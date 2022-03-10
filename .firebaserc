@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "sws-apps",
+    "staging": "sws-apps-staging",
+    "production": "sws-apps",
+    "development": "sws-apps-dev"
+  },
+  "targets": {}
+}
