@@ -1,3 +1,10 @@
+# [1.0.0-alpha.3](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2022-03-10)
+
+
+### Features
+
+* **home:** add work progress for application list ([eb1a3e2](https://github.com/sws2apps/sws2apps-web/commit/eb1a3e2ec45861b80a00c0fc40ea7e4aeac16504))
+
 # [1.0.0-alpha.2](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2022-03-10)
 
 
