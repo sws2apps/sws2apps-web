@@ -27,6 +27,7 @@ const Home = () => {
 						name='Life and Ministry Meeting Overseer Assistant'
 						desc='This application is designed for use by the Life and Ministry Meeting Overseer. It will help him to schedule the student assignments for the midweek meeting.'
 						github='lmm-oa-sws'
+						completed={70}
 					/>
 					<AppListItem
 						name='Meeting Schedule Creator'
@@ -36,6 +37,7 @@ const Home = () => {
 						name='SWS Pocket'
 						desc='This application is designed for use by students for midweek meeting and publishers. It will help them to see the midweek and weekend meeting schedule. Publishers will be able to submit their monthly field service report as well.'
 						github='sws-pocket'
+						completed={10}
 					/>
 					<AppListItem
 						name='Secretary Tools Report Organizer'
