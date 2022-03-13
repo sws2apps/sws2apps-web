@@ -57,7 +57,7 @@ const AppMenus = () => {
 							alt='App Logo'
 							className='appLogoTop'
 						/>
-						<Typography variant='h6' noWrap sx={{ marginLeft: '10px' }}>
+						<Typography noWrap sx={{ marginLeft: '10px', fontSize: '16px' }}>
 							Scheduling Workbox System
 						</Typography>
 					</Box>
@@ -65,7 +65,7 @@ const AppMenus = () => {
 				<Button
 					onClick={handleAccount}
 					startIcon={<AccountCircleIcon />}
-					sx={{ color: 'white', marginRight: '5px' }}
+					sx={{ color: 'white', marginRight: '5px', fontSize: '12px' }}
 				>
 					{isAdmin ? 'Logout' : 'Login'}
 				</Button>

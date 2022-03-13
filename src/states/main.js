@@ -7,7 +7,7 @@ export const apiHostState = atom({
 
 export const isAdminState = atom({
 	key: 'isAdmin',
-	default: true,
+	default: false,
 });
 
 export const pendingRequestsState = atom({
@@ -15,14 +15,19 @@ export const pendingRequestsState = atom({
 	default: [],
 });
 
+export const usersListState = atom({
+	key: 'usersList',
+	default: [],
+});
+
 export const adminEmailState = atom({
 	key: 'adminEmail',
-	default: 'sws2apps@gmail.com',
+	default: '',
 });
 
 export const adminPasswordState = atom({
 	key: 'adminPassword',
-	default: 'swsDev2022BaseFire!HARI',
+	default: '',
 });
 
 export const countPendingRequestsState = selector({

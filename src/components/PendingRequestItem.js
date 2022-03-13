@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import CheckCircleOutline from '@mui/icons-material/CheckCircleOutline';
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import {
 	adminEmailState,
@@ -33,6 +34,63 @@ const PendingRequestItem = ({ request }) => {
 	const adminPassword = useRecoilValue(adminPasswordState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
+	const [isDisapprove, setIsDisapprove] = useState(false);
+	const [disapproveReason, setDisapproveReason] = useState(false);
+
+	const handleCongDisapprove = async () => {
+		if (isDisapprove) {
+			setIsDisapprove(false);
+			setIsProcessing(true);
+			const reqPayload = {
+				email: adminEmail,
+				password: adminPassword,
+				cong_name: request.cong_name,
+				cong_number: request.cong_number,
+				request_email: request.email,
+				request_id: request.id,
+				request_username: request.username,
+				disapproval_reason: disapproveReason,
+			};
+
+			if (apiHost !== '') {
+				fetch(`${apiHost}api/admin/congregation-request-disapprove`, {
+					signal: abortCont.signal,
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(reqPayload),
+				})
+					.then(async (res) => {
+						const data = await res.json();
+						if (res.status === 200) {
+							let newReq = pendingReq.filter(
+								(pending) => pending.id !== request.id
+							);
+							setIsProcessing(false);
+							setPendingReq(newReq);
+							setAppMessage('Congregation account request disapproved');
+							setAppSeverity('info');
+							setAppSnackOpen(true);
+						} else {
+							setIsProcessing(false);
+							setAppMessage(data.message);
+							setAppSeverity('warning');
+							setAppSnackOpen(true);
+						}
+					})
+					.catch((err) => {
+						setIsProcessing(false);
+						setAppMessage(err.message);
+						setAppSeverity('error');
+						setAppSnackOpen(true);
+					});
+			}
+		} else {
+			setDisapproveReason('');
+			setIsDisapprove(true);
+		}
+	};
 
 	const handleCongApprove = async () => {
 		setIsProcessing(true);
@@ -131,6 +189,28 @@ const PendingRequestItem = ({ request }) => {
 						</Box>
 						<Typography sx={{ fontWeight: 'bold' }}>{request.id}</Typography>
 					</Box>
+					{isDisapprove && (
+						<Box
+							sx={{
+								marginTop: '15px',
+								backgroundColor: 'white',
+								padding: '10px',
+							}}
+						>
+							<TextField
+								id='outlined-disapprove'
+								label='Disapproval reason'
+								variant='outlined'
+								size='small'
+								autoComplete='off'
+								required
+								value={disapproveReason}
+								onChange={(e) => setDisapproveReason(e.target.value)}
+								sx={{ width: '100%' }}
+							/>
+						</Box>
+					)}
+
 					<Box
 						sx={{
 							display: 'flex',
@@ -163,6 +243,7 @@ const PendingRequestItem = ({ request }) => {
 									Approve
 								</Button>
 								<Button
+									onClick={handleCongDisapprove}
 									startIcon={<BlockIcon />}
 									sx={{ color: 'red', marginRight: '5px' }}
 								>

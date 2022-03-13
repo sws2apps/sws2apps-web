@@ -5,6 +5,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import CongregationPendingRequests from '../components/CongregationPendingRequests';
+import UsersList from '../components/UsersList';
 
 const AdminPanel = () => {
 	const [value, setValue] = useState('1');
@@ -27,7 +28,9 @@ const AdminPanel = () => {
 					<CongregationPendingRequests />
 				</TabPanel>
 				<TabPanel value='2'>Item Two</TabPanel>
-				<TabPanel value='3'>Item Three</TabPanel>
+				<TabPanel value='3'>
+					<UsersList />
+				</TabPanel>
 			</TabContext>
 		</Box>
 	);
