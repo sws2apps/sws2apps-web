@@ -20,6 +20,20 @@ export const usersListState = atom({
 	default: [],
 });
 
+export const usersListSortedState = selector({
+	key: 'usersListSorted',
+	get: ({ get }) => {
+		const tempList = get(usersListState);
+
+		let usersList = tempList.map((x) => x);
+		usersList.sort((a, b) => {
+			return a.username > b.username ? 1 : -1;
+		});
+
+		return usersList;
+	},
+});
+
 export const adminEmailState = atom({
 	key: 'adminEmail',
 	default: '',

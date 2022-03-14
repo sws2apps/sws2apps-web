@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
@@ -13,6 +13,7 @@ import {
 	adminEmailState,
 	adminPasswordState,
 	apiHostState,
+	usersListSortedState,
 	usersListState,
 } from '../states/main';
 import {
@@ -27,12 +28,12 @@ const UsersList = () => {
 	const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
 	const setAppSeverity = useSetRecoilState(appSeverityState);
 	const setAppMessage = useSetRecoilState(appMessageState);
-
-	const [data, setData] = useRecoilState(usersListState);
+	const setData = useSetRecoilState(usersListState);
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
 	const adminPassword = useRecoilValue(adminPasswordState);
+	const usersList = useRecoilValue(usersListSortedState);
 
 	const [isProcessing, setIsProcessing] = useState(true);
 	const [isError, setIsError] = useState(false);
@@ -151,9 +152,9 @@ const UsersList = () => {
 						</IconButton>
 					</Box>
 					<Box sx={{ marginTop: '20px' }}>
-						{data.length > 0 && (
+						{usersList.length > 0 && (
 							<>
-								{data.map((user) => (
+								{usersList.map((user) => (
 									<UserItem key={user.uid} user={user} />
 								))}
 							</>
