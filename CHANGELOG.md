@@ -1,3 +1,10 @@
+# [1.0.0-alpha.5](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2022-03-14)
+
+
+### Bug Fixes
+
+* **web:** add link to roboto font for mui ([019ac1a](https://github.com/sws2apps/sws2apps-web/commit/019ac1af7c1ee6a8bd5058f822f62a1f86d97c9c))
+
 # [1.0.0-alpha.4](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2022-03-13)
 
 
