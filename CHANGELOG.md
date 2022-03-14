@@ -1,3 +1,11 @@
+# [1.0.0-alpha.4](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2022-03-13)
+
+
+### Features
+
+* **administration:** new page for administration ([2990e19](https://github.com/sws2apps/sws2apps-web/commit/2990e19ce1dafee1a16907decaa263a65e694ed1))
+* **deps:** bump @emotion/react from 11.8.1 to 11.8.2 ([56a37b4](https://github.com/sws2apps/sws2apps-web/commit/56a37b4e4b6cb183d7ab95049b5930b32b342f02))
+
 # [1.0.0-alpha.3](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2022-03-10)
 
 
