@@ -1,3 +1,10 @@
+# [1.0.0-alpha.6](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2022-03-14)
+
+
+### Features
+
+* **administration:** add actions to users management ([683a1f4](https://github.com/sws2apps/sws2apps-web/commit/683a1f4c352b065da0b850026a03462730628012))
+
 # [1.0.0-alpha.5](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2022-03-14)
 
 
