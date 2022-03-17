@@ -7,7 +7,7 @@ export const apiHostState = atom({
 
 export const isAdminState = atom({
 	key: 'isAdmin',
-	default: false,
+	default: true,
 });
 
 export const pendingRequestsState = atom({
@@ -36,12 +36,12 @@ export const usersListSortedState = selector({
 
 export const adminEmailState = atom({
 	key: 'adminEmail',
-	default: '',
+	default: 'sws2apps@gmail.com',
 });
 
 export const adminPasswordState = atom({
 	key: 'adminPassword',
-	default: '',
+	default: 'swsDev2022BaseFire!HARI',
 });
 
 export const countPendingRequestsState = selector({
@@ -49,5 +49,24 @@ export const countPendingRequestsState = selector({
 	get: ({ get }) => {
 		const pendingReq = get(pendingRequestsState);
 		return pendingReq.length;
+	},
+});
+
+export const congsListState = atom({
+	key: 'congsList',
+	default: [],
+});
+
+export const congsListSortedState = selector({
+	key: 'congsListSorted',
+	get: ({ get }) => {
+		const tempList = get(congsListState);
+
+		let congsList = tempList.map((x) => x);
+		congsList.sort((a, b) => {
+			return a.cong_name > b.cong_name ? 1 : -1;
+		});
+
+		return congsList;
 	},
 });

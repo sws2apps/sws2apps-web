@@ -79,6 +79,10 @@ const UserItem = ({ user }) => {
 	};
 
 	const handleDlgClose = () => {
+		setIsDelete(false);
+		setIsEnableUser(false);
+		setIsDisableUser(false);
+		setIsResetPwd(false);
 		setOpen(false);
 	};
 
