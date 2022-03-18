@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import Autocomplete from '@mui/material/Autocomplete';
 import Avatar from '@mui/material/Avatar';
+import BlockIcon from '@mui/icons-material/Block';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import CancelIcon from '@mui/icons-material/Cancel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -15,9 +17,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import ErrorIcon from '@mui/icons-material/Error';
 import GradeIcon from '@mui/icons-material/Grade';
 import Grid from '@mui/material/Grid';
+import HourglassFullIcon from '@mui/icons-material/HourglassFull';
 import HouseIcon from '@mui/icons-material/House';
 import IconButton from '@mui/material/IconButton';
-import Link from '@mui/material/Link';
 import PersonIcon from '@mui/icons-material/Person';
 import SearchIcon from '@mui/icons-material/Search';
 import SecurityIcon from '@mui/icons-material/Security';
@@ -27,7 +29,6 @@ import {
 	adminEmailState,
 	adminPasswordState,
 	apiHostState,
-	usersListState,
 } from '../states/main';
 import {
 	appMessageState,
@@ -46,22 +47,65 @@ const CongregationItem = ({ cong }) => {
 	const adminEmail = useRecoilValue(adminEmailState);
 	const adminPassword = useRecoilValue(adminPasswordState);
 
+	const [admins, setAdmins] = useState(cong.admin);
+	const [vips, setVips] = useState(cong.vip);
+	const [pockets, setPockets] = useState(cong.pocket);
+
 	const [open, setOpen] = useState(false);
-	const [isFetch, setIsFetch] = useState(true);
+	const [isFetch, setIsFetch] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [dlgTitle, setDlgTitle] = useState('');
-	const [dlgContent, setDlgContent] = useState('');
 	const [isAdminAdd, setIsAdminAdd] = useState(false);
 	const [isVipAdd, setIsVipAdd] = useState(false);
 	const [isPocketAdd, setIsPocketAdd] = useState(false);
-	const [data, setData] = useState([]);
-	const [value, setValue] = useState('');
+	const [varText, setVarText] = useState('');
+	const [user, setUser] = useState(undefined);
+	const [isSearch, setIsSearch] = useState(false);
+	const [isYesDisabled, setIsYesDisabled] = useState(true);
+	const [isSearchDisabled, setIsSearchDisable] = useState(false);
+	const [isProcessing, setIsProcessing] = useState(false);
+	const [isDelete, setIsDelete] = useState(false);
+	const [isDeleteAdmin, setIsDeleteAdmin] = useState(false);
+	const [isDeleteVip, setIsDeleteVip] = useState(false);
+	const [isDeletePocket, setIsDeletePocket] = useState(false);
+	const [toBeDel, setToBeDel] = useState('');
 
 	const handleDlgClose = () => {
 		setIsAdminAdd(false);
 		setIsVipAdd(false);
 		setIsPocketAdd(false);
+		setIsDelete(false);
+		setIsDeleteAdmin(false);
+		setIsDeleteVip(false);
+		setIsDeletePocket(false);
 		setOpen(false);
+	};
+
+	const handleSetIsDeleteAdmin = (username) => {
+		setToBeDel(username);
+		setDlgTitle(`Remove ${username} from congregation?`);
+		setIsDelete(true);
+		setIsDeleteAdmin(true);
+		setIsYesDisabled(false);
+		setOpen(true);
+	};
+
+	const handleSetIsDeleteVip = (username) => {
+		setToBeDel(username);
+		setDlgTitle(`Remove ${username} from congregation?`);
+		setIsDelete(true);
+		setIsDeleteVip(true);
+		setIsYesDisabled(false);
+		setOpen(true);
+	};
+
+	const handleSetIsDeletePocket = (username) => {
+		setToBeDel(username);
+		setDlgTitle(`Remove ${username} from congregation?`);
+		setIsDelete(true);
+		setIsDeletePocket(true);
+		setIsYesDisabled(false);
+		setOpen(true);
 	};
 
 	const handleSetAdminAdd = () => {
@@ -82,7 +126,117 @@ const CongregationItem = ({ cong }) => {
 		setOpen(true);
 	};
 
-	const fetchAllUsers = async () => {
+	const handleDlgAction = async () => {
+		setOpen(false);
+		if (isAdminAdd) {
+			await handleAddAdmin();
+			setIsAdminAdd(false);
+		} else if (isDelete) {
+			if (isDeleteAdmin) {
+				await handleDeleteUser(toBeDel, 'admin');
+				setIsDeleteAdmin(false);
+			} else if (isDeleteVip) {
+				await handleDeleteUser(toBeDel, 'vip');
+				setIsDeleteVip(false);
+			}
+			setIsDelete(false);
+		}
+	};
+
+	const handleAddAdmin = async () => {
+		setIsProcessing(true);
+
+		const reqPayload = {
+			email: adminEmail,
+			password: adminPassword,
+			cong_id: cong.cong_id,
+			user_email: user.email,
+		};
+
+		if (apiHost !== '') {
+			fetch(`${apiHost}api/admin/congregation-add-admin`, {
+				signal: abortCont.signal,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(reqPayload),
+			})
+				.then(async (res) => {
+					if (res.status === 200) {
+						let newAdmins = [];
+						newAdmins = admins.map((x) => x);
+
+						let obj = {
+							name: user.username,
+							email: user.email,
+						};
+
+						newAdmins.push(obj);
+						setAdmins(newAdmins);
+					} else {
+						const data = await res.json();
+
+						setAppMessage(data.message);
+						setAppSeverity('warning');
+						setAppSnackOpen(true);
+					}
+					setIsProcessing(false);
+				})
+				.catch((err) => {
+					setIsProcessing(false);
+					setAppMessage(err.message);
+					setAppSeverity('error');
+					setAppSnackOpen(true);
+				});
+		}
+	};
+
+	const handleDeleteUser = async (email, type) => {
+		setIsProcessing(true);
+
+		const reqPayload = {
+			email: adminEmail,
+			password: adminPassword,
+			user_email: email,
+		};
+
+		if (apiHost !== '') {
+			fetch(`${apiHost}api/admin/congregation-remove-user`, {
+				signal: abortCont.signal,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(reqPayload),
+			})
+				.then(async (res) => {
+					if (res.status === 200) {
+						if (type === 'admin') {
+							let newAdmins = [];
+							newAdmins = admins.filter((admin) => admin.email !== email);
+							setAdmins(newAdmins);
+						}
+					} else {
+						const data = await res.json();
+
+						setAppMessage(data.message);
+						setAppSeverity('warning');
+						setAppSnackOpen(true);
+					}
+					setIsProcessing(false);
+				})
+				.catch((err) => {
+					setIsProcessing(false);
+					setAppMessage(err.message);
+					setAppSeverity('error');
+					setAppSnackOpen(true);
+				});
+		}
+	};
+
+	const findUser = async () => {
+		setIsSearch(true);
 		setIsError(false);
 		setIsFetch(true);
 		const reqPayload = {
@@ -103,33 +257,39 @@ const CongregationItem = ({ cong }) => {
 					if (res.status === 200) {
 						const users = await res.json();
 
-						let finalResult = [];
-						for (let i = 0; i < users.length; i++) {
+						if (isAdminAdd || isVipAdd) {
+							const findUser = users.find(
+								(user) =>
+									user.email === varText &&
+									user.global_role !== 'admin' &&
+									user.cong_name === ''
+							);
 							if (
-								users[i].global_role !== 'admin' &&
-								users[i].cong_name === ''
+								findUser?.disabled === false &&
+								findUser?.emailVerified === true
 							) {
-								if (isAdminAdd || isVipAdd) {
-									console.log(users[i]);
-									if (users[i].global_role === 'vip') {
-										const display_name = `[${users[i].email}] ${users[i].username}`;
-										finalResult.push({
-											...users[i],
-											display_name: display_name,
-										});
-									}
-								} else if (isPocketAdd) {
-									if (users[i].global_role === 'pocket') {
-										finalResult.push({
-											...users[i],
-										});
-									}
-								}
+								setIsYesDisabled(false);
+							} else {
+								setIsYesDisabled(true);
 							}
+							setUser(findUser);
+						} else if (isPocketAdd) {
+							const findUser = users.find(
+								(user) =>
+									user.pocket_id === varText &&
+									user.global_role === 'pocket' &&
+									user.cong_name === ''
+							);
+							if (
+								findUser?.disabled === false &&
+								findUser?.emailVerified === true
+							) {
+								setIsYesDisabled(false);
+							} else {
+								setIsYesDisabled(true);
+							}
+							setUser(findUser);
 						}
-
-						setData(finalResult);
-						console.log(finalResult);
 					} else {
 						setIsError(true);
 					}
@@ -144,6 +304,14 @@ const CongregationItem = ({ cong }) => {
 				});
 		}
 	};
+
+	useEffect(() => {
+		if (varText.length === 0) {
+			setIsSearchDisable(true);
+		} else {
+			setIsSearchDisable(false);
+		}
+	}, [varText]);
 
 	useEffect(() => {
 		return () => abortCont.abort();
@@ -162,40 +330,161 @@ const CongregationItem = ({ cong }) => {
 							</Typography>
 						</DialogTitle>
 						<DialogContent sx={{ paddingTop: '15px !important' }}>
-							<Box sx={{ display: 'flex' }}>
-								<TextField
-									id='outlined-identifier'
-									label={
-										isAdminAdd || isVipAdd
-											? 'Enter an email address'
-											: 'Enter the user ID'
-									}
-									sx={{ width: '100%' }}
-									variant='outlined'
-									size='small'
-									autoComplete='off'
-									value={value}
-									onChange={(e) => setValue(e.target.value)}
-								/>
-								<IconButton
-									id='button-find-user'
-									sx={{
-										backgroundColor: '#1976d2',
-										'&:hover': {
-											backgroundColor: 'black',
-										},
-										marginLeft: '5px',
-									}}
-								>
-									<SearchIcon sx={{ color: 'white' }} />
-								</IconButton>
-							</Box>
+							{isDelete && (
+								<Typography>Are you sure to delete this user?</Typography>
+							)}
+							{!isDelete && (
+								<>
+									<Box sx={{ display: 'flex' }}>
+										<TextField
+											id='outlined-identifier'
+											label={
+												isAdminAdd || isVipAdd
+													? 'Enter an email address'
+													: 'Enter the user ID'
+											}
+											sx={{ width: '100%' }}
+											variant='outlined'
+											size='small'
+											autoComplete='off'
+											value={varText}
+											onChange={(e) => setVarText(e.target.value)}
+										/>
+										<IconButton
+											id='button-find-user'
+											sx={{
+												backgroundColor: '#1976d2',
+												'&:hover': {
+													backgroundColor: 'black',
+												},
+												marginLeft: '5px',
+											}}
+											onClick={findUser}
+											disabled={isSearchDisabled || isFetch}
+										>
+											<SearchIcon sx={{ color: 'white' }} />
+										</IconButton>
+									</Box>
+									{isFetch && (
+										<Container
+											sx={{
+												display: 'flex',
+												justifyContent: 'center',
+												marginTop: '25px',
+											}}
+										>
+											<CircularProgress
+												disableShrink
+												color='secondary'
+												size={'30px'}
+											/>
+										</Container>
+									)}
+									{!isFetch && isError && (
+										<Container
+											sx={{
+												width: '280px',
+												display: 'flex',
+												justifyContent: 'center',
+												marginTop: '10px',
+												flexDirection: 'column',
+												alignItems: 'center',
+											}}
+										>
+											<ErrorIcon color='error' sx={{ fontSize: '40px' }} />
+											<Typography align='center' sx={{ fontSize: '14px' }}>
+												An error occured while finding the user. Try searching
+												again
+											</Typography>
+										</Container>
+									)}
+									{!isFetch && !isError && isSearch && (
+										<Box>
+											{user && (
+												<Box
+													sx={{
+														width: '300px',
+														marginTop: '10px',
+														display: 'flex',
+														alignItems: 'center',
+														backgroundColor: '#E8DAEF',
+														borderRadius: '10px',
+														boxShadow: '0px 2px #888888',
+														padding: '5px',
+													}}
+												>
+													{user.disabled && (
+														<BlockIcon sx={{ color: '#ff5722' }} />
+													)}
+													{!user.disabled && !user.emailVerified && (
+														<HourglassFullIcon sx={{ color: '#ff5722' }} />
+													)}
+													{!user.disabled && user.emailVerified && (
+														<CheckCircleIcon color='success' />
+													)}
+													<Box sx={{ marginLeft: '10px' }}>
+														<Typography
+															sx={{ fontSize: '14px', fontWeight: 'bold' }}
+														>
+															{user.username}
+														</Typography>
+														<Typography sx={{ fontSize: '13px' }}>
+															{user.email}
+														</Typography>
+														{user.disabled && (
+															<Typography
+																sx={{ marginTop: '10px', fontSize: '13px' }}
+															>
+																The account is disabled and could not be added
+															</Typography>
+														)}
+														{!user.disabled && !user.emailVerified && (
+															<Typography
+																sx={{ marginTop: '10px', fontSize: '13px' }}
+															>
+																The account is not verified yet and could not be
+																added
+															</Typography>
+														)}
+													</Box>
+												</Box>
+											)}
+											{!user && (
+												<Container
+													sx={{
+														width: '280px',
+														display: 'flex',
+														justifyContent: 'center',
+														marginTop: '10px',
+														flexDirection: 'column',
+														alignItems: 'center',
+													}}
+												>
+													<CancelIcon
+														color='secondary'
+														sx={{ fontSize: '40px' }}
+													/>
+													<Typography align='center' sx={{ fontSize: '14px' }}>
+														The user could not be found. Check that the email
+														address is correct, and if the user has registered
+													</Typography>
+												</Container>
+											)}
+										</Box>
+									)}
+								</>
+							)}
 						</DialogContent>
 						<DialogActions>
 							<Button onClick={() => setOpen(false)} color='primary'>
 								No
 							</Button>
-							<Button color='primary' autoFocus>
+							<Button
+								color='primary'
+								autoFocus
+								disabled={isYesDisabled}
+								onClick={handleDlgAction}
+							>
 								Yes
 							</Button>
 						</DialogActions>
@@ -212,23 +501,35 @@ const CongregationItem = ({ cong }) => {
 					marginBottom: '15px',
 				}}
 			>
-				<Box sx={{ display: 'flex', alignItems: 'center' }}>
-					<Avatar
-						sx={{
-							backgroundColor: '#D98880',
-						}}
-					>
-						<HouseIcon />
-					</Avatar>
-					<Box sx={{ marginLeft: '10px' }}>
-						<Typography sx={{ fontWeight: 'bold', fontSize: '16px' }}>
-							{cong.cong_name} ({cong.cong_number})
-						</Typography>
-						<Typography sx={{ fontWeight: 'bold', fontSize: '12px' }}>
-							{`ID: ${cong.cong_id}`}
-						</Typography>
+				<Box
+					sx={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+					}}
+				>
+					<Box sx={{ display: 'flex', alignItems: 'center' }}>
+						<Avatar
+							sx={{
+								backgroundColor: '#D98880',
+							}}
+						>
+							<HouseIcon />
+						</Avatar>
+						<Box sx={{ marginLeft: '10px' }}>
+							<Typography sx={{ fontWeight: 'bold', fontSize: '16px' }}>
+								{cong.cong_name} ({cong.cong_number})
+							</Typography>
+							<Typography sx={{ fontWeight: 'bold', fontSize: '12px' }}>
+								{`ID: ${cong.cong_id}`}
+							</Typography>
+						</Box>
 					</Box>
+					{isProcessing && (
+						<CircularProgress disableShrink color='secondary' size={'30px'} />
+					)}
 				</Box>
+
 				<Box
 					sx={{
 						borderTop: '2px solid #BFC9CA',
@@ -259,15 +560,21 @@ const CongregationItem = ({ cong }) => {
 									</Typography>
 								</Box>
 							</Box>
-							<Box sx={{ marginLeft: '40px', maxHeight: '130px' }}>
-								{cong.admin.length === 0 && (
+							<Box
+								sx={{
+									marginLeft: '40px',
+									maxHeight: '130px',
+									overflow: 'auto',
+								}}
+							>
+								{admins.length === 0 && (
 									<Typography sx={{ fontSize: '14px' }}>
 										No users yet
 									</Typography>
 								)}
-								{cong.admin.length > 0 && (
+								{admins.length > 0 && (
 									<>
-										{cong.admin.map((admin) => (
+										{admins.map((admin) => (
 											<Box
 												key={admin.email}
 												sx={{
@@ -277,6 +584,7 @@ const CongregationItem = ({ cong }) => {
 													display: 'flex',
 													justifyContent: 'space-between',
 													alignItems: 'center',
+													marginBottom: '8px',
 												}}
 											>
 												<Box>
@@ -287,7 +595,10 @@ const CongregationItem = ({ cong }) => {
 														{admin.email}
 													</Typography>
 												</Box>
-												<IconButton aria-label='delete'>
+												<IconButton
+													aria-label='delete'
+													onClick={() => handleSetIsDeleteAdmin(admin.email)}
+												>
 													<DeleteIcon color='error' />
 												</IconButton>
 											</Box>
@@ -295,13 +606,15 @@ const CongregationItem = ({ cong }) => {
 									</>
 								)}
 							</Box>
-							<IconButton
-								onClick={handleSetAdminAdd}
-								aria-label='add'
-								sx={{ marginLeft: '40px' }}
-							>
-								<AddCircleIcon sx={{ color: 'blue' }} />
-							</IconButton>
+							{!isProcessing && (
+								<IconButton
+									onClick={handleSetAdminAdd}
+									aria-label='add'
+									sx={{ marginLeft: '40px' }}
+								>
+									<AddCircleIcon sx={{ color: 'blue' }} />
+								</IconButton>
+							)}
 						</Grid>
 						<Grid item xs={12} sm={12} md={6} lg={4}>
 							<Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -321,15 +634,21 @@ const CongregationItem = ({ cong }) => {
 								</Box>
 							</Box>
 							<Box sx={{ marginLeft: '40px', maxHeight: '130px' }}>
-								{cong.vip.length === 0 && (
+								{vips.length === 0 && (
 									<Typography sx={{ fontSize: '14px' }}>
 										No users yet
 									</Typography>
 								)}
 							</Box>
-							<IconButton aria-label='add' sx={{ marginLeft: '40px' }}>
-								<AddCircleIcon sx={{ color: 'blue' }} />
-							</IconButton>
+							{!isProcessing && (
+								<IconButton
+									onClick={handleSetVipAdd}
+									aria-label='add'
+									sx={{ marginLeft: '40px' }}
+								>
+									<AddCircleIcon sx={{ color: 'blue' }} />
+								</IconButton>
+							)}
 						</Grid>
 						<Grid item xs={12} sm={12} md={6} lg={4}>
 							<Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -348,15 +667,21 @@ const CongregationItem = ({ cong }) => {
 								</Box>
 							</Box>
 							<Box sx={{ marginLeft: '40px', maxHeight: '130px' }}>
-								{cong.pocket.length === 0 && (
+								{pockets.length === 0 && (
 									<Typography sx={{ fontSize: '14px' }}>
 										No users yet
 									</Typography>
 								)}
 							</Box>
-							<IconButton aria-label='add' sx={{ marginLeft: '40px' }}>
-								<AddCircleIcon sx={{ color: 'blue' }} />
-							</IconButton>
+							{!isProcessing && (
+								<IconButton
+									onClick={handleSetPocketAdd}
+									aria-label='add'
+									sx={{ marginLeft: '40px' }}
+								>
+									<AddCircleIcon sx={{ color: 'blue' }} />
+								</IconButton>
+							)}
 						</Grid>
 					</Grid>
 				</Box>
