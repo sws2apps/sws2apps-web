@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import PendingRequestItem from './PendingRequestItem';
 import {
 	adminEmailState,
-	adminPasswordState,
+	adminPwdState,
 	apiHostState,
 	countPendingRequestsState,
 	pendingRequestsState,
@@ -33,7 +33,7 @@ const CongregationPendingRequests = () => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPasswordState);
+	const adminPassword = useRecoilValue(adminPwdState);
 	const cnRequest = useRecoilValue(countPendingRequestsState);
 
 	const [isProcessing, setIsProcessing] = useState(true);

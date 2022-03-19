@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import CongregationItem from './CongregationItem';
 import {
 	adminEmailState,
-	adminPasswordState,
+	adminPwdState,
 	apiHostState,
 	congsListSortedState,
 	congsListState,
@@ -32,7 +32,7 @@ const CongregationsList = () => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPasswordState);
+	const adminPassword = useRecoilValue(adminPwdState);
 	const congsList = useRecoilValue(congsListSortedState);
 
 	const [isProcessing, setIsProcessing] = useState(true);

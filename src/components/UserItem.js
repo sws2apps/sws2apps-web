@@ -30,7 +30,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import {
 	adminEmailState,
-	adminPasswordState,
+	adminPwdState,
 	apiHostState,
 	usersListState,
 } from '../states/main';
@@ -51,7 +51,7 @@ const UserItem = ({ user }) => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPasswordState);
+	const adminPassword = useRecoilValue(adminPwdState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);

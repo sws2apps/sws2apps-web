@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import UserItem from './UserItem';
 import {
 	adminEmailState,
-	adminPasswordState,
+	adminPwdState,
 	apiHostState,
 	usersListSortedState,
 	usersListState,
@@ -32,7 +32,7 @@ const UsersList = () => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPasswordState);
+	const adminPassword = useRecoilValue(adminPwdState);
 	const usersList = useRecoilValue(usersListSortedState);
 
 	const [isProcessing, setIsProcessing] = useState(true);

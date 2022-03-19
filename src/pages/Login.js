@@ -1,18 +1,25 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
-import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import LoginAdmin from '../components/LoginAdmin';
+import MfaCheck from '../components/MfaCheck';
 import {
 	adminEmailState,
-	adminPasswordState,
+	adminPwdState,
+	adminTmpEmailState,
+	adminTmpPwdState,
 	apiHostState,
 	isAdminState,
+	hasErrorEmailState,
+	hasErrorPwdState,
+	isMfaVerifiedState,
+	hasErrorTokenState,
+	adminTokenState,
 } from '../states/main';
 import {
 	appMessageState,
@@ -26,19 +33,23 @@ const Login = () => {
 
 	let abortCont = useMemo(() => new AbortController(), []);
 
+	const [isAdmin, setIsAdmin] = useRecoilState(isAdminState);
+	const [isMfaVerified, setIsMfaVerified] = useRecoilState(isMfaVerifiedState);
+
 	const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
 	const setAppSeverity = useSetRecoilState(appSeverityState);
 	const setAppMessage = useSetRecoilState(appMessageState);
-	const setIsAdmin = useSetRecoilState(isAdminState);
+	const setHasErrorEmail = useSetRecoilState(hasErrorEmailState);
+	const setHasErrorPwd = useSetRecoilState(hasErrorPwdState);
+	const setHasErrorToken = useSetRecoilState(hasErrorTokenState);
 	const setAdminEmail = useSetRecoilState(adminEmailState);
-	const setAdminPassword = useSetRecoilState(adminPasswordState);
+	const setAdminPwd = useSetRecoilState(adminPwdState);
 
 	const apiHost = useRecoilValue(apiHostState);
+	const userTmpPwd = useRecoilValue(adminTmpPwdState);
+	const userTmpEmail = useRecoilValue(adminTmpEmailState);
+	const adminToken = useRecoilValue(adminTokenState);
 
-	const [userTmpPwd, setUserTmpPwd] = useState('');
-	const [userTmpEmail, setUserTmpEmail] = useState('');
-	const [hasErrorEmail, setHasErrorEmail] = useState(false);
-	const [hasErrorPwd, setHasErrorPwd] = useState(false);
 	const [isProcessing, setIsProcessing] = useState(false);
 
 	const handleGoPublic = () => {
@@ -48,7 +59,10 @@ const Login = () => {
 	const handleSignIn = () => {
 		setHasErrorEmail(false);
 		setHasErrorPwd(false);
-		if (isEmailValid(userTmpEmail) && userTmpPwd.length >= 10) {
+
+		const checkEmail = isEmailValid(userTmpEmail);
+
+		if (checkEmail && userTmpPwd.length >= 10) {
 			setIsProcessing(true);
 			const reqPayload = {
 				email: userTmpEmail,
@@ -67,13 +81,62 @@ const Login = () => {
 					.then(async (res) => {
 						const data = await res.json();
 						if (res.status === 200) {
+							setIsAdmin(true);
+							setIsProcessing(false);
+						} else {
+							setIsProcessing(false);
+							setAppMessage(data.message);
+							setAppSeverity('warning');
+							setAppSnackOpen(true);
+						}
+					})
+					.catch((err) => {
+						setIsProcessing(false);
+						setAppMessage(err.message);
+						setAppSeverity('error');
+						setAppSnackOpen(true);
+					});
+			}
+		} else {
+			if (!checkEmail) {
+				setHasErrorEmail(true);
+			}
+			if (userTmpPwd.length < 10) {
+				setHasErrorPwd(true);
+			}
+		}
+	};
+
+	const handleVerifyToken = () => {
+		setHasErrorToken(false);
+
+		if (adminToken.length === 6) {
+			setIsProcessing(true);
+			const reqPayload = {
+				email: userTmpEmail,
+				password: userTmpPwd,
+				token: adminToken,
+			};
+
+			if (apiHost !== '') {
+				fetch(`${apiHost}api/user/verify-token`, {
+					signal: abortCont.signal,
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(reqPayload),
+				})
+					.then(async (res) => {
+						const data = await res.json();
+						if (res.status === 200) {
+							setAdminEmail(userTmpEmail);
+							setAdminPwd(userTmpPwd);
+							setIsMfaVerified(true);
 							setAppMessage(data.message);
 							setAppSeverity('success');
 							setAppSnackOpen(true);
 							setIsProcessing(false);
-							setAdminEmail(userTmpEmail);
-							setAdminPassword(userTmpPwd);
-							setIsAdmin(true);
 							navigate('/administration');
 						} else {
 							setIsProcessing(false);
@@ -90,12 +153,7 @@ const Login = () => {
 					});
 			}
 		} else {
-			if (!isEmailValid(userTmpEmail)) {
-				setHasErrorEmail(true);
-			}
-			if (userTmpPwd.length < 10) {
-				setHasErrorPwd(true);
-			}
+			setHasErrorToken(true);
 		}
 	};
 
@@ -123,65 +181,56 @@ const Login = () => {
 				Accessing the Administration Panel
 			</Typography>
 
-			<Box sx={{ marginTop: '25px' }}>
-				<TextField
-					id='outlined-email'
-					label='Email address'
-					variant='outlined'
-					size='small'
-					autoComplete='off'
-					required
-					value={userTmpEmail}
-					onChange={(e) => setUserTmpEmail(e.target.value)}
-					error={hasErrorEmail ? true : false}
-					sx={{ width: '100%' }}
-				/>
-				<TextField
-					sx={{ marginTop: '15px', width: '100%' }}
-					id='outlined-password'
-					label='Password'
-					type='password'
-					variant='outlined'
-					size='small'
-					autoComplete='off'
-					required
-					value={userTmpPwd}
-					onChange={(e) => setUserTmpPwd(e.target.value)}
-					error={hasErrorPwd ? true : false}
-				/>
+			{!isAdmin && !isMfaVerified && <LoginAdmin />}
+			{isAdmin && !isMfaVerified && <MfaCheck />}
 
-				{isProcessing && (
-					<Container
-						sx={{
-							display: 'flex',
-							justifyContent: 'center',
-							marginTop: '15px',
-						}}
-					>
-						<CircularProgress disableShrink color='secondary' size={'40px'} />
-					</Container>
-				)}
-
+			{isProcessing && (
 				<Box
 					sx={{
-						marginTop: '20px',
 						display: 'flex',
-						justifyContent: 'space-between',
-						alignItems: 'center',
+						justifyContent: 'center',
+						marginTop: '15px',
 					}}
 				>
-					<Link
-						component='button'
-						underline='none'
-						variant='body2'
-						onClick={handleGoPublic}
+					<CircularProgress disableShrink color='secondary' size={'40px'} />
+				</Box>
+			)}
+
+			<Box
+				sx={{
+					marginTop: '20px',
+					display: 'flex',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+					width: '100%',
+				}}
+			>
+				<Link
+					component='button'
+					underline='none'
+					variant='body2'
+					onClick={handleGoPublic}
+				>
+					Go back to home page
+				</Link>
+				{!isAdmin && !isMfaVerified && (
+					<Button
+						variant='contained'
+						onClick={handleSignIn}
+						disabled={isProcessing}
 					>
-						Go back to home page
-					</Link>
-					<Button variant='contained' onClick={handleSignIn}>
 						Login
 					</Button>
-				</Box>
+				)}
+				{isAdmin && !isMfaVerified && (
+					<Button
+						variant='contained'
+						onClick={handleVerifyToken}
+						disabled={isProcessing}
+					>
+						Verify
+					</Button>
+				)}
 			</Box>
 		</Box>
 	);

@@ -25,11 +25,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import SecurityIcon from '@mui/icons-material/Security';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import {
-	adminEmailState,
-	adminPasswordState,
-	apiHostState,
-} from '../states/main';
+import { adminEmailState, adminPwdState, apiHostState } from '../states/main';
 import {
 	appMessageState,
 	appSeverityState,
@@ -45,7 +41,7 @@ const CongregationItem = ({ cong }) => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPasswordState);
+	const adminPassword = useRecoilValue(adminPwdState);
 
 	const [admins, setAdmins] = useState(cong.admin);
 	const [vips, setVips] = useState(cong.vip);

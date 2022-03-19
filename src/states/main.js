@@ -7,7 +7,7 @@ export const apiHostState = atom({
 
 export const isAdminState = atom({
 	key: 'isAdmin',
-	default: true,
+	default: false,
 });
 
 export const pendingRequestsState = atom({
@@ -36,12 +36,22 @@ export const usersListSortedState = selector({
 
 export const adminEmailState = atom({
 	key: 'adminEmail',
-	default: 'sws2apps@gmail.com',
+	default: '',
 });
 
-export const adminPasswordState = atom({
-	key: 'adminPassword',
-	default: 'swsDev2022BaseFire!HARI',
+export const adminPwdState = atom({
+	key: 'adminPwd',
+	default: '',
+});
+
+export const adminTmpEmailState = atom({
+	key: 'adminTmpEmail',
+	default: '',
+});
+
+export const adminTmpPwdState = atom({
+	key: 'adminTmpPwd',
+	default: '',
 });
 
 export const countPendingRequestsState = selector({
@@ -69,4 +79,29 @@ export const congsListSortedState = selector({
 
 		return congsList;
 	},
+});
+
+export const isMfaVerifiedState = atom({
+	key: 'isMfaVerified',
+	default: false,
+});
+
+export const hasErrorEmailState = atom({
+	key: 'hasErrorEmail',
+	default: false,
+});
+
+export const hasErrorPwdState = atom({
+	key: 'hasErrorPwd',
+	default: false,
+});
+
+export const adminTokenState = atom({
+	key: 'adminToken',
+	default: '',
+});
+
+export const hasErrorTokenState = atom({
+	key: 'hasErrorToken',
+	default: false,
 });
