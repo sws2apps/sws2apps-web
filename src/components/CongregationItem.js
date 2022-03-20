@@ -50,8 +50,8 @@ const CongregationItem = ({ cong }) => {
 	const cnID = useRecoilValue(connectionIdState);
 
 	const [admins, setAdmins] = useState(cong.admin);
-	const [vips, setVips] = useState(cong.vip);
-	const [pockets, setPockets] = useState(cong.pocket);
+	const vips = useState(cong.vip);
+	const pockets = useState(cong.pocket);
 
 	const [open, setOpen] = useState(false);
 	const [isFetch, setIsFetch] = useState(false);
@@ -69,7 +69,7 @@ const CongregationItem = ({ cong }) => {
 	const [isDelete, setIsDelete] = useState(false);
 	const [isDeleteAdmin, setIsDeleteAdmin] = useState(false);
 	const [isDeleteVip, setIsDeleteVip] = useState(false);
-	const [isDeletePocket, setIsDeletePocket] = useState(false);
+	const { setState: setIsDeletePocket } = useState(false);
 	const [toBeDel, setToBeDel] = useState('');
 
 	const handleDlgClose = () => {
@@ -92,23 +92,23 @@ const CongregationItem = ({ cong }) => {
 		setOpen(true);
 	};
 
-	const handleSetIsDeleteVip = (username) => {
-		setToBeDel(username);
-		setDlgTitle(`Remove ${username} from congregation?`);
-		setIsDelete(true);
-		setIsDeleteVip(true);
-		setIsYesDisabled(false);
-		setOpen(true);
-	};
+	// const handleSetIsDeleteVip = (username) => {
+	// 	setToBeDel(username);
+	// 	setDlgTitle(`Remove ${username} from congregation?`);
+	// 	setIsDelete(true);
+	// 	setIsDeleteVip(true);
+	// 	setIsYesDisabled(false);
+	// 	setOpen(true);
+	// };
 
-	const handleSetIsDeletePocket = (username) => {
-		setToBeDel(username);
-		setDlgTitle(`Remove ${username} from congregation?`);
-		setIsDelete(true);
-		setIsDeletePocket(true);
-		setIsYesDisabled(false);
-		setOpen(true);
-	};
+	// const handleSetIsDeletePocket = (username) => {
+	// 	setToBeDel(username);
+	// 	setDlgTitle(`Remove ${username} from congregation?`);
+	// 	setIsDelete(true);
+	// 	setIsDeletePocket(true);
+	// 	setIsYesDisabled(false);
+	// 	setOpen(true);
+	// };
 
 	const handleSetAdminAdd = () => {
 		setDlgTitle(`Add Administrator to ${cong.cong_name}`);
