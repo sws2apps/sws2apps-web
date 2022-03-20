@@ -1,6 +1,21 @@
 # [1.0.0-alpha.7](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2022-03-20)
 
 
+### Bug Fixes
+
+* **web:** remove unnecessary code ([2d1a87b](https://github.com/sws2apps/sws2apps-web/commit/2d1a87b16a96877beeee0acf40405d6247872002))
+
+
+### Features
+
+* **admin:** add two-factor authentication ([8c7fe25](https://github.com/sws2apps/sws2apps-web/commit/8c7fe2527279c0939bd200abb6fdce1c44ef50b8))
+* **deps:** bump @mui/icons-material from 5.5.0 to 5.5.1 ([f1469e2](https://github.com/sws2apps/sws2apps-web/commit/f1469e2c340fc742ce82088d7e41de81310b8a39))
+* **deps:** bump @mui/lab from 5.0.0-alpha.72 to 5.0.0-alpha.73 ([dd0e307](https://github.com/sws2apps/sws2apps-web/commit/dd0e307bd7d6364c407d2c02d4c84fb1b5961419))
+* **deps:** bump @mui/material from 5.5.0 to 5.5.1 ([5d812c3](https://github.com/sws2apps/sws2apps-web/commit/5d812c3578093bcd32b1a2d7969a7384cee305f1))
+
+# [1.0.0-alpha.7](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2022-03-20)
+
+
 ### Features
 
 * **admin:** add two-factor authentication ([8c7fe25](https://github.com/sws2apps/sws2apps-web/commit/8c7fe2527279c0939bd200abb6fdce1c44ef50b8))
