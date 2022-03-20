@@ -25,7 +25,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import SecurityIcon from '@mui/icons-material/Security';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { adminEmailState, adminPwdState, apiHostState } from '../states/main';
+import {
+	adminEmailState,
+	adminPwdState,
+	apiHostState,
+	connectionIdState,
+} from '../states/main';
 import {
 	appMessageState,
 	appSeverityState,
@@ -42,6 +47,7 @@ const CongregationItem = ({ cong }) => {
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
 	const adminPassword = useRecoilValue(adminPwdState);
+	const cnID = useRecoilValue(connectionIdState);
 
 	const [admins, setAdmins] = useState(cong.admin);
 	const [vips, setVips] = useState(cong.vip);
@@ -155,6 +161,7 @@ const CongregationItem = ({ cong }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					cn_uid: cnID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -203,6 +210,7 @@ const CongregationItem = ({ cong }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					cn_uid: cnID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -246,6 +254,7 @@ const CongregationItem = ({ cong }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					cn_uid: cnID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -680,6 +689,25 @@ const CongregationItem = ({ cong }) => {
 							)}
 						</Grid>
 					</Grid>
+				</Box>
+				<Box
+					sx={{
+						borderTop: '2px solid #BFC9CA',
+						display: 'flex',
+						justifyContent: 'flex-end',
+					}}
+				>
+					<Button
+						startIcon={<DeleteIcon sx={{ color: 'red' }} />}
+						sx={{
+							color: 'black',
+							marginLeft: '5px',
+							marginTop: '5px',
+						}}
+						variant='outlined'
+					>
+						Delete
+					</Button>
 				</Box>
 			</Box>
 		</>

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { useTheme } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import AddModeratorIcon from '@mui/icons-material/AddModerator';
 import Avatar from '@mui/material/Avatar';
 import BlockIcon from '@mui/icons-material/Block';
 import Box from '@mui/material/Box';
@@ -14,44 +13,66 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import GppBadIcon from '@mui/icons-material/GppBad';
+import GppGoodIcon from '@mui/icons-material/GppGood';
 import GradeIcon from '@mui/icons-material/Grade';
 import HourglassFullIcon from '@mui/icons-material/HourglassFull';
-import IconButton from '@mui/material/IconButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import LockResetIcon from '@mui/icons-material/LockReset';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PersonIcon from '@mui/icons-material/Person';
 import PowerIcon from '@mui/icons-material/Power';
 import SecurityIcon from '@mui/icons-material/Security';
 import Stack from '@mui/material/Stack';
+import TokenIcon from '@mui/icons-material/Token';
 import Typography from '@mui/material/Typography';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import {
 	adminEmailState,
 	adminPwdState,
+	adminTmpEmailState,
+	adminTmpPwdState,
+	adminTokenState,
 	apiHostState,
+	connectionIdState,
+	isAdminState,
+	isMfaVerifiedState,
+	isMfaEnabledState,
+	isViewTokenState,
+	pendingRequestsState,
 	usersListState,
+	viewTokenEmailState,
+	viewTokenUsernameState,
 } from '../states/main';
 import {
 	appMessageState,
 	appSeverityState,
 	appSnackOpenState,
 } from '../states/notification';
+import UserViewToken from './UserViewToken';
 
 const UserItem = ({ user }) => {
 	let abortCont = useMemo(() => new AbortController(), []);
 
 	const [usersList, setUsersList] = useRecoilState(usersListState);
+	const [isViewToken, setIsViewToken] = useRecoilState(isViewTokenState);
+	const [adminEmail, setAdminEmail] = useRecoilState(adminEmailState);
+	const [adminPwd, setAdminPwd] = useRecoilState(adminPwdState);
 
 	const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
 	const setAppSeverity = useSetRecoilState(appSeverityState);
 	const setAppMessage = useSetRecoilState(appMessageState);
+	const setViewTokenEmail = useSetRecoilState(viewTokenEmailState);
+	const setViewTokenUsername = useSetRecoilState(viewTokenUsernameState);
+	const setIsAdmin = useSetRecoilState(isAdminState);
+	const setPendingRequests = useSetRecoilState(pendingRequestsState);
+	const setAdminTmpEmail = useSetRecoilState(adminTmpEmailState);
+	const setAdminTmpPwd = useSetRecoilState(adminTmpPwdState);
+	const setAdminToken = useSetRecoilState(adminTokenState);
+	const setIsMfaVerified = useSetRecoilState(isMfaVerifiedState);
+	const setIsMfaEnabled = useSetRecoilState(isMfaEnabledState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPwdState);
+
+	const cnID = useRecoilValue(connectionIdState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
@@ -61,29 +82,21 @@ const UserItem = ({ user }) => {
 	const [open, setOpen] = useState(false);
 	const [dlgTitle, setDlgTitle] = useState('');
 	const [dlgContent, setDlgContent] = useState('');
-	const [anchorEl, setAnchorEl] = useState(null);
-
-	const theme = useTheme();
-	const miniView = useMediaQuery(theme.breakpoints.down(500), {
-		noSsr: true,
-	});
-
-	const menuOpen = Boolean(anchorEl);
-
-	const handleMenuOpen = (event) => {
-		setAnchorEl(event.currentTarget);
-	};
-
-	const handleMenuClose = () => {
-		setAnchorEl(null);
-	};
+	const [isRevoke, setIsRevoke] = useState(false);
 
 	const handleDlgClose = () => {
 		setIsDelete(false);
 		setIsEnableUser(false);
 		setIsDisableUser(false);
 		setIsResetPwd(false);
+		setIsRevoke(false);
 		setOpen(false);
+	};
+
+	const handleViewUserToken = () => {
+		setViewTokenEmail(user.email);
+		setViewTokenUsername(user.username);
+		setIsViewToken(true);
 	};
 
 	const handleDlgAction = async () => {
@@ -100,11 +113,14 @@ const UserItem = ({ user }) => {
 			handleDlgClose();
 			await handleResetPassword();
 			setIsResetPwd(false);
+		} else if (isRevoke) {
+			handleDlgClose();
+			await handleRevokeToken();
+			setIsResetPwd(false);
 		}
 	};
 
 	const handleSetDelete = () => {
-		handleMenuClose();
 		setDlgTitle('Delete user');
 		setDlgContent(`Are you sure to delete the user: ${user.username}?`);
 		setIsDelete(true);
@@ -112,7 +128,6 @@ const UserItem = ({ user }) => {
 	};
 
 	const handleSetStatus = () => {
-		handleMenuClose();
 		if (user.disabled) {
 			setDlgTitle('Enable user');
 			setDlgContent(
@@ -131,7 +146,6 @@ const UserItem = ({ user }) => {
 	};
 
 	const handleSetReset = () => {
-		handleMenuClose();
 		setDlgTitle('Reset user password');
 		setDlgContent(
 			`Are you sure to send a password reset link to this user: ${user.username}?`
@@ -140,11 +154,20 @@ const UserItem = ({ user }) => {
 		setOpen(true);
 	};
 
+	const handleSetRevoke = () => {
+		setDlgTitle('Revoke MFA token');
+		setDlgContent(
+			`Are you sure to revoke the MFA token this user: ${user.username}?`
+		);
+		setIsRevoke(true);
+		setOpen(true);
+	};
+
 	const handleDeleteUser = async () => {
 		setIsProcessing(true);
 		const reqPayload = {
 			email: adminEmail,
-			password: adminPassword,
+			password: adminPwd,
 			user_email: user.email,
 			user_uid: user.uid,
 		};
@@ -155,6 +178,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					cn_uid: cnID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -189,7 +213,7 @@ const UserItem = ({ user }) => {
 		setIsProcessing(true);
 		const reqPayload = {
 			email: adminEmail,
-			password: adminPassword,
+			password: adminPwd,
 			user_email: user.email,
 			user_uid: user.uid,
 		};
@@ -203,6 +227,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					cn_uid: cnID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -247,7 +272,7 @@ const UserItem = ({ user }) => {
 		setIsProcessing(true);
 		const reqPayload = {
 			email: adminEmail,
-			password: adminPassword,
+			password: adminPwd,
 			user_email: user.email,
 			user_username: user.username,
 		};
@@ -258,6 +283,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					cn_uid: cnID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -281,6 +307,62 @@ const UserItem = ({ user }) => {
 					setAppSeverity('error');
 					setAppSnackOpen(true);
 				});
+		}
+	};
+
+	const handleRevokeToken = async () => {
+		setIsProcessing(true);
+		try {
+			const reqPayload = {
+				email: adminEmail,
+				password: adminPwd,
+				user_email: user.email,
+			};
+
+			if (apiHost !== '') {
+				const res = await fetch(`${apiHost}api/admin/revoke-user-token`, {
+					signal: abortCont.signal,
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						cn_uid: cnID,
+					},
+					body: JSON.stringify(reqPayload),
+				});
+
+				const data = await res.json();
+				if (res.status === 200) {
+					setIsProcessing(false);
+					setAppMessage('User MFA token revoked successfully');
+					setAppSeverity('success');
+					setAppSnackOpen(true);
+
+					if (adminEmail === user.email) {
+						setAdminEmail('');
+						setAdminPwd('');
+						setAdminTmpEmail('');
+						setAdminTmpPwd('');
+						setAdminToken('');
+						setPendingRequests([]);
+
+						setTimeout(() => {
+							setIsAdmin(false);
+							setIsMfaVerified(false);
+							setIsMfaEnabled(false);
+						}, 1000);
+					}
+				} else {
+					setIsProcessing(false);
+					setAppMessage(data.message);
+					setAppSeverity('warning');
+					setAppSnackOpen(true);
+				}
+			}
+		} catch (err) {
+			setIsProcessing(false);
+			setAppMessage(err.message);
+			setAppSeverity('error');
+			setAppSnackOpen(true);
 		}
 	};
 
@@ -313,6 +395,7 @@ const UserItem = ({ user }) => {
 						</DialogActions>
 					</Dialog>
 				)}
+				{isViewToken && <UserViewToken />}
 			</Box>
 			<Box
 				sx={{
@@ -321,6 +404,7 @@ const UserItem = ({ user }) => {
 					borderRadius: '10px',
 					padding: '10px',
 					marginBottom: '15px',
+					minWidth: '450px',
 				}}
 			>
 				{user && (
@@ -361,130 +445,47 @@ const UserItem = ({ user }) => {
 									</Typography>
 								</Box>
 							</Box>
-							{miniView && (
-								<Box>
-									{isProcessing && (
-										<Container
-											sx={{
-												display: 'flex',
-												justifyContent: 'center',
-											}}
-										>
-											<CircularProgress
-												disableShrink
-												color='secondary'
-												size={'20px'}
-											/>
-										</Container>
-									)}
-									{!isProcessing && (
-										<>
-											<IconButton
-												id='more-button-mini'
-												aria-controls={menuOpen ? 'basic-menu' : undefined}
-												aria-haspopup='true'
-												aria-expanded={menuOpen ? 'true' : undefined}
-												onClick={handleMenuOpen}
-											>
-												<MoreVertIcon />
-											</IconButton>
-											<Menu
-												id='demo-positioned-menu'
-												aria-labelledby='more-button-mini'
-												anchorEl={anchorEl}
-												open={menuOpen}
-												onClose={handleMenuClose}
-												anchorOrigin={{
-													vertical: 'top',
-													horizontal: 'left',
-												}}
-												transformOrigin={{
-													vertical: 'top',
-													horizontal: 'left',
-												}}
-											>
-												<MenuItem
-													onClick={handleSetStatus}
-													sx={{ minHeight: '25px' }}
-												>
-													<ListItemIcon>
-														<>
-															{user.disabled && (
-																<PowerIcon sx={{ color: '#311b92' }} />
-															)}
-															{!user.disabled && (
-																<BlockIcon sx={{ color: '#311b92' }} />
-															)}
-														</>
-													</ListItemIcon>
-													<ListItemText>
-														{user.disabled ? 'Enable' : 'Disable'}
-													</ListItemText>
-												</MenuItem>
-												<MenuItem
-													onClick={handleSetReset}
-													sx={{ minHeight: '25px' }}
-												>
-													<ListItemIcon>
-														<LockResetIcon sx={{ color: '#bf360c' }} />
-													</ListItemIcon>
-													<ListItemText>Reset password</ListItemText>
-												</MenuItem>
-												<MenuItem
-													onClick={handleSetDelete}
-													sx={{ minHeight: '25px' }}
-												>
-													<ListItemIcon>
-														<DeleteIcon sx={{ color: 'red' }} />
-													</ListItemIcon>
-													<ListItemText>Delete</ListItemText>
-												</MenuItem>
-											</Menu>
-										</>
-									)}
-								</Box>
-							)}
 						</Box>
-						{!miniView && (
+						<Box
+							sx={{
+								borderTop: '2px solid #BFC9CA',
+								marginTop: '10px',
+								display: 'flex',
+								justifyContent: 'space-between',
+								alignItems: 'flex-start',
+								flexWrap: 'wrap',
+							}}
+						>
 							<Box
 								sx={{
-									borderTop: '2px solid #BFC9CA',
 									marginTop: '10px',
 									display: 'flex',
-									justifyContent: 'space-between',
 									alignItems: 'flex-start',
-									flexWrap: 'wrap',
 								}}
 							>
-								<Box
-									sx={{
-										marginTop: '10px',
-										display: 'flex',
-										alignItems: 'flex-start',
-									}}
-								>
-									<Box sx={{ width: '250px' }}>
-										<Typography
-											sx={{
-												fontWeight: 'bold',
-												textDecoration: 'underline',
-												fontSize: '14px',
-											}}
-										>
-											Congregation
+								<Box sx={{ width: '250px' }}>
+									<Typography
+										sx={{
+											fontWeight: 'bold',
+											textDecoration: 'underline',
+											fontSize: '14px',
+										}}
+									>
+										Congregation
+									</Typography>
+									{user.cong_name !== '' && (
+										<Typography sx={{ fontSize: '14px' }}>
+											{user.cong_name} ({user.cong_number})
 										</Typography>
-										{user.cong_name !== '' && (
-											<Typography sx={{ fontSize: '14px' }}>
-												{user.cong_name} ({user.cong_number})
-											</Typography>
-										)}
-										{user.cong_name === '' && (
-											<Typography sx={{ fontSize: '14px' }}>
-												Not yet assigned
-											</Typography>
-										)}
-									</Box>
+									)}
+									{user.cong_name === '' && (
+										<Typography sx={{ fontSize: '14px' }}>
+											Not yet assigned
+										</Typography>
+									)}
+								</Box>
 
+								<Box>
 									<Stack direction='row' alignItems='center' spacing={0.5}>
 										{user.disabled && <BlockIcon sx={{ color: '#ff5722' }} />}
 										{!user.disabled && user.emailVerified && (
@@ -502,82 +503,138 @@ const UserItem = ({ user }) => {
 												: 'Need verification'}
 										</Typography>
 									</Stack>
-								</Box>
-								<Box>
-									{isProcessing && (
-										<Container
-											sx={{
-												display: 'flex',
-												justifyContent: 'center',
-												marginTop: '25px',
-											}}
-										>
-											<CircularProgress
-												disableShrink
-												color='secondary'
-												size={'20px'}
-											/>
-										</Container>
-									)}
-									{!isProcessing && (
-										<>
-											{user.disabled && (
-												<Button
-													onClick={handleSetStatus}
-													startIcon={<PowerIcon sx={{ color: '#311b92' }} />}
-													sx={{
-														color: 'black',
-														marginLeft: '5px',
-														marginTop: '5px',
-													}}
-													variant='outlined'
-												>
-													Enable
-												</Button>
-											)}
-											{!user.disabled && (
-												<Button
-													onClick={handleSetStatus}
-													startIcon={<BlockIcon sx={{ color: '#311b92' }} />}
-													sx={{
-														color: 'black',
-														marginLeft: '5px',
-														marginTop: '5px',
-													}}
-													variant='outlined'
-												>
-													Disable
-												</Button>
-											)}
-											<Button
-												onClick={handleSetReset}
-												startIcon={<LockResetIcon sx={{ color: '#bf360c' }} />}
-												sx={{
-													color: 'black',
-													marginLeft: '5px',
-													marginTop: '5px',
-												}}
-												variant='outlined'
-											>
-												Reset pwd
-											</Button>
-											<Button
-												onClick={handleSetDelete}
-												startIcon={<DeleteIcon sx={{ color: 'red' }} />}
-												sx={{
-													color: 'black',
-													marginLeft: '5px',
-													marginTop: '5px',
-												}}
-												variant='outlined'
-											>
-												Delete
-											</Button>
-										</>
-									)}
+									<Stack direction='row' alignItems='center' spacing={0.5}>
+										{user.mfaEnabled && (
+											<GppGoodIcon sx={{ color: '#D35400' }} />
+										)}
+										{!user.mfaEnabled && (
+											<GppBadIcon sx={{ color: '#515A5A' }} />
+										)}
+
+										<Typography sx={{ fontSize: '14px' }}>
+											{user.mfaEnabled ? 'MFA enabled' : 'MFA pending'}
+										</Typography>
+									</Stack>
 								</Box>
 							</Box>
-						)}
+							<Box>
+								{isProcessing && (
+									<Container
+										sx={{
+											display: 'flex',
+											justifyContent: 'center',
+											marginTop: '25px',
+										}}
+									>
+										<CircularProgress
+											disableShrink
+											color='secondary'
+											size={'20px'}
+										/>
+									</Container>
+								)}
+								{!isProcessing && (
+									<>
+										{user.global_role === 'vip' &&
+											!user.disabled &&
+											user.emailVerified &&
+											user.mfaEnabled && (
+												<Button
+													onClick={handleSetStatus}
+													startIcon={
+														<AddModeratorIcon sx={{ color: '#E74C3C' }} />
+													}
+													sx={{
+														color: 'black',
+														marginLeft: '5px',
+														marginTop: '5px',
+													}}
+													variant='outlined'
+												>
+													Make as admin
+												</Button>
+											)}
+
+										<Button
+											onClick={handleViewUserToken}
+											startIcon={<VisibilityIcon sx={{ color: '#311b92' }} />}
+											sx={{
+												color: 'black',
+												marginLeft: '5px',
+												marginTop: '5px',
+											}}
+											variant='outlined'
+										>
+											View token
+										</Button>
+										<Button
+											onClick={handleSetRevoke}
+											startIcon={<TokenIcon sx={{ color: '#D35400' }} />}
+											sx={{
+												color: 'black',
+												marginLeft: '5px',
+												marginTop: '5px',
+											}}
+											variant='outlined'
+										>
+											Revoke token
+										</Button>
+										{user.disabled && (
+											<Button
+												onClick={handleSetStatus}
+												startIcon={<PowerIcon sx={{ color: '#311b92' }} />}
+												sx={{
+													color: 'black',
+													marginLeft: '5px',
+													marginTop: '5px',
+												}}
+												variant='outlined'
+											>
+												Enable
+											</Button>
+										)}
+										{!user.disabled && (
+											<Button
+												onClick={handleSetStatus}
+												startIcon={<BlockIcon sx={{ color: '#311b92' }} />}
+												sx={{
+													color: 'black',
+													marginLeft: '5px',
+													marginTop: '5px',
+												}}
+												variant='outlined'
+											>
+												Disable
+											</Button>
+										)}
+										<Button
+											onClick={handleSetReset}
+											startIcon={<LockResetIcon sx={{ color: '#bf360c' }} />}
+											sx={{
+												color: 'black',
+												marginLeft: '5px',
+												marginTop: '5px',
+											}}
+											variant='outlined'
+										>
+											Reset pwd
+										</Button>
+										<Button
+											onClick={handleSetDelete}
+											startIcon={<DeleteIcon sx={{ color: 'red' }} />}
+											sx={{
+												color: 'black',
+												marginLeft: '5px',
+												marginTop: '5px',
+											}}
+											variant='outlined'
+										>
+											Delete
+										</Button>
+									</>
+								)}
+							</Box>
+						</Box>
 					</Box>
 				)}
 			</Box>

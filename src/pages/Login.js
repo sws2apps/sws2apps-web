@@ -8,18 +8,23 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import LoginAdmin from '../components/LoginAdmin';
 import MfaCheck from '../components/MfaCheck';
+import MfaSetup from '../components/MfaSetup';
 import {
 	adminEmailState,
 	adminPwdState,
 	adminTmpEmailState,
 	adminTmpPwdState,
+	adminTokenState,
 	apiHostState,
-	isAdminState,
+	connectionIdState,
 	hasErrorEmailState,
 	hasErrorPwdState,
+	isAdminState,
+	isMfaEnabledState,
 	isMfaVerifiedState,
 	hasErrorTokenState,
-	adminTokenState,
+	qrCodePathState,
+	secretTokenPathState,
 } from '../states/main';
 import {
 	appMessageState,
@@ -34,7 +39,9 @@ const Login = () => {
 	let abortCont = useMemo(() => new AbortController(), []);
 
 	const [isAdmin, setIsAdmin] = useRecoilState(isAdminState);
+	const [isMfaEnabled, setIsMfaEnabled] = useRecoilState(isMfaEnabledState);
 	const [isMfaVerified, setIsMfaVerified] = useRecoilState(isMfaVerifiedState);
+	const [cnID, setCnID] = useRecoilState(connectionIdState);
 
 	const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
 	const setAppSeverity = useSetRecoilState(appSeverityState);
@@ -44,6 +51,11 @@ const Login = () => {
 	const setHasErrorToken = useSetRecoilState(hasErrorTokenState);
 	const setAdminEmail = useSetRecoilState(adminEmailState);
 	const setAdminPwd = useSetRecoilState(adminPwdState);
+	const setAdminTmpEmail = useSetRecoilState(adminTmpEmailState);
+	const setAdminTmpPwd = useSetRecoilState(adminTmpPwdState);
+	const setAdminToken = useSetRecoilState(adminTokenState);
+	const setQrCodePath = useSetRecoilState(qrCodePathState);
+	const setSecretTokenPath = useSetRecoilState(secretTokenPathState);
 
 	const apiHost = useRecoilValue(apiHostState);
 	const userTmpPwd = useRecoilValue(adminTmpPwdState);
@@ -53,6 +65,13 @@ const Login = () => {
 	const [isProcessing, setIsProcessing] = useState(false);
 
 	const handleGoPublic = () => {
+		setAdminEmail('');
+		setAdminPwd('');
+		setAdminTmpEmail('');
+		setAdminTmpPwd('');
+		setAdminToken('');
+		setIsAdmin(false);
+		setIsMfaVerified(false);
 		navigate('/');
 	};
 
@@ -82,12 +101,21 @@ const Login = () => {
 						const data = await res.json();
 						if (res.status === 200) {
 							setIsAdmin(true);
+							setCnID(data.message);
 							setIsProcessing(false);
 						} else {
-							setIsProcessing(false);
-							setAppMessage(data.message);
-							setAppSeverity('warning');
-							setAppSnackOpen(true);
+							if (data.secret && data.qrCode && data.cn_uid) {
+								setSecretTokenPath(data.secret);
+								setQrCodePath(data.qrCode);
+								setCnID(data.cn_uid);
+								setIsAdmin(true);
+								setIsProcessing(false);
+							} else {
+								setIsProcessing(false);
+								setAppMessage(data.message);
+								setAppSeverity('warning');
+								setAppSnackOpen(true);
+							}
 						}
 					})
 					.catch((err) => {
@@ -119,11 +147,12 @@ const Login = () => {
 			};
 
 			if (apiHost !== '') {
-				fetch(`${apiHost}api/user/verify-token`, {
+				fetch(`${apiHost}api/mfa/verify-token`, {
 					signal: abortCont.signal,
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
+						cn_uid: cnID,
 					},
 					body: JSON.stringify(reqPayload),
 				})
@@ -133,6 +162,7 @@ const Login = () => {
 							setAdminEmail(userTmpEmail);
 							setAdminPwd(userTmpPwd);
 							setIsMfaVerified(true);
+							setIsMfaEnabled(true);
 							setAppMessage(data.message);
 							setAppSeverity('success');
 							setAppSnackOpen(true);
@@ -165,7 +195,7 @@ const Login = () => {
 		<Box
 			sx={{
 				border: '2px solid #BFC9CA',
-				width: '400px',
+				width: '450px',
 				height: 'auto',
 				display: 'flex',
 				justifyContent: 'center',
@@ -182,7 +212,12 @@ const Login = () => {
 			</Typography>
 
 			{!isAdmin && !isMfaVerified && <LoginAdmin />}
-			{isAdmin && !isMfaVerified && <MfaCheck />}
+			{isAdmin && !isMfaEnabled && !isMfaVerified && <MfaSetup />}
+			{isAdmin && isMfaEnabled && !isMfaVerified && (
+				<Box sx={{ marginTop: '25px', width: '100%' }}>
+					<MfaCheck />
+				</Box>
+			)}
 
 			{isProcessing && (
 				<Box

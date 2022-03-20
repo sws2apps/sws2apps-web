@@ -105,3 +105,48 @@ export const hasErrorTokenState = atom({
 	key: 'hasErrorToken',
 	default: false,
 });
+
+export const connectionIdState = atom({
+	key: 'connectionId',
+	default: '5e223018-45f8-409a-a041-dae724a85002',
+});
+
+export const isAdminLoggedState = atom({
+	key: 'isAdminLogged',
+	default: true,
+});
+
+export const isLogoutState = atom({
+	key: 'isLogout',
+	default: false,
+});
+
+export const isViewTokenState = atom({
+	key: 'isViewToken',
+	default: false,
+});
+
+export const viewTokenEmailState = atom({
+	key: 'viewTokenEmail',
+	default: '',
+});
+
+export const viewTokenUsernameState = atom({
+	key: 'viewTokenUsername',
+	default: '',
+});
+
+export const isMfaEnabledState = atom({
+	key: 'isMfaEnabled',
+	default: false,
+});
+
+export const qrCodePathState = atom({
+	key: 'qrCodePath',
+	default: '',
+});
+
+export const secretTokenPathState = atom({
+	key: 'secretTokenPath',
+	default: '',
+});

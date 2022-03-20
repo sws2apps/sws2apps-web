@@ -13,6 +13,7 @@ import {
 	adminEmailState,
 	adminPwdState,
 	apiHostState,
+	connectionIdState,
 	usersListSortedState,
 	usersListState,
 } from '../states/main';
@@ -34,8 +35,9 @@ const UsersList = () => {
 	const adminEmail = useRecoilValue(adminEmailState);
 	const adminPassword = useRecoilValue(adminPwdState);
 	const usersList = useRecoilValue(usersListSortedState);
+	const cnID = useRecoilValue(connectionIdState);
 
-	const [isProcessing, setIsProcessing] = useState(true);
+	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
 
 	const handleFetchUsers = useCallback(async () => {
@@ -52,6 +54,7 @@ const UsersList = () => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					cn_uid: cnID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -76,6 +79,7 @@ const UsersList = () => {
 		adminEmail,
 		adminPassword,
 		apiHost,
+		cnID,
 		setAppMessage,
 		setAppSeverity,
 		setAppSnackOpen,
@@ -84,16 +88,11 @@ const UsersList = () => {
 	]);
 
 	useEffect(() => {
-		const fetchUsers = async () => {
-			await handleFetchUsers();
+		return () => {
+			setData([]);
+			abortCont.abort();
 		};
-
-		fetchUsers();
-	}, [handleFetchUsers]);
-
-	useEffect(() => {
-		return () => abortCont.abort();
-	}, [abortCont]);
+	}, [abortCont, setData]);
 
 	return (
 		<>
@@ -143,10 +142,13 @@ const UsersList = () => {
 					<Box
 						sx={{
 							display: 'flex',
-							justifyContent: 'flex-end',
+							justifyContent: 'space-between',
 							alignItems: 'center',
 						}}
 					>
+						<Typography sx={{ fontWeight: 'bold', fontSize: '18px' }}>
+							{`USERS LIST (${usersList.length})`}
+						</Typography>
 						<IconButton color='inherit' edge='start' onClick={handleFetchUsers}>
 							<RefreshIcon />
 						</IconButton>

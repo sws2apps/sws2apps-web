@@ -9,7 +9,7 @@ const MfaCheck = () => {
 	const hasErrorToken = useRecoilValue(hasErrorTokenState);
 
 	return (
-		<Box sx={{ marginTop: '25px', width: '100%' }}>
+		<Box sx={{ width: '100%' }}>
 			<TextField
 				id='outlined-token'
 				type='number'

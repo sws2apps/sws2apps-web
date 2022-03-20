@@ -13,7 +13,9 @@ import {
 	adminEmailState,
 	adminPwdState,
 	apiHostState,
+	connectionIdState,
 	countPendingRequestsState,
+	isLogoutState,
 	pendingRequestsState,
 } from '../states/main';
 import {
@@ -35,6 +37,8 @@ const CongregationPendingRequests = () => {
 	const adminEmail = useRecoilValue(adminEmailState);
 	const adminPassword = useRecoilValue(adminPwdState);
 	const cnRequest = useRecoilValue(countPendingRequestsState);
+	const cnID = useRecoilValue(connectionIdState);
+	const isLogout = useRecoilValue(isLogoutState);
 
 	const [isProcessing, setIsProcessing] = useState(true);
 	const [isError, setIsError] = useState(false);
@@ -53,6 +57,7 @@ const CongregationPendingRequests = () => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					cn_uid: cnID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -77,6 +82,7 @@ const CongregationPendingRequests = () => {
 		adminEmail,
 		adminPassword,
 		apiHost,
+		cnID,
 		setAppMessage,
 		setAppSeverity,
 		setAppSnackOpen,
@@ -93,8 +99,11 @@ const CongregationPendingRequests = () => {
 	}, [handleFetchPending]);
 
 	useEffect(() => {
+		if (isLogout) {
+			abortCont.abort();
+		}
 		return () => abortCont.abort();
-	}, [abortCont]);
+	}, [isLogout, abortCont]);
 
 	return (
 		<>

@@ -4,7 +4,12 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Layout from './components/Layout';
 import NotificationBar from './components/NotificationBar';
 import PrivateRoute from './components/PrivateRoute';
-import { apiHostState, isAdminState, isMfaVerifiedState } from './states/main';
+import {
+	apiHostState,
+	isAdminState,
+	isLogoutState,
+	isMfaVerifiedState,
+} from './states/main';
 import { appSnackOpenState } from './states/notification';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -59,7 +64,7 @@ const App = () => {
 									/>
 								}
 							>
-								<Route path='/administration' element={<AdminPanel />} />
+								<Route path='/administration/*' element={<AdminPanel />} />
 							</Route>
 						</Routes>
 					</Layout>

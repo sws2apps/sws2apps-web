@@ -8,13 +8,14 @@ import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import Typography from '@mui/material/Typography';
-import CongregationItem from './CongregationItem';
+import CongregationItem from '../components/CongregationItem';
 import {
 	adminEmailState,
 	adminPwdState,
 	apiHostState,
 	congsListSortedState,
 	congsListState,
+	connectionIdState,
 } from '../states/main';
 import {
 	appMessageState,
@@ -34,8 +35,9 @@ const CongregationsList = () => {
 	const adminEmail = useRecoilValue(adminEmailState);
 	const adminPassword = useRecoilValue(adminPwdState);
 	const congsList = useRecoilValue(congsListSortedState);
+	const cnID = useRecoilValue(connectionIdState);
 
-	const [isProcessing, setIsProcessing] = useState(true);
+	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
 
 	const handleFetchCongregations = useCallback(async () => {
@@ -52,6 +54,7 @@ const CongregationsList = () => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					cn_uid: cnID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -65,17 +68,20 @@ const CongregationsList = () => {
 					setIsProcessing(false);
 				})
 				.catch((err) => {
-					setIsError(true);
-					setIsProcessing(false);
-					setAppMessage(err.message);
-					setAppSeverity('error');
-					setAppSnackOpen(true);
+					if (!abortCont.signal.aborted) {
+						setIsError(true);
+						setIsProcessing(false);
+						setAppMessage(err.message);
+						setAppSeverity('error');
+						setAppSnackOpen(true);
+					}
 				});
 		}
 	}, [
 		adminEmail,
 		adminPassword,
 		apiHost,
+		cnID,
 		setAppMessage,
 		setAppSeverity,
 		setAppSnackOpen,
@@ -84,16 +90,11 @@ const CongregationsList = () => {
 	]);
 
 	useEffect(() => {
-		const fetchCongregations = async () => {
-			await handleFetchCongregations();
+		return () => {
+			setData([]);
+			abortCont.abort();
 		};
-
-		fetchCongregations();
-	}, [handleFetchCongregations]);
-
-	useEffect(() => {
-		return () => abortCont.abort();
-	}, [abortCont]);
+	}, [abortCont, setData]);
 
 	return (
 		<>
@@ -143,10 +144,13 @@ const CongregationsList = () => {
 					<Box
 						sx={{
 							display: 'flex',
-							justifyContent: 'flex-end',
+							justifyContent: 'space-between',
 							alignItems: 'center',
 						}}
 					>
+						<Typography sx={{ fontWeight: 'bold', fontSize: '18px' }}>
+							{`CONGREGATION LIST (${congsList.length})`}
+						</Typography>
 						<IconButton
 							color='inherit'
 							edge='start'
