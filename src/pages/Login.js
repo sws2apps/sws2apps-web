@@ -71,6 +71,7 @@ const Login = () => {
 		setAdminTmpPwd('');
 		setAdminToken('');
 		setIsAdmin(false);
+		setIsMfaEnabled(false);
 		setIsMfaVerified(false);
 		navigate('/');
 	};
@@ -101,6 +102,7 @@ const Login = () => {
 						const data = await res.json();
 						if (res.status === 200) {
 							setIsAdmin(true);
+							setIsMfaEnabled(true);
 							setCnID(data.message);
 							setIsProcessing(false);
 						} else {
@@ -211,7 +213,7 @@ const Login = () => {
 				Accessing the Administration Panel
 			</Typography>
 
-			{!isAdmin && !isMfaVerified && <LoginAdmin />}
+			{!isAdmin && !isMfaEnabled && !isMfaVerified && <LoginAdmin />}
 			{isAdmin && !isMfaEnabled && !isMfaVerified && <MfaSetup />}
 			{isAdmin && isMfaEnabled && !isMfaVerified && (
 				<Box sx={{ marginTop: '25px', width: '100%' }}>
