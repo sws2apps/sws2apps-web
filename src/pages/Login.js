@@ -101,17 +101,17 @@ const Login = () => {
 					.then(async (res) => {
 						const data = await res.json();
 						if (res.status === 200) {
+							setIsProcessing(false);
 							setIsAdmin(true);
 							setIsMfaEnabled(true);
 							setCnID(data.message);
-							setIsProcessing(false);
 						} else {
 							if (data.secret && data.qrCode && data.cn_uid) {
+								setIsProcessing(false);
 								setSecretTokenPath(data.secret);
 								setQrCodePath(data.qrCode);
 								setCnID(data.cn_uid);
 								setIsAdmin(true);
-								setIsProcessing(false);
 							} else {
 								setIsProcessing(false);
 								setAppMessage(data.message);
