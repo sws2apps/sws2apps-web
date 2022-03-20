@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import AddModeratorIcon from '@mui/icons-material/AddModerator';
 import Avatar from '@mui/material/Avatar';
@@ -25,6 +25,7 @@ import Stack from '@mui/material/Stack';
 import TokenIcon from '@mui/icons-material/Token';
 import Typography from '@mui/material/Typography';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { handleAdminLogout } from '../utils/admin';
 import {
 	adminEmailState,
 	adminPwdState,
@@ -83,6 +84,11 @@ const UserItem = ({ user }) => {
 	const [dlgTitle, setDlgTitle] = useState('');
 	const [dlgContent, setDlgContent] = useState('');
 	const [isRevoke, setIsRevoke] = useState(false);
+	const [isMakeUserAdmin, setIsMakeUserAdmin] = useState(false);
+
+	const handleClearAdmin = useCallback(async () => {
+		await handleAdminLogout();
+	}, []);
 
 	const handleDlgClose = () => {
 		setIsDelete(false);
@@ -117,7 +123,20 @@ const UserItem = ({ user }) => {
 			handleDlgClose();
 			await handleRevokeToken();
 			setIsResetPwd(false);
+		} else if (isMakeUserAdmin) {
+			handleDlgClose();
+			await handleMakeUserAdmin();
+			setIsMakeUserAdmin(false);
 		}
+	};
+
+	const handleSetAdmin = () => {
+		setDlgTitle('Make user as administrator');
+		setDlgContent(
+			`Are you sure to set as admin the following user: ${user.username}?`
+		);
+		setIsMakeUserAdmin(true);
+		setOpen(true);
 	};
 
 	const handleSetDelete = () => {
@@ -193,6 +212,8 @@ const UserItem = ({ user }) => {
 						setAppMessage('User deleted successfully');
 						setAppSeverity('success');
 						setAppSnackOpen(true);
+					} else if (res.status === 403) {
+						handleClearAdmin();
 					} else {
 						setIsProcessing(false);
 						setAppMessage(data.message);
@@ -252,6 +273,8 @@ const UserItem = ({ user }) => {
 						setAppMessage('User account status updated successfully');
 						setAppSeverity('success');
 						setAppSnackOpen(true);
+					} else if (res.status === 403) {
+						handleClearAdmin();
 					} else {
 						setIsProcessing(false);
 						setAppMessage(data.message);
@@ -294,6 +317,8 @@ const UserItem = ({ user }) => {
 						setAppMessage('Password reset email queued for sending');
 						setAppSeverity('success');
 						setAppSnackOpen(true);
+					} else if (res.status === 403) {
+						handleClearAdmin();
 					} else {
 						setIsProcessing(false);
 						setAppMessage(data.message);
@@ -351,6 +376,65 @@ const UserItem = ({ user }) => {
 							setIsMfaEnabled(false);
 						}, 1000);
 					}
+				} else if (res.status === 403) {
+					handleClearAdmin();
+				} else {
+					setIsProcessing(false);
+					setAppMessage(data.message);
+					setAppSeverity('warning');
+					setAppSnackOpen(true);
+				}
+			}
+		} catch (err) {
+			setIsProcessing(false);
+			setAppMessage(err.message);
+			setAppSeverity('error');
+			setAppSnackOpen(true);
+		}
+	};
+
+	const handleMakeUserAdmin = async () => {
+		setIsProcessing(true);
+		try {
+			const reqPayload = {
+				email: adminEmail,
+				password: adminPwd,
+				user_email: user.email,
+			};
+
+			if (apiHost !== '') {
+				const res = await fetch(`${apiHost}api/admin/make-user-admin`, {
+					signal: abortCont.signal,
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						cn_uid: cnID,
+					},
+					body: JSON.stringify(reqPayload),
+				});
+
+				const data = await res.json();
+				if (res.status === 200) {
+					let item = usersList.find((itemUser) => itemUser.uid === user.uid);
+
+					let newUsers = usersList.filter(
+						(itemUser) => itemUser.uid !== user.uid
+					);
+
+					let obj = {
+						...item,
+						global_role: 'admin',
+					};
+
+					newUsers.push(obj);
+
+					setIsProcessing(false);
+					setUsersList(newUsers);
+					setAppMessage('User account status set as admin successfully');
+					setAppSeverity('success');
+					setAppSnackOpen(true);
+				} else if (res.status === 403) {
+					handleClearAdmin();
 				} else {
 					setIsProcessing(false);
 					setAppMessage(data.message);
@@ -540,7 +624,7 @@ const UserItem = ({ user }) => {
 											user.emailVerified &&
 											user.mfaEnabled && (
 												<Button
-													onClick={handleSetStatus}
+													onClick={handleSetAdmin}
 													startIcon={
 														<AddModeratorIcon sx={{ color: '#E74C3C' }} />
 													}

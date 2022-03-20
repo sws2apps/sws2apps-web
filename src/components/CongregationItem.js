@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Avatar from '@mui/material/Avatar';
@@ -25,6 +25,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import SecurityIcon from '@mui/icons-material/Security';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { handleAdminLogout } from '../utils/admin';
 import {
 	adminEmailState,
 	adminPwdState,
@@ -46,13 +47,12 @@ const CongregationItem = ({ cong }) => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPwdState);
+	const adminPwd = useRecoilValue(adminPwdState);
 	const cnID = useRecoilValue(connectionIdState);
 
 	const [admins, setAdmins] = useState(cong.admin);
 	const vips = useState(cong.vip);
 	const pockets = useState(cong.pocket);
-
 	const [open, setOpen] = useState(false);
 	const [isFetch, setIsFetch] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -71,6 +71,10 @@ const CongregationItem = ({ cong }) => {
 	const [isDeleteVip, setIsDeleteVip] = useState(false);
 	const { setState: setIsDeletePocket } = useState(false);
 	const [toBeDel, setToBeDel] = useState('');
+
+	const handleClearAdmin = useCallback(async () => {
+		await handleAdminLogout();
+	}, []);
 
 	const handleDlgClose = () => {
 		setIsAdminAdd(false);
@@ -150,7 +154,7 @@ const CongregationItem = ({ cong }) => {
 
 		const reqPayload = {
 			email: adminEmail,
-			password: adminPassword,
+			password: adminPwd,
 			cong_id: cong.cong_id,
 			user_email: user.email,
 		};
@@ -177,14 +181,16 @@ const CongregationItem = ({ cong }) => {
 
 						newAdmins.push(obj);
 						setAdmins(newAdmins);
+						setIsProcessing(false);
+					} else if (res.status === 403) {
+						handleClearAdmin();
 					} else {
 						const data = await res.json();
-
+						setIsProcessing(false);
 						setAppMessage(data.message);
 						setAppSeverity('warning');
 						setAppSnackOpen(true);
 					}
-					setIsProcessing(false);
 				})
 				.catch((err) => {
 					setIsProcessing(false);
@@ -200,7 +206,7 @@ const CongregationItem = ({ cong }) => {
 
 		const reqPayload = {
 			email: adminEmail,
-			password: adminPassword,
+			password: adminPwd,
 			user_email: email,
 		};
 
@@ -221,14 +227,16 @@ const CongregationItem = ({ cong }) => {
 							newAdmins = admins.filter((admin) => admin.email !== email);
 							setAdmins(newAdmins);
 						}
+						setIsProcessing(false);
+					} else if (res.status === 403) {
+						handleClearAdmin();
 					} else {
 						const data = await res.json();
-
+						setIsProcessing(false);
 						setAppMessage(data.message);
 						setAppSeverity('warning');
 						setAppSnackOpen(true);
 					}
-					setIsProcessing(false);
 				})
 				.catch((err) => {
 					setIsProcessing(false);
@@ -245,7 +253,7 @@ const CongregationItem = ({ cong }) => {
 		setIsFetch(true);
 		const reqPayload = {
 			email: adminEmail,
-			password: adminPassword,
+			password: adminPwd,
 		};
 
 		if (apiHost !== '') {
@@ -295,10 +303,13 @@ const CongregationItem = ({ cong }) => {
 							}
 							setUser(findUser);
 						}
+						setIsFetch(false);
+					} else if (res.status === 403) {
+						handleClearAdmin();
 					} else {
 						setIsError(true);
+						setIsFetch(false);
 					}
-					setIsFetch(false);
 				})
 				.catch((err) => {
 					setIsError(true);

@@ -8,19 +8,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Typography from '@mui/material/Typography';
+import { handleAdminLogout } from '../utils/admin';
 import {
 	adminEmailState,
 	adminPwdState,
-	adminTmpEmailState,
-	adminTmpPwdState,
-	adminTokenState,
 	apiHostState,
 	connectionIdState,
-	isAdminState,
 	isLogoutState,
-	isMfaEnabledState,
-	isMfaVerifiedState,
-	pendingRequestsState,
 } from '../states/main';
 import {
 	appMessageState,
@@ -33,19 +27,10 @@ const Logout = () => {
 
 	const [open, setOpen] = useRecoilState(isLogoutState);
 
-	const setIsAdmin = useSetRecoilState(isAdminState);
-	const setPendingRequests = useSetRecoilState(pendingRequestsState);
-	const setAdminEmail = useSetRecoilState(adminEmailState);
-	const setAdminPwd = useSetRecoilState(adminPwdState);
-	const setAdminTmpEmail = useSetRecoilState(adminTmpEmailState);
-	const setAdminTmpPwd = useSetRecoilState(adminTmpPwdState);
-	const setAdminToken = useSetRecoilState(adminTokenState);
 	const setIsLogout = useSetRecoilState(isLogoutState);
 	const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
 	const setAppSeverity = useSetRecoilState(appSeverityState);
 	const setAppMessage = useSetRecoilState(appMessageState);
-	const setIsMfaVerified = useSetRecoilState(isMfaVerifiedState);
-	const setIsMfaEnabled = useSetRecoilState(isMfaEnabledState);
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
@@ -64,6 +49,10 @@ const Logout = () => {
 		},
 		[setOpen, setIsLogout]
 	);
+
+	const handleClearAdmin = useCallback(async () => {
+		await handleAdminLogout();
+	}, []);
 
 	const handleLogout = useCallback(async () => {
 		setIsProcessing(true);
@@ -85,16 +74,10 @@ const Logout = () => {
 				.then(async (res) => {
 					const data = await res.json();
 					if (res.status === 200) {
-						setPendingRequests([]);
-						setAdminEmail('');
-						setAdminPwd('');
-						setAdminTmpEmail('');
-						setAdminTmpPwd('');
-						setAdminToken('');
-						setIsAdmin(false);
-						setIsMfaEnabled(false);
-						setIsMfaVerified(false);
-
+						handleClearAdmin();
+						handleClose();
+					} else if (res.status === 403) {
+						handleClearAdmin();
 						handleClose();
 					} else {
 						setAppMessage(data.message);
@@ -118,19 +101,11 @@ const Logout = () => {
 		adminPassword,
 		apiHost,
 		cnID,
+		handleClearAdmin,
 		handleClose,
-		setAdminEmail,
-		setAdminPwd,
-		setAdminTmpEmail,
-		setAdminTmpPwd,
-		setAdminToken,
 		setAppMessage,
 		setAppSeverity,
 		setAppSnackOpen,
-		setIsAdmin,
-		setIsMfaEnabled,
-		setIsMfaVerified,
-		setPendingRequests,
 	]);
 
 	useEffect(() => {
