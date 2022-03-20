@@ -9,6 +9,7 @@ import Link from '@mui/material/Link';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import Typography from '@mui/material/Typography';
 import UserItem from './UserItem';
+import { handleAdminLogout } from '../utils/admin';
 import {
 	adminEmailState,
 	adminPwdState,
@@ -40,6 +41,10 @@ const UsersList = () => {
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
 
+	const handleClearAdmin = useCallback(async () => {
+		await handleAdminLogout();
+	}, []);
+
 	const handleFetchUsers = useCallback(async () => {
 		setIsError(false);
 		setIsProcessing(true);
@@ -62,10 +67,13 @@ const UsersList = () => {
 					if (res.status === 200) {
 						const users = await res.json();
 						setData(users);
+						setIsProcessing(false);
+					} else if (res.status === 403) {
+						handleClearAdmin();
 					} else {
 						setIsError(true);
+						setIsProcessing(false);
 					}
-					setIsProcessing(false);
 				})
 				.catch((err) => {
 					setIsError(true);
@@ -80,6 +88,7 @@ const UsersList = () => {
 		adminPassword,
 		apiHost,
 		cnID,
+		handleClearAdmin,
 		setAppMessage,
 		setAppSeverity,
 		setAppSnackOpen,

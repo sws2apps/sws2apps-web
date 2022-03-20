@@ -12,10 +12,14 @@ import PendingRequestItem from './PendingRequestItem';
 import {
 	adminEmailState,
 	adminPwdState,
+	adminTmpEmailState,
+	adminTmpPwdState,
+	adminTokenState,
 	apiHostState,
 	connectionIdState,
-	countPendingRequestsState,
-	isLogoutState,
+	isAdminState,
+	isMfaEnabledState,
+	isMfaVerifiedState,
 	pendingRequestsState,
 } from '../states/main';
 import {
@@ -38,11 +42,33 @@ const CongregationPendingRequests = () => {
 	const adminPassword = useRecoilValue(adminPwdState);
 	const cnRequest = useRecoilValue(countPendingRequestsState);
 	const cnID = useRecoilValue(connectionIdState);
-	const isLogout = useRecoilValue(isLogoutState);
 
 	const [isProcessing, setIsProcessing] = useState(true);
 	const [isError, setIsError] = useState(false);
 
+	const handleClearAdmin = useCallback(() => {
+		setPendingRequests([]);
+		setAdminEmail('');
+		setAdminPwd('');
+		setAdminTmpEmail('');
+		setAdminTmpPwd('');
+		setAdminToken('');
+		setCnID('');
+		setIsAdmin(false);
+		setIsMfaEnabled(false);
+		setIsMfaVerified(false);
+	}, [
+		setAdminEmail,
+		setAdminPwd,
+		setAdminTmpEmail,
+		setAdminTmpPwd,
+		setAdminToken,
+		setCnID,
+		setIsAdmin,
+		setIsMfaEnabled,
+		setIsMfaVerified,
+		setPendingRequests,
+	]);
 	const handleFetchPending = useCallback(async () => {
 		setIsError(false);
 		setIsProcessing(true);
@@ -99,11 +125,8 @@ const CongregationPendingRequests = () => {
 	}, [handleFetchPending]);
 
 	useEffect(() => {
-		if (isLogout) {
-			abortCont.abort();
-		}
 		return () => abortCont.abort();
-	}, [isLogout, abortCont]);
+	}, [abortCont]);
 
 	return (
 		<>
