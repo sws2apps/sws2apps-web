@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
-function PrivateRoute({ isAdmin }) {
-	return isAdmin ? <Outlet /> : <Navigate to='/' />;
+function PrivateRoute({ isAdmin, isMfaVerified }) {
+	return isAdmin && isMfaVerified ? <Outlet /> : <Navigate to='/' />;
 }
 
 export default PrivateRoute;

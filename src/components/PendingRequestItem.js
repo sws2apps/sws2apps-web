@@ -10,8 +10,9 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import {
 	adminEmailState,
-	adminPasswordState,
+	adminPwdState,
 	apiHostState,
+	connectionIdState,
 	pendingRequestsState,
 } from '../states/main';
 import {
@@ -31,7 +32,8 @@ const PendingRequestItem = ({ request }) => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPasswordState);
+	const adminPassword = useRecoilValue(adminPwdState);
+	const cnID = useRecoilValue(connectionIdState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isDisapprove, setIsDisapprove] = useState(false);
@@ -58,6 +60,7 @@ const PendingRequestItem = ({ request }) => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
+						cn_uid: cnID,
 					},
 					body: JSON.stringify(reqPayload),
 				})
@@ -110,6 +113,7 @@ const PendingRequestItem = ({ request }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					cn_uid: cnID,
 				},
 				body: JSON.stringify(reqPayload),
 			})

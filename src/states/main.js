@@ -39,8 +39,18 @@ export const adminEmailState = atom({
 	default: '',
 });
 
-export const adminPasswordState = atom({
-	key: 'adminPassword',
+export const adminPwdState = atom({
+	key: 'adminPwd',
+	default: '',
+});
+
+export const adminTmpEmailState = atom({
+	key: 'adminTmpEmail',
+	default: '',
+});
+
+export const adminTmpPwdState = atom({
+	key: 'adminTmpPwd',
 	default: '',
 });
 
@@ -50,4 +60,93 @@ export const countPendingRequestsState = selector({
 		const pendingReq = get(pendingRequestsState);
 		return pendingReq.length;
 	},
+});
+
+export const congsListState = atom({
+	key: 'congsList',
+	default: [],
+});
+
+export const congsListSortedState = selector({
+	key: 'congsListSorted',
+	get: ({ get }) => {
+		const tempList = get(congsListState);
+
+		let congsList = tempList.map((x) => x);
+		congsList.sort((a, b) => {
+			return a.cong_name > b.cong_name ? 1 : -1;
+		});
+
+		return congsList;
+	},
+});
+
+export const isMfaVerifiedState = atom({
+	key: 'isMfaVerified',
+	default: false,
+});
+
+export const hasErrorEmailState = atom({
+	key: 'hasErrorEmail',
+	default: false,
+});
+
+export const hasErrorPwdState = atom({
+	key: 'hasErrorPwd',
+	default: false,
+});
+
+export const adminTokenState = atom({
+	key: 'adminToken',
+	default: '',
+});
+
+export const hasErrorTokenState = atom({
+	key: 'hasErrorToken',
+	default: false,
+});
+
+export const connectionIdState = atom({
+	key: 'connectionId',
+	default: '5e223018-45f8-409a-a041-dae724a85002',
+});
+
+export const isAdminLoggedState = atom({
+	key: 'isAdminLogged',
+	default: true,
+});
+
+export const isLogoutState = atom({
+	key: 'isLogout',
+	default: false,
+});
+
+export const isViewTokenState = atom({
+	key: 'isViewToken',
+	default: false,
+});
+
+export const viewTokenEmailState = atom({
+	key: 'viewTokenEmail',
+	default: '',
+});
+
+export const viewTokenUsernameState = atom({
+	key: 'viewTokenUsername',
+	default: '',
+});
+
+export const isMfaEnabledState = atom({
+	key: 'isMfaEnabled',
+	default: false,
+});
+
+export const qrCodePathState = atom({
+	key: 'qrCodePath',
+	default: '',
+});
+
+export const secretTokenPathState = atom({
+	key: 'secretTokenPath',
+	default: '',
 });

@@ -4,7 +4,12 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Layout from './components/Layout';
 import NotificationBar from './components/NotificationBar';
 import PrivateRoute from './components/PrivateRoute';
-import { apiHostState, isAdminState } from './states/main';
+import {
+	apiHostState,
+	isAdminState,
+	isLogoutState,
+	isMfaVerifiedState,
+} from './states/main';
 import { appSnackOpenState } from './states/notification';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -16,6 +21,7 @@ const App = () => {
 
 	const appSnackOpen = useRecoilValue(appSnackOpenState);
 	const isAdmin = useRecoilValue(isAdminState);
+	const isMfaVerified = useRecoilValue(isMfaVerifiedState);
 
 	useEffect(() => {
 		if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -50,8 +56,15 @@ const App = () => {
 						<Routes>
 							<Route path='/' element={<Home />} />
 							<Route path='/login' element={<Login />} />
-							<Route element={<PrivateRoute isAdmin={isAdmin} />}>
-								<Route path='/administration' element={<AdminPanel />} />
+							<Route
+								element={
+									<PrivateRoute
+										isAdmin={isAdmin}
+										isMfaVerified={isMfaVerified}
+									/>
+								}
+							>
+								<Route path='/administration/*' element={<AdminPanel />} />
 							</Route>
 						</Routes>
 					</Layout>

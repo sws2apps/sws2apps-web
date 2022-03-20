@@ -8,14 +8,14 @@ import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import Typography from '@mui/material/Typography';
-import UserItem from './UserItem';
+import CongregationItem from '../components/CongregationItem';
 import {
 	adminEmailState,
 	adminPwdState,
 	apiHostState,
+	congsListSortedState,
+	congsListState,
 	connectionIdState,
-	usersListSortedState,
-	usersListState,
 } from '../states/main';
 import {
 	appMessageState,
@@ -23,24 +23,24 @@ import {
 	appSnackOpenState,
 } from '../states/notification';
 
-const UsersList = () => {
+const CongregationsList = () => {
 	let abortCont = useMemo(() => new AbortController(), []);
 
 	const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
 	const setAppSeverity = useSetRecoilState(appSeverityState);
 	const setAppMessage = useSetRecoilState(appMessageState);
-	const setData = useSetRecoilState(usersListState);
+	const setData = useSetRecoilState(congsListState);
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
 	const adminPassword = useRecoilValue(adminPwdState);
-	const usersList = useRecoilValue(usersListSortedState);
+	const congsList = useRecoilValue(congsListSortedState);
 	const cnID = useRecoilValue(connectionIdState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
 
-	const handleFetchUsers = useCallback(async () => {
+	const handleFetchCongregations = useCallback(async () => {
 		setIsError(false);
 		setIsProcessing(true);
 		const reqPayload = {
@@ -49,7 +49,7 @@ const UsersList = () => {
 		};
 
 		if (apiHost !== '') {
-			fetch(`${apiHost}api/admin/get-users`, {
+			fetch(`${apiHost}api/admin/get-congregations`, {
 				signal: abortCont.signal,
 				method: 'POST',
 				headers: {
@@ -60,19 +60,21 @@ const UsersList = () => {
 			})
 				.then(async (res) => {
 					if (res.status === 200) {
-						const users = await res.json();
-						setData(users);
+						const congregations = await res.json();
+						setData(congregations);
 					} else {
 						setIsError(true);
 					}
 					setIsProcessing(false);
 				})
 				.catch((err) => {
-					setIsError(true);
-					setIsProcessing(false);
-					setAppMessage(err.message);
-					setAppSeverity('error');
-					setAppSnackOpen(true);
+					if (!abortCont.signal.aborted) {
+						setIsError(true);
+						setIsProcessing(false);
+						setAppMessage(err.message);
+						setAppSeverity('error');
+						setAppSnackOpen(true);
+					}
 				});
 		}
 	}, [
@@ -114,13 +116,13 @@ const UsersList = () => {
 						}}
 					/>
 					<Typography align='center' sx={{ marginTop: '15px' }}>
-						An error occured while fetching users
+						An error occured while fetching congregations
 					</Typography>
 					<Link
 						component='button'
 						underline='none'
 						variant='body2'
-						onClick={handleFetchUsers}
+						onClick={handleFetchCongregations}
 					>
 						Refresh
 					</Link>
@@ -147,17 +149,21 @@ const UsersList = () => {
 						}}
 					>
 						<Typography sx={{ fontWeight: 'bold', fontSize: '18px' }}>
-							{`USERS LIST (${usersList.length})`}
+							{`CONGREGATION LIST (${congsList.length})`}
 						</Typography>
-						<IconButton color='inherit' edge='start' onClick={handleFetchUsers}>
+						<IconButton
+							color='inherit'
+							edge='start'
+							onClick={handleFetchCongregations}
+						>
 							<RefreshIcon />
 						</IconButton>
 					</Box>
 					<Box sx={{ marginTop: '20px' }}>
-						{usersList.length > 0 && (
+						{congsList.length > 0 && (
 							<>
-								{usersList.map((user) => (
-									<UserItem key={user.uid} user={user} />
+								{congsList.map((cong) => (
+									<CongregationItem key={cong.cong_id} cong={cong} />
 								))}
 							</>
 						)}
@@ -168,4 +174,4 @@ const UsersList = () => {
 	);
 };
 
-export default UsersList;
+export default CongregationsList;
