@@ -1,3 +1,10 @@
+# [1.0.0-alpha.8](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2022-03-20)
+
+
+### Bug Fixes
+
+* **login:** fix bug when admin is stuck at login ([7449c9a](https://github.com/sws2apps/sws2apps-web/commit/7449c9afb2bba94975327a0eaf5df4cdebf7c0e5))
+
 # [1.0.0-alpha.7](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2022-03-20)
 
 
