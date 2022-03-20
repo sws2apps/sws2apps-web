@@ -39,7 +39,9 @@ const MfaSetup = () => {
 			});
 		};
 
-		getQrCode();
+		if (qrCodePath.length > 0) {
+			getQrCode();
+		}
 	}, [qrCodePath, setIsAdmin]);
 
 	return (
