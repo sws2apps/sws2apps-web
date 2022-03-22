@@ -9,13 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Typography from '@mui/material/Typography';
 import { handleAdminLogout } from '../utils/admin';
-import {
-	adminEmailState,
-	adminPwdState,
-	apiHostState,
-	connectionIdState,
-	isLogoutState,
-} from '../states/main';
+import { apiHostState, sessionIDState, isLogoutState } from '../states/main';
 import {
 	appMessageState,
 	appSeverityState,
@@ -33,9 +27,7 @@ const Logout = () => {
 	const setAppMessage = useSetRecoilState(appMessageState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPwdState);
-	const cnID = useRecoilValue(connectionIdState);
+	const sessionID = useRecoilValue(sessionIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 
@@ -56,20 +48,15 @@ const Logout = () => {
 
 	const handleLogout = useCallback(async () => {
 		setIsProcessing(true);
-		const reqPayload = {
-			email: adminEmail,
-			password: adminPassword,
-		};
 
 		if (apiHost !== '') {
 			fetch(`${apiHost}api/admin/logout`, {
 				signal: abortCont.signal,
-				method: 'POST',
+				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					cn_uid: cnID,
+					session_id: sessionID,
 				},
-				body: JSON.stringify(reqPayload),
 			})
 				.then(async (res) => {
 					const data = await res.json();
@@ -97,10 +84,8 @@ const Logout = () => {
 		}
 	}, [
 		abortCont,
-		adminEmail,
-		adminPassword,
 		apiHost,
-		cnID,
+		sessionID,
 		handleClearAdmin,
 		handleClose,
 		setAppMessage,

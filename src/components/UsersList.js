@@ -11,10 +11,8 @@ import Typography from '@mui/material/Typography';
 import UserItem from './UserItem';
 import { handleAdminLogout } from '../utils/admin';
 import {
-	adminEmailState,
-	adminPwdState,
 	apiHostState,
-	connectionIdState,
+	sessionIDState,
 	usersListSortedState,
 	usersListState,
 } from '../states/main';
@@ -33,10 +31,8 @@ const UsersList = () => {
 	const setData = useSetRecoilState(usersListState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPwdState);
 	const usersList = useRecoilValue(usersListSortedState);
-	const cnID = useRecoilValue(connectionIdState);
+	const sessionID = useRecoilValue(sessionIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -48,20 +44,15 @@ const UsersList = () => {
 	const handleFetchUsers = useCallback(async () => {
 		setIsError(false);
 		setIsProcessing(true);
-		const reqPayload = {
-			email: adminEmail,
-			password: adminPassword,
-		};
 
 		if (apiHost !== '') {
-			fetch(`${apiHost}api/admin/get-users`, {
+			fetch(`${apiHost}api/admin/users`, {
 				signal: abortCont.signal,
-				method: 'POST',
+				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					cn_uid: cnID,
+					session_id: sessionID,
 				},
-				body: JSON.stringify(reqPayload),
 			})
 				.then(async (res) => {
 					if (res.status === 200) {
@@ -84,10 +75,8 @@ const UsersList = () => {
 				});
 		}
 	}, [
-		adminEmail,
-		adminPassword,
 		apiHost,
-		cnID,
+		sessionID,
 		handleClearAdmin,
 		setAppMessage,
 		setAppSeverity,

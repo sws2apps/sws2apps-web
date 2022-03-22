@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import Box from '@mui/material/Box';
@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import LoginAdmin from '../components/LoginAdmin';
 import MfaCheck from '../components/MfaCheck';
 import MfaSetup from '../components/MfaSetup';
+import { handleAdminLogout } from '../utils/admin';
 import {
 	adminEmailState,
 	adminPwdState,
@@ -16,7 +17,7 @@ import {
 	adminTmpPwdState,
 	adminTokenState,
 	apiHostState,
-	connectionIdState,
+	sessionIDState,
 	hasErrorEmailState,
 	hasErrorPwdState,
 	isAdminState,
@@ -41,8 +42,8 @@ const Login = () => {
 	const [isAdmin, setIsAdmin] = useRecoilState(isAdminState);
 	const [isMfaEnabled, setIsMfaEnabled] = useRecoilState(isMfaEnabledState);
 	const [isMfaVerified, setIsMfaVerified] = useRecoilState(isMfaVerifiedState);
-	const [cnID, setCnID] = useRecoilState(connectionIdState);
 
+	const setSessionID = useSetRecoilState(sessionIDState);
 	const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
 	const setAppSeverity = useSetRecoilState(appSeverityState);
 	const setAppMessage = useSetRecoilState(appMessageState);
@@ -51,9 +52,6 @@ const Login = () => {
 	const setHasErrorToken = useSetRecoilState(hasErrorTokenState);
 	const setAdminEmail = useSetRecoilState(adminEmailState);
 	const setAdminPwd = useSetRecoilState(adminPwdState);
-	const setAdminTmpEmail = useSetRecoilState(adminTmpEmailState);
-	const setAdminTmpPwd = useSetRecoilState(adminTmpPwdState);
-	const setAdminToken = useSetRecoilState(adminTokenState);
 	const setQrCodePath = useSetRecoilState(qrCodePathState);
 	const setSecretTokenPath = useSetRecoilState(secretTokenPathState);
 
@@ -63,16 +61,14 @@ const Login = () => {
 	const adminToken = useRecoilValue(adminTokenState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
+	const [tempSession, setTempSession] = useState('');
 
-	const handleGoPublic = () => {
-		setAdminEmail('');
-		setAdminPwd('');
-		setAdminTmpEmail('');
-		setAdminTmpPwd('');
-		setAdminToken('');
-		setIsAdmin(false);
-		setIsMfaEnabled(false);
-		setIsMfaVerified(false);
+	const handleClearAdmin = useCallback(async () => {
+		await handleAdminLogout();
+	}, []);
+
+	const handleGoPublic = async () => {
+		await handleClearAdmin();
 		navigate('/');
 	};
 
@@ -90,7 +86,7 @@ const Login = () => {
 			};
 
 			if (apiHost !== '') {
-				fetch(`${apiHost}api/admin/login`, {
+				fetch(`${apiHost}user-login`, {
 					signal: abortCont.signal,
 					method: 'POST',
 					headers: {
@@ -104,13 +100,13 @@ const Login = () => {
 							setIsProcessing(false);
 							setIsAdmin(true);
 							setIsMfaEnabled(true);
-							setCnID(data.message);
+							setTempSession(data.session_id);
 						} else {
-							if (data.secret && data.qrCode && data.cn_uid) {
+							if (data.secret && data.qrCode && data.session_id) {
 								setIsProcessing(false);
 								setSecretTokenPath(data.secret);
 								setQrCodePath(data.qrCode);
-								setCnID(data.cn_uid);
+								setTempSession(data.session_id);
 								setIsAdmin(true);
 							} else {
 								setIsProcessing(false);
@@ -137,30 +133,41 @@ const Login = () => {
 		}
 	};
 
-	const handleVerifyToken = () => {
-		setHasErrorToken(false);
+	const handleVerifyToken = async () => {
+		try {
+			setHasErrorToken(false);
 
-		if (adminToken.length === 6) {
-			setIsProcessing(true);
-			const reqPayload = {
-				email: userTmpEmail,
-				password: userTmpPwd,
-				token: adminToken,
-			};
+			if (adminToken.length === 6) {
+				setIsProcessing(true);
+				const reqPayload = {
+					token: adminToken,
+				};
 
-			if (apiHost !== '') {
-				fetch(`${apiHost}api/mfa/verify-token`, {
-					signal: abortCont.signal,
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						cn_uid: cnID,
-					},
-					body: JSON.stringify(reqPayload),
-				})
-					.then(async (res) => {
-						const data = await res.json();
-						if (res.status === 200) {
+				if (apiHost !== '') {
+					const res = await fetch(`${apiHost}api/mfa/verify-token`, {
+						signal: abortCont.signal,
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							session_id: tempSession,
+						},
+						body: JSON.stringify(reqPayload),
+					});
+
+					const data = await res.json();
+					if (res.status === 200) {
+						// attemp to access admin
+						const adminRes = await fetch(`${apiHost}api/admin/`, {
+							signal: abortCont.signal,
+							method: 'GET',
+							headers: {
+								'Content-Type': 'application/json',
+								session_id: tempSession,
+							},
+						});
+
+						if (adminRes.status === 200) {
+							setSessionID(tempSession);
 							setAdminEmail(userTmpEmail);
 							setAdminPwd(userTmpPwd);
 							setIsMfaVerified(true);
@@ -169,23 +176,32 @@ const Login = () => {
 							setAppSeverity('success');
 							setAppSnackOpen(true);
 							setIsProcessing(false);
+							localStorage.setItem('session_id', tempSession);
 							navigate('/administration');
 						} else {
+							const adminData = await adminRes.json();
 							setIsProcessing(false);
-							setAppMessage(data.message);
+							setAppMessage(adminData.message);
 							setAppSeverity('warning');
 							setAppSnackOpen(true);
+
+							await handleClearAdmin();
 						}
-					})
-					.catch((err) => {
+					} else {
 						setIsProcessing(false);
-						setAppMessage(err.message);
-						setAppSeverity('error');
+						setAppMessage(data.message);
+						setAppSeverity('warning');
 						setAppSnackOpen(true);
-					});
+					}
+				}
+			} else {
+				setHasErrorToken(true);
 			}
-		} else {
-			setHasErrorToken(true);
+		} catch (err) {
+			setIsProcessing(false);
+			setAppMessage(err.message);
+			setAppSeverity('error');
+			setAppSnackOpen(true);
 		}
 	};
 

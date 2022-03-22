@@ -32,7 +32,12 @@ const AdminMenu = () => {
 				Administration Pannel
 			</Typography>
 			<List>
-				<ListItem disablePadding>
+				<ListItem
+					disablePadding
+					button
+					component={Link}
+					to='/administration/congregation-requests'
+				>
 					<ListItemButton>
 						<ListItemIcon>
 							<PendingActionsIcon />
@@ -66,7 +71,12 @@ const AdminMenu = () => {
 						<ListItemText primary='Congregations' />
 					</ListItemButton>
 				</ListItem>
-				<ListItem disablePadding>
+				<ListItem
+					disablePadding
+					button
+					component={Link}
+					to='/administration/blocked-requests'
+				>
 					<ListItemButton>
 						<ListItemIcon>
 							<ApiIcon />

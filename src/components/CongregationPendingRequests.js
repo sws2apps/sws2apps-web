@@ -9,17 +9,11 @@ import Link from '@mui/material/Link';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import Typography from '@mui/material/Typography';
 import PendingRequestItem from './PendingRequestItem';
+import { handleAdminLogout } from '../utils/admin';
 import {
-	adminEmailState,
-	adminPwdState,
-	adminTmpEmailState,
-	adminTmpPwdState,
-	adminTokenState,
 	apiHostState,
-	connectionIdState,
-	isAdminState,
-	isMfaEnabledState,
-	isMfaVerifiedState,
+	sessionIDState,
+	countPendingRequestsState,
 	pendingRequestsState,
 } from '../states/main';
 import {
@@ -38,63 +32,40 @@ const CongregationPendingRequests = () => {
 	const [data, setData] = useRecoilState(pendingRequestsState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPwdState);
 	const cnRequest = useRecoilValue(countPendingRequestsState);
-	const cnID = useRecoilValue(connectionIdState);
+	const sessionID = useRecoilValue(sessionIDState);
 
-	const [isProcessing, setIsProcessing] = useState(true);
+	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
 
-	const handleClearAdmin = useCallback(() => {
-		setPendingRequests([]);
-		setAdminEmail('');
-		setAdminPwd('');
-		setAdminTmpEmail('');
-		setAdminTmpPwd('');
-		setAdminToken('');
-		setCnID('');
-		setIsAdmin(false);
-		setIsMfaEnabled(false);
-		setIsMfaVerified(false);
-	}, [
-		setAdminEmail,
-		setAdminPwd,
-		setAdminTmpEmail,
-		setAdminTmpPwd,
-		setAdminToken,
-		setCnID,
-		setIsAdmin,
-		setIsMfaEnabled,
-		setIsMfaVerified,
-		setPendingRequests,
-	]);
+	const handleClearAdmin = useCallback(async () => {
+		await handleAdminLogout();
+	}, []);
+
 	const handleFetchPending = useCallback(async () => {
 		setIsError(false);
 		setIsProcessing(true);
-		const reqPayload = {
-			email: adminEmail,
-			password: adminPassword,
-		};
 
 		if (apiHost !== '') {
 			fetch(`${apiHost}api/admin/pending-requests`, {
 				signal: abortCont.signal,
-				method: 'POST',
+				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					cn_uid: cnID,
+					session_id: sessionID,
 				},
-				body: JSON.stringify(reqPayload),
 			})
 				.then(async (res) => {
 					if (res.status === 200) {
 						const requests = await res.json();
 						setData(requests);
+						setIsProcessing(false);
+					} else if (res.status === 403) {
+						handleClearAdmin();
 					} else {
 						setIsError(true);
+						setIsProcessing(false);
 					}
-					setIsProcessing(false);
 				})
 				.catch((err) => {
 					setIsError(true);
@@ -105,24 +76,15 @@ const CongregationPendingRequests = () => {
 				});
 		}
 	}, [
-		adminEmail,
-		adminPassword,
 		apiHost,
-		cnID,
+		sessionID,
+		handleClearAdmin,
 		setAppMessage,
 		setAppSeverity,
 		setAppSnackOpen,
 		setData,
 		abortCont,
 	]);
-
-	useEffect(() => {
-		const fetchPendingRequests = async () => {
-			await handleFetchPending();
-		};
-
-		fetchPendingRequests();
-	}, [handleFetchPending]);
 
 	useEffect(() => {
 		return () => abortCont.abort();
@@ -182,7 +144,7 @@ const CongregationPendingRequests = () => {
 						}}
 					>
 						<Typography>
-							Pending request: <strong>{cnRequest}</strong>
+							Pending congregations request: <strong>{cnRequest}</strong>
 						</Typography>
 						<IconButton
 							color='inherit'
