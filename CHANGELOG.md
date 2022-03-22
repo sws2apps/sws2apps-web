@@ -1,3 +1,14 @@
+# [1.0.0-alpha.9](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2022-03-22)
+
+
+### Features
+
+* **admin:** add more actions to the users dashboard ([a2ddded](https://github.com/sws2apps/sws2apps-web/commit/a2dddedb50f7aec3a0c58cc477d55ffb3958f948))
+* **deps:** bump @mui/lab from 5.0.0-alpha.73 to 5.0.0-alpha.74 ([00b895f](https://github.com/sws2apps/sws2apps-web/commit/00b895fd1062d282c8d9229ffd425837bdc13523))
+* **deps:** bump @mui/material from 5.5.1 to 5.5.2 ([e72099e](https://github.com/sws2apps/sws2apps-web/commit/e72099ee608edaec01c5eecfb6c174313ab01b8f))
+* **logout:** display confirmation before logout ([1322672](https://github.com/sws2apps/sws2apps-web/commit/13226723a9eb8f22c3bf1537c6024cf060f5ca57))
+* **web:** change to support the new api auth flow ([accb544](https://github.com/sws2apps/sws2apps-web/commit/accb5448d737124c0229bf3e723d45f7f596c7fc))
+
 # [1.0.0-alpha.8](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2022-03-20)
 
 
