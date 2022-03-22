@@ -9,13 +9,13 @@ import IconButton from '@mui/material/IconButton';
 import PreviewIcon from '@mui/icons-material/Preview';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { handleAdminLogout } from '../utils/admin';
 import {
-	adminEmailState,
-	adminPwdState,
 	apiHostState,
-	connectionIdState,
+	sessionIDState,
 	isViewTokenState,
 	viewTokenEmailState,
+	viewTokenPocketUidState,
 	viewTokenUsernameState,
 } from '../states/main';
 import {
@@ -30,6 +30,9 @@ const UserViewToken = () => {
 	const [open, setOpen] = useRecoilState(isViewTokenState);
 	const [viewTokenEmail, setViewTokenEmail] =
 		useRecoilState(viewTokenEmailState);
+	const [viewTokenPocketUid, setViewTokenPocketUid] = useRecoilState(
+		viewTokenPocketUidState
+	);
 	const [viewTokenUsername, setViewTokenUsername] = useRecoilState(
 		viewTokenUsernameState
 	);
@@ -39,26 +42,29 @@ const UserViewToken = () => {
 	const setAppMessage = useSetRecoilState(appMessageState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPwdState);
-	const cnID = useRecoilValue(connectionIdState);
+	const sessionID = useRecoilValue(sessionIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [token, setToken] = useState('');
 
+	const handleClearAdmin = useCallback(async () => {
+		await handleAdminLogout();
+	}, []);
+
 	const handleClose = useCallback(() => {
 		setViewTokenEmail('');
+		setViewTokenPocketUid('');
 		setViewTokenUsername('');
 		setOpen(false);
-	}, [setOpen, setViewTokenEmail, setViewTokenUsername]);
+	}, [setOpen, setViewTokenEmail, setViewTokenPocketUid, setViewTokenUsername]);
 
 	const handleGetToken = useCallback(async () => {
 		setIsProcessing(true);
 		try {
 			const reqPayload = {
-				email: adminEmail,
-				password: adminPassword,
-				user_email: viewTokenEmail,
+				user_uid:
+					viewTokenEmail.length > 0 ? viewTokenEmail : viewTokenPocketUid,
+				user_type: viewTokenEmail.length > 0 ? 'pocket' : 'vip',
 			};
 
 			if (apiHost !== '') {
@@ -67,7 +73,7 @@ const UserViewToken = () => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						cn_uid: cnID,
+						session_id: sessionID,
 					},
 					body: JSON.stringify(reqPayload),
 				});
@@ -76,6 +82,8 @@ const UserViewToken = () => {
 				if (res.status === 200) {
 					setIsProcessing(false);
 					setToken(data.message);
+				} else if (res.status === 403) {
+					handleClearAdmin();
 				} else {
 					handleClose();
 					setAppMessage(data.message);
@@ -91,11 +99,11 @@ const UserViewToken = () => {
 		}
 	}, [
 		abortCont,
-		adminEmail,
-		adminPassword,
 		apiHost,
-		cnID,
+		sessionID,
+		handleClearAdmin,
 		viewTokenEmail,
+		viewTokenPocketUid,
 		handleClose,
 		setAppMessage,
 		setAppSeverity,

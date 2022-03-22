@@ -26,12 +26,7 @@ import SecurityIcon from '@mui/icons-material/Security';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { handleAdminLogout } from '../utils/admin';
-import {
-	adminEmailState,
-	adminPwdState,
-	apiHostState,
-	connectionIdState,
-} from '../states/main';
+import { apiHostState, sessionIDState } from '../states/main';
 import {
 	appMessageState,
 	appSeverityState,
@@ -46,13 +41,11 @@ const CongregationItem = ({ cong }) => {
 	const setAppMessage = useSetRecoilState(appMessageState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPwd = useRecoilValue(adminPwdState);
-	const cnID = useRecoilValue(connectionIdState);
+	const sessionID = useRecoilValue(sessionIDState);
 
 	const [admins, setAdmins] = useState(cong.admin);
-	const vips = useState(cong.vip);
-	const pockets = useState(cong.pocket);
+	const [vips, setVips] = useState(cong.vip);
+	const [pockets, setPockets] = useState(cong.pocket);
 	const [open, setOpen] = useState(false);
 	const [isFetch, setIsFetch] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -69,7 +62,7 @@ const CongregationItem = ({ cong }) => {
 	const [isDelete, setIsDelete] = useState(false);
 	const [isDeleteAdmin, setIsDeleteAdmin] = useState(false);
 	const [isDeleteVip, setIsDeleteVip] = useState(false);
-	const { setState: setIsDeletePocket } = useState(false);
+	const [isDeletePocket, setIsDeletePocket] = useState(false);
 	const [toBeDel, setToBeDel] = useState('');
 
 	const handleClearAdmin = useCallback(async () => {
@@ -96,23 +89,23 @@ const CongregationItem = ({ cong }) => {
 		setOpen(true);
 	};
 
-	// const handleSetIsDeleteVip = (username) => {
-	// 	setToBeDel(username);
-	// 	setDlgTitle(`Remove ${username} from congregation?`);
-	// 	setIsDelete(true);
-	// 	setIsDeleteVip(true);
-	// 	setIsYesDisabled(false);
-	// 	setOpen(true);
-	// };
+	const handleSetIsDeleteVip = (username) => {
+		setToBeDel(username);
+		setDlgTitle(`Remove ${username} from congregation?`);
+		setIsDelete(true);
+		setIsDeleteVip(true);
+		setIsYesDisabled(false);
+		setOpen(true);
+	};
 
-	// const handleSetIsDeletePocket = (username) => {
-	// 	setToBeDel(username);
-	// 	setDlgTitle(`Remove ${username} from congregation?`);
-	// 	setIsDelete(true);
-	// 	setIsDeletePocket(true);
-	// 	setIsYesDisabled(false);
-	// 	setOpen(true);
-	// };
+	const handleSetIsDeletePocket = (username) => {
+		setToBeDel(username);
+		setDlgTitle(`Remove ${username} from congregation?`);
+		setIsDelete(true);
+		setIsDeletePocket(true);
+		setIsYesDisabled(false);
+		setOpen(true);
+	};
 
 	const handleSetAdminAdd = () => {
 		setDlgTitle(`Add Administrator to ${cong.cong_name}`);
@@ -144,6 +137,9 @@ const CongregationItem = ({ cong }) => {
 			} else if (isDeleteVip) {
 				await handleDeleteUser(toBeDel, 'vip');
 				setIsDeleteVip(false);
+			} else if (isDeletePocket) {
+				await handleDeletePocket(toBeDel);
+				setIsDeletePocket(false);
 			}
 			setIsDelete(false);
 		}
@@ -153,8 +149,6 @@ const CongregationItem = ({ cong }) => {
 		setIsProcessing(true);
 
 		const reqPayload = {
-			email: adminEmail,
-			password: adminPwd,
 			cong_id: cong.cong_id,
 			user_email: user.email,
 		};
@@ -165,7 +159,7 @@ const CongregationItem = ({ cong }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					cn_uid: cnID,
+					session_id: sessionID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -205,8 +199,6 @@ const CongregationItem = ({ cong }) => {
 		setIsProcessing(true);
 
 		const reqPayload = {
-			email: adminEmail,
-			password: adminPwd,
 			user_email: email,
 		};
 
@@ -216,7 +208,7 @@ const CongregationItem = ({ cong }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					cn_uid: cnID,
+					session_id: sessionID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -226,7 +218,53 @@ const CongregationItem = ({ cong }) => {
 							let newAdmins = [];
 							newAdmins = admins.filter((admin) => admin.email !== email);
 							setAdmins(newAdmins);
+						} else if (type === 'vip') {
+							let newVips = [];
+							newVips = vips.filter((vip) => vip.email !== email);
+							setVips(newVips);
 						}
+						setIsProcessing(false);
+					} else if (res.status === 403) {
+						handleClearAdmin();
+					} else {
+						const data = await res.json();
+						setIsProcessing(false);
+						setAppMessage(data.message);
+						setAppSeverity('warning');
+						setAppSnackOpen(true);
+					}
+				})
+				.catch((err) => {
+					setIsProcessing(false);
+					setAppMessage(err.message);
+					setAppSeverity('error');
+					setAppSnackOpen(true);
+				});
+		}
+	};
+
+	const handleDeletePocket = async (uid) => {
+		setIsProcessing(true);
+
+		const reqPayload = {
+			pocket_uid: uid,
+		};
+
+		if (apiHost !== '') {
+			fetch(`${apiHost}api/admin/congregation-remove-pocket`, {
+				signal: abortCont.signal,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					session_id: sessionID,
+				},
+				body: JSON.stringify(reqPayload),
+			})
+				.then(async (res) => {
+					if (res.status === 200) {
+						let newPockets = [];
+						newPockets = pockets.filter((pocket) => pocket.pocket_uid !== uid);
+						setPockets(newPockets);
 						setIsProcessing(false);
 					} else if (res.status === 403) {
 						handleClearAdmin();
@@ -251,20 +289,15 @@ const CongregationItem = ({ cong }) => {
 		setIsSearch(true);
 		setIsError(false);
 		setIsFetch(true);
-		const reqPayload = {
-			email: adminEmail,
-			password: adminPwd,
-		};
 
 		if (apiHost !== '') {
-			fetch(`${apiHost}api/admin/get-users`, {
+			fetch(`${apiHost}api/admin/users`, {
 				signal: abortCont.signal,
-				method: 'POST',
+				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					cn_uid: cnID,
+					session_id: sessionID,
 				},
-				body: JSON.stringify(reqPayload),
 			})
 				.then(async (res) => {
 					if (res.status === 200) {
@@ -289,13 +322,13 @@ const CongregationItem = ({ cong }) => {
 						} else if (isPocketAdd) {
 							const findUser = users.find(
 								(user) =>
-									user.pocket_id === varText &&
+									user.pocket_uid === varText &&
 									user.global_role === 'pocket' &&
 									user.cong_name === ''
 							);
 							if (
 								findUser?.disabled === false &&
-								findUser?.emailVerified === true
+								findUser?.pocket_verified === true
 							) {
 								setIsYesDisabled(false);
 							} else {
@@ -655,6 +688,39 @@ const CongregationItem = ({ cong }) => {
 										No users yet
 									</Typography>
 								)}
+								{vips.length > 0 && (
+									<>
+										{vips.map((vip) => (
+											<Box
+												key={vip.email}
+												sx={{
+													backgroundColor: '#D6DBDF',
+													borderRadius: '10px',
+													padding: '10px',
+													display: 'flex',
+													justifyContent: 'space-between',
+													alignItems: 'center',
+													marginBottom: '8px',
+												}}
+											>
+												<Box>
+													<Typography sx={{ fontSize: '13px' }}>
+														{vip.name}
+													</Typography>
+													<Typography sx={{ fontSize: '13px' }}>
+														{vip.email}
+													</Typography>
+												</Box>
+												<IconButton
+													aria-label='delete'
+													onClick={() => handleSetIsDeleteVip(vip.email)}
+												>
+													<DeleteIcon color='error' />
+												</IconButton>
+											</Box>
+										))}
+									</>
+								)}
 							</Box>
 							{!isProcessing && (
 								<IconButton
@@ -672,6 +738,7 @@ const CongregationItem = ({ cong }) => {
 									sx={{
 										height: '30px',
 										width: '30px',
+										backgroundColor: '#5B2C6F',
 									}}
 								>
 									<PersonIcon sx={{ fontSize: '16px' }} />
@@ -687,6 +754,41 @@ const CongregationItem = ({ cong }) => {
 									<Typography sx={{ fontSize: '14px' }}>
 										No users yet
 									</Typography>
+								)}
+								{pockets.length > 0 && (
+									<>
+										{pockets.map((pocket) => (
+											<Box
+												key={pocket.pocket_uid}
+												sx={{
+													backgroundColor: '#D6DBDF',
+													borderRadius: '10px',
+													padding: '10px',
+													display: 'flex',
+													justifyContent: 'space-between',
+													alignItems: 'center',
+													marginBottom: '8px',
+												}}
+											>
+												<Box>
+													<Typography sx={{ fontSize: '13px' }}>
+														{pocket.name}
+													</Typography>
+													<Typography sx={{ fontSize: '13px' }}>
+														{pocket.pocket_uid}
+													</Typography>
+												</Box>
+												<IconButton
+													aria-label='delete'
+													onClick={() =>
+														handleSetIsDeletePocket(pocket.pocket_uid)
+													}
+												>
+													<DeleteIcon color='error' />
+												</IconButton>
+											</Box>
+										))}
+									</>
 								)}
 							</Box>
 							{!isProcessing && (

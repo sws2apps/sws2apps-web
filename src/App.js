@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import AdminSession from './components/AdminSession';
 import Layout from './components/Layout';
 import NotificationBar from './components/NotificationBar';
 import PrivateRoute from './components/PrivateRoute';
@@ -45,6 +46,7 @@ const App = () => {
 	return (
 		<>
 			{appSnackOpen && <NotificationBar />}
+			<AdminSession />
 			<Suspense fallback={<div></div>}>
 				<HashRouter>
 					<Layout>

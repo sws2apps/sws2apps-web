@@ -28,19 +28,12 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { handleAdminLogout } from '../utils/admin';
 import {
 	adminEmailState,
-	adminPwdState,
-	adminTmpEmailState,
-	adminTmpPwdState,
-	adminTokenState,
 	apiHostState,
-	connectionIdState,
-	isAdminState,
-	isMfaVerifiedState,
-	isMfaEnabledState,
+	sessionIDState,
 	isViewTokenState,
-	pendingRequestsState,
 	usersListState,
 	viewTokenEmailState,
+	viewTokenPocketUidState,
 	viewTokenUsernameState,
 } from '../states/main';
 import {
@@ -55,25 +48,17 @@ const UserItem = ({ user }) => {
 
 	const [usersList, setUsersList] = useRecoilState(usersListState);
 	const [isViewToken, setIsViewToken] = useRecoilState(isViewTokenState);
-	const [adminEmail, setAdminEmail] = useRecoilState(adminEmailState);
-	const [adminPwd, setAdminPwd] = useRecoilState(adminPwdState);
 
 	const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
 	const setAppSeverity = useSetRecoilState(appSeverityState);
 	const setAppMessage = useSetRecoilState(appMessageState);
 	const setViewTokenEmail = useSetRecoilState(viewTokenEmailState);
+	const setViewTokenPocketUid = useSetRecoilState(viewTokenPocketUidState);
 	const setViewTokenUsername = useSetRecoilState(viewTokenUsernameState);
-	const setIsAdmin = useSetRecoilState(isAdminState);
-	const setPendingRequests = useSetRecoilState(pendingRequestsState);
-	const setAdminTmpEmail = useSetRecoilState(adminTmpEmailState);
-	const setAdminTmpPwd = useSetRecoilState(adminTmpPwdState);
-	const setAdminToken = useSetRecoilState(adminTokenState);
-	const setIsMfaVerified = useSetRecoilState(isMfaVerifiedState);
-	const setIsMfaEnabled = useSetRecoilState(isMfaEnabledState);
 
 	const apiHost = useRecoilValue(apiHostState);
-
-	const cnID = useRecoilValue(connectionIdState);
+	const adminEmail = useRecoilValue(adminEmailState);
+	const sessionID = useRecoilValue(sessionIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
@@ -100,7 +85,14 @@ const UserItem = ({ user }) => {
 	};
 
 	const handleViewUserToken = () => {
-		setViewTokenEmail(user.email);
+		if (user.global_role === 'pocket') {
+			setViewTokenEmail('');
+			setViewTokenPocketUid(user.uid);
+		} else {
+			setViewTokenEmail(user.email);
+			setViewTokenPocketUid('');
+		}
+
 		setViewTokenUsername(user.username);
 		setIsViewToken(true);
 	};
@@ -184,11 +176,10 @@ const UserItem = ({ user }) => {
 
 	const handleDeleteUser = async () => {
 		setIsProcessing(true);
+
 		const reqPayload = {
-			email: adminEmail,
-			password: adminPwd,
-			user_email: user.email,
-			user_uid: user.uid,
+			user_uid: user.global_role === 'pocket' ? user.uid : user.email,
+			user_type: user.global_role === 'pocket' ? 'pocket' : 'vip',
 		};
 
 		if (apiHost !== '') {
@@ -197,7 +188,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					cn_uid: cnID,
+					session_id: sessionID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -232,11 +223,10 @@ const UserItem = ({ user }) => {
 
 	const handleAccountStatus = async () => {
 		setIsProcessing(true);
+
 		const reqPayload = {
-			email: adminEmail,
-			password: adminPwd,
-			user_email: user.email,
-			user_uid: user.uid,
+			user_uid: user.global_role === 'pocket' ? user.uid : user.email,
+			user_type: user.global_role === 'pocket' ? 'pocket' : 'vip',
 		};
 
 		if (apiHost !== '') {
@@ -248,7 +238,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					cn_uid: cnID,
+					session_id: sessionID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -294,8 +284,6 @@ const UserItem = ({ user }) => {
 	const handleResetPassword = async () => {
 		setIsProcessing(true);
 		const reqPayload = {
-			email: adminEmail,
-			password: adminPwd,
 			user_email: user.email,
 			user_username: user.username,
 		};
@@ -306,7 +294,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					cn_uid: cnID,
+					session_id: sessionID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -339,9 +327,7 @@ const UserItem = ({ user }) => {
 		setIsProcessing(true);
 		try {
 			const reqPayload = {
-				email: adminEmail,
-				password: adminPwd,
-				user_email: user.email,
+				user_uid: user.global_role === 'pocket' ? user.uid : user.email,
 			};
 
 			if (apiHost !== '') {
@@ -350,7 +336,7 @@ const UserItem = ({ user }) => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						cn_uid: cnID,
+						session_id: sessionID,
 					},
 					body: JSON.stringify(reqPayload),
 				});
@@ -363,18 +349,7 @@ const UserItem = ({ user }) => {
 					setAppSnackOpen(true);
 
 					if (adminEmail === user.email) {
-						setAdminEmail('');
-						setAdminPwd('');
-						setAdminTmpEmail('');
-						setAdminTmpPwd('');
-						setAdminToken('');
-						setPendingRequests([]);
-
-						setTimeout(() => {
-							setIsAdmin(false);
-							setIsMfaVerified(false);
-							setIsMfaEnabled(false);
-						}, 1000);
+						await handleClearAdmin();
 					}
 				} else if (res.status === 403) {
 					handleClearAdmin();
@@ -397,8 +372,6 @@ const UserItem = ({ user }) => {
 		setIsProcessing(true);
 		try {
 			const reqPayload = {
-				email: adminEmail,
-				password: adminPwd,
 				user_email: user.email,
 			};
 
@@ -408,7 +381,7 @@ const UserItem = ({ user }) => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						cn_uid: cnID,
+						session_id: sessionID,
 					},
 					body: JSON.stringify(reqPayload),
 				});
@@ -508,7 +481,7 @@ const UserItem = ({ user }) => {
 												? 'red'
 												: user.global_role === 'vip'
 												? 'green'
-												: ''
+												: '#5B2C6F'
 										}`,
 									}}
 								>
@@ -525,7 +498,7 @@ const UserItem = ({ user }) => {
 										{user.username}
 									</Typography>
 									<Typography sx={{ fontSize: '12px' }}>
-										{user.email}
+										{user.global_role === 'pocket' ? user.uid : user.email}
 									</Typography>
 								</Box>
 							</Box>
@@ -572,20 +545,32 @@ const UserItem = ({ user }) => {
 								<Box>
 									<Stack direction='row' alignItems='center' spacing={0.5}>
 										{user.disabled && <BlockIcon sx={{ color: '#ff5722' }} />}
-										{!user.disabled && user.emailVerified && (
-											<CheckCircleIcon color='success' />
-										)}
-										{!user.disabled && !user.emailVerified && (
-											<HourglassFullIcon sx={{ color: '#ff5722' }} />
+										{!user.disabled && user.global_role !== 'pocket' && (
+											<>
+												{user.emailVerified && (
+													<CheckCircleIcon color='success' />
+												)}
+												{!user.emailVerified && (
+													<HourglassFullIcon sx={{ color: '#ff5722' }} />
+												)}
+											</>
 										)}
 
-										<Typography sx={{ fontSize: '14px' }}>
-											{user.disabled
-												? 'Account disabled'
-												: user.emailVerified
-												? 'Account verified'
-												: 'Need verification'}
-										</Typography>
+										{user.global_role === 'pocket' && user.disabled && (
+											<Typography sx={{ fontSize: '14px' }}>
+												Account disabled
+											</Typography>
+										)}
+
+										{user.global_role !== 'pocket' && (
+											<Typography sx={{ fontSize: '14px' }}>
+												{user.disabled
+													? 'Account disabled'
+													: user.emailVerified
+													? 'Account verified'
+													: 'Need verification'}
+											</Typography>
+										)}
 									</Stack>
 									<Stack direction='row' alignItems='center' spacing={0.5}>
 										{user.mfaEnabled && (
@@ -691,18 +676,20 @@ const UserItem = ({ user }) => {
 												Disable
 											</Button>
 										)}
-										<Button
-											onClick={handleSetReset}
-											startIcon={<LockResetIcon sx={{ color: '#bf360c' }} />}
-											sx={{
-												color: 'black',
-												marginLeft: '5px',
-												marginTop: '5px',
-											}}
-											variant='outlined'
-										>
-											Reset pwd
-										</Button>
+										{user.global_role !== 'pocket' && (
+											<Button
+												onClick={handleSetReset}
+												startIcon={<LockResetIcon sx={{ color: '#bf360c' }} />}
+												sx={{
+													color: 'black',
+													marginLeft: '5px',
+													marginTop: '5px',
+												}}
+												variant='outlined'
+											>
+												Reset pwd
+											</Button>
+										)}
 										<Button
 											onClick={handleSetDelete}
 											startIcon={<DeleteIcon sx={{ color: 'red' }} />}

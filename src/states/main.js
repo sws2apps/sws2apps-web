@@ -106,9 +106,9 @@ export const hasErrorTokenState = atom({
 	default: false,
 });
 
-export const connectionIdState = atom({
-	key: 'connectionId',
-	default: '5e223018-45f8-409a-a041-dae724a85002',
+export const sessionIDState = atom({
+	key: 'sessionID',
+	default: '',
 });
 
 export const isAdminLoggedState = atom({
@@ -131,6 +131,11 @@ export const viewTokenEmailState = atom({
 	default: '',
 });
 
+export const viewTokenPocketUidState = atom({
+	key: 'viewTokenPocketUid',
+	default: '',
+});
+
 export const viewTokenUsernameState = atom({
 	key: 'viewTokenUsername',
 	default: '',
@@ -149,4 +154,9 @@ export const qrCodePathState = atom({
 export const secretTokenPathState = atom({
 	key: 'secretTokenPath',
 	default: '',
+});
+
+export const blockedRequestsState = atom({
+	key: 'blockedRequests',
+	default: [],
 });

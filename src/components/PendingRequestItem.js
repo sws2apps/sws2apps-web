@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import BlockIcon from '@mui/icons-material/Block';
 import Box from '@mui/material/Box';
@@ -8,11 +8,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { handleAdminLogout } from '../utils/admin';
 import {
-	adminEmailState,
-	adminPwdState,
 	apiHostState,
-	connectionIdState,
+	sessionIDState,
 	pendingRequestsState,
 } from '../states/main';
 import {
@@ -31,21 +30,21 @@ const PendingRequestItem = ({ request }) => {
 	const [pendingReq, setPendingReq] = useRecoilState(pendingRequestsState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const adminEmail = useRecoilValue(adminEmailState);
-	const adminPassword = useRecoilValue(adminPwdState);
-	const cnID = useRecoilValue(connectionIdState);
+	const sessionID = useRecoilValue(sessionIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isDisapprove, setIsDisapprove] = useState(false);
 	const [disapproveReason, setDisapproveReason] = useState(false);
+
+	const handleClearAdmin = useCallback(async () => {
+		await handleAdminLogout();
+	}, []);
 
 	const handleCongDisapprove = async () => {
 		if (isDisapprove) {
 			setIsDisapprove(false);
 			setIsProcessing(true);
 			const reqPayload = {
-				email: adminEmail,
-				password: adminPassword,
 				cong_name: request.cong_name,
 				cong_number: request.cong_number,
 				request_email: request.email,
@@ -60,7 +59,7 @@ const PendingRequestItem = ({ request }) => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						cn_uid: cnID,
+						session_id: sessionID,
 					},
 					body: JSON.stringify(reqPayload),
 				})
@@ -75,6 +74,8 @@ const PendingRequestItem = ({ request }) => {
 							setAppMessage('Congregation account request disapproved');
 							setAppSeverity('info');
 							setAppSnackOpen(true);
+						} else if (res.status === 403) {
+							handleClearAdmin();
 						} else {
 							setIsProcessing(false);
 							setAppMessage(data.message);
@@ -98,8 +99,6 @@ const PendingRequestItem = ({ request }) => {
 	const handleCongApprove = async () => {
 		setIsProcessing(true);
 		const reqPayload = {
-			email: adminEmail,
-			password: adminPassword,
 			cong_name: request.cong_name,
 			cong_number: request.cong_number,
 			request_email: request.email,
@@ -113,7 +112,7 @@ const PendingRequestItem = ({ request }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					cn_uid: cnID,
+					session_id: sessionID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -128,6 +127,8 @@ const PendingRequestItem = ({ request }) => {
 						setAppMessage('Congregation account approved and created');
 						setAppSeverity('success');
 						setAppSnackOpen(true);
+					} else if (res.status === 403) {
+						handleClearAdmin();
 					} else {
 						setIsProcessing(false);
 						setAppMessage(data.message);
