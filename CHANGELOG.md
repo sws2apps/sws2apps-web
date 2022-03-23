@@ -1,3 +1,10 @@
+# [1.0.0-alpha.12](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.11...v1.0.0-alpha.12) (2022-03-23)
+
+
+### Bug Fixes
+
+* **firebase:** update json ([4bf73c3](https://github.com/sws2apps/sws2apps-web/commit/4bf73c3357c809be5d3082b55e9e7ece2c58d4a3))
+
 # [1.0.0-alpha.11](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2022-03-23)
 
 
