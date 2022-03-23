@@ -1,3 +1,10 @@
+# [1.0.0-alpha.11](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2022-03-23)
+
+
+### Bug Fixes
+
+* **firebase:** fix wrong property in json ([959fd02](https://github.com/sws2apps/sws2apps-web/commit/959fd02e14147a17b1fbfa13b3fcc7004f97620e))
+
 # [1.0.0-alpha.10](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2022-03-23)
 
 
