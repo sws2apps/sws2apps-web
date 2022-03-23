@@ -1,3 +1,10 @@
+# [1.0.0-alpha.13](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2022-03-23)
+
+
+### Bug Fixes
+
+* **firebase:** remove duplicate headers ([09a33e1](https://github.com/sws2apps/sws2apps-web/commit/09a33e138311ff5766744f4f4da24f65f141946e))
+
 # [1.0.0-alpha.12](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.11...v1.0.0-alpha.12) (2022-03-23)
 
 
