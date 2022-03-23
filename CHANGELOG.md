@@ -1,3 +1,10 @@
+# [1.0.0-alpha.10](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2022-03-23)
+
+
+### Features
+
+* **firebase-hosting:** set values some headers ([d898ac3](https://github.com/sws2apps/sws2apps-web/commit/d898ac33e15308c819092ab834d3ed113f3354b9))
+
 # [1.0.0-alpha.9](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2022-03-22)
 
 
