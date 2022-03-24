@@ -1,3 +1,10 @@
+# [1.0.0-alpha.22](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2022-03-24)
+
+
+### Bug Fixes
+
+* **firebase:** update script-src ([2527209](https://github.com/sws2apps/sws2apps-web/commit/252720956c4df15e0817598070d0fb1ea96386d2))
+
 # [1.0.0-alpha.21](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2022-03-24)
 
 
