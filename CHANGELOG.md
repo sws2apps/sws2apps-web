@@ -1,3 +1,10 @@
+# [1.0.0-alpha.18](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.17...v1.0.0-alpha.18) (2022-03-24)
+
+
+### Bug Fixes
+
+* **firebase:** json invalid format ([a20639c](https://github.com/sws2apps/sws2apps-web/commit/a20639c21342a48ddd0ac1c1b74596d6e1885c45))
+
 # [1.0.0-alpha.17](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.16...v1.0.0-alpha.17) (2022-03-24)
 
 
