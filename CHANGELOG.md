@@ -1,3 +1,10 @@
+# [1.0.0-alpha.19](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2022-03-24)
+
+
+### Bug Fixes
+
+* **firebase:** adjust csp for font - try 1 ([152e39c](https://github.com/sws2apps/sws2apps-web/commit/152e39c0a73557fdd453a807855dad07f794c9f0))
+
 # [1.0.0-alpha.18](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.17...v1.0.0-alpha.18) (2022-03-24)
 
 
