@@ -15,7 +15,11 @@
     "headers": [{
       "source": "**",
       "headers": [
+<<<<<<< HEAD
         { "key": "Content-Security-Policy", "value": "default-src 'none'; img-src 'self'; script-src 'self'; style-src fonts.googleapis.com 'self' 'unsafe-inline'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'" },
+=======
+        { "key": "Content-Security-Policy", "value": "default-src 'none'; img-src 'self'; script-src 'self'; style-src 'self' 'fonts.googleapis.com' 'unsafe-inline'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'" },
+>>>>>>> 6269ff84b85474f421ad6c7520dac80c7c4052e0
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "DENY" },
