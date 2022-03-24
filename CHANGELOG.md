@@ -1,3 +1,10 @@
+# [1.0.0-alpha.14](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2022-03-24)
+
+
+### Bug Fixes
+
+* **firebase:** adjust more headers props ([8ac651f](https://github.com/sws2apps/sws2apps-web/commit/8ac651ff6553f815b207f0acf568d446bb8f55cd))
+
 # [1.0.0-alpha.13](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2022-03-23)
 
 
