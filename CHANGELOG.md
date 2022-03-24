@@ -1,3 +1,10 @@
+# [1.0.0-alpha.21](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2022-03-24)
+
+
+### Bug Fixes
+
+* **firebase:** update csp default-src ([7409e05](https://github.com/sws2apps/sws2apps-web/commit/7409e054d336582edc7628c0cd9e9b58a2e4662d))
+
 # [1.0.0-alpha.20](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2022-03-24)
 
 
