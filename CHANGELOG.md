@@ -1,3 +1,10 @@
+# [1.0.0-alpha.17](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.16...v1.0.0-alpha.17) (2022-03-24)
+
+
+### Bug Fixes
+
+* **firebase:** fix style-src csp for invalid format ([b832048](https://github.com/sws2apps/sws2apps-web/commit/b832048234384aac60a38e992262ef16286fc8b2))
+
 # [1.0.0-alpha.16](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2022-03-24)
 
 
