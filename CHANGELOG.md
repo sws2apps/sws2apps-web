@@ -1,3 +1,10 @@
+# [1.0.0-alpha.16](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2022-03-24)
+
+
+### Bug Fixes
+
+* **firebase:** adjust google fonts for csp ([34ddbf0](https://github.com/sws2apps/sws2apps-web/commit/34ddbf0f122e084b8e97f3ed14000683d7eeaa9d))
+
 # [1.0.0-alpha.15](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2022-03-24)
 
 
