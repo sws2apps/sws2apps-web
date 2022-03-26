@@ -5,7 +5,7 @@ import {
 	adminTmpEmailState,
 	adminTmpPwdState,
 	adminTokenState,
-	sessionIDState,
+	visitorIDState,
 	isAdminState,
 	isMfaEnabledState,
 	isMfaVerifiedState,
@@ -21,9 +21,8 @@ export const handleAdminLogout = async () => {
 	await promiseSetRecoil(adminTmpEmailState, '');
 	await promiseSetRecoil(adminTmpPwdState, '');
 	await promiseSetRecoil(adminTokenState, '');
-	await promiseSetRecoil(sessionIDState, '');
+	await promiseSetRecoil(visitorIDState, '');
 	await promiseSetRecoil(isAdminState, false);
 	await promiseSetRecoil(isMfaEnabledState, false);
 	await promiseSetRecoil(isMfaVerifiedState, false);
-	localStorage.removeItem('session_id');
 };

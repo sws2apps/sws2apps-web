@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Typography from '@mui/material/Typography';
 import { handleAdminLogout } from '../utils/admin';
-import { apiHostState, sessionIDState, isLogoutState } from '../states/main';
+import { apiHostState, visitorIDState, isLogoutState } from '../states/main';
 import {
 	appMessageState,
 	appSeverityState,
@@ -27,7 +27,7 @@ const Logout = () => {
 	const setAppMessage = useSetRecoilState(appMessageState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const sessionID = useRecoilValue(sessionIDState);
+	const visitorID = useRecoilValue(visitorIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 
@@ -55,7 +55,7 @@ const Logout = () => {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 			})
 				.then(async (res) => {
@@ -85,7 +85,7 @@ const Logout = () => {
 	}, [
 		abortCont,
 		apiHost,
-		sessionID,
+		visitorID,
 		handleClearAdmin,
 		handleClose,
 		setAppMessage,

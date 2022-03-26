@@ -29,7 +29,7 @@ import { handleAdminLogout } from '../utils/admin';
 import {
 	adminEmailState,
 	apiHostState,
-	sessionIDState,
+	visitorIDState,
 	isViewTokenState,
 	usersListState,
 	viewTokenEmailState,
@@ -58,7 +58,7 @@ const UserItem = ({ user }) => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
-	const sessionID = useRecoilValue(sessionIDState);
+	const visitorID = useRecoilValue(visitorIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
@@ -188,7 +188,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -238,7 +238,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -294,7 +294,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -336,7 +336,7 @@ const UserItem = ({ user }) => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						session_id: sessionID,
+						visitor_id: visitorID,
 					},
 					body: JSON.stringify(reqPayload),
 				});
@@ -381,7 +381,7 @@ const UserItem = ({ user }) => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						session_id: sessionID,
+						visitor_id: visitorID,
 					},
 					body: JSON.stringify(reqPayload),
 				});

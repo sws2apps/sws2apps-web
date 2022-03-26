@@ -17,15 +17,16 @@ import {
 	adminTmpPwdState,
 	adminTokenState,
 	apiHostState,
-	sessionIDState,
 	hasErrorEmailState,
 	hasErrorPwdState,
 	isAdminState,
+	isLoginAttemptState,
 	isMfaEnabledState,
 	isMfaVerifiedState,
 	hasErrorTokenState,
 	qrCodePathState,
 	secretTokenPathState,
+	visitorIDState,
 } from '../states/main';
 import {
 	appMessageState,
@@ -43,7 +44,6 @@ const Login = () => {
 	const [isMfaEnabled, setIsMfaEnabled] = useRecoilState(isMfaEnabledState);
 	const [isMfaVerified, setIsMfaVerified] = useRecoilState(isMfaVerifiedState);
 
-	const setSessionID = useSetRecoilState(sessionIDState);
 	const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
 	const setAppSeverity = useSetRecoilState(appSeverityState);
 	const setAppMessage = useSetRecoilState(appMessageState);
@@ -59,9 +59,10 @@ const Login = () => {
 	const userTmpPwd = useRecoilValue(adminTmpPwdState);
 	const userTmpEmail = useRecoilValue(adminTmpEmailState);
 	const adminToken = useRecoilValue(adminTokenState);
+	const visitorID = useRecoilValue(visitorIDState);
+	const isLoginAttempt = useRecoilValue(isLoginAttemptState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
-	const [tempSession, setTempSession] = useState('');
 
 	const handleClearAdmin = useCallback(async () => {
 		await handleAdminLogout();
@@ -83,6 +84,7 @@ const Login = () => {
 			const reqPayload = {
 				email: userTmpEmail,
 				password: userTmpPwd,
+				visitor_id: visitorID,
 			};
 
 			if (apiHost !== '') {
@@ -100,13 +102,11 @@ const Login = () => {
 							setIsProcessing(false);
 							setIsAdmin(true);
 							setIsMfaEnabled(true);
-							setTempSession(data.session_id);
 						} else {
-							if (data.secret && data.qrCode && data.session_id) {
+							if (data.secret && data.qrCode) {
 								setIsProcessing(false);
 								setSecretTokenPath(data.secret);
 								setQrCodePath(data.qrCode);
-								setTempSession(data.session_id);
 								setIsAdmin(true);
 							} else {
 								setIsProcessing(false);
@@ -149,7 +149,7 @@ const Login = () => {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
-							session_id: tempSession,
+							visitor_id: visitorID,
 						},
 						body: JSON.stringify(reqPayload),
 					});
@@ -162,12 +162,11 @@ const Login = () => {
 							method: 'GET',
 							headers: {
 								'Content-Type': 'application/json',
-								session_id: tempSession,
+								visitor_id: visitorID,
 							},
 						});
 
 						if (adminRes.status === 200) {
-							setSessionID(tempSession);
 							setAdminEmail(userTmpEmail);
 							setAdminPwd(userTmpPwd);
 							setIsMfaVerified(true);
@@ -176,7 +175,6 @@ const Login = () => {
 							setAppSeverity('success');
 							setAppSnackOpen(true);
 							setIsProcessing(false);
-							localStorage.setItem('session_id', tempSession);
 							navigate('/administration');
 						} else {
 							const adminData = await adminRes.json();
@@ -206,6 +204,12 @@ const Login = () => {
 	};
 
 	useEffect(() => {
+		if (isAdmin && isMfaEnabled && isMfaVerified) {
+			navigate('/administration');
+		}
+	}, [isAdmin, isMfaEnabled, isMfaVerified, navigate]);
+
+	useEffect(() => {
 		return () => abortCont.abort();
 	}, [abortCont]);
 
@@ -229,12 +233,28 @@ const Login = () => {
 				Accessing the Administration Panel
 			</Typography>
 
-			{!isAdmin && !isMfaEnabled && !isMfaVerified && <LoginAdmin />}
-			{isAdmin && !isMfaEnabled && !isMfaVerified && <MfaSetup />}
-			{isAdmin && isMfaEnabled && !isMfaVerified && (
-				<Box sx={{ marginTop: '25px', width: '100%' }}>
-					<MfaCheck />
+			{isLoginAttempt && (
+				<Box
+					sx={{
+						display: 'flex',
+						justifyContent: 'center',
+						marginTop: '30px',
+						marginBottom: '20px',
+					}}
+				>
+					<CircularProgress disableShrink color='secondary' size={'60px'} />
 				</Box>
+			)}
+			{!isLoginAttempt && (
+				<>
+					{!isAdmin && !isMfaEnabled && !isMfaVerified && <LoginAdmin />}
+					{isAdmin && !isMfaEnabled && !isMfaVerified && <MfaSetup />}
+					{isAdmin && isMfaEnabled && !isMfaVerified && (
+						<Box sx={{ marginTop: '25px', width: '100%' }}>
+							<MfaCheck />
+						</Box>
+					)}
+				</>
 			)}
 
 			{isProcessing && (
@@ -270,7 +290,7 @@ const Login = () => {
 					<Button
 						variant='contained'
 						onClick={handleSignIn}
-						disabled={isProcessing}
+						disabled={isProcessing || isLoginAttempt}
 					>
 						Login
 					</Button>

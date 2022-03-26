@@ -106,11 +106,6 @@ export const hasErrorTokenState = atom({
 	default: false,
 });
 
-export const sessionIDState = atom({
-	key: 'sessionID',
-	default: '',
-});
-
 export const isAdminLoggedState = atom({
 	key: 'isAdminLogged',
 	default: true,
@@ -159,4 +154,14 @@ export const secretTokenPathState = atom({
 export const blockedRequestsState = atom({
 	key: 'blockedRequests',
 	default: [],
+});
+
+export const visitorIDState = atom({
+	key: 'visitorID',
+	default: '',
+});
+
+export const isLoginAttemptState = atom({
+	key: 'isLoginAttempt',
+	default: false,
 });

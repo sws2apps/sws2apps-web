@@ -12,7 +12,7 @@ import BlockedItem from './BlockedItem';
 import {
 	apiHostState,
 	blockedRequestsState,
-	sessionIDState,
+	visitorIDState,
 } from '../states/main';
 import {
 	appMessageState,
@@ -30,7 +30,7 @@ const BlockedRequestsList = () => {
 	const setAppMessage = useSetRecoilState(appMessageState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const sessionID = useRecoilValue(sessionIDState);
+	const visitorID = useRecoilValue(visitorIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -45,7 +45,7 @@ const BlockedRequestsList = () => {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 			})
 				.then(async (res) => {
@@ -69,7 +69,7 @@ const BlockedRequestsList = () => {
 		}
 	}, [
 		apiHost,
-		sessionID,
+		visitorID,
 		setAppMessage,
 		setAppSeverity,
 		setAppSnackOpen,

@@ -13,7 +13,7 @@ import {
 	apiHostState,
 	congsListSortedState,
 	congsListState,
-	sessionIDState,
+	visitorIDState,
 } from '../states/main';
 import {
 	appMessageState,
@@ -31,7 +31,7 @@ const CongregationsList = () => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const congsList = useRecoilValue(congsListSortedState);
-	const sessionID = useRecoilValue(sessionIDState);
+	const visitorID = useRecoilValue(visitorIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -46,7 +46,7 @@ const CongregationsList = () => {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 			})
 				.then(async (res) => {
@@ -70,7 +70,7 @@ const CongregationsList = () => {
 		}
 	}, [
 		apiHost,
-		sessionID,
+		visitorID,
 		setAppMessage,
 		setAppSeverity,
 		setAppSnackOpen,
