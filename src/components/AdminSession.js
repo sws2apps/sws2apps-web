@@ -85,7 +85,7 @@ const AdminSession = () => {
 		// get visitor ID and check if there is an active connection
 		const getUserID = async () => {
 			const fpPromise = FingerprintJS.load({
-				apiKey: process.env.REACT_APP_FINGERPRINT_API_KEY,
+				apiKey: 'XwmESck7zm6PZAfspXbs',
 			});
 			const fp = await fpPromise;
 			const result = await fp.get();
