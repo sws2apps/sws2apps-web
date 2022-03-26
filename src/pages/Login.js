@@ -290,7 +290,7 @@ const Login = () => {
 					<Button
 						variant='contained'
 						onClick={handleSignIn}
-						disabled={isProcessing || isLoginAttempt}
+						disabled={isProcessing || isLoginAttempt || visitorID.length === 0}
 					>
 						Login
 					</Button>
