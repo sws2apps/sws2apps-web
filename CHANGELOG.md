@@ -1,3 +1,10 @@
+# [1.0.0-alpha.27](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.26...v1.0.0-alpha.27) (2022-03-26)
+
+
+### Bug Fixes
+
+* **fingerprintjs:** fix issue with device id ([10fa846](https://github.com/sws2apps/sws2apps-web/commit/10fa84631cb04d15ef872ba6b32dc7fe5244fdb2))
+
 # [1.0.0-alpha.26](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.25...v1.0.0-alpha.26) (2022-03-26)
 
 
