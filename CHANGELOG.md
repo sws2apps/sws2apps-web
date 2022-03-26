@@ -1,3 +1,10 @@
+# [1.0.0-alpha.23](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.22...v1.0.0-alpha.23) (2022-03-24)
+
+
+### Bug Fixes
+
+* **firebase:** add connect-src ([eecf0ba](https://github.com/sws2apps/sws2apps-web/commit/eecf0ba3155e26694e83cb0a28a26f940ea02c7a))
+
 # [1.0.0-alpha.22](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2022-03-24)
 
 
