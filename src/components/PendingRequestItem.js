@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import { handleAdminLogout } from '../utils/admin';
 import {
 	apiHostState,
-	sessionIDState,
+	visitorIDState,
 	pendingRequestsState,
 } from '../states/main';
 import {
@@ -30,7 +30,7 @@ const PendingRequestItem = ({ request }) => {
 	const [pendingReq, setPendingReq] = useRecoilState(pendingRequestsState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const sessionID = useRecoilValue(sessionIDState);
+	const visitorID = useRecoilValue(visitorIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isDisapprove, setIsDisapprove] = useState(false);
@@ -59,7 +59,7 @@ const PendingRequestItem = ({ request }) => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						session_id: sessionID,
+						visitor_id: visitorID,
 					},
 					body: JSON.stringify(reqPayload),
 				})
@@ -112,7 +112,7 @@ const PendingRequestItem = ({ request }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
 			})

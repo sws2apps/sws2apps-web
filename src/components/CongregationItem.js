@@ -26,7 +26,7 @@ import SecurityIcon from '@mui/icons-material/Security';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { handleAdminLogout } from '../utils/admin';
-import { apiHostState, sessionIDState } from '../states/main';
+import { apiHostState, visitorIDState } from '../states/main';
 import {
 	appMessageState,
 	appSeverityState,
@@ -41,7 +41,7 @@ const CongregationItem = ({ cong }) => {
 	const setAppMessage = useSetRecoilState(appMessageState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const sessionID = useRecoilValue(sessionIDState);
+	const visitorID = useRecoilValue(visitorIDState);
 
 	const [admins, setAdmins] = useState(cong.admin);
 	const [vips, setVips] = useState(cong.vip);
@@ -159,7 +159,7 @@ const CongregationItem = ({ cong }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -208,7 +208,7 @@ const CongregationItem = ({ cong }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -256,7 +256,7 @@ const CongregationItem = ({ cong }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -296,7 +296,7 @@ const CongregationItem = ({ cong }) => {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 			})
 				.then(async (res) => {

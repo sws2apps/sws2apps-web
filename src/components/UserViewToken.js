@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import { handleAdminLogout } from '../utils/admin';
 import {
 	apiHostState,
-	sessionIDState,
+	visitorIDState,
 	isViewTokenState,
 	viewTokenEmailState,
 	viewTokenPocketUidState,
@@ -42,7 +42,7 @@ const UserViewToken = () => {
 	const setAppMessage = useSetRecoilState(appMessageState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const sessionID = useRecoilValue(sessionIDState);
+	const visitorID = useRecoilValue(visitorIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [token, setToken] = useState('');
@@ -73,7 +73,7 @@ const UserViewToken = () => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						session_id: sessionID,
+						visitor_id: visitorID,
 					},
 					body: JSON.stringify(reqPayload),
 				});
@@ -100,7 +100,7 @@ const UserViewToken = () => {
 	}, [
 		abortCont,
 		apiHost,
-		sessionID,
+		visitorID,
 		handleClearAdmin,
 		viewTokenEmail,
 		viewTokenPocketUid,

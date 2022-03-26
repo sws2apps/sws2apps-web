@@ -12,7 +12,7 @@ import UserItem from './UserItem';
 import { handleAdminLogout } from '../utils/admin';
 import {
 	apiHostState,
-	sessionIDState,
+	visitorIDState,
 	usersListSortedState,
 	usersListState,
 } from '../states/main';
@@ -32,7 +32,7 @@ const UsersList = () => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const usersList = useRecoilValue(usersListSortedState);
-	const sessionID = useRecoilValue(sessionIDState);
+	const visitorID = useRecoilValue(visitorIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -51,7 +51,7 @@ const UsersList = () => {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 			})
 				.then(async (res) => {
@@ -76,7 +76,7 @@ const UsersList = () => {
 		}
 	}, [
 		apiHost,
-		sessionID,
+		visitorID,
 		handleClearAdmin,
 		setAppMessage,
 		setAppSeverity,

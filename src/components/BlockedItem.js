@@ -9,7 +9,7 @@ import WebIcon from '@mui/icons-material/Web';
 import {
 	apiHostState,
 	blockedRequestsState,
-	sessionIDState,
+	visitorIDState,
 } from '../states/main';
 import {
 	appMessageState,
@@ -26,7 +26,7 @@ const BlockedItem = ({ request }) => {
 	const setData = useSetRecoilState(blockedRequestsState);
 
 	const apiHost = useRecoilValue(apiHostState);
-	const sessionID = useRecoilValue(sessionIDState);
+	const visitorID = useRecoilValue(visitorIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 
@@ -48,7 +48,7 @@ const BlockedItem = ({ request }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
 			})
@@ -74,7 +74,7 @@ const BlockedItem = ({ request }) => {
 		}
 	}, [
 		apiHost,
-		sessionID,
+		visitorID,
 		request,
 		setAppMessage,
 		setAppSeverity,

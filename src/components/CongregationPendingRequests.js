@@ -12,7 +12,7 @@ import PendingRequestItem from './PendingRequestItem';
 import { handleAdminLogout } from '../utils/admin';
 import {
 	apiHostState,
-	sessionIDState,
+	visitorIDState,
 	countPendingRequestsState,
 	pendingRequestsState,
 } from '../states/main';
@@ -33,7 +33,7 @@ const CongregationPendingRequests = () => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const cnRequest = useRecoilValue(countPendingRequestsState);
-	const sessionID = useRecoilValue(sessionIDState);
+	const visitorID = useRecoilValue(visitorIDState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -52,7 +52,7 @@ const CongregationPendingRequests = () => {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					session_id: sessionID,
+					visitor_id: visitorID,
 				},
 			})
 				.then(async (res) => {
@@ -77,7 +77,7 @@ const CongregationPendingRequests = () => {
 		}
 	}, [
 		apiHost,
-		sessionID,
+		visitorID,
 		handleClearAdmin,
 		setAppMessage,
 		setAppSeverity,

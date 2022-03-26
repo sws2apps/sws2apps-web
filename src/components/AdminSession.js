@@ -1,12 +1,14 @@
 import { useCallback, useMemo, useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import FingerprintJS from '@fingerprintjs/fingerprintjs-pro';
 import { handleAdminLogout } from '../utils/admin';
 import {
 	apiHostState,
 	isAdminState,
+	isLoginAttemptState,
 	isMfaEnabledState,
 	isMfaVerifiedState,
-	sessionIDState,
+	visitorIDState,
 } from '../states/main';
 import {
 	appMessageState,
@@ -20,10 +22,11 @@ const AdminSession = () => {
 	const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
 	const setAppSeverity = useSetRecoilState(appSeverityState);
 	const setAppMessage = useSetRecoilState(appMessageState);
-	const setSessionID = useSetRecoilState(sessionIDState);
+	const setVisitorID = useSetRecoilState(visitorIDState);
 	const setIsAdmin = useSetRecoilState(isAdminState);
 	const setIsMfaEnabled = useSetRecoilState(isMfaEnabledState);
 	const setIsMfaVerified = useSetRecoilState(isMfaVerifiedState);
+	const setIsLoginAttempt = useSetRecoilState(isLoginAttemptState);
 
 	const apiHost = useRecoilValue(apiHostState);
 
@@ -32,14 +35,14 @@ const AdminSession = () => {
 	}, []);
 
 	const handleValidateSession = useCallback(
-		async (tempID) => {
+		async (visitorID) => {
 			try {
 				const adminRes = await fetch(`${apiHost}api/admin/`, {
 					signal: abortCont.signal,
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
-						session_id: tempID,
+						visitor_id: visitorID,
 					},
 				});
 
@@ -47,7 +50,6 @@ const AdminSession = () => {
 
 				if (isValid) {
 					if (adminRes.status === 200) {
-						setSessionID(tempID);
 						setIsMfaVerified(true);
 						setIsMfaEnabled(true);
 						setIsAdmin(true);
@@ -56,13 +58,9 @@ const AdminSession = () => {
 						setAppSnackOpen(true);
 					} else {
 						await handleClearAdmin();
-						setAppMessage(
-							'You have been disconnected from the administration session'
-						);
-						setAppSeverity('info');
-						setAppSnackOpen(true);
 					}
 				}
+				setIsLoginAttempt(false);
 			} catch (err) {
 				setAppMessage(err);
 				setAppSeverity('error');
@@ -77,21 +75,32 @@ const AdminSession = () => {
 			setAppSeverity,
 			setAppSnackOpen,
 			setIsAdmin,
+			setIsLoginAttempt,
 			setIsMfaEnabled,
 			setIsMfaVerified,
-			setSessionID,
 		]
 	);
 
 	useEffect(() => {
-		// attemp to access admin
-		const tempID = localStorage.getItem('session_id');
-		if (tempID?.length > 0) {
+		// get visitor ID and check if there is an active connection
+		const getUserID = async () => {
+			const fpPromise = FingerprintJS.load({
+				apiKey: process.env.REACT_APP_FINGERPRINT_API_KEY,
+			});
+			const fp = await fpPromise;
+			const result = await fp.get();
+			const visitorId = result.visitorId;
+
+			setVisitorID(visitorId);
+
 			setTimeout(() => {
-				handleValidateSession(tempID);
-			}, 5000);
-		}
-	}, [handleValidateSession]);
+				handleValidateSession(visitorId);
+			}, 3000);
+		};
+
+		setIsLoginAttempt(true);
+		getUserID();
+	}, [handleValidateSession, setIsLoginAttempt, setVisitorID]);
 
 	return <></>;
 };
