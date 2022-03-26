@@ -1,3 +1,10 @@
+# [1.0.0-alpha.28](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2022-03-26)
+
+
+### Bug Fixes
+
+* **firebase:** update csp cache-control ([c112b32](https://github.com/sws2apps/sws2apps-web/commit/c112b329df3e2fba450e9ad666571deac7093b6f))
+
 # [1.0.0-alpha.27](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.26...v1.0.0-alpha.27) (2022-03-26)
 
 
