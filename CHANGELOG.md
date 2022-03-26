@@ -1,3 +1,10 @@
+# [1.0.0-alpha.26](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.25...v1.0.0-alpha.26) (2022-03-26)
+
+
+### Bug Fixes
+
+* **firebase:** update csp to include fingerprintjs services ([b6282d7](https://github.com/sws2apps/sws2apps-web/commit/b6282d7471c63c0b51a46f0cfc7cfcc80e61d4df))
+
 # [1.0.0-alpha.25](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.24...v1.0.0-alpha.25) (2022-03-26)
 
 
