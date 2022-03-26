@@ -46,7 +46,11 @@ const AdminSession = () => {
 					},
 				});
 
-				const isValid = adminRes.headers.get('content-length') ? true : false;
+				const isValid =
+					adminRes.headers.get('content-type') ===
+					'application/json; charset=utf-8'
+						? true
+						: false;
 
 				if (isValid) {
 					if (adminRes.status === 200) {
@@ -87,9 +91,14 @@ const AdminSession = () => {
 			const fpPromise = FingerprintJS.load({
 				apiKey: 'XwmESck7zm6PZAfspXbs',
 			});
-			const fp = await fpPromise;
-			const result = await fp.get();
-			const visitorId = result.visitorId;
+
+			let visitorId = '';
+
+			do {
+				const fp = await fpPromise;
+				const result = await fp.get();
+				visitorId = result.visitorId;
+			} while (visitorId.length === 0);
 
 			setVisitorID(visitorId);
 
