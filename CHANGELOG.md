@@ -1,3 +1,10 @@
+# [1.0.0-alpha.25](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.24...v1.0.0-alpha.25) (2022-03-26)
+
+
+### Bug Fixes
+
+* **fingerprintjs:** add public api key ([96c79ed](https://github.com/sws2apps/sws2apps-web/commit/96c79ed9bb7ea9ab18d24681d091b6850e8bf1da))
+
 # [1.0.0-alpha.24](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.23...v1.0.0-alpha.24) (2022-03-26)
 
 
