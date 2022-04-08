@@ -1,3 +1,19 @@
+# [1.0.0-alpha.29](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.28...v1.0.0-alpha.29) (2022-04-08)
+
+
+### Features
+
+* **deps:** bump @emotion/react from 11.8.2 to 11.9.0 ([ab16129](https://github.com/sws2apps/sws2apps-web/commit/ab16129c6beb1960361a96f58b674ad77dc8b0e3))
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.5.7 to 3.6.0 ([32743e8](https://github.com/sws2apps/sws2apps-web/commit/32743e847fa874f1d2be65581737f4c1dd3a032e))
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.6.0 to 3.6.1 ([62cfd8f](https://github.com/sws2apps/sws2apps-web/commit/62cfd8f22a6487ca9dc80edf6315d54e67d19cd3))
+* **deps:** bump @mui/icons-material from 5.5.1 to 5.6.0 ([3bb07fa](https://github.com/sws2apps/sws2apps-web/commit/3bb07fa9f891adc97fcc9012402da8571cecb7c9))
+* **deps:** bump @mui/lab from 5.0.0-alpha.74 to 5.0.0-alpha.75 ([66af9a0](https://github.com/sws2apps/sws2apps-web/commit/66af9a03d9c265b2e7b9c61a6e35330e8246d26c))
+* **deps:** bump @mui/lab from 5.0.0-alpha.75 to 5.0.0-alpha.76 ([544aa3f](https://github.com/sws2apps/sws2apps-web/commit/544aa3f782a53ef3f98b72f0954bd4a88c754a24))
+* **deps:** bump @mui/material from 5.5.2 to 5.5.3 ([74f6ed7](https://github.com/sws2apps/sws2apps-web/commit/74f6ed77df6f2c09f15482d764c32e924723e7a9))
+* **deps:** bump @mui/material from 5.5.3 to 5.6.0 ([e01eb39](https://github.com/sws2apps/sws2apps-web/commit/e01eb39ef99bdc6fd9714c20303a201a08767f6d))
+* **deps:** bump react-router-dom from 6.2.2 to 6.3.0 ([4d5d563](https://github.com/sws2apps/sws2apps-web/commit/4d5d563a4d41d63f0f428924bbc36db3b52d292a))
+* **deps:** bump recoil from 0.6.1 to 0.7.0 ([47b366e](https://github.com/sws2apps/sws2apps-web/commit/47b366e2c7b27fe1a89bdd9c2b6ce0d2553dfc35))
+
 # [1.0.0-alpha.28](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2022-03-26)
 
 
