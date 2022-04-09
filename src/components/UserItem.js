@@ -24,37 +24,27 @@ import SecurityIcon from '@mui/icons-material/Security';
 import Stack from '@mui/material/Stack';
 import TokenIcon from '@mui/icons-material/Token';
 import Typography from '@mui/material/Typography';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { handleAdminLogout } from '../utils/admin';
 import {
 	adminEmailState,
 	apiHostState,
 	visitorIDState,
-	isViewTokenState,
 	usersListState,
-	viewTokenEmailState,
-	viewTokenPocketUidState,
-	viewTokenUsernameState,
 } from '../states/main';
 import {
 	appMessageState,
 	appSeverityState,
 	appSnackOpenState,
 } from '../states/notification';
-import UserViewToken from './UserViewToken';
 
 const UserItem = ({ user }) => {
 	let abortCont = useMemo(() => new AbortController(), []);
 
 	const [usersList, setUsersList] = useRecoilState(usersListState);
-	const [isViewToken, setIsViewToken] = useRecoilState(isViewTokenState);
 
 	const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
 	const setAppSeverity = useSetRecoilState(appSeverityState);
 	const setAppMessage = useSetRecoilState(appMessageState);
-	const setViewTokenEmail = useSetRecoilState(viewTokenEmailState);
-	const setViewTokenPocketUid = useSetRecoilState(viewTokenPocketUidState);
-	const setViewTokenUsername = useSetRecoilState(viewTokenUsernameState);
 
 	const apiHost = useRecoilValue(apiHostState);
 	const adminEmail = useRecoilValue(adminEmailState);
@@ -82,19 +72,6 @@ const UserItem = ({ user }) => {
 		setIsResetPwd(false);
 		setIsRevoke(false);
 		setOpen(false);
-	};
-
-	const handleViewUserToken = () => {
-		if (user.global_role === 'pocket') {
-			setViewTokenEmail('');
-			setViewTokenPocketUid(user.uid);
-		} else {
-			setViewTokenEmail(user.email);
-			setViewTokenPocketUid('');
-		}
-
-		setViewTokenUsername(user.username);
-		setIsViewToken(true);
 	};
 
 	const handleDlgAction = async () => {
@@ -188,6 +165,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					email: adminEmail,
 					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
@@ -238,6 +216,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					email: adminEmail,
 					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
@@ -294,6 +273,7 @@ const UserItem = ({ user }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					email: adminEmail,
 					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
@@ -336,6 +316,7 @@ const UserItem = ({ user }) => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
+						email: adminEmail,
 						visitor_id: visitorID,
 					},
 					body: JSON.stringify(reqPayload),
@@ -381,6 +362,7 @@ const UserItem = ({ user }) => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
+						email: adminEmail,
 						visitor_id: visitorID,
 					},
 					body: JSON.stringify(reqPayload),
@@ -452,7 +434,6 @@ const UserItem = ({ user }) => {
 						</DialogActions>
 					</Dialog>
 				)}
-				{isViewToken && <UserViewToken />}
 			</Box>
 			<Box
 				sx={{
@@ -498,7 +479,7 @@ const UserItem = ({ user }) => {
 										{user.username}
 									</Typography>
 									<Typography sx={{ fontSize: '12px' }}>
-										{user.global_role === 'pocket' ? user.uid : user.email}
+										{user.user_uid}
 									</Typography>
 								</Box>
 							</Box>
@@ -624,18 +605,6 @@ const UserItem = ({ user }) => {
 												</Button>
 											)}
 
-										<Button
-											onClick={handleViewUserToken}
-											startIcon={<VisibilityIcon sx={{ color: '#311b92' }} />}
-											sx={{
-												color: 'black',
-												marginLeft: '5px',
-												marginTop: '5px',
-											}}
-											variant='outlined'
-										>
-											View token
-										</Button>
 										<Button
 											onClick={handleSetRevoke}
 											startIcon={<TokenIcon sx={{ color: '#D35400' }} />}

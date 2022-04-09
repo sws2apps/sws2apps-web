@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import UserItem from './UserItem';
 import { handleAdminLogout } from '../utils/admin';
 import {
+	adminEmailState,
 	apiHostState,
 	visitorIDState,
 	usersListSortedState,
@@ -33,6 +34,7 @@ const UsersList = () => {
 	const apiHost = useRecoilValue(apiHostState);
 	const usersList = useRecoilValue(usersListSortedState);
 	const visitorID = useRecoilValue(visitorIDState);
+	const adminEmail = useRecoilValue(adminEmailState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -51,6 +53,7 @@ const UsersList = () => {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
+					email: adminEmail,
 					visitor_id: visitorID,
 				},
 			})
@@ -75,6 +78,7 @@ const UsersList = () => {
 				});
 		}
 	}, [
+		adminEmail,
 		apiHost,
 		visitorID,
 		handleClearAdmin,
@@ -155,7 +159,7 @@ const UsersList = () => {
 						{usersList.length > 0 && (
 							<>
 								{usersList.map((user) => (
-									<UserItem key={user.uid} user={user} />
+									<UserItem key={user.user_uid} user={user} />
 								))}
 							</>
 						)}

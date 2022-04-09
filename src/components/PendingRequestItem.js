@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { handleAdminLogout } from '../utils/admin';
 import {
+	adminEmailState,
 	apiHostState,
 	visitorIDState,
 	pendingRequestsState,
@@ -31,6 +32,7 @@ const PendingRequestItem = ({ request }) => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const visitorID = useRecoilValue(visitorIDState);
+	const adminEmail = useRecoilValue(adminEmailState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isDisapprove, setIsDisapprove] = useState(false);
@@ -45,11 +47,7 @@ const PendingRequestItem = ({ request }) => {
 			setIsDisapprove(false);
 			setIsProcessing(true);
 			const reqPayload = {
-				cong_name: request.cong_name,
-				cong_number: request.cong_number,
-				request_email: request.email,
 				request_id: request.id,
-				request_username: request.username,
 				disapproval_reason: disapproveReason,
 			};
 
@@ -59,6 +57,7 @@ const PendingRequestItem = ({ request }) => {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
+						email: adminEmail,
 						visitor_id: visitorID,
 					},
 					body: JSON.stringify(reqPayload),
@@ -99,11 +98,7 @@ const PendingRequestItem = ({ request }) => {
 	const handleCongApprove = async () => {
 		setIsProcessing(true);
 		const reqPayload = {
-			cong_name: request.cong_name,
-			cong_number: request.cong_number,
-			request_email: request.email,
 			request_id: request.id,
-			request_username: request.username,
 		};
 
 		if (apiHost !== '') {
@@ -112,6 +107,7 @@ const PendingRequestItem = ({ request }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					email: adminEmail,
 					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
@@ -191,6 +187,24 @@ const PendingRequestItem = ({ request }) => {
 								Congregation number
 							</Typography>
 							<Typography>{request.cong_number}</Typography>
+							<Typography
+								sx={{
+									marginTop: '15px',
+									fontWeight: 'bold',
+									textDecoration: 'underline',
+								}}
+							>
+								Congregation roles
+							</Typography>
+							{request.cong_role.map((role, index) => (
+								<Typography
+									key={`role-${index}`}
+									sx={{ display: 'inline-block', marginRight: '8px' }}
+								>
+									{role}
+									{index < request.cong_role.length - 1 ? ',' : ''}
+								</Typography>
+							))}
 						</Box>
 						<Typography sx={{ fontWeight: 'bold' }}>{request.id}</Typography>
 					</Box>
