@@ -1,3 +1,10 @@
+# [1.0.0-alpha.30](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.29...v1.0.0-alpha.30) (2022-04-09)
+
+
+### Features
+
+* **web:** add role management for congregation ([96d0ea2](https://github.com/sws2apps/sws2apps-web/commit/96d0ea2547e263e5bca355160820b0d2e72f1059))
+
 # [1.0.0-alpha.29](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.28...v1.0.0-alpha.29) (2022-04-08)
 
 
