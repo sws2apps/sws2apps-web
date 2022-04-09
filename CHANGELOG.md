@@ -1,3 +1,10 @@
+# [1.0.0-alpha.31](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2022-04-09)
+
+
+### Bug Fixes
+
+* **firebase:** update csp connect-src and prefetch-src ([c5afc8b](https://github.com/sws2apps/sws2apps-web/commit/c5afc8b4c04bf48cf03740dbbf3fef5009e0b666))
+
 # [1.0.0-alpha.30](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.29...v1.0.0-alpha.30) (2022-04-09)
 
 
