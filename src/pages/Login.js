@@ -149,6 +149,7 @@ const Login = () => {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
+							email: userTmpEmail,
 							visitor_id: visitorID,
 						},
 						body: JSON.stringify(reqPayload),
@@ -162,11 +163,13 @@ const Login = () => {
 							method: 'GET',
 							headers: {
 								'Content-Type': 'application/json',
+								email: userTmpEmail,
 								visitor_id: visitorID,
 							},
 						});
 
 						if (adminRes.status === 200) {
+							localStorage.setItem('email', userTmpEmail);
 							setAdminEmail(userTmpEmail);
 							setAdminPwd(userTmpPwd);
 							setIsMfaVerified(true);

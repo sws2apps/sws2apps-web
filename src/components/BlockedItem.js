@@ -7,6 +7,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import Typography from '@mui/material/Typography';
 import WebIcon from '@mui/icons-material/Web';
 import {
+	adminEmailState,
 	apiHostState,
 	blockedRequestsState,
 	visitorIDState,
@@ -27,6 +28,7 @@ const BlockedItem = ({ request }) => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const visitorID = useRecoilValue(visitorIDState);
+	const adminEmail = useRecoilValue(adminEmailState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 
@@ -48,6 +50,7 @@ const BlockedItem = ({ request }) => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					email: adminEmail,
 					visitor_id: visitorID,
 				},
 				body: JSON.stringify(reqPayload),
@@ -73,6 +76,7 @@ const BlockedItem = ({ request }) => {
 				});
 		}
 	}, [
+		adminEmail,
 		apiHost,
 		visitorID,
 		request,

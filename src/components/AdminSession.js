@@ -3,6 +3,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import FingerprintJS from '@fingerprintjs/fingerprintjs-pro';
 import { handleAdminLogout } from '../utils/admin';
 import {
+	adminEmailState,
 	apiHostState,
 	isAdminState,
 	isLoginAttemptState,
@@ -27,6 +28,7 @@ const AdminSession = () => {
 	const setIsMfaEnabled = useSetRecoilState(isMfaEnabledState);
 	const setIsMfaVerified = useSetRecoilState(isMfaVerifiedState);
 	const setIsLoginAttempt = useSetRecoilState(isLoginAttemptState);
+	const setAdminEmail = useSetRecoilState(adminEmailState);
 
 	const apiHost = useRecoilValue(apiHostState);
 
@@ -35,13 +37,14 @@ const AdminSession = () => {
 	}, []);
 
 	const handleValidateSession = useCallback(
-		async (visitorID) => {
+		async (visitorID, email) => {
 			try {
 				const adminRes = await fetch(`${apiHost}api/admin/`, {
 					signal: abortCont.signal,
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
+						email: email,
 						visitor_id: visitorID,
 					},
 				});
@@ -54,13 +57,14 @@ const AdminSession = () => {
 
 				if (isValid) {
 					if (adminRes.status === 200) {
+						setAdminEmail(email);
 						setIsMfaVerified(true);
 						setIsMfaEnabled(true);
 						setIsAdmin(true);
 						setAppMessage('You are connected as administrator');
 						setAppSeverity('success');
 						setAppSnackOpen(true);
-					} else {
+					} else if (adminRes.status === 403) {
 						await handleClearAdmin();
 					}
 				}
@@ -75,6 +79,7 @@ const AdminSession = () => {
 			abortCont,
 			apiHost,
 			handleClearAdmin,
+			setAdminEmail,
 			setAppMessage,
 			setAppSeverity,
 			setAppSnackOpen,
@@ -103,7 +108,8 @@ const AdminSession = () => {
 			setVisitorID(visitorId);
 
 			setTimeout(() => {
-				handleValidateSession(visitorId);
+				const email = localStorage.getItem('email');
+				handleValidateSession(visitorId, email);
 			}, 3000);
 		};
 

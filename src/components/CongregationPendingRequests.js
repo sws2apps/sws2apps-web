@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import PendingRequestItem from './PendingRequestItem';
 import { handleAdminLogout } from '../utils/admin';
 import {
+	adminEmailState,
 	apiHostState,
 	visitorIDState,
 	countPendingRequestsState,
@@ -34,6 +35,7 @@ const CongregationPendingRequests = () => {
 	const apiHost = useRecoilValue(apiHostState);
 	const cnRequest = useRecoilValue(countPendingRequestsState);
 	const visitorID = useRecoilValue(visitorIDState);
+	const adminEmail = useRecoilValue(adminEmailState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -52,6 +54,7 @@ const CongregationPendingRequests = () => {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
+					email: adminEmail,
 					visitor_id: visitorID,
 				},
 			})
@@ -76,6 +79,7 @@ const CongregationPendingRequests = () => {
 				});
 		}
 	}, [
+		adminEmail,
 		apiHost,
 		visitorID,
 		handleClearAdmin,

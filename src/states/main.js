@@ -116,26 +116,6 @@ export const isLogoutState = atom({
 	default: false,
 });
 
-export const isViewTokenState = atom({
-	key: 'isViewToken',
-	default: false,
-});
-
-export const viewTokenEmailState = atom({
-	key: 'viewTokenEmail',
-	default: '',
-});
-
-export const viewTokenPocketUidState = atom({
-	key: 'viewTokenPocketUid',
-	default: '',
-});
-
-export const viewTokenUsernameState = atom({
-	key: 'viewTokenUsername',
-	default: '',
-});
-
 export const isMfaEnabledState = atom({
 	key: 'isMfaEnabled',
 	default: false,
@@ -163,5 +143,10 @@ export const visitorIDState = atom({
 
 export const isLoginAttemptState = atom({
 	key: 'isLoginAttempt',
+	default: false,
+});
+
+export const lockRoleState = atom({
+	key: 'lockRole',
 	default: false,
 });

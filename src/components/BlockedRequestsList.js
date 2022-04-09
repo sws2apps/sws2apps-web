@@ -10,6 +10,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import Typography from '@mui/material/Typography';
 import BlockedItem from './BlockedItem';
 import {
+	adminEmailState,
 	apiHostState,
 	blockedRequestsState,
 	visitorIDState,
@@ -31,6 +32,7 @@ const BlockedRequestsList = () => {
 
 	const apiHost = useRecoilValue(apiHostState);
 	const visitorID = useRecoilValue(visitorIDState);
+	const adminEmail = useRecoilValue(adminEmailState);
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -45,6 +47,7 @@ const BlockedRequestsList = () => {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
+					email: adminEmail,
 					visitor_id: visitorID,
 				},
 			})
@@ -68,6 +71,7 @@ const BlockedRequestsList = () => {
 				});
 		}
 	}, [
+		adminEmail,
 		apiHost,
 		visitorID,
 		setAppMessage,

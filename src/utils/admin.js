@@ -13,6 +13,7 @@ import {
 } from '../states/main';
 
 export const handleAdminLogout = async () => {
+	localStorage.removeItem('email');
 	await promiseSetRecoil(pendingRequestsState, []);
 	await promiseSetRecoil(usersListState, []);
 	await promiseSetRecoil(adminEmailState, '');
