@@ -91,7 +91,7 @@ const CongregationUserRole = ({ member }) => {
 			setIsProcessing(true);
 
 			const reqPayload = {
-				user_uid: member.userID,
+				user_uid: member.user_uid,
 				user_role: tmpRoles,
 			};
 
