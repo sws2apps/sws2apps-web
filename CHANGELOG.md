@@ -1,3 +1,19 @@
+# [1.0.0-alpha.32](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.31...v1.0.0-alpha.32) (2022-04-14)
+
+
+### Bug Fixes
+
+* **admin:** fix bug where user identifier is not passed to the request body ([21fb86b](https://github.com/sws2apps/sws2apps-web/commit/21fb86baf909ea968bdc17ccb4e346e9611732ca))
+
+
+### Features
+
+* **deps:** bump @mui/icons-material from 5.6.0 to 5.6.1 ([434cec1](https://github.com/sws2apps/sws2apps-web/commit/434cec1138cf3a8f1867be2315da0b431ba58d1b))
+* **deps:** bump @mui/lab from 5.0.0-alpha.76 to 5.0.0-alpha.77 ([e720558](https://github.com/sws2apps/sws2apps-web/commit/e720558b9b769de2f30af71457fe061231d022dc))
+* **deps:** bump @mui/material from 5.6.0 to 5.6.1 ([7556ac9](https://github.com/sws2apps/sws2apps-web/commit/7556ac9a3b6f26f7516e9c5cffbb53b4e4682076))
+* **deps:** bump react-scripts from 5.0.0 to 5.0.1 ([b85a1c5](https://github.com/sws2apps/sws2apps-web/commit/b85a1c5f2754831455dce4d48b5fcfd545a665df))
+* **deps:** bump recoil from 0.7.0 to 0.7.1 ([9d0ade6](https://github.com/sws2apps/sws2apps-web/commit/9d0ade6236d8093bcb3a8e685d3f5a373a96978b))
+
 # [1.0.0-alpha.31](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2022-04-09)
 
 
