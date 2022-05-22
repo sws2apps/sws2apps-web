@@ -1,3 +1,35 @@
+# [1.0.0-alpha.35](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.34...v1.0.0-alpha.35) (2022-05-19)
+
+
+### Features
+
+* **deps:** bump @mui/icons-material from 5.6.2 to 5.8.0 ([db87f66](https://github.com/sws2apps/sws2apps-web/commit/db87f66107c9adaab8afbe5b70a3d3d8055c7b2f))
+* **deps:** bump @mui/lab from 5.0.0-alpha.80 to 5.0.0-alpha.81 ([cc4e1d5](https://github.com/sws2apps/sws2apps-web/commit/cc4e1d5a4a0bff1ac7b4b6d8417bd0651964416b))
+* **deps:** bump @mui/lab from 5.0.0-alpha.81 to 5.0.0-alpha.82 ([a4ccffc](https://github.com/sws2apps/sws2apps-web/commit/a4ccffc05993985f892c20dafa17e3d984a5f09b))
+* **deps:** bump @mui/material from 5.6.4 to 5.7.0 ([c04ffa3](https://github.com/sws2apps/sws2apps-web/commit/c04ffa3a3e5b0c8480f78eb159f1d7f118a3b735))
+* **deps:** bump @mui/material from 5.7.0 to 5.8.0 ([23371ad](https://github.com/sws2apps/sws2apps-web/commit/23371ad45ec972137497a6d7a10584f8dd677a21))
+
+# [1.0.0-alpha.34](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.33...v1.0.0-alpha.34) (2022-05-10)
+
+
+### Features
+
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.6.1 to 3.6.2 ([4cf6e7d](https://github.com/sws2apps/sws2apps-web/commit/4cf6e7d45d568ce5a4554b03578ae51e26bf8fe4))
+* **deps:** bump @mui/lab from 5.0.0-alpha.79 to 5.0.0-alpha.80 ([ad54510](https://github.com/sws2apps/sws2apps-web/commit/ad5451010897415caabfa0ae63884aadf21f0c2c))
+* **deps:** bump @mui/material from 5.6.3 to 5.6.4 ([c368d32](https://github.com/sws2apps/sws2apps-web/commit/c368d32e86695230a2a609edf5f4a2a49543eb3e))
+
+# [1.0.0-alpha.33](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.32...v1.0.0-alpha.33) (2022-04-26)
+
+
+### Features
+
+* **deps:** bump @mui/icons-material from 5.6.1 to 5.6.2 ([4be86d8](https://github.com/sws2apps/sws2apps-web/commit/4be86d83daeac0aef37cae0cabd1ff903a66b0f2))
+* **deps:** bump @mui/lab from 5.0.0-alpha.77 to 5.0.0-alpha.78 ([f30e030](https://github.com/sws2apps/sws2apps-web/commit/f30e030743fc3b6913123a76519e99f7a45b9d1d))
+* **deps:** bump @mui/lab from 5.0.0-alpha.78 to 5.0.0-alpha.79 ([b3725e6](https://github.com/sws2apps/sws2apps-web/commit/b3725e6385014614d316cf7398f3fbe3adca4393))
+* **deps:** bump @mui/material from 5.6.1 to 5.6.2 ([5f64855](https://github.com/sws2apps/sws2apps-web/commit/5f648559029d798974756fbb07772e07316a6046))
+* **deps:** bump @mui/material from 5.6.2 to 5.6.3 ([de1d2cd](https://github.com/sws2apps/sws2apps-web/commit/de1d2cd493304705839e0890471999722457d686))
+* **deps:** bump recoil from 0.7.1 to 0.7.2 ([71e47ab](https://github.com/sws2apps/sws2apps-web/commit/71e47abddbead6e6c8fb552a2f48462d9afe3943))
+
 # [1.0.0-alpha.32](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.31...v1.0.0-alpha.32) (2022-04-14)
 
 
