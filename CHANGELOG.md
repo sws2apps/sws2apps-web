@@ -1,3 +1,11 @@
+# [1.0.0-alpha.36](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.35...v1.0.0-alpha.36) (2022-05-24)
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.82 to 5.0.0-alpha.83 ([fb48b45](https://github.com/sws2apps/sws2apps-web/commit/fb48b45c42727f39e61d698016adfcf111caec22))
+* **deps:** bump @mui/material from 5.8.0 to 5.8.1 ([58e129f](https://github.com/sws2apps/sws2apps-web/commit/58e129fd6370e8f084a4aa92741951682a3a3415))
+
 # [1.0.0-alpha.35](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.34...v1.0.0-alpha.35) (2022-05-19)
 
 
