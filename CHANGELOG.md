@@ -1,3 +1,15 @@
+# [1.0.0-alpha.37](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.36...v1.0.0-alpha.37) (2022-05-25)
+
+
+### Bug Fixes
+
+* **index:** update render method ([49386f1](https://github.com/sws2apps/sws2apps-web/commit/49386f17b0532f521b648bcbd6117947e7094239))
+
+
+### Features
+
+* **deps:** bump react and react-dom ([66c858e](https://github.com/sws2apps/sws2apps-web/commit/66c858ef0c4cc1b8129b2e382228ae3e73a905c4))
+
 # [1.0.0-alpha.36](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.35...v1.0.0-alpha.36) (2022-05-24)
 
 
