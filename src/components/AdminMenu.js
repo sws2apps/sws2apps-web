@@ -8,6 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import Typography from '@mui/material/Typography';
 
@@ -32,6 +33,19 @@ const AdminMenu = () => {
 				Administration Pannel
 			</Typography>
 			<List>
+				<ListItem
+					disablePadding
+					button
+					component={Link}
+					to='/administration/announcements'
+				>
+					<ListItemButton>
+						<ListItemIcon>
+							<NotificationsIcon />
+						</ListItemIcon>
+						<ListItemText primary='Announcements' />
+					</ListItemButton>
+				</ListItem>
 				<ListItem
 					disablePadding
 					button
