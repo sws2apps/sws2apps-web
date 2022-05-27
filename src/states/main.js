@@ -150,3 +150,8 @@ export const lockRoleState = atom({
 	key: 'lockRole',
 	default: false,
 });
+
+export const dbAnnouncementsState = atom({
+	key: 'dbAnnouncements',
+	default: [],
+});
