@@ -11,6 +11,9 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
@@ -52,14 +55,11 @@ const AnnouncementItemDetails = () => {
 	const [announcementTitle, setAnnouncementTitle] = useState('');
 	const [announcementDesc, setAnnouncementDesc] = useState('');
 	const [bodyContent, setBodyContent] = useState('<p></p>');
-	const [expiredDate, setExpiredDate] = useState(() => {
-		var d = new Date(Date.now());
-		d.setDate(d.getDate() + 7);
-
-		return format(d, 'MM/dd/yyyy');
-	});
+	const [expiredDate, setExpiredDate] = useState('');
+	const [publishedDate, setPublishedDate] = useState(null);
 	const [announcement, setAnnouncement] = useState({});
 	const [isProcessing, setIsProcessing] = useState(true);
+	const [isSaving, setIsSaving] = useState(false);
 
 	const handleClearAdmin = useCallback(async () => {
 		await handleAdminLogout();
@@ -127,6 +127,7 @@ const AnnouncementItemDetails = () => {
 
 	const handleSaveDraft = async () => {
 		if (apiHost !== '') {
+			setIsSaving(true);
 			const reqPayload = {
 				announcement: announcement,
 			};
@@ -165,8 +166,56 @@ const AnnouncementItemDetails = () => {
 		}
 	};
 
+	const handlePublish = async () => {
+		if (apiHost !== '') {
+			setIsSaving(true);
+
+			const d = new Date();
+			announcement.publishedDate = format(d, 'MM/dd/yyyy');
+			announcement.isDraft = false;
+
+			const reqPayload = {
+				announcement: announcement,
+			};
+
+			fetch(`${apiHost}api/admin/announcement-publish`, {
+				signal: abortCont.signal,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					email: adminEmail,
+					visitor_id: visitorID,
+				},
+				body: JSON.stringify(reqPayload),
+			})
+				.then(async (res) => {
+					if (res.status === 200) {
+						const announcements = await res.json();
+						setDbAnnouncements(announcements);
+						navigate('/administration/announcements');
+					} else if (res.status === 403) {
+						handleClearAdmin();
+					} else {
+						const data = await res.json();
+						setAppMessage(data.message);
+						setAppSeverity('warn');
+						setAppSnackOpen(true);
+						navigate('/administration/announcements');
+					}
+				})
+				.catch((err) => {
+					setAppMessage(err.message);
+					setAppSeverity('error');
+					setAppSnackOpen(true);
+					navigate('/administration/announcements');
+				});
+		}
+	};
+
 	const handleDeleteAnnouncement = async () => {
 		if (apiHost !== '') {
+			setIsSaving(true);
+
 			fetch(`${apiHost}api/admin/announcement`, {
 				signal: abortCont.signal,
 				method: 'DELETE',
@@ -200,6 +249,13 @@ const AnnouncementItemDetails = () => {
 		}
 	};
 
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway' || reason === 'backdropClick') {
+			return;
+		}
+		setIsSaving(false);
+	};
+
 	useEffect(() => {
 		if (id) {
 			handleGetAnnouncement();
@@ -213,6 +269,7 @@ const AnnouncementItemDetails = () => {
 		if (currentData) {
 			setAppTarget(currentData.appTarget || 'lmm-oa');
 			setExpiredDate(currentData.expiredDate);
+			setPublishedDate(currentData.publishedDate || null);
 			if (language) {
 				setAnnouncementTitle(currentData[language]?.title || '');
 				setAnnouncementDesc(currentData[language]?.desc || '');
@@ -235,7 +292,7 @@ const AnnouncementItemDetails = () => {
 		}
 
 		currentData.appTarget = appTarget;
-		currentData.publishedDate = null;
+		currentData.publishedDate = publishedDate;
 		currentData.expiredDate = expiredDate;
 		currentData.isDraft = true;
 
@@ -249,10 +306,33 @@ const AnnouncementItemDetails = () => {
 		announcementDesc,
 		bodyContent,
 		expiredDate,
+		publishedDate,
 	]);
 
 	return (
 		<Box>
+			<Dialog
+				open={isSaving}
+				aria-labelledby='dialog-title-announcement-edit'
+				onClose={handleClose}
+			>
+				<DialogTitle id='dialog-title-announcement-edit'>
+					<Typography variant='h6' component='p'>
+						Please wait ...
+					</Typography>
+				</DialogTitle>
+				<DialogContent>
+					<Container
+						sx={{
+							display: 'flex',
+							justifyContent: 'center',
+							padding: '10px 50px',
+						}}
+					>
+						<CircularProgress disableShrink color='secondary' size={'60px'} />
+					</Container>
+				</DialogContent>
+			</Dialog>
 			<Button
 				variant='outlined'
 				startIcon={<KeyboardBackspaceIcon />}
@@ -293,19 +373,23 @@ const AnnouncementItemDetails = () => {
 								: 'Edit announcement'}
 						</Typography>
 						<Box>
-							<Button
-								variant='outlined'
-								startIcon={<SaveAsIcon />}
-								sx={{ marginLeft: '5px' }}
-								onClick={handleSaveDraft}
-							>
-								Save as draft
-							</Button>
+							{publishedDate === null && (
+								<Button
+									variant='outlined'
+									startIcon={<SaveAsIcon />}
+									sx={{ marginLeft: '5px' }}
+									onClick={handleSaveDraft}
+								>
+									Save as draft
+								</Button>
+							)}
+
 							<Button
 								variant='outlined'
 								color='success'
 								startIcon={<SendIcon />}
 								sx={{ marginLeft: '5px' }}
+								onClick={handlePublish}
 							>
 								Publish
 							</Button>
