@@ -1,3 +1,10 @@
+# [1.0.0-alpha.38](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.37...v1.0.0-alpha.38) (2022-05-27)
+
+
+### Features
+
+* **admin:** add announcements to dashboard ([5184bf7](https://github.com/sws2apps/sws2apps-web/commit/5184bf7a83ab8a1e6ecb4d805643bce4a923b332))
+
 # [1.0.0-alpha.37](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.36...v1.0.0-alpha.37) (2022-05-25)
 
 
