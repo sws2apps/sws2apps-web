@@ -55,7 +55,9 @@ const AnnouncementItemDetails = () => {
 	const [announcementTitle, setAnnouncementTitle] = useState('');
 	const [announcementDesc, setAnnouncementDesc] = useState('');
 	const [bodyContent, setBodyContent] = useState('<p></p>');
-	const [expiredDate, setExpiredDate] = useState('');
+	const [expiredDate, setExpiredDate] = useState(
+		format(new Date(), 'MM/dd/yyyy')
+	);
 	const [publishedDate, setPublishedDate] = useState(null);
 	const [announcement, setAnnouncement] = useState({});
 	const [isProcessing, setIsProcessing] = useState(true);
@@ -152,7 +154,7 @@ const AnnouncementItemDetails = () => {
 					} else {
 						const data = await res.json();
 						setAppMessage(data.message);
-						setAppSeverity('warn');
+						setAppSeverity('warning');
 						setAppSnackOpen(true);
 						navigate('/administration/announcements');
 					}
@@ -198,7 +200,7 @@ const AnnouncementItemDetails = () => {
 					} else {
 						const data = await res.json();
 						setAppMessage(data.message);
-						setAppSeverity('warn');
+						setAppSeverity('warning');
 						setAppSnackOpen(true);
 						navigate('/administration/announcements');
 					}
@@ -268,7 +270,9 @@ const AnnouncementItemDetails = () => {
 		let currentData = announcement;
 		if (currentData) {
 			setAppTarget(currentData.appTarget || 'lmm-oa');
-			setExpiredDate(currentData.expiredDate);
+			setExpiredDate(
+				currentData.expiredDate || format(new Date(), 'MM/dd/yyyy')
+			);
 			setPublishedDate(currentData.publishedDate || null);
 			if (language) {
 				setAnnouncementTitle(currentData[language]?.title || '');
