@@ -1,3 +1,10 @@
+# [1.0.0-alpha.39](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.38...v1.0.0-alpha.39) (2022-05-28)
+
+
+### Bug Fixes
+
+* **admin:** expired date set undefined when publishing ([b8f7439](https://github.com/sws2apps/sws2apps-web/commit/b8f7439b7503b9f0cebf72f610ad321e9854529f))
+
 # [1.0.0-alpha.38](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.37...v1.0.0-alpha.38) (2022-05-27)
 
 
