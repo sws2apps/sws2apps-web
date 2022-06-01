@@ -1,3 +1,14 @@
+# [1.0.0-alpha.40](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.39...v1.0.0-alpha.40) (2022-06-01)
+
+
+### Features
+
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.6.2 to 3.6.3 ([cb65b83](https://github.com/sws2apps/sws2apps-web/commit/cb65b832a8efa14ff8e94831065ee637930b86a7))
+* **deps:** bump @mui/icons-material from 5.8.0 to 5.8.2 ([4d1f548](https://github.com/sws2apps/sws2apps-web/commit/4d1f548e0dd6842227dbe05993670b8f2329602c))
+* **deps:** bump @mui/lab from 5.0.0-alpha.83 to 5.0.0-alpha.84 ([cf004d5](https://github.com/sws2apps/sws2apps-web/commit/cf004d54c8a6b785f28d3c2d90927cc5686c8367))
+* **deps:** bump @mui/material from 5.8.1 to 5.8.2 ([0c101eb](https://github.com/sws2apps/sws2apps-web/commit/0c101ebac12cd13a5051742035d8ea0795411583))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-alpha.4 to 5.0.0-alpha.5 ([f630255](https://github.com/sws2apps/sws2apps-web/commit/f630255c01124552fc75a93fd2de056c750db907))
+
 # [1.0.0-alpha.39](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.38...v1.0.0-alpha.39) (2022-05-28)
 
 
