@@ -1,3 +1,10 @@
+# [1.0.0-alpha.41](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.40...v1.0.0-alpha.41) (2022-06-03)
+
+
+### Features
+
+* **deps:** bump recoil from 0.7.2 to 0.7.3 ([cbbbebf](https://github.com/sws2apps/sws2apps-web/commit/cbbbebf34ef791b6826417f7a157297b027ee45e))
+
 # [1.0.0-alpha.40](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.39...v1.0.0-alpha.40) (2022-06-01)
 
 
