@@ -155,7 +155,7 @@ const UserItem = ({ user }) => {
 		setIsProcessing(true);
 
 		const reqPayload = {
-			user_uid: user.global_role === 'pocket' ? user.uid : user.email,
+			user_uid: user.user_uid,
 			user_type: user.global_role === 'pocket' ? 'pocket' : 'vip',
 		};
 
@@ -203,7 +203,7 @@ const UserItem = ({ user }) => {
 		setIsProcessing(true);
 
 		const reqPayload = {
-			user_uid: user.global_role === 'pocket' ? user.uid : user.email,
+			user_uid: user.user_uid,
 			user_type: user.global_role === 'pocket' ? 'pocket' : 'vip',
 		};
 
@@ -262,8 +262,9 @@ const UserItem = ({ user }) => {
 
 	const handleResetPassword = async () => {
 		setIsProcessing(true);
+
 		const reqPayload = {
-			user_email: user.email,
+			user_email: user.user_uid,
 			user_username: user.username,
 		};
 
@@ -307,7 +308,7 @@ const UserItem = ({ user }) => {
 		setIsProcessing(true);
 		try {
 			const reqPayload = {
-				user_uid: user.global_role === 'pocket' ? user.uid : user.email,
+				user_uid: user.user_uid,
 			};
 
 			if (apiHost !== '') {
@@ -329,7 +330,7 @@ const UserItem = ({ user }) => {
 					setAppSeverity('success');
 					setAppSnackOpen(true);
 
-					if (adminEmail === user.email) {
+					if (adminEmail === user.user_uid) {
 						await handleClearAdmin();
 					}
 				} else if (res.status === 403) {
@@ -353,7 +354,7 @@ const UserItem = ({ user }) => {
 		setIsProcessing(true);
 		try {
 			const reqPayload = {
-				user_email: user.email,
+				user_email: user.user_uid,
 			};
 
 			if (apiHost !== '') {
