@@ -159,7 +159,7 @@ const UsersList = () => {
 						{usersList.length > 0 && (
 							<>
 								{usersList.map((user) => (
-									<UserItem key={user.user_uid} user={user} />
+									<UserItem key={user.id} user={user} />
 								))}
 							</>
 						)}
