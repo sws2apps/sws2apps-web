@@ -1,3 +1,24 @@
+# [1.0.0-alpha.43](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.42...v1.0.0-alpha.43) (2022-06-10)
+
+
+### Bug Fixes
+
+* **admin:** update to support new api routes (wip) ([f266b73](https://github.com/sws2apps/sws2apps-web/commit/f266b731b59d97e39dc909e38b626c3b8381b82c))
+
+# [1.0.0-alpha.42](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.41...v1.0.0-alpha.42) (2022-06-10)
+
+
+### Bug Fixes
+
+* **admin:** update for new api routes ([accbb88](https://github.com/sws2apps/sws2apps-web/commit/accbb886fba2c7492ebc7538576dd5148fb21c9b))
+
+
+### Features
+
+* **deps:** bump @mui/icons-material from 5.8.2 to 5.8.3 ([a54842a](https://github.com/sws2apps/sws2apps-web/commit/a54842a147fb2bbf0ac0c64621f89706d4033067))
+* **deps:** bump @mui/lab from 5.0.0-alpha.84 to 5.0.0-alpha.85 ([d0a3edc](https://github.com/sws2apps/sws2apps-web/commit/d0a3edca6213bf5dca679a81e7d92f952b9dacf2))
+* **deps:** bump @mui/material from 5.8.2 to 5.8.3 ([1ba0fa0](https://github.com/sws2apps/sws2apps-web/commit/1ba0fa07ac78385332e8fb38792a8b8a2fa93825))
+
 # [1.0.0-alpha.41](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.40...v1.0.0-alpha.41) (2022-06-03)
 
 
