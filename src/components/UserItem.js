@@ -154,27 +154,21 @@ const UserItem = ({ user }) => {
 	const handleDeleteUser = async () => {
 		setIsProcessing(true);
 
-		const reqPayload = {
-			user_uid: user.user_uid,
-			user_type: user.global_role === 'pocket' ? 'pocket' : 'vip',
-		};
-
 		if (apiHost !== '') {
-			fetch(`${apiHost}api/admin/delete-user`, {
+			fetch(`${apiHost}api/admin/users/${user.id}`, {
 				signal: abortCont.signal,
-				method: 'POST',
+				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json',
 					email: adminEmail,
 					visitor_id: visitorID,
 				},
-				body: JSON.stringify(reqPayload),
 			})
 				.then(async (res) => {
 					const data = await res.json();
 					if (res.status === 200) {
 						let newUsers = usersList.filter(
-							(itemUser) => itemUser.uid !== user.uid
+							(itemUser) => itemUser.id !== user.id
 						);
 						setIsProcessing(false);
 						setUsersList(newUsers);
@@ -202,32 +196,26 @@ const UserItem = ({ user }) => {
 	const handleAccountStatus = async () => {
 		setIsProcessing(true);
 
-		const reqPayload = {
-			user_uid: user.user_uid,
-			user_type: user.global_role === 'pocket' ? 'pocket' : 'vip',
-		};
-
 		if (apiHost !== '') {
-			const uri = `${apiHost}api/admin/${
-				isEnableUser ? 'enable-user' : isDisableUser ? 'disable-user' : ''
+			const uri = `${apiHost}api/admin/users/${user.id}/${
+				isEnableUser ? 'enable' : isDisableUser ? 'disable' : ''
 			}`;
 			fetch(uri, {
 				signal: abortCont.signal,
-				method: 'POST',
+				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json',
 					email: adminEmail,
 					visitor_id: visitorID,
 				},
-				body: JSON.stringify(reqPayload),
 			})
 				.then(async (res) => {
 					const data = await res.json();
 					if (res.status === 200) {
-						let item = usersList.find((itemUser) => itemUser.uid === user.uid);
+						let item = usersList.find((itemUser) => itemUser.id === user.id);
 
 						let newUsers = usersList.filter(
-							(itemUser) => itemUser.uid !== user.uid
+							(itemUser) => itemUser.id !== user.id
 						);
 
 						let obj = {
@@ -263,21 +251,15 @@ const UserItem = ({ user }) => {
 	const handleResetPassword = async () => {
 		setIsProcessing(true);
 
-		const reqPayload = {
-			user_email: user.user_uid,
-			user_username: user.username,
-		};
-
 		if (apiHost !== '') {
-			fetch(`${apiHost}api/admin/user-reset-password`, {
+			fetch(`${apiHost}api/admin/users/${user.id}/reset-password`, {
 				signal: abortCont.signal,
-				method: 'POST',
+				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json',
 					email: adminEmail,
 					visitor_id: visitorID,
 				},
-				body: JSON.stringify(reqPayload),
 			})
 				.then(async (res) => {
 					const data = await res.json();
@@ -307,21 +289,19 @@ const UserItem = ({ user }) => {
 	const handleRevokeToken = async () => {
 		setIsProcessing(true);
 		try {
-			const reqPayload = {
-				user_uid: user.user_uid,
-			};
-
 			if (apiHost !== '') {
-				const res = await fetch(`${apiHost}api/admin/revoke-user-token`, {
-					signal: abortCont.signal,
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						email: adminEmail,
-						visitor_id: visitorID,
-					},
-					body: JSON.stringify(reqPayload),
-				});
+				const res = await fetch(
+					`${apiHost}api/admin/users/${user.id}/revoke-token`,
+					{
+						signal: abortCont.signal,
+						method: 'PATCH',
+						headers: {
+							'Content-Type': 'application/json',
+							email: adminEmail,
+							visitor_id: visitorID,
+						},
+					}
+				);
 
 				const data = await res.json();
 				if (res.status === 200) {
@@ -353,28 +333,26 @@ const UserItem = ({ user }) => {
 	const handleMakeUserAdmin = async () => {
 		setIsProcessing(true);
 		try {
-			const reqPayload = {
-				user_email: user.user_uid,
-			};
-
 			if (apiHost !== '') {
-				const res = await fetch(`${apiHost}api/admin/make-user-admin`, {
-					signal: abortCont.signal,
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						email: adminEmail,
-						visitor_id: visitorID,
-					},
-					body: JSON.stringify(reqPayload),
-				});
+				const res = await fetch(
+					`${apiHost}api/admin/users/${user.id}/make-admin`,
+					{
+						signal: abortCont.signal,
+						method: 'PATCH',
+						headers: {
+							'Content-Type': 'application/json',
+							email: adminEmail,
+							visitor_id: visitorID,
+						},
+					}
+				);
 
 				const data = await res.json();
 				if (res.status === 200) {
-					let item = usersList.find((itemUser) => itemUser.uid === user.uid);
+					let item = usersList.find((itemUser) => itemUser.id === user.id);
 
 					let newUsers = usersList.filter(
-						(itemUser) => itemUser.uid !== user.uid
+						(itemUser) => itemUser.id !== user.id
 					);
 
 					let obj = {
