@@ -203,9 +203,6 @@ const CongregationItem = ({
 								<Typography sx={{ fontWeight: 'bold', fontSize: '16px' }}>
 									{cong.cong_name} ({cong.cong_number})
 								</Typography>
-								<Typography sx={{ fontWeight: 'bold', fontSize: '12px' }}>
-									{`ID: ${cong.cong_id}`}
-								</Typography>
 							</Box>
 						</Box>
 						{isProcessing && (
