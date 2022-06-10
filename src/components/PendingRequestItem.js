@@ -47,14 +47,13 @@ const PendingRequestItem = ({ request }) => {
 			setIsDisapprove(false);
 			setIsProcessing(true);
 			const reqPayload = {
-				request_id: request.id,
-				disapproval_reason: disapproveReason,
+				reason: disapproveReason,
 			};
 
 			if (apiHost !== '') {
-				fetch(`${apiHost}api/admin/congregation-request-disapprove`, {
+				fetch(`${apiHost}api/admin/congregations/${request.id}/disapprove`, {
 					signal: abortCont.signal,
-					method: 'POST',
+					method: 'PUT',
 					headers: {
 						'Content-Type': 'application/json',
 						email: adminEmail,
@@ -97,20 +96,16 @@ const PendingRequestItem = ({ request }) => {
 
 	const handleCongApprove = async () => {
 		setIsProcessing(true);
-		const reqPayload = {
-			request_id: request.id,
-		};
 
 		if (apiHost !== '') {
-			fetch(`${apiHost}api/admin/create-congregation`, {
+			fetch(`${apiHost}api/admin/congregations/${request.id}/approve`, {
 				signal: abortCont.signal,
-				method: 'POST',
+				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
 					email: adminEmail,
 					visitor_id: visitorID,
 				},
-				body: JSON.stringify(reqPayload),
 			})
 				.then(async (res) => {
 					const data = await res.json();
@@ -206,7 +201,6 @@ const PendingRequestItem = ({ request }) => {
 								</Typography>
 							))}
 						</Box>
-						<Typography sx={{ fontWeight: 'bold' }}>{request.id}</Typography>
 					</Box>
 					{isDisapprove && (
 						<Box

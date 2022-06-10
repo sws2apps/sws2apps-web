@@ -49,7 +49,7 @@ const CongregationPendingRequests = () => {
 		setIsProcessing(true);
 
 		if (apiHost !== '') {
-			fetch(`${apiHost}api/admin/pending-requests`, {
+			fetch(`${apiHost}api/admin/congregations/requests`, {
 				signal: abortCont.signal,
 				method: 'GET',
 				headers: {
