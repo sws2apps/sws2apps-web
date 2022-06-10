@@ -1,3 +1,10 @@
+# [1.0.0-alpha.44](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.43...v1.0.0-alpha.44) (2022-06-10)
+
+
+### Bug Fixes
+
+* **admin:** update fetch users requests to support new api routes ([2dfc6d4](https://github.com/sws2apps/sws2apps-web/commit/2dfc6d47dfad5bd78c9f638ad2e2e78f28308a6f))
+
 # [1.0.0-alpha.43](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.42...v1.0.0-alpha.43) (2022-06-10)
 
 
