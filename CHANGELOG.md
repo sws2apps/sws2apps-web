@@ -1,3 +1,10 @@
+# [1.0.0-alpha.43](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.42...v1.0.0-alpha.43) (2022-06-10)
+
+
+### Bug Fixes
+
+* **admin:** update to support new api routes (wip) ([f266b73](https://github.com/sws2apps/sws2apps-web/commit/f266b731b59d97e39dc909e38b626c3b8381b82c))
+
 # [1.0.0-alpha.42](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.41...v1.0.0-alpha.42) (2022-06-10)
 
 
