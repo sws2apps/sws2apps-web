@@ -28,7 +28,7 @@ const chkRoleStyles = {
 	minWidth: '260px',
 };
 
-const CongregationUserRole = ({ member }) => {
+const CongregationUserRole = ({ member, cong_id }) => {
 	let abortCont = useMemo(() => new AbortController(), []);
 
 	const [lockRole, setLockRole] = useRecoilState(lockRoleState);
@@ -96,16 +96,19 @@ const CongregationUserRole = ({ member }) => {
 			};
 
 			if (apiHost !== '') {
-				const response = await fetch(`${apiHost}api/admin/user-update-role`, {
-					signal: abortCont.signal,
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						email: adminEmail,
-						visitor_id: visitorID,
-					},
-					body: JSON.stringify(reqPayload),
-				});
+				const response = await fetch(
+					`${apiHost}api/admin/congregations/${cong_id}/update-role`,
+					{
+						signal: abortCont.signal,
+						method: 'PATCH',
+						headers: {
+							'Content-Type': 'application/json',
+							email: adminEmail,
+							visitor_id: visitorID,
+						},
+						body: JSON.stringify(reqPayload),
+					}
+				);
 
 				if (response.status === 200) {
 					const newCongs = await response.json();

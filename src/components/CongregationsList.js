@@ -162,16 +162,15 @@ const CongregationsList = () => {
 			setIsCongProcessing(true);
 
 			const reqPayload = {
-				cong_id: congID,
 				user_uid: user.user_uid,
 			};
 
 			if (apiHost !== '') {
 				const response = await fetch(
-					`${apiHost}api/admin/congregation-add-user`,
+					`${apiHost}api/admin/congregations/${congID}/add-user`,
 					{
 						signal: abortCont.signal,
-						method: 'POST',
+						method: 'PATCH',
 						headers: {
 							'Content-Type': 'application/json',
 							email: adminEmail,
@@ -213,20 +212,18 @@ const CongregationsList = () => {
 			setIsYesDisabled(true);
 
 			if (apiHost !== '') {
-				const reqPayload = {
-					user_uid: varText,
-				};
-
-				const response = await fetch(`${apiHost}api/admin/find-user`, {
-					signal: abortCont.signal,
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						email: adminEmail,
-						visitor_id: visitorID,
-					},
-					body: JSON.stringify(reqPayload),
-				});
+				const response = await fetch(
+					`${apiHost}api/admin/users/find?search=${varText}`,
+					{
+						signal: abortCont.signal,
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							email: adminEmail,
+							visitor_id: visitorID,
+						},
+					}
+				);
 
 				if (response.status === 200) {
 					const findUser = await response.json();
@@ -275,22 +272,17 @@ const CongregationsList = () => {
 		try {
 			setIsCongProcessing(true);
 
-			const reqPayload = {
-				cong_id: congID,
-			};
-
 			if (apiHost !== '') {
 				const response = await fetch(
-					`${apiHost}api/admin/congregation-delete`,
+					`${apiHost}api/admin/congregations/${congID}`,
 					{
 						signal: abortCont.signal,
-						method: 'POST',
+						method: 'DELETE',
 						headers: {
 							'Content-Type': 'application/json',
 							email: adminEmail,
 							visitor_id: visitorID,
 						},
-						body: JSON.stringify(reqPayload),
 					}
 				);
 
@@ -444,7 +436,7 @@ const CongregationsList = () => {
 															{user.username}
 														</Typography>
 														<Typography sx={{ fontSize: '13px' }}>
-															{user.email}
+															{user.user_uid}
 														</Typography>
 														<Typography
 															sx={{ marginTop: '10px', fontSize: '13px' }}

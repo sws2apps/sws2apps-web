@@ -93,10 +93,10 @@ const CongregationItem = ({
 
 			if (apiHost !== '') {
 				const response = await fetch(
-					`${apiHost}api/admin/congregation-remove-user`,
+					`${apiHost}api/admin/congregations/${congID}/remove-user`,
 					{
 						signal: abortCont.signal,
-						method: 'POST',
+						method: 'PATCH',
 						headers: {
 							'Content-Type': 'application/json',
 							email: adminEmail,
@@ -298,7 +298,7 @@ const CongregationItem = ({
 										</Box>
 									)}
 								</Box>
-								<CongregationUserRole member={member} />
+								<CongregationUserRole member={member} cong_id={congID} />
 							</Box>
 						))}
 					</Box>
