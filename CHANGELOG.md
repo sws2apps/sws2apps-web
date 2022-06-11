@@ -1,3 +1,10 @@
+# [1.0.0-alpha.45](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.44...v1.0.0-alpha.45) (2022-06-11)
+
+
+### Bug Fixes
+
+* **admin:** update congregation management routes to use new api ([a09c943](https://github.com/sws2apps/sws2apps-web/commit/a09c943d0a1e9cfcbf5b694fbc29abf58ee972be))
+
 # [1.0.0-alpha.44](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.43...v1.0.0-alpha.44) (2022-06-10)
 
 
