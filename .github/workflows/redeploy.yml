@@ -47,6 +47,6 @@ jobs:
         uses: sws2apps/firebase-deployment@2be7e53f42b9ad7cc73ba859c57cab4cd66a7895
         with:
           project: 'sws-apps-dev'
-          config: 'custom_path/firebase.json'
+          config: './firebase.json'
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_SWS_APPS_TOKEN }}
