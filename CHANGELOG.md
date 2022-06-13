@@ -1,3 +1,11 @@
+# [1.0.0-alpha.46](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.45...v1.0.0-alpha.46) (2022-06-13)
+
+
+### Features
+
+* **deps:** bump @emotion/react from 11.9.0 to 11.9.3 ([1c3409c](https://github.com/sws2apps/sws2apps-web/commit/1c3409c4af0b9cde3b629f77a9c7908ea4dde2d7))
+* **deps:** bump @emotion/styled from 11.8.1 to 11.9.3 ([3de0ef8](https://github.com/sws2apps/sws2apps-web/commit/3de0ef8165001f6c1a28af1bb0fbee5360897ae1))
+
 # [1.0.0-alpha.45](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.44...v1.0.0-alpha.45) (2022-06-11)
 
 
