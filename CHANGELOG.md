@@ -1,3 +1,14 @@
+# [1.0.0-alpha.47](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.46...v1.0.0-alpha.47) (2022-06-15)
+
+
+### Features
+
+* **deps:** bump @mui/icons-material from 5.8.3 to 5.8.4 ([9582cf8](https://github.com/sws2apps/sws2apps-web/commit/9582cf86638cb6296f4fc00e8ac0dacedbfb9677))
+* **deps:** bump @mui/lab from 5.0.0-alpha.85 to 5.0.0-alpha.86 ([c612b38](https://github.com/sws2apps/sws2apps-web/commit/c612b38b46269ed9ce3fd8176d4e1d662ee99c20))
+* **deps:** bump @mui/material from 5.8.3 to 5.8.4 ([eca55a3](https://github.com/sws2apps/sws2apps-web/commit/eca55a32ebbecf774fd808fb9b30a2ac117a5ead))
+* **deps:** bump react from 18.1.0 to 18.2.0 ([e3d437f](https://github.com/sws2apps/sws2apps-web/commit/e3d437f27974eaa599f7113460fa658ce54e5fb8))
+* **deps:** bump react-dom from 18.1.0 to 18.2.0 ([da8f120](https://github.com/sws2apps/sws2apps-web/commit/da8f120ba10f24b28b6481c839e6ce0967ab3740))
+
 # [1.0.0-alpha.46](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.45...v1.0.0-alpha.46) (2022-06-13)
 
 
