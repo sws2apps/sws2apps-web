@@ -1,3 +1,10 @@
+# [1.0.0-alpha.49](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.48...v1.0.0-alpha.49) (2022-06-27)
+
+
+### Features
+
+* **deps:** bump @mui/x-date-pickers from 5.0.0-alpha.6 to 5.0.0-alpha.7 ([fa12ecb](https://github.com/sws2apps/sws2apps-web/commit/fa12ecb77962ee2eab8bffa7f666137fe06ccbce))
+
 # [1.0.0-alpha.48](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.47...v1.0.0-alpha.48) (2022-06-22)
 
 
