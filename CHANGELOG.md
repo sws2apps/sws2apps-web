@@ -1,3 +1,14 @@
+# [1.0.0-alpha.52](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.51...v1.0.0-alpha.52) (2022-07-14)
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.89 to 5.0.0-alpha.90 ([debd4bd](https://github.com/sws2apps/sws2apps-web/commit/debd4bd9681ebddd76bfbdeb3eb38f2ec32a34c5))
+* **deps:** bump @mui/material from 5.8.7 to 5.9.0 ([6b5850b](https://github.com/sws2apps/sws2apps-web/commit/6b5850b8e710a36dec35c65e7b3568d273a94b48))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-alpha.7 to 5.0.0-beta.0 ([c866c3d](https://github.com/sws2apps/sws2apps-web/commit/c866c3d0ccc1f0fb30b817544407c16f344b358c))
+* **deps:** bump moment from 2.29.3 to 2.29.4 ([0501c3d](https://github.com/sws2apps/sws2apps-web/commit/0501c3db72f6b3b2bb7596fe760a0accd998ead0))
+* **deps:** bump qrcode from 1.5.0 to 1.5.1 ([8206c4c](https://github.com/sws2apps/sws2apps-web/commit/8206c4c82075f844954312661ed87afecdbe1ded))
+
 # [1.0.0-alpha.51](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.50...v1.0.0-alpha.51) (2022-07-05)
 
 
