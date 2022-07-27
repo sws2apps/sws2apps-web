@@ -1,3 +1,17 @@
+# [1.0.0-alpha.53](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.52...v1.0.0-alpha.53) (2022-07-27)
+
+
+### Features
+
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.6.3 to 3.6.4 ([642c91b](https://github.com/sws2apps/sws2apps-web/commit/642c91b7f57faf1f7ac580b232a07f1b8c82d53f))
+* **deps:** bump @mui/lab from 5.0.0-alpha.90 to 5.0.0-alpha.91 ([d597790](https://github.com/sws2apps/sws2apps-web/commit/d597790b38b1a60771cce6ab1d1348875d4c8c13))
+* **deps:** bump @mui/lab from 5.0.0-alpha.91 to 5.0.0-alpha.92 ([e06546d](https://github.com/sws2apps/sws2apps-web/commit/e06546d2ee7880a80f0f39e06c058ad33c11bb67))
+* **deps:** bump @mui/material from 5.9.0 to 5.9.1 ([f82e747](https://github.com/sws2apps/sws2apps-web/commit/f82e747050f25482fb9ab7e2c3c471302f0e0fd9))
+* **deps:** bump @mui/material from 5.9.1 to 5.9.2 ([12831ce](https://github.com/sws2apps/sws2apps-web/commit/12831cea4d4be24c69f2c3e48ed985267a55f8d8))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.0 to 5.0.0-beta.1 ([194d75b](https://github.com/sws2apps/sws2apps-web/commit/194d75b028776c68b28e211aae527a312ffd6c02))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.1 to 5.0.0-beta.2 ([56ce226](https://github.com/sws2apps/sws2apps-web/commit/56ce2262cab14086f59e6ca7762867729ade53ee))
+* **deps:** bump date-fns from 2.28.0 to 2.29.1 ([6816518](https://github.com/sws2apps/sws2apps-web/commit/6816518112221be1c1b11ab363f7e5dd80048be5))
+
 # [1.0.0-alpha.52](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.51...v1.0.0-alpha.52) (2022-07-14)
 
 

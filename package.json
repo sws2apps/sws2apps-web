@@ -1,6 +1,6 @@
 {
   "name": "sws2apps-web",
-  "version": "1.0.0-alpha.52",
+  "version": "1.0.0-alpha.53",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^2.14.0",
