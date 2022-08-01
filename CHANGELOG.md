@@ -1,3 +1,13 @@
+# [1.0.0-alpha.54](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.53...v1.0.0-alpha.54) (2022-08-01)
+
+
+### Features
+
+* **deps:** bump @emotion/react from 11.9.3 to 11.10.0 ([b6e4f3d](https://github.com/sws2apps/sws2apps-web/commit/b6e4f3d8a53dc65c42379d216c7961a03af117ba))
+* **deps:** bump @emotion/styled from 11.9.3 to 11.10.0 ([c0d3030](https://github.com/sws2apps/sws2apps-web/commit/c0d3030a0de049cc29a382b3e53058e63f05ea36))
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.6.4 to 3.7.0 ([d13865e](https://github.com/sws2apps/sws2apps-web/commit/d13865e26c323a08084a05e16984ca3c29b0af32))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.2 to 5.0.0-beta.3 ([60b3c30](https://github.com/sws2apps/sws2apps-web/commit/60b3c3054ad9fb4665e24c19b23377b2d681e698))
+
 # [1.0.0-alpha.53](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.52...v1.0.0-alpha.53) (2022-07-27)
 
 
