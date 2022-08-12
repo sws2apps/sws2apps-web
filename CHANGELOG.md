@@ -1,3 +1,14 @@
+# [1.0.0-alpha.57](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.56...v1.0.0-alpha.57) (2022-08-12)
+
+
+### Features
+
+* **deps:** bump @date-io/date-fns from 2.14.0 to 2.15.0 ([6d2355b](https://github.com/sws2apps/sws2apps-web/commit/6d2355bd352d549aaf35db8f7ec93bcf60f1a707))
+* **deps:** bump @mui/lab from 5.0.0-alpha.93 to 5.0.0-alpha.94 ([97d3d6c](https://github.com/sws2apps/sws2apps-web/commit/97d3d6c595057eab2ed65d99537a0978f1181f85))
+* **deps:** bump @mui/material from 5.9.3 to 5.10.0 ([4ae6720](https://github.com/sws2apps/sws2apps-web/commit/4ae6720a8474339d078ba964fdaffe165abf9970))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.4 to 5.0.0-beta.5 ([2caaa03](https://github.com/sws2apps/sws2apps-web/commit/2caaa034ebeac7c8c0dec694e2198eb7fb35c1ca))
+* **deps:** bump recoil from 0.7.4 to 0.7.5 ([23020dd](https://github.com/sws2apps/sws2apps-web/commit/23020dd3d3cb4f36c69c2351aea2df29e90b8647))
+
 # [1.0.0-alpha.56](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.55...v1.0.0-alpha.56) (2022-08-05)
 
 
