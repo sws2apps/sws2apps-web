@@ -1,3 +1,21 @@
+# [1.0.0-alpha.60](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.59...v1.0.0-alpha.60) (2022-09-10)
+
+
+### Features
+
+* **deps:** bump @emotion/react from 11.10.0 to 11.10.4 ([45975fe](https://github.com/sws2apps/sws2apps-web/commit/45975fe3c76a0829e8448af9b3c2fa870333021a))
+* **deps:** bump @emotion/styled from 11.10.0 to 11.10.4 ([5c01cba](https://github.com/sws2apps/sws2apps-web/commit/5c01cbab6e6549316be7524ace5ca84ae700e844))
+* **deps:** bump @mui/icons-material from 5.10.2 to 5.10.3 ([0f08168](https://github.com/sws2apps/sws2apps-web/commit/0f08168397ad5204d1938bf925e37db4f514c22c))
+* **deps:** bump @mui/icons-material from 5.8.4 to 5.10.2 ([add9a1b](https://github.com/sws2apps/sws2apps-web/commit/add9a1b085c33e767e2020b95ea25ca339a8861b))
+* **deps:** bump @mui/lab from 5.0.0-alpha.95 to 5.0.0-alpha.96 ([f1c71f6](https://github.com/sws2apps/sws2apps-web/commit/f1c71f6d998c61a111f36f1ded8617d7be8380c1))
+* **deps:** bump @mui/lab from 5.0.0-alpha.96 to 5.0.0-alpha.97 ([87a8e99](https://github.com/sws2apps/sws2apps-web/commit/87a8e996f89a237fc43ceeb012c69a4452cfe5d3))
+* **deps:** bump @mui/lab from 5.0.0-alpha.97 to 5.0.0-alpha.98 ([1f5f7e3](https://github.com/sws2apps/sws2apps-web/commit/1f5f7e3d0b38334ede4f863fa748d42f72d6f7a4))
+* **deps:** bump @mui/material from 5.10.1 to 5.10.2 ([5e14844](https://github.com/sws2apps/sws2apps-web/commit/5e14844d9a1a2e32cd636d253c213785f9aededf))
+* **deps:** bump @mui/material from 5.10.2 to 5.10.3 ([f457bc5](https://github.com/sws2apps/sws2apps-web/commit/f457bc52177d137b7c5b2a96dede44f3231831b7))
+* **deps:** bump @mui/material from 5.10.3 to 5.10.4 ([08aeb8d](https://github.com/sws2apps/sws2apps-web/commit/08aeb8d0e4b6a0564e1faaf7ab39f2e1a418bc99))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.6 to 5.0.0-beta.7 ([297b313](https://github.com/sws2apps/sws2apps-web/commit/297b3133a61096ddbe7ff0da48349474257a1177))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.7 to 5.0.0 ([8be6ace](https://github.com/sws2apps/sws2apps-web/commit/8be6ace31f9df09135ee7d44d0218455dfaa2423))
+
 # [1.0.0-alpha.59](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.58...v1.0.0-alpha.59) (2022-08-20)
 
 
