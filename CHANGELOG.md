@@ -1,3 +1,19 @@
+# [1.0.0-alpha.61](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.60...v1.0.0-alpha.61) (2022-09-16)
+
+
+### Bug Fixes
+
+* **web:** update backend url from heroku to render ([257d3a1](https://github.com/sws2apps/sws2apps-web/commit/257d3a109a0f8af98ca99b6e15565d9e68242ba0))
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.98 to 5.0.0-alpha.99 ([225daeb](https://github.com/sws2apps/sws2apps-web/commit/225daeb799f3f34be35de0d396156cd94ad788f1))
+* **deps:** bump @mui/material from 5.10.4 to 5.10.5 ([8f4a651](https://github.com/sws2apps/sws2apps-web/commit/8f4a651d9e50b92ee3a94396d90b8d10ec782c47))
+* **deps:** bump @mui/x-date-pickers from 5.0.0 to 5.0.1 ([f8a4dc0](https://github.com/sws2apps/sws2apps-web/commit/f8a4dc068392d7fabdd7b482407043683a245a92))
+* **deps:** bump date-fns from 2.29.2 to 2.29.3 ([54ed295](https://github.com/sws2apps/sws2apps-web/commit/54ed2955360b12aa8eaf19e02f1e268f95eda03d))
+* **deps:** bump react-router-dom from 6.3.0 to 6.4.0 ([c5a7118](https://github.com/sws2apps/sws2apps-web/commit/c5a71189a5490d9e58031197f80e2ac814a96675))
+
 # [1.0.0-alpha.60](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.59...v1.0.0-alpha.60) (2022-09-10)
 
 
