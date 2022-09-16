@@ -28,17 +28,17 @@ const App = () => {
 				appUrl === 'sws-apps-dev.web.app' ||
 				appUrl === 'sws-apps-dev.firebaseapp.com'
 			) {
-				setApiHost('https://dev-sws2apps.herokuapp.com/');
+				setApiHost('https://alpha-sws2apps-api.onrender.com/');
 			} else if (
 				appUrl === 'sws-apps-staging.web.app' ||
 				appUrl === 'sws-apps-staging.firebaseapp.com'
 			) {
-				setApiHost('https://staging-sws2apps.herokuapp.com/');
+				setApiHost('https://beta-sws2apps-api.onrender.com/');
 			} else if (
 				appUrl === 'sws-apps.web.app' ||
 				appUrl === 'sws-apps.firebaseapp.com'
 			) {
-				setApiHost('https://dev-sws2apps.herokuapp.com/');
+				setApiHost('https://sws2apps-api.onrender.com/');
 			}
 		}
 	}, [setApiHost]);
