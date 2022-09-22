@@ -1,3 +1,173 @@
+# [1.0.0-alpha.61](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.60...v1.0.0-alpha.61) (2022-09-16)
+
+
+### Bug Fixes
+
+* **web:** update backend url from heroku to render ([257d3a1](https://github.com/sws2apps/sws2apps-web/commit/257d3a109a0f8af98ca99b6e15565d9e68242ba0))
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.98 to 5.0.0-alpha.99 ([225daeb](https://github.com/sws2apps/sws2apps-web/commit/225daeb799f3f34be35de0d396156cd94ad788f1))
+* **deps:** bump @mui/material from 5.10.4 to 5.10.5 ([8f4a651](https://github.com/sws2apps/sws2apps-web/commit/8f4a651d9e50b92ee3a94396d90b8d10ec782c47))
+* **deps:** bump @mui/x-date-pickers from 5.0.0 to 5.0.1 ([f8a4dc0](https://github.com/sws2apps/sws2apps-web/commit/f8a4dc068392d7fabdd7b482407043683a245a92))
+* **deps:** bump date-fns from 2.29.2 to 2.29.3 ([54ed295](https://github.com/sws2apps/sws2apps-web/commit/54ed2955360b12aa8eaf19e02f1e268f95eda03d))
+* **deps:** bump react-router-dom from 6.3.0 to 6.4.0 ([c5a7118](https://github.com/sws2apps/sws2apps-web/commit/c5a71189a5490d9e58031197f80e2ac814a96675))
+
+# [1.0.0-alpha.60](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.59...v1.0.0-alpha.60) (2022-09-10)
+
+
+### Features
+
+* **deps:** bump @emotion/react from 11.10.0 to 11.10.4 ([45975fe](https://github.com/sws2apps/sws2apps-web/commit/45975fe3c76a0829e8448af9b3c2fa870333021a))
+* **deps:** bump @emotion/styled from 11.10.0 to 11.10.4 ([5c01cba](https://github.com/sws2apps/sws2apps-web/commit/5c01cbab6e6549316be7524ace5ca84ae700e844))
+* **deps:** bump @mui/icons-material from 5.10.2 to 5.10.3 ([0f08168](https://github.com/sws2apps/sws2apps-web/commit/0f08168397ad5204d1938bf925e37db4f514c22c))
+* **deps:** bump @mui/icons-material from 5.8.4 to 5.10.2 ([add9a1b](https://github.com/sws2apps/sws2apps-web/commit/add9a1b085c33e767e2020b95ea25ca339a8861b))
+* **deps:** bump @mui/lab from 5.0.0-alpha.95 to 5.0.0-alpha.96 ([f1c71f6](https://github.com/sws2apps/sws2apps-web/commit/f1c71f6d998c61a111f36f1ded8617d7be8380c1))
+* **deps:** bump @mui/lab from 5.0.0-alpha.96 to 5.0.0-alpha.97 ([87a8e99](https://github.com/sws2apps/sws2apps-web/commit/87a8e996f89a237fc43ceeb012c69a4452cfe5d3))
+* **deps:** bump @mui/lab from 5.0.0-alpha.97 to 5.0.0-alpha.98 ([1f5f7e3](https://github.com/sws2apps/sws2apps-web/commit/1f5f7e3d0b38334ede4f863fa748d42f72d6f7a4))
+* **deps:** bump @mui/material from 5.10.1 to 5.10.2 ([5e14844](https://github.com/sws2apps/sws2apps-web/commit/5e14844d9a1a2e32cd636d253c213785f9aededf))
+* **deps:** bump @mui/material from 5.10.2 to 5.10.3 ([f457bc5](https://github.com/sws2apps/sws2apps-web/commit/f457bc52177d137b7c5b2a96dede44f3231831b7))
+* **deps:** bump @mui/material from 5.10.3 to 5.10.4 ([08aeb8d](https://github.com/sws2apps/sws2apps-web/commit/08aeb8d0e4b6a0564e1faaf7ab39f2e1a418bc99))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.6 to 5.0.0-beta.7 ([297b313](https://github.com/sws2apps/sws2apps-web/commit/297b3133a61096ddbe7ff0da48349474257a1177))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.7 to 5.0.0 ([8be6ace](https://github.com/sws2apps/sws2apps-web/commit/8be6ace31f9df09135ee7d44d0218455dfaa2423))
+
+# [1.0.0-alpha.59](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.58...v1.0.0-alpha.59) (2022-08-20)
+
+
+### Features
+
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.5 to 5.0.0-beta.6 ([fc6eeb8](https://github.com/sws2apps/sws2apps-web/commit/fc6eeb875decafd83e2b41efb0be5ecdb0b319d9))
+* **deps:** bump date-fns from 2.29.1 to 2.29.2 ([c597456](https://github.com/sws2apps/sws2apps-web/commit/c597456d28faae0c6b59aa8c386df8f37688988c))
+
+# [1.0.0-alpha.58](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.57...v1.0.0-alpha.58) (2022-08-18)
+
+
+### Features
+
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.7.0 to 3.7.1 ([847f5b2](https://github.com/sws2apps/sws2apps-web/commit/847f5b272cf6b94b1c2474c4b7ed722577d2caed))
+* **deps:** bump @mui/lab from 5.0.0-alpha.94 to 5.0.0-alpha.95 ([cc42ede](https://github.com/sws2apps/sws2apps-web/commit/cc42edeedc109fa2044f4b9321bf577cd3909900))
+* **deps:** bump @mui/material from 5.10.0 to 5.10.1 ([b27765a](https://github.com/sws2apps/sws2apps-web/commit/b27765a87851ba8fd817e86dcc7ff3f11efe9b6c))
+
+# [1.0.0-alpha.57](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.56...v1.0.0-alpha.57) (2022-08-12)
+
+
+### Features
+
+* **deps:** bump @date-io/date-fns from 2.14.0 to 2.15.0 ([6d2355b](https://github.com/sws2apps/sws2apps-web/commit/6d2355bd352d549aaf35db8f7ec93bcf60f1a707))
+* **deps:** bump @mui/lab from 5.0.0-alpha.93 to 5.0.0-alpha.94 ([97d3d6c](https://github.com/sws2apps/sws2apps-web/commit/97d3d6c595057eab2ed65d99537a0978f1181f85))
+* **deps:** bump @mui/material from 5.9.3 to 5.10.0 ([4ae6720](https://github.com/sws2apps/sws2apps-web/commit/4ae6720a8474339d078ba964fdaffe165abf9970))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.4 to 5.0.0-beta.5 ([2caaa03](https://github.com/sws2apps/sws2apps-web/commit/2caaa034ebeac7c8c0dec694e2198eb7fb35c1ca))
+* **deps:** bump recoil from 0.7.4 to 0.7.5 ([23020dd](https://github.com/sws2apps/sws2apps-web/commit/23020dd3d3cb4f36c69c2351aea2df29e90b8647))
+
+# [1.0.0-alpha.56](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.55...v1.0.0-alpha.56) (2022-08-05)
+
+
+### Features
+
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.3 to 5.0.0-beta.4 ([a33f285](https://github.com/sws2apps/sws2apps-web/commit/a33f2859b7b29340a239be68a0961787db70bb2f))
+
+# [1.0.0-alpha.55](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.54...v1.0.0-alpha.55) (2022-08-02)
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.92 to 5.0.0-alpha.93 ([ff3d3cc](https://github.com/sws2apps/sws2apps-web/commit/ff3d3cc77b79c4a8540082098d3af0434841638a))
+* **deps:** bump @mui/material from 5.9.2 to 5.9.3 ([8ef7c4a](https://github.com/sws2apps/sws2apps-web/commit/8ef7c4a5fd6762a4b72e3e5ba2187c41e4513541))
+
+# [1.0.0-alpha.54](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.53...v1.0.0-alpha.54) (2022-08-01)
+
+
+### Features
+
+* **deps:** bump @emotion/react from 11.9.3 to 11.10.0 ([b6e4f3d](https://github.com/sws2apps/sws2apps-web/commit/b6e4f3d8a53dc65c42379d216c7961a03af117ba))
+* **deps:** bump @emotion/styled from 11.9.3 to 11.10.0 ([c0d3030](https://github.com/sws2apps/sws2apps-web/commit/c0d3030a0de049cc29a382b3e53058e63f05ea36))
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.6.4 to 3.7.0 ([d13865e](https://github.com/sws2apps/sws2apps-web/commit/d13865e26c323a08084a05e16984ca3c29b0af32))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.2 to 5.0.0-beta.3 ([60b3c30](https://github.com/sws2apps/sws2apps-web/commit/60b3c3054ad9fb4665e24c19b23377b2d681e698))
+
+# [1.0.0-alpha.53](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.52...v1.0.0-alpha.53) (2022-07-27)
+
+
+### Features
+
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.6.3 to 3.6.4 ([642c91b](https://github.com/sws2apps/sws2apps-web/commit/642c91b7f57faf1f7ac580b232a07f1b8c82d53f))
+* **deps:** bump @mui/lab from 5.0.0-alpha.90 to 5.0.0-alpha.91 ([d597790](https://github.com/sws2apps/sws2apps-web/commit/d597790b38b1a60771cce6ab1d1348875d4c8c13))
+* **deps:** bump @mui/lab from 5.0.0-alpha.91 to 5.0.0-alpha.92 ([e06546d](https://github.com/sws2apps/sws2apps-web/commit/e06546d2ee7880a80f0f39e06c058ad33c11bb67))
+* **deps:** bump @mui/material from 5.9.0 to 5.9.1 ([f82e747](https://github.com/sws2apps/sws2apps-web/commit/f82e747050f25482fb9ab7e2c3c471302f0e0fd9))
+* **deps:** bump @mui/material from 5.9.1 to 5.9.2 ([12831ce](https://github.com/sws2apps/sws2apps-web/commit/12831cea4d4be24c69f2c3e48ed985267a55f8d8))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.0 to 5.0.0-beta.1 ([194d75b](https://github.com/sws2apps/sws2apps-web/commit/194d75b028776c68b28e211aae527a312ffd6c02))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-beta.1 to 5.0.0-beta.2 ([56ce226](https://github.com/sws2apps/sws2apps-web/commit/56ce2262cab14086f59e6ca7762867729ade53ee))
+* **deps:** bump date-fns from 2.28.0 to 2.29.1 ([6816518](https://github.com/sws2apps/sws2apps-web/commit/6816518112221be1c1b11ab363f7e5dd80048be5))
+
+# [1.0.0-alpha.52](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.51...v1.0.0-alpha.52) (2022-07-14)
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.89 to 5.0.0-alpha.90 ([debd4bd](https://github.com/sws2apps/sws2apps-web/commit/debd4bd9681ebddd76bfbdeb3eb38f2ec32a34c5))
+* **deps:** bump @mui/material from 5.8.7 to 5.9.0 ([6b5850b](https://github.com/sws2apps/sws2apps-web/commit/6b5850b8e710a36dec35c65e7b3568d273a94b48))
+* **deps:** bump @mui/x-date-pickers from 5.0.0-alpha.7 to 5.0.0-beta.0 ([c866c3d](https://github.com/sws2apps/sws2apps-web/commit/c866c3d0ccc1f0fb30b817544407c16f344b358c))
+* **deps:** bump moment from 2.29.3 to 2.29.4 ([0501c3d](https://github.com/sws2apps/sws2apps-web/commit/0501c3db72f6b3b2bb7596fe760a0accd998ead0))
+* **deps:** bump qrcode from 1.5.0 to 1.5.1 ([8206c4c](https://github.com/sws2apps/sws2apps-web/commit/8206c4c82075f844954312661ed87afecdbe1ded))
+
+# [1.0.0-alpha.51](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.50...v1.0.0-alpha.51) (2022-07-05)
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.88 to 5.0.0-alpha.89 ([e4036d0](https://github.com/sws2apps/sws2apps-web/commit/e4036d0465b7dc87c2f07f2209443525177adbd6))
+* **deps:** bump @mui/material from 5.8.6 to 5.8.7 ([6f7f838](https://github.com/sws2apps/sws2apps-web/commit/6f7f838713930554fd9ad30f96bd6e42f882a5ac))
+
+# [1.0.0-alpha.50](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.49...v1.0.0-alpha.50) (2022-06-28)
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.87 to 5.0.0-alpha.88 ([06a2579](https://github.com/sws2apps/sws2apps-web/commit/06a25797b32fffd74319f68bb215d5c8dd89d40f))
+* **deps:** bump @mui/material from 5.8.5 to 5.8.6 ([fbe6353](https://github.com/sws2apps/sws2apps-web/commit/fbe6353cf144ba7ce7522427bb15ee65a6f52c88))
+
+# [1.0.0-alpha.49](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.48...v1.0.0-alpha.49) (2022-06-27)
+
+
+### Features
+
+* **deps:** bump @mui/x-date-pickers from 5.0.0-alpha.6 to 5.0.0-alpha.7 ([fa12ecb](https://github.com/sws2apps/sws2apps-web/commit/fa12ecb77962ee2eab8bffa7f666137fe06ccbce))
+
+# [1.0.0-alpha.48](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.47...v1.0.0-alpha.48) (2022-06-22)
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.86 to 5.0.0-alpha.87 ([fd0a89f](https://github.com/sws2apps/sws2apps-web/commit/fd0a89fbf95a13717cf39a630c1f74a8f776fcdd))
+* **deps:** bump @mui/material from 5.8.4 to 5.8.5 ([f381233](https://github.com/sws2apps/sws2apps-web/commit/f3812333b4cca9636a96dcd3c3f18dc0ced26411))
+* **deps:** bump recoil from 0.7.3 to 0.7.4 ([b43f192](https://github.com/sws2apps/sws2apps-web/commit/b43f1922c5e46963adc2da08f5c9e622a66eb335))
+
+# [1.0.0-alpha.47](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.46...v1.0.0-alpha.47) (2022-06-15)
+
+
+### Features
+
+* **deps:** bump @mui/icons-material from 5.8.3 to 5.8.4 ([9582cf8](https://github.com/sws2apps/sws2apps-web/commit/9582cf86638cb6296f4fc00e8ac0dacedbfb9677))
+* **deps:** bump @mui/lab from 5.0.0-alpha.85 to 5.0.0-alpha.86 ([c612b38](https://github.com/sws2apps/sws2apps-web/commit/c612b38b46269ed9ce3fd8176d4e1d662ee99c20))
+* **deps:** bump @mui/material from 5.8.3 to 5.8.4 ([eca55a3](https://github.com/sws2apps/sws2apps-web/commit/eca55a32ebbecf774fd808fb9b30a2ac117a5ead))
+* **deps:** bump react from 18.1.0 to 18.2.0 ([e3d437f](https://github.com/sws2apps/sws2apps-web/commit/e3d437f27974eaa599f7113460fa658ce54e5fb8))
+* **deps:** bump react-dom from 18.1.0 to 18.2.0 ([da8f120](https://github.com/sws2apps/sws2apps-web/commit/da8f120ba10f24b28b6481c839e6ce0967ab3740))
+
+# [1.0.0-alpha.46](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.45...v1.0.0-alpha.46) (2022-06-13)
+
+
+### Features
+
+* **deps:** bump @emotion/react from 11.9.0 to 11.9.3 ([1c3409c](https://github.com/sws2apps/sws2apps-web/commit/1c3409c4af0b9cde3b629f77a9c7908ea4dde2d7))
+* **deps:** bump @emotion/styled from 11.8.1 to 11.9.3 ([3de0ef8](https://github.com/sws2apps/sws2apps-web/commit/3de0ef8165001f6c1a28af1bb0fbee5360897ae1))
+
+# [1.0.0-alpha.45](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.44...v1.0.0-alpha.45) (2022-06-11)
+
+
+### Bug Fixes
+
+* **admin:** update congregation management routes to use new api ([a09c943](https://github.com/sws2apps/sws2apps-web/commit/a09c943d0a1e9cfcbf5b694fbc29abf58ee972be))
+
 # [1.0.0-alpha.44](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.43...v1.0.0-alpha.44) (2022-06-10)
 
 
