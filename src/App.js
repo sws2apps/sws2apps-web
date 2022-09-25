@@ -23,23 +23,7 @@ const App = () => {
 		if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 			setApiHost('http://localhost:8000/');
 		} else {
-			const appUrl = window.location.hostname;
-			if (
-				appUrl === 'sws-apps-dev.web.app' ||
-				appUrl === 'sws-apps-dev.firebaseapp.com'
-			) {
-				setApiHost('https://alpha-sws2apps-api.onrender.com/');
-			} else if (
-				appUrl === 'sws-apps-staging.web.app' ||
-				appUrl === 'sws-apps-staging.firebaseapp.com'
-			) {
-				setApiHost('https://beta-sws2apps-api.onrender.com/');
-			} else if (
-				appUrl === 'sws-apps.web.app' ||
-				appUrl === 'sws-apps.firebaseapp.com'
-			) {
-				setApiHost('https://sws2apps-api.onrender.com/');
-			}
+			setApiHost('https://sws2apps-api.onrender.com/');
 		}
 	}, [setApiHost]);
 
