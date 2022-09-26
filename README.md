@@ -2,7 +2,7 @@
 
 Our main website to host our applications documentations.
 
-*Note: We are putting most of our time to build most of the frontend applications. Therefore, the website is not yet good as it should be.*
+_Note: We are putting most of our time to build most of the frontend applications. Therefore, the website is not yet good as it should be._
 
 ## May I contribute?
 
