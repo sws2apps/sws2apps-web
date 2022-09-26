@@ -1,3 +1,10 @@
+# 1.0.0 (2022-09-26)
+
+
+### Features
+
+* **web:** initial commit for live release ([f1fbe0d](https://github.com/sws2apps/sws2apps-web/commit/f1fbe0d88a67160bb35a63a8538030a247837afb))
+
 # [1.0.0-alpha.62](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.61...v1.0.0-alpha.62) (2022-09-23)
 
 
