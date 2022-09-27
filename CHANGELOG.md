@@ -1,3 +1,17 @@
+## [1.0.1](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0...v1.0.1) (2022-09-26)
+
+
+### Bug Fixes
+
+* **csp:** allow to make requests to new api ([972cf23](https://github.com/sws2apps/sws2apps-web/commit/972cf2322ebf47ffc50be9ec8cbbc1b34fc4f064))
+
+# 1.0.0 (2022-09-26)
+
+
+### Features
+
+* **web:** initial commit for live release ([f1fbe0d](https://github.com/sws2apps/sws2apps-web/commit/f1fbe0d88a67160bb35a63a8538030a247837afb))
+
 # [1.0.0-alpha.62](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0-alpha.61...v1.0.0-alpha.62) (2022-09-23)
 
 
