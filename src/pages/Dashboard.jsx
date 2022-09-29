@@ -1,8 +1,16 @@
-import { Users } from '../features/dashboard';
+import Grid from '@mui/material/Grid';
+import { Congregations, Users } from '../features/dashboard';
 
 const Dashboard = () => {
 	return (
-		<Users />
+		<Grid
+			container
+			spacing={2}
+			sx={{ marginLeft: { xs: '-11px', sm: '-16px' } }}
+		>
+			<Users isProcessing={true} />
+			<Congregations isProcessing={true} />
+		</Grid>
 	);
 };
 

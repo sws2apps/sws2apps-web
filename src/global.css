@@ -1,9 +1,17 @@
+body {
+    background-color: #f8f8f7;
+}
+
 .appLogoStartup {
 	height: 60px;
 	width: auto;
 	border-radius: 8px;
 }
 
-body {
-    background-color: #f8f8f7;
+.card-icon {
+	font-size: 28px !important;
+}
+
+.MuiOtpInput-TextField .MuiInputBase-input {
+	padding: 10px 0px !important
 }

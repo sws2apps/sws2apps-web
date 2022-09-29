@@ -66,7 +66,12 @@ const AppDrawer = ({ children }) => {
 					<AppMenus />
 				</Box>
 			</Drawer>
-			<Box sx={{ flexGrow: 1, marginRight: '20px', marginLeft: '-20px' }}>
+			<Box
+				sx={{
+					flexGrow: 1,
+					margin: '20px 20px 20px -20px',
+				}}
+			>
 				<Toolbar />
 				{children}
 			</Box>

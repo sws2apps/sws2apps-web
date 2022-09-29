@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import Badge from '@mui/material/Badge';
 import BlockIcon from '@mui/icons-material/Block';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -14,13 +17,33 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import SendIcon from '@mui/icons-material/Send';
 
+const activeMenu = {
+	backgroundColor: 'rgba(133, 193, 233, .3)',
+};
+
 const AppMenus = () => {
+	const location = useLocation();
+
+	const [activeLink, setActiveLink] = useState('');
+
+	useEffect(() => {
+		const currentPath = location.pathname.toLowerCase();
+
+		if (currentPath === '/dashboard') {
+			setActiveLink('Dashboard');
+			return;
+		}
+
+		setActiveLink('');
+	}, [location.pathname]);
+
 	return (
 		<>
-			<List
-				aria-labelledby='nested-list-subheader'
-			>
-				<ListItem disablePadding>
+			<List aria-labelledby='nested-list-subheader'>
+				<ListItem
+					disablePadding
+					sx={activeLink === 'Dashboard' ? activeMenu : {}}
+				>
 					<ListItemButton>
 						<ListItemIcon sx={{ minWidth: '40px', width: '40px' }}>
 							<DashboardIcon />
@@ -38,7 +61,10 @@ const AppMenus = () => {
 					</ListSubheader>
 				}
 			>
-				<ListItem disablePadding>
+				<ListItem
+					disablePadding
+					sx={activeLink === 'Announcements' ? activeMenu : {}}
+				>
 					<ListItemButton>
 						<ListItemIcon sx={{ minWidth: '40px', width: '40px' }}>
 							<CampaignIcon />
@@ -46,7 +72,10 @@ const AppMenus = () => {
 						<ListItemText primary='Announcements' />
 					</ListItemButton>
 				</ListItem>
-				<ListItem disablePadding>
+				<ListItem
+					disablePadding
+					sx={activeLink === 'Feature Flags' ? activeMenu : {}}
+				>
 					<ListItemButton>
 						<ListItemIcon sx={{ minWidth: '40px', width: '40px' }}>
 							<FlagIcon />
@@ -54,7 +83,10 @@ const AppMenus = () => {
 						<ListItemText primary='Feature Flags' />
 					</ListItemButton>
 				</ListItem>
-				<ListItem disablePadding>
+				<ListItem
+					disablePadding
+					sx={activeLink === 'Blocked IP' ? activeMenu : {}}
+				>
 					<ListItemButton>
 						<ListItemIcon sx={{ minWidth: '40px', width: '40px' }}>
 							<BlockIcon />
@@ -72,7 +104,10 @@ const AppMenus = () => {
 					</ListSubheader>
 				}
 			>
-				<ListItem disablePadding>
+				<ListItem
+					disablePadding
+					sx={activeLink === 'ListUsers' ? activeMenu : {}}
+				>
 					<ListItemButton>
 						<ListItemIcon sx={{ minWidth: '40px', width: '40px' }}>
 							<PeopleAltIcon />
@@ -80,7 +115,10 @@ const AppMenus = () => {
 						<ListItemText primary='List' />
 					</ListItemButton>
 				</ListItem>
-				<ListItem disablePadding>
+				<ListItem
+					disablePadding
+					sx={activeLink === 'SendEmailUsers' ? activeMenu : {}}
+				>
 					<ListItemButton>
 						<ListItemIcon sx={{ minWidth: '40px', width: '40px' }}>
 							<SendIcon />
@@ -98,7 +136,10 @@ const AppMenus = () => {
 					</ListSubheader>
 				}
 			>
-				<ListItem disablePadding>
+				<ListItem
+					disablePadding
+					sx={activeLink === 'ListCongregations' ? activeMenu : {}}
+				>
 					<ListItemButton>
 						<ListItemIcon sx={{ minWidth: '40px', width: '40px' }}>
 							<HomeWorkIcon />
@@ -106,7 +147,24 @@ const AppMenus = () => {
 						<ListItemText primary='List' />
 					</ListItemButton>
 				</ListItem>
-				<ListItem disablePadding>
+				<ListItem
+					disablePadding
+					secondaryAction={<Badge badgeContent={7} color='primary' />}
+					sx={
+						activeLink === 'ListCongregations'
+							? {
+									...activeMenu,
+									'.MuiListItemSecondaryAction-root': {
+										right: '20px',
+									},
+							  }
+							: {
+									'.MuiListItemSecondaryAction-root': {
+										right: '20px',
+									},
+							  }
+					}
+				>
 					<ListItemButton>
 						<ListItemIcon sx={{ minWidth: '40px', width: '40px' }}>
 							<PlaylistAddIcon />
@@ -114,7 +172,10 @@ const AppMenus = () => {
 						<ListItemText primary='Requests' />
 					</ListItemButton>
 				</ListItem>
-				<ListItem disablePadding>
+				<ListItem
+					disablePadding
+					sx={activeLink === 'SendEmailCongregations' ? activeMenu : {}}
+				>
 					<ListItemButton>
 						<ListItemIcon sx={{ minWidth: '40px', width: '40px' }}>
 							<SendIcon />
