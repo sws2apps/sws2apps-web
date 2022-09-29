@@ -1,33 +1,16 @@
 {
   "name": "sws2apps-web",
-  "version": "1.0.1",
   "private": true,
-  "dependencies": {
-    "@date-io/date-fns": "^2.16.0",
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@fingerprintjs/fingerprintjs-pro": "^3.7.1",
-    "@mui/icons-material": "^5.10.6",
-    "@mui/lab": "^5.0.0-alpha.101",
-    "@mui/material": "^5.10.7",
-    "@mui/x-date-pickers": "^5.0.2",
-    "date-fns": "^2.29.3",
-    "dateformat": "^5.0.3",
-    "interweave": "^13.0.0",
-    "moment": "^2.29.4",
-    "qrcode": "^1.5.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.1",
-    "react-scripts": "5.0.1",
-    "recoil": "^0.7.5",
-    "recoil-outside": "^0.1.1"
+  "version": "0.0.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sws2apps/sws2apps-web.git"
   },
   "scripts": {
-    "start": "set PORT=3001 && react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -35,21 +18,26 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@fingerprintjs/fingerprintjs-pro": "^3.7.1",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/icons-material": "^5.10.6",
+    "@mui/material": "^5.10.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.1",
+    "recoil": "^0.7.5",
+    "recoil-outside": "^0.1.1",
+    "vite": "^3.1.0"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/git": "^10.0.1"
+    "@nabla/vite-plugin-eslint": "^1.4.1",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.1.0",
+    "eslint": "^8.24.0",
+    "eslint-config-react-app": "^7.0.1"
   }
 }

@@ -1,4 +1,9 @@
-.appLogoTop {
+.appLogoStartup {
+	height: 60px;
 	width: auto;
-	height: 40px;
+	border-radius: 8px;
+}
+
+body {
+    background-color: #f8f8f7;
 }
