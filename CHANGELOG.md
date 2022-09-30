@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/sws2apps/sws2apps-web/compare/v1.0.1...v1.1.0) (2022-09-30)
+
+
+### Bug Fixes
+
+* **api:** update visitor_id field name in req.headers to visitorid ([184f192](https://github.com/sws2apps/sws2apps-web/commit/184f1924a3970a0723c922b5d91521029c57f513))
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.100 to 5.0.0-alpha.101 ([72095ba](https://github.com/sws2apps/sws2apps-web/commit/72095ba7919262c1adf3290633b0d004f3dc66ae))
+* **deps:** bump @mui/material from 5.10.6 to 5.10.7 ([dcb4104](https://github.com/sws2apps/sws2apps-web/commit/dcb4104d794a5cfd3b461e563ca009679d0f74a4))
+
 ## [1.0.1](https://github.com/sws2apps/sws2apps-web/compare/v1.0.0...v1.0.1) (2022-09-26)
 
 
