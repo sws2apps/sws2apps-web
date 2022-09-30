@@ -57,7 +57,7 @@ const PendingRequestItem = ({ request }) => {
 					headers: {
 						'Content-Type': 'application/json',
 						email: adminEmail,
-						visitor_id: visitorID,
+						visitorid: visitorID,
 					},
 					body: JSON.stringify(reqPayload),
 				})
@@ -104,7 +104,7 @@ const PendingRequestItem = ({ request }) => {
 				headers: {
 					'Content-Type': 'application/json',
 					email: adminEmail,
-					visitor_id: visitorID,
+					visitorid: visitorID,
 				},
 			})
 				.then(async (res) => {

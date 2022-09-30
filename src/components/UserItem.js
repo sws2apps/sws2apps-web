@@ -161,7 +161,7 @@ const UserItem = ({ user }) => {
 				headers: {
 					'Content-Type': 'application/json',
 					email: adminEmail,
-					visitor_id: visitorID,
+					visitorid: visitorID,
 				},
 			})
 				.then(async (res) => {
@@ -206,7 +206,7 @@ const UserItem = ({ user }) => {
 				headers: {
 					'Content-Type': 'application/json',
 					email: adminEmail,
-					visitor_id: visitorID,
+					visitorid: visitorID,
 				},
 			})
 				.then(async (res) => {
@@ -258,7 +258,7 @@ const UserItem = ({ user }) => {
 				headers: {
 					'Content-Type': 'application/json',
 					email: adminEmail,
-					visitor_id: visitorID,
+					visitorid: visitorID,
 				},
 			})
 				.then(async (res) => {
@@ -298,7 +298,7 @@ const UserItem = ({ user }) => {
 						headers: {
 							'Content-Type': 'application/json',
 							email: adminEmail,
-							visitor_id: visitorID,
+							visitorid: visitorID,
 						},
 					}
 				);
@@ -342,7 +342,7 @@ const UserItem = ({ user }) => {
 						headers: {
 							'Content-Type': 'application/json',
 							email: adminEmail,
-							visitor_id: visitorID,
+							visitorid: visitorID,
 						},
 					}
 				);
