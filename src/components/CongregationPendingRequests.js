@@ -55,7 +55,7 @@ const CongregationPendingRequests = () => {
 				headers: {
 					'Content-Type': 'application/json',
 					email: adminEmail,
-					visitor_id: visitorID,
+					visitorid: visitorID,
 				},
 			})
 				.then(async (res) => {

@@ -104,7 +104,7 @@ const CongregationUserRole = ({ member, cong_id }) => {
 						headers: {
 							'Content-Type': 'application/json',
 							email: adminEmail,
-							visitor_id: visitorID,
+							visitorid: visitorID,
 						},
 						body: JSON.stringify(reqPayload),
 					}

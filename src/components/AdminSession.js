@@ -45,7 +45,7 @@ const AdminSession = () => {
 					headers: {
 						'Content-Type': 'application/json',
 						email: email,
-						visitor_id: visitorID,
+						visitorid: visitorID,
 					},
 				});
 

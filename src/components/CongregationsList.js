@@ -83,7 +83,7 @@ const CongregationsList = () => {
 				headers: {
 					'Content-Type': 'application/json',
 					email: adminEmail,
-					visitor_id: visitorID,
+					visitorid: visitorID,
 				},
 			})
 				.then(async (res) => {
@@ -174,7 +174,7 @@ const CongregationsList = () => {
 						headers: {
 							'Content-Type': 'application/json',
 							email: adminEmail,
-							visitor_id: visitorID,
+							visitorid: visitorID,
 						},
 						body: JSON.stringify(reqPayload),
 					}
@@ -220,7 +220,7 @@ const CongregationsList = () => {
 						headers: {
 							'Content-Type': 'application/json',
 							email: adminEmail,
-							visitor_id: visitorID,
+							visitorid: visitorID,
 						},
 					}
 				);
@@ -281,7 +281,7 @@ const CongregationsList = () => {
 						headers: {
 							'Content-Type': 'application/json',
 							email: adminEmail,
-							visitor_id: visitorID,
+							visitorid: visitorID,
 						},
 					}
 				);

@@ -84,7 +84,7 @@ const Login = () => {
 			const reqPayload = {
 				email: userTmpEmail,
 				password: userTmpPwd,
-				visitor_id: visitorID,
+				visitorid: visitorID,
 			};
 
 			if (apiHost !== '') {
@@ -150,7 +150,7 @@ const Login = () => {
 						headers: {
 							'Content-Type': 'application/json',
 							email: userTmpEmail,
-							visitor_id: visitorID,
+							visitorid: visitorID,
 						},
 						body: JSON.stringify(reqPayload),
 					});
@@ -164,7 +164,7 @@ const Login = () => {
 							headers: {
 								'Content-Type': 'application/json',
 								email: userTmpEmail,
-								visitor_id: visitorID,
+								visitorid: visitorID,
 							},
 						});
 
