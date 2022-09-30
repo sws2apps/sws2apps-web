@@ -17,7 +17,7 @@ export const validateMe = async (
 			headers: {
 				'Content-Type': 'application/json',
 				email: adminEmail,
-				visitor_id: visitorId,
+				visitorid: visitorId,
 			},
 		});
 
@@ -49,7 +49,7 @@ export const loginAdmin = async (
 		const reqPayload = {
 			email: adminEmail,
 			password: adminPassword,
-			visitor_id: visitorId,
+			visitorid: visitorId,
 		};
 
 		const res = await fetch(`${apiHost}user-login`, {
@@ -97,7 +97,7 @@ export const verifyToken = async (
 			headers: {
 				'Content-Type': 'application/json',
 				email: adminEmail,
-				visitor_id: visitorId,
+				visitorid: visitorId,
 			},
 			body: JSON.stringify({ token: adminToken }),
 		});
