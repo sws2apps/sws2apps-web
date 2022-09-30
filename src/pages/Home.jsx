@@ -83,6 +83,7 @@ const Home = () => {
 
 			if (isValid) {
 				setIsAdmin(true);
+				setAdminEmail(tmpEmail);
 				navigate('/dashboard');
 			} else {
 				setIsValidating(false);
@@ -92,7 +93,7 @@ const Home = () => {
 				`An error occured while validating your credentials: ${error.message}`
 			);
 		}
-	}, [navigate, setIsAdmin, setVisitorId]);
+	}, [navigate, setIsAdmin, setAdminEmail, setVisitorId]);
 
 	const handleLogin = async () => {
 		try {

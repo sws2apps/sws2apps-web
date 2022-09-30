@@ -1,6 +1,4 @@
-import { getApiHost } from './host.js';
-
-const apiHost = getApiHost();
+import { apiHost } from './host.js';
 
 export const validateMe = async (
 	adminEmail = '',

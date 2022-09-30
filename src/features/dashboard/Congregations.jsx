@@ -8,18 +8,18 @@ import Card from './components/Card';
 
 const iconsProps = { fontSize: '40px', marginRight: '10px' };
 
-const Congregations = ({ isProcessing }) => {
+const Congregations = ({ congsData, failedFetch, isProcessing }) => {
 	const congregationsSummary = [
 		{
 			id: 'cong-requests',
 			label: 'Pending Requests',
-			count: 3,
+			count: congsData.requests,
 			icon: <PendingIcon sx={{ color: 'blue', ...iconsProps }} />,
 		},
 		{
 			id: 'cong-active',
 			label: 'Active Congregations',
-			count: 11,
+			count: congsData.active,
 			icon: <HomeWorkIcon sx={{ color: 'green', ...iconsProps }} />,
 		},
 	];

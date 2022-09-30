@@ -1,4 +1,5 @@
 import { blue } from '@mui/material/colors';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import GppBadIcon from '@mui/icons-material/GppBad';
@@ -9,30 +10,36 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 
 import Card from './components/Card';
 
-const Users = ({ isProcessing }) => {
+const Users = ({ isProcessing, failedFetch, usersData }) => {
 	const usersSummary = [
 		{
 			id: 'users-all',
 			label: 'All users',
-			count: 28,
+			count: usersData.total,
 			icon: <PeopleAltIcon />,
 		},
 		{
 			id: 'users-active',
 			label: 'Active users',
-			count: 28,
+			count: usersData.active,
 			icon: <VerifiedUserIcon sx={{ color: 'green' }} />,
+		},
+		{
+			id: 'users-pocket',
+			label: 'Pocket users',
+			count: usersData.pockets,
+			icon: <AccountCircleIcon sx={{ color: 'green' }} />,
 		},
 		{
 			id: 'users-pending-mfa',
 			label: 'MFA Pending',
-			count: 28,
+			count: usersData.mfaPending,
 			icon: <GppBadIcon sx={{ color: 'red' }} />,
 		},
 		{
 			id: 'users-unverified',
 			label: 'Unverified users',
-			count: 28,
+			count: usersData.unverified,
 			icon: <HourglassFullIcon sx={{ color: 'purple' }} />,
 		},
 	];
@@ -56,7 +63,7 @@ const Users = ({ isProcessing }) => {
 				</Box>
 			)}
 			{!isProcessing && (
-				<Box sx={{ marginTop: '20px' }}>
+				<Box sx={{ marginTop: '10px' }}>
 					{usersSummary.map((summary) => (
 						<Box
 							key={summary.id}
@@ -64,7 +71,7 @@ const Users = ({ isProcessing }) => {
 								display: 'flex',
 								justifyContent: 'space-between',
 								alignItems: 'center',
-								marginBottom: '5px',
+								marginBottom: '2px',
 							}}
 						>
 							<Box sx={{ display: 'flex', alignItems: 'center' }}>
