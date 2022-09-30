@@ -1,6 +1,7 @@
 import { green } from '@mui/material/colors';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import ErrorIcon from '@mui/icons-material/Error';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import PendingIcon from '@mui/icons-material/Pending';
 import Typography from '@mui/material/Typography';
@@ -42,7 +43,22 @@ const Congregations = ({ congsData, failedFetch, isProcessing }) => {
 					<CircularProgress color='secondary' size={40} disableShrink={true} />
 				</Box>
 			)}
-			{!isProcessing && (
+			{!isProcessing && failedFetch && (
+				<Box
+					sx={{
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						height: '65%',
+					}}
+				>
+					<ErrorIcon color='error' sx={{ fontSize: '40px' }} />
+					<Typography sx={{ fontSize: '14px' }}>
+						An error occured while getting congregations information
+					</Typography>
+				</Box>
+			)}
+			{!isProcessing && !failedFetch && (
 				<Box
 					sx={{
 						marginTop: '30px',

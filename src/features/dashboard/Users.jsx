@@ -2,6 +2,7 @@ import { blue } from '@mui/material/colors';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import ErrorIcon from '@mui/icons-material/Error';
 import GppBadIcon from '@mui/icons-material/GppBad';
 import HourglassFullIcon from '@mui/icons-material/HourglassFull';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
@@ -62,7 +63,23 @@ const Users = ({ isProcessing, failedFetch, usersData }) => {
 					<CircularProgress color='secondary' size={40} disableShrink={true} />
 				</Box>
 			)}
-			{!isProcessing && (
+			{!isProcessing && failedFetch && (
+				<Box
+					sx={{
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						flexDirection: 'column',
+						height: '65%',
+					}}
+				>
+					<ErrorIcon color='error' sx={{ fontSize: '40px' }} />
+					<Typography sx={{ fontSize: '14px' }}>
+						An error occured while getting users information
+					</Typography>
+				</Box>
+			)}
+			{!isProcessing && !failedFetch && (
 				<Box sx={{ marginTop: '10px' }}>
 					{usersSummary.map((summary) => (
 						<Box
