@@ -20,7 +20,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
-    "recoil": "^0.7.5",
+    "recoil": "^0.7.6",
     "recoil-outside": "^0.1.1"
   },
   "scripts": {
