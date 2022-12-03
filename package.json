@@ -4,13 +4,13 @@
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^2.16.0",
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@fingerprintjs/fingerprintjs-pro": "^3.7.1",
-    "@mui/icons-material": "^5.10.6",
-    "@mui/lab": "^5.0.0-alpha.101",
-    "@mui/material": "^5.10.7",
-    "@mui/x-date-pickers": "^5.0.2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@fingerprintjs/fingerprintjs-pro": "^3.8.1",
+    "@mui/icons-material": "^5.10.16",
+    "@mui/lab": "^5.0.0-alpha.110",
+    "@mui/material": "^5.10.16",
+    "@mui/x-date-pickers": "^5.0.9",
     "date-fns": "^2.29.3",
     "dateformat": "^5.0.3",
     "interweave": "^13.0.0",
@@ -18,9 +18,9 @@
     "qrcode": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.1",
+    "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
-    "recoil": "^0.7.5",
+    "recoil": "^0.7.6",
     "recoil-outside": "^0.1.1"
   },
   "scripts": {
@@ -48,7 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1"
   }

@@ -20,13 +20,13 @@ jobs:
 
     steps:
       - name: Checkout for release preparation
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
         with:
           ref: main
           persist-credentials: false
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@969bd2663942d722d85b6a8626225850c2f7be4b
+        uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516
         with:
           node-version: current
 
@@ -40,7 +40,7 @@ jobs:
 
       - name: Check if new version has been generated
         id: check_build
-        uses: andstor/file-existence-action@f02338908d150e00a4b8bebc2dad18bd9e5229b0
+        uses: andstor/file-existence-action@20b4d2e596410855db8f9ca21e96fbe18e12930b
         with:
           files: 'build'
 
