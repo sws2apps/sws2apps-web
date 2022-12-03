@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/sws2apps/sws2apps-web/compare/v1.2.1...v1.2.2) (2022-12-03)
+
+
+### Bug Fixes
+
+* **announcement:** change for new api req ([2e81ac1](https://github.com/sws2apps/sws2apps-web/commit/2e81ac1542d7de7f1e842d4b56010bf932b86018))
+
 ## [1.2.1](https://github.com/sws2apps/sws2apps-web/compare/v1.2.0...v1.2.1) (2022-12-03)
 
 
