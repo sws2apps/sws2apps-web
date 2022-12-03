@@ -1,3 +1,52 @@
+# [1.2.0](https://github.com/sws2apps/sws2apps-web/compare/v1.1.0...v1.2.0) (2022-12-03)
+
+
+### Bug Fixes
+
+* **announcements:** change to support new api response ([9108802](https://github.com/sws2apps/sws2apps-web/commit/9108802d364f9a357ddbc5669925a0445b46487c))
+
+
+### Features
+
+* **deps:** bump @emotion/react from 11.10.4 to 11.10.5 ([655bf67](https://github.com/sws2apps/sws2apps-web/commit/655bf67e3898150c27a00bdbc64e1ef61f99b9bc))
+* **deps:** bump @emotion/styled from 11.10.4 to 11.10.5 ([b3a310b](https://github.com/sws2apps/sws2apps-web/commit/b3a310b0db2563937b27cf6e38d0d179a2f3b191))
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.7.1 to 3.8.0 ([b0f3ea2](https://github.com/sws2apps/sws2apps-web/commit/b0f3ea2f831a5508fb2df1cbca6c29981cd10cec))
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.8.0 to 3.8.1 ([5368d5a](https://github.com/sws2apps/sws2apps-web/commit/5368d5a535e94e3f6882b84da32996628caeb244))
+* **deps:** bump @mui/icons-material from 5.10.14 to 5.10.15 ([c524aac](https://github.com/sws2apps/sws2apps-web/commit/c524aac52e565de5a2313fe0eee6e8b2f6b1d92a))
+* **deps:** bump @mui/icons-material from 5.10.15 to 5.10.16 ([75f18e3](https://github.com/sws2apps/sws2apps-web/commit/75f18e31a761985b77c0168c219a393e8ae895fb))
+* **deps:** bump @mui/icons-material from 5.10.6 to 5.10.9 ([d3f3d0e](https://github.com/sws2apps/sws2apps-web/commit/d3f3d0e85360509dff931a57e6b7c917f73d9dab))
+* **deps:** bump @mui/icons-material from 5.10.9 to 5.10.14 ([49839ef](https://github.com/sws2apps/sws2apps-web/commit/49839efb634c1c1e6d8f0d9474b01b8826e21cf7))
+* **deps:** bump @mui/lab from 5.0.0-alpha.101 to 5.0.0-alpha.102 ([4ece409](https://github.com/sws2apps/sws2apps-web/commit/4ece40930f844888260a1856117d8525a379b766))
+* **deps:** bump @mui/lab from 5.0.0-alpha.102 to 5.0.0-alpha.103 ([734786e](https://github.com/sws2apps/sws2apps-web/commit/734786ea14df41621ef9a810976d9254a02585b5))
+* **deps:** bump @mui/lab from 5.0.0-alpha.103 to 5.0.0-alpha.104 ([bafe04b](https://github.com/sws2apps/sws2apps-web/commit/bafe04bfec9a1582ade874241cf61ea4f49a69dc))
+* **deps:** bump @mui/lab from 5.0.0-alpha.104 to 5.0.0-alpha.105 ([ac8fd49](https://github.com/sws2apps/sws2apps-web/commit/ac8fd494c6bc5bb667e6c270cd0f4b7c8d78f39b))
+* **deps:** bump @mui/lab from 5.0.0-alpha.105 to 5.0.0-alpha.106 ([4db8f16](https://github.com/sws2apps/sws2apps-web/commit/4db8f1655782474393965a295ff4ad7adef39eba))
+* **deps:** bump @mui/lab from 5.0.0-alpha.106 to 5.0.0-alpha.107 ([9fce9af](https://github.com/sws2apps/sws2apps-web/commit/9fce9aff1fcfe07e89917a492019b794b1c70d85))
+* **deps:** bump @mui/lab from 5.0.0-alpha.107 to 5.0.0-alpha.108 ([f453ce4](https://github.com/sws2apps/sws2apps-web/commit/f453ce429b88aaca3e9f4d2d9c76e7b5f745c139))
+* **deps:** bump @mui/lab from 5.0.0-alpha.108 to 5.0.0-alpha.109 ([1f5917f](https://github.com/sws2apps/sws2apps-web/commit/1f5917fa36faf33288cc7ff3803508ba703edeea))
+* **deps:** bump @mui/lab from 5.0.0-alpha.109 to 5.0.0-alpha.110 ([0c63378](https://github.com/sws2apps/sws2apps-web/commit/0c633783a69a567f35ebad1f75a9e04e5d5b4b62))
+* **deps:** bump @mui/material from 5.10.10 to 5.10.11 ([02d8ad3](https://github.com/sws2apps/sws2apps-web/commit/02d8ad357cdc2461b1f9e646514a9262f97e39d6))
+* **deps:** bump @mui/material from 5.10.11 to 5.10.12 ([665e80c](https://github.com/sws2apps/sws2apps-web/commit/665e80ca0313c2a89c67d68331e784d366bd8b25))
+* **deps:** bump @mui/material from 5.10.12 to 5.10.13 ([8a5e694](https://github.com/sws2apps/sws2apps-web/commit/8a5e6940f067a88032fee6c5d78476bbd61a8dab))
+* **deps:** bump @mui/material from 5.10.13 to 5.10.14 ([3fd3fba](https://github.com/sws2apps/sws2apps-web/commit/3fd3fbab5d2edf9e926434a813508b13886c3160))
+* **deps:** bump @mui/material from 5.10.14 to 5.10.15 ([be5cdb9](https://github.com/sws2apps/sws2apps-web/commit/be5cdb9e9fd599811b144866d70b9b8047ceecf9))
+* **deps:** bump @mui/material from 5.10.15 to 5.10.16 ([0eed5d8](https://github.com/sws2apps/sws2apps-web/commit/0eed5d8f94afc96ae70a2f63a5e893acf200793b))
+* **deps:** bump @mui/material from 5.10.7 to 5.10.8 ([547d013](https://github.com/sws2apps/sws2apps-web/commit/547d0139376a9c508f2c1f0762682233e0423536))
+* **deps:** bump @mui/material from 5.10.8 to 5.10.9 ([e8f7180](https://github.com/sws2apps/sws2apps-web/commit/e8f71804a11e0d79b09d55bb22abaf22b7691605))
+* **deps:** bump @mui/material from 5.10.9 to 5.10.10 ([210d36b](https://github.com/sws2apps/sws2apps-web/commit/210d36ba18b407011639b950406e6ff32c67ca5d))
+* **deps:** bump @mui/x-date-pickers from 5.0.3 to 5.0.4 ([8e17af8](https://github.com/sws2apps/sws2apps-web/commit/8e17af8aa2e043930ad515eeece782ec2fb3f162))
+* **deps:** bump @mui/x-date-pickers from 5.0.4 to 5.0.5 ([d952abd](https://github.com/sws2apps/sws2apps-web/commit/d952abdaa5a829d880870aa699a7f4e95b2e928d))
+* **deps:** bump @mui/x-date-pickers from 5.0.5 to 5.0.6 ([dbce076](https://github.com/sws2apps/sws2apps-web/commit/dbce076fc62056af6d2e30923815db093d7cb055))
+* **deps:** bump @mui/x-date-pickers from 5.0.6 to 5.0.7 ([7aae68b](https://github.com/sws2apps/sws2apps-web/commit/7aae68b521a83395f8027794357e19a67a0bdb4d))
+* **deps:** bump @mui/x-date-pickers from 5.0.7 to 5.0.8 ([0c529e7](https://github.com/sws2apps/sws2apps-web/commit/0c529e766f20cf72da5df61ff6f359a6a1379433))
+* **deps:** bump @mui/x-date-pickers from 5.0.8 to 5.0.9 ([7364265](https://github.com/sws2apps/sws2apps-web/commit/7364265b8958cf2c0b681ff6a0a898c2b6682ad8))
+* **deps:** bump loader-utils from 2.0.2 to 2.0.3 ([7941276](https://github.com/sws2apps/sws2apps-web/commit/7941276fdf286d58ce5350b4740e22cbc5fd2f68))
+* **deps:** bump loader-utils from 2.0.3 to 2.0.4 ([462f6c1](https://github.com/sws2apps/sws2apps-web/commit/462f6c17d07535145b78ec477f9ef16482557059))
+* **deps:** bump react-router-dom from 6.4.1 to 6.4.2 ([ebd5be3](https://github.com/sws2apps/sws2apps-web/commit/ebd5be3c69ddf06f52ef00af30dda66fec52ee48))
+* **deps:** bump react-router-dom from 6.4.2 to 6.4.3 ([cf0f0a5](https://github.com/sws2apps/sws2apps-web/commit/cf0f0a51b1212feff6d1aaf56d2cd76b3b02b72f))
+* **deps:** bump react-router-dom from 6.4.3 to 6.4.4 ([1d7b49c](https://github.com/sws2apps/sws2apps-web/commit/1d7b49c6547fed549651f8df8773974350c58a71))
+* **deps:** bump recoil from 0.7.5 to 0.7.6 ([a78a278](https://github.com/sws2apps/sws2apps-web/commit/a78a2781bb9bae898477f7907dfbbf28518acbae))
+
 # [1.1.0](https://github.com/sws2apps/sws2apps-web/compare/v1.0.1...v1.1.0) (2022-09-30)
 
 
