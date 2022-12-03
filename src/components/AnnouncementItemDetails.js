@@ -248,9 +248,9 @@ const AnnouncementItemDetails = () => {
   useEffect(() => {
     let currentData = announcement;
     if (currentData) {
-      setAppTarget(currentData.data.appTarget || 'lmm-oa');
-      setExpiredDate(currentData.data.expiredDate || format(new Date(), 'MM/dd/yyyy'));
-      setPublishedDate(currentData.data.publishedDate || null);
+      setAppTarget(currentData.appTarget || 'lmm-oa');
+      setExpiredDate(currentData.expiredDate || format(new Date(), 'MM/dd/yyyy'));
+      setPublishedDate(currentData.publishedDate || null);
       if (language) {
         setAnnouncementTitle(currentData.data[language]?.title || '');
         setAnnouncementDesc(currentData.data[language]?.desc || '');
@@ -272,10 +272,10 @@ const AnnouncementItemDetails = () => {
       currentData.id = id;
     }
 
-    currentData.data.appTarget = appTarget;
-    currentData.data.publishedDate = publishedDate;
-    currentData.data.expiredDate = expiredDate;
-    currentData.data.isDraft = true;
+    currentData.appTarget = appTarget;
+    currentData.publishedDate = publishedDate;
+    currentData.expiredDate = expiredDate;
+    currentData.isDraft = true;
 
     setAnnouncement(currentData);
   }, [

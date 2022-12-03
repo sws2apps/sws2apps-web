@@ -67,8 +67,8 @@ const AnnouncementItemCard = ({ announcement, isLocked }) => {
             }}
             gutterBottom={false}
           >
-            {announcement.data.publishedDate
-              ? `Published on ${getDate(announcement.data.publishedDate)}`
+            {announcement.publishedDate
+              ? `Published on ${getDate(announcement.publishedDate)}`
               : 'Draft, not published yet'}
           </Typography>
           <Typography
@@ -78,7 +78,7 @@ const AnnouncementItemCard = ({ announcement, isLocked }) => {
               textAlign: 'right',
             }}
           >
-            {`Expired on ${getDate(announcement.data.expiredDate)}`}
+            {`Expired on ${getDate(announcement.expiredDate)}`}
           </Typography>
         </Box>
       </Box>
