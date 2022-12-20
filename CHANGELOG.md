@@ -1,3 +1,19 @@
+# [1.3.0](https://github.com/sws2apps/sws2apps-web/compare/v1.2.2...v1.3.0) (2022-12-20)
+
+
+### Features
+
+* **deps:** bump @mui/icons-material from 5.10.16 to 5.11.0 ([b9faa15](https://github.com/sws2apps/sws2apps-web/commit/b9faa15ebdc0619a4e7a9661f1b70c5398681257))
+* **deps:** bump @mui/lab from 5.0.0-alpha.110 to 5.0.0-alpha.111 ([3e71a16](https://github.com/sws2apps/sws2apps-web/commit/3e71a167fe843e41fc46c38bfdc614aafcec4a52))
+* **deps:** bump @mui/lab from 5.0.0-alpha.111 to 5.0.0-alpha.112 ([d98c30d](https://github.com/sws2apps/sws2apps-web/commit/d98c30d277253438a7e1ffde3dde4a1f61a82fa7))
+* **deps:** bump @mui/material from 5.10.16 to 5.10.17 ([513dcd4](https://github.com/sws2apps/sws2apps-web/commit/513dcd4fb1c580d99316c6b0b6916de1b4f89f74))
+* **deps:** bump @mui/material from 5.10.17 to 5.11.0 ([1928039](https://github.com/sws2apps/sws2apps-web/commit/1928039993d9ab7bc987f175ec324a51e1c82f3c))
+* **deps:** bump @mui/x-date-pickers from 5.0.10 to 5.0.11 ([d3d2073](https://github.com/sws2apps/sws2apps-web/commit/d3d20737546bd9a57e75dd1c7384dcc8eb38dee1))
+* **deps:** bump @mui/x-date-pickers from 5.0.9 to 5.0.10 ([c3e5d68](https://github.com/sws2apps/sws2apps-web/commit/c3e5d68b8e09486218cde60d6808ca9d29a7e881))
+* **deps:** bump react-router-dom from 6.4.4 to 6.4.5 ([02bea5d](https://github.com/sws2apps/sws2apps-web/commit/02bea5d0a933e7e8641d17c4f417cc29aa27bbae))
+* **deps:** bump react-router-dom from 6.4.5 to 6.5.0 ([5893100](https://github.com/sws2apps/sws2apps-web/commit/5893100bb2afc79cf8edde2a632c58df69931f36))
+* **web:** update to match new api changes ([a8d7116](https://github.com/sws2apps/sws2apps-web/commit/a8d7116941785afa6e11a501169153d758834220))
+
 ## [1.2.2](https://github.com/sws2apps/sws2apps-web/compare/v1.2.1...v1.2.2) (2022-12-03)
 
 
