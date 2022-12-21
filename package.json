@@ -8,7 +8,7 @@
     "@emotion/styled": "^11.10.5",
     "@fingerprintjs/fingerprintjs-pro": "^3.8.1",
     "@mui/icons-material": "^5.11.0",
-    "@mui/lab": "^5.0.0-alpha.112",
+    "@mui/lab": "^5.0.0-alpha.113",
     "@mui/material": "^5.11.0",
     "@mui/x-date-pickers": "^5.0.11",
     "date-fns": "^2.29.3",
