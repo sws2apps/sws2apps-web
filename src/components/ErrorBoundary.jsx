@@ -15,7 +15,7 @@ const ErrorBoundary = () => {
       }}
     >
       <Typography>Ooops</Typography>
-      <Typography>{error.message}</Typography>
+      <Typography>{error.message || error.data}</Typography>
     </Box>
   );
 };

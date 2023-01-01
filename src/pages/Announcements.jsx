@@ -1,33 +1,13 @@
-import { promiseGetRecoil } from 'recoil-outside';
 import { useQuery } from '@tanstack/react-query';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import ErrorIcon from '@mui/icons-material/Error';
 import Typography from '@mui/material/Typography';
-import { apiHostState, userEmailState, visitorIDState } from '../states/main';
 import { AnnouncementCard } from '../features/announcements';
-
-const fetchAnnouncements = async () => {
-  const apiHost = await promiseGetRecoil(apiHostState);
-  const userEmail = await promiseGetRecoil(userEmailState);
-  const visitorID = await promiseGetRecoil(visitorIDState);
-
-  if (apiHost !== '') {
-    const res = await fetch(`${apiHost}api/admin/announcements`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        email: userEmail,
-        visitorid: visitorID,
-      },
-    });
-
-    return res.json();
-  }
-};
+import { apiFetchAnnouncements } from '../utils/api';
 
 const Announcements = () => {
-  const { isLoading, error, data } = useQuery({ queryKey: ['announcements'], queryFn: fetchAnnouncements });
+  const { isLoading, error, data } = useQuery({ queryKey: ['announcements'], queryFn: apiFetchAnnouncements });
 
   return (
     <Box>

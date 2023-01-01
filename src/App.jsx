@@ -17,7 +17,13 @@ import PrivateRoute from './components/PrivateRoot';
 // lazy loading
 const Announcements = lazy(() => import('./pages/Announcements'));
 const AnnouncementDetails = lazy(() => import('./pages/AnnouncementDetails'));
+const CongregationDetails = lazy(() => import('./pages/CongregationDetails'));
+const CongregationRequestDetails = lazy(() => import('./pages/CongregationRequestDetails'));
+const CongregationRequests = lazy(() => import('./pages/CongregationRequests'));
+const Congregations = lazy(() => import('./pages/Congregations'));
 const Startup = lazy(() => import('./pages/Startup'));
+const UserDetails = lazy(() => import('./pages/UserDetails'));
+const Users = lazy(() => import('./pages/Users'));
 
 // creating theme
 const lightTheme = createTheme({
@@ -66,6 +72,30 @@ const App = () => {
             {
               path: '/announcements/new',
               element: <AnnouncementDetails />,
+            },
+            {
+              path: '/congregations/requests',
+              element: <CongregationRequests />,
+            },
+            {
+              path: '/congregations/requests/:id',
+              element: <CongregationRequestDetails />,
+            },
+            {
+              path: '/congregations',
+              element: <Congregations />,
+            },
+            {
+              path: '/congregations/:id',
+              element: <CongregationDetails />,
+            },
+            {
+              path: '/users',
+              element: <Users />,
+            },
+            {
+              path: '/users/:id',
+              element: <UserDetails />,
             },
           ],
         },
