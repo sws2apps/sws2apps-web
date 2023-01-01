@@ -4,6 +4,30 @@
 ### Bug Fixes
 
 * **features:** fix typo in component name for startup ([8ff4887](https://github.com/sws2apps/sws2apps-web/commit/8ff4887c6219900772531b77ab994a9236bc69a6))
+* **pages:** fix typo when importing signin component ([#305](https://github.com/sws2apps/sws2apps-web/issues/305)) ([0cc7104](https://github.com/sws2apps/sws2apps-web/commit/0cc7104982cd00c23610a8b515b817f93b856288))
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.112 to 5.0.0-alpha.113 ([f50c1e8](https://github.com/sws2apps/sws2apps-web/commit/f50c1e8a640c17e967bc293c47b583ec7cf41921))
+* **deps:** bump @mui/lab from 5.0.0-alpha.113 to 5.0.0-alpha.114 ([8c390f5](https://github.com/sws2apps/sws2apps-web/commit/8c390f53ed4fcf27219049447fe086f120f42f01))
+* **deps:** bump @mui/material from 5.11.0 to 5.11.1 ([62b413f](https://github.com/sws2apps/sws2apps-web/commit/62b413ff010b4a4a2a7f1ed7d18c25f6f5a7b7d6))
+* **deps:** bump @mui/material from 5.11.1 to 5.11.2 ([dbf5060](https://github.com/sws2apps/sws2apps-web/commit/dbf50607160febe058e23625541c0c8678c41590))
+* **deps:** bump @mui/x-date-pickers from 5.0.11 to 5.0.12 ([1a842c9](https://github.com/sws2apps/sws2apps-web/commit/1a842c9f081c5e6e8db1efbf740d385ceb010ce2))
+* **deps:** bump react-router-dom from 6.5.0 to 6.6.1 ([01c8346](https://github.com/sws2apps/sws2apps-web/commit/01c8346560dc40fe53230aabc08987ff95bdff90))
+* **web:** update website to new ui ([ac584cf](https://github.com/sws2apps/sws2apps-web/commit/ac584cf8caed09684e6f66d337f113d4633ff90a))
+
+
+### BREAKING CHANGES
+
+* **web:** New UI for website. Migrate from CRA to Vite.
+
+# [2.0.0](https://github.com/sws2apps/sws2apps-web/compare/v1.3.0...v2.0.0) (2023-01-01)
+
+
+### Bug Fixes
+
+* **features:** fix typo in component name for startup ([8ff4887](https://github.com/sws2apps/sws2apps-web/commit/8ff4887c6219900772531b77ab994a9236bc69a6))
 
 
 ### Features
