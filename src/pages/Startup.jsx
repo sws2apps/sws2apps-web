@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import Box from '@mui/material/Box';
-import { EmailBlocked, EmailNotVerified, SetupMFA, Signin, UnauthorizedRole, VerifyMFA } from '../features/startup';
+import { EmailBlocked, EmailNotVerified, SetupMFA, SignIn, UnauthorizedRole, VerifyMFA } from '../features/startup';
 import {
   isEmailBlockedState,
   isEmailNotVerifiedState,
@@ -20,7 +20,7 @@ const Startup = () => {
 
   return (
     <Box>
-      {isUserSignIn && <Signin />}
+      {isUserSignIn && <SignIn />}
       {isEmailNotVerified && <EmailNotVerified />}
       {isUserMfaSetup && <SetupMFA />}
       {isUnauthorizedRole && <UnauthorizedRole />}
