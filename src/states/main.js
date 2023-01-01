@@ -1,157 +1,227 @@
 import { atom, selector } from 'recoil';
 
+const defaultLightTheme = localStorage.getItem('theme') && localStorage.getItem('theme') === 'dark' ? false : true;
+
+export const isLightThemeState = atom({
+  key: 'isLightTheme',
+  default: defaultLightTheme,
+});
+
 export const apiHostState = atom({
-	key: 'apiHost',
-	default: '',
+  key: 'apiHost',
+  default: '',
 });
 
-export const isAdminState = atom({
-	key: 'isAdmin',
-	default: false,
+export const uidUserState = atom({
+  key: 'uidUser',
+  default: '',
 });
 
-export const pendingRequestsState = atom({
-	key: 'pendingRequests',
-	default: [],
+export const userPasswordState = atom({
+  key: 'userPassowrd',
+  default: '',
 });
 
-export const usersListState = atom({
-	key: 'usersList',
-	default: [],
+export const isDeleteDbOpenState = atom({
+  key: 'isDeleteDbOpen',
+  default: false,
 });
 
-export const usersListSortedState = selector({
-	key: 'usersListSorted',
-	get: ({ get }) => {
-		const tempList = get(usersListState);
-
-		let usersList = tempList.map((x) => x);
-		usersList.sort((a, b) => {
-			return a.username > b.username ? 1 : -1;
-		});
-
-		return usersList;
-	},
+export const isBackupDbOpenState = atom({
+  key: 'isBackupDbOpen',
+  default: false,
 });
 
-export const adminEmailState = atom({
-	key: 'adminEmail',
-	default: '',
+export const isBackupOfflineState = atom({
+  key: 'isBackupOffline',
+  default: false,
 });
 
-export const adminPwdState = atom({
-	key: 'adminPwd',
-	default: '',
+export const isBackupOnlineState = atom({
+  key: 'isBackupOnline',
+  default: false,
 });
 
-export const adminTmpEmailState = atom({
-	key: 'adminTmpEmail',
-	default: '',
+export const isRestoreOfflineState = atom({
+  key: 'isRestoreOffline',
+  default: false,
 });
 
-export const adminTmpPwdState = atom({
-	key: 'adminTmpPwd',
-	default: '',
+export const isRestoreOnlineState = atom({
+  key: 'isRestoreOnline',
+  default: false,
 });
 
-export const countPendingRequestsState = selector({
-	key: 'countPendingRequests',
-	get: ({ get }) => {
-		const pendingReq = get(pendingRequestsState);
-		return pendingReq.length;
-	},
+export const backupEncryptedState = atom({
+  key: 'backupEncrypted',
+  default: {},
 });
 
-export const congsListState = atom({
-	key: 'congsList',
-	default: [],
+export const backupJsonDataState = atom({
+  key: 'backupJsonData',
+  default: undefined,
 });
 
-export const congsListSortedState = selector({
-	key: 'congsListSorted',
-	get: ({ get }) => {
-		const tempList = get(congsListState);
-
-		let congsList = tempList.map((x) => x);
-		congsList.sort((a, b) => {
-			return a.cong_name > b.cong_name ? 1 : -1;
-		});
-
-		return congsList;
-	},
+export const isUserLoggedState = atom({
+  key: 'isUserLogged',
+  default: false,
 });
 
-export const isMfaVerifiedState = atom({
-	key: 'isMfaVerified',
-	default: false,
+export const isUserSignInState = atom({
+  key: 'isUserSignIn',
+  default: true,
 });
 
-export const hasErrorEmailState = atom({
-	key: 'hasErrorEmail',
-	default: false,
+export const isUserSignUpState = atom({
+  key: 'isUserSignUp',
+  default: true,
 });
 
-export const hasErrorPwdState = atom({
-	key: 'hasErrorPwd',
-	default: false,
+export const isEmailNotVerifiedState = atom({
+  key: 'isEmailNotVerified',
+  default: false,
 });
 
-export const adminTokenState = atom({
-	key: 'adminToken',
-	default: '',
-});
-
-export const hasErrorTokenState = atom({
-	key: 'hasErrorToken',
-	default: false,
-});
-
-export const isAdminLoggedState = atom({
-	key: 'isAdminLogged',
-	default: true,
-});
-
-export const isLogoutState = atom({
-	key: 'isLogout',
-	default: false,
-});
-
-export const isMfaEnabledState = atom({
-	key: 'isMfaEnabled',
-	default: false,
-});
-
-export const qrCodePathState = atom({
-	key: 'qrCodePath',
-	default: '',
-});
-
-export const secretTokenPathState = atom({
-	key: 'secretTokenPath',
-	default: '',
-});
-
-export const blockedRequestsState = atom({
-	key: 'blockedRequests',
-	default: [],
+export const isEmailBlockedState = atom({
+  key: 'isEmailBlocked',
+  default: false,
 });
 
 export const visitorIDState = atom({
-	key: 'visitorID',
-	default: '',
+  key: 'visitorID',
+  default: '',
 });
 
-export const isLoginAttemptState = atom({
-	key: 'isLoginAttempt',
-	default: false,
+export const qrCodePathState = atom({
+  key: 'qrCodePath',
+  default: '',
 });
 
-export const lockRoleState = atom({
-	key: 'lockRole',
-	default: false,
+export const secretTokenPathState = atom({
+  key: 'secretTokenPath',
+  default: '',
 });
 
-export const dbAnnouncementsState = atom({
-	key: 'dbAnnouncements',
-	default: [],
+export const isOnlineState = atom({
+  key: 'isOnline',
+  default: navigator.onLine,
+});
+
+export const isUserMfaSetupState = atom({
+  key: 'isUserMfaSetup',
+  default: false,
+});
+
+export const isUserMfaVerifyState = atom({
+  key: 'isUserMfaVerify',
+  default: false,
+});
+
+export const isUnauthorizedRoleState = atom({
+  key: 'isUnauthorizedRole',
+  default: false,
+});
+
+export const isAppClosingState = atom({
+  key: 'isAppClosing',
+  default: false,
+});
+
+export const isPrecachedState = atom({
+  key: 'isPrecached',
+  default: false,
+});
+
+export const showReloadState = atom({
+  key: 'showReload',
+  default: false,
+});
+
+export const waitingWorkerState = atom({
+  key: 'waitingWorker',
+  default: null,
+});
+
+export const isWhatsNewOpenState = atom({
+  key: 'isWhatsNewOpen',
+  default: false,
+});
+
+export const appNotificationsState = atom({
+  key: 'appNotifications',
+  default: [],
+});
+
+export const countNotificationsState = selector({
+  key: 'countNotifications',
+  get: ({ get }) => {
+    const notifications = get(appNotificationsState);
+    const unread = notifications.filter((notification) => notification.isRead !== true);
+    return unread.length;
+  },
+});
+
+export const currentNotificationState = atom({
+  key: 'currentNotification',
+  default: {},
+});
+
+export const startupProgressState = atom({
+  key: 'startupProgress',
+  default: 0,
+});
+
+export const rootModalOpenState = atom({
+  key: 'rootModalOpen',
+  default: false,
+});
+
+export const backupDbOpenState = atom({
+  key: 'backupDbOpen',
+  default: false,
+});
+
+export const restoreDbOpenState = atom({
+  key: 'restoreDbOpen',
+  default: false,
+});
+
+export const userIDState = atom({
+  key: 'userID',
+  default: '',
+});
+
+export const isReEnrollMFAState = atom({
+  key: 'isReEnrollMFA',
+  default: false,
+});
+
+export const userLocalUidState = atom({
+  key: 'userLocalUid',
+  default: '',
+});
+
+export const isMyAssignmentOpenState = atom({
+  key: 'isMyAssignmentOpen',
+  default: false,
+});
+
+export const refreshMyAssignmentsState = atom({
+  key: 'refreshMyAssignments',
+  default: false,
+});
+
+export const isCongPersonAddState = atom({
+  key: 'isCongPersonAdd',
+  default: false,
+});
+
+export const userEmailState = atom({
+  key: 'userEmail',
+  default: localStorage.getItem('email') || '',
+});
+
+export const isAdminState = atom({
+  key: 'isAdmin',
+  default: false,
 });
