@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import ErrorIcon from '@mui/icons-material/Error';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { AnnouncementCard } from '../features/announcements';
 import { apiFetchAnnouncements } from '../utils/api';
@@ -36,10 +37,12 @@ const Announcements = () => {
         </Box>
       )}
       {data && data.length > 0 && (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '20px' }}>
-          {data.map((announcement) => (
-            <AnnouncementCard key={announcement.id} announcement={announcement} />
-          ))}
+        <Box sx={{ flexGrow: 1, marginTop: '20px' }}>
+          <Grid container spacing={2}>
+            {data.map((announcement) => (
+              <AnnouncementCard key={announcement.id} announcement={announcement} />
+            ))}
+          </Grid>
         </Box>
       )}
     </Box>
