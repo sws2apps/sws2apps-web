@@ -310,3 +310,71 @@ export const apiCongregationUserUpdateRole = async (cong_id, user_uid, user_role
     throw new Error(err);
   }
 };
+
+export const apiCountriesBulkAdd = async (geo_list, language) => {
+  const { apiHost, userEmail, visitorID } = await getProfile();
+
+  try {
+    if (apiHost !== '') {
+      const res = await fetch(`${apiHost}api/admin/geo/import`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          email: userEmail,
+          visitorid: visitorID,
+        },
+        body: JSON.stringify({ geo_list, language }),
+      });
+      const data = await res.json();
+
+      return { status: res.status, data };
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+export const apiFetchCountries = async () => {
+  const { apiHost, userEmail, visitorID } = await getProfile();
+
+  try {
+    if (apiHost !== '') {
+      const res = await fetch(`${apiHost}api/admin/geo/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          email: userEmail,
+          visitorid: visitorID,
+        },
+      });
+      const data = await res.json();
+
+      return { status: res.status, data };
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+export const apiCongregationsBulkAdd = async (geo_id, cong_list, language) => {
+  const { apiHost, userEmail, visitorID } = await getProfile();
+
+  try {
+    if (apiHost !== '') {
+      const res = await fetch(`${apiHost}api/admin/geo/${geo_id}/import`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          email: userEmail,
+          visitorid: visitorID,
+        },
+        body: JSON.stringify({ cong_list, language }),
+      });
+      const data = await res.json();
+
+      return { status: res.status, data };
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+};

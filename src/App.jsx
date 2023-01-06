@@ -21,6 +21,7 @@ const CongregationDetails = lazy(() => import('./pages/CongregationDetails'));
 const CongregationRequestDetails = lazy(() => import('./pages/CongregationRequestDetails'));
 const CongregationRequests = lazy(() => import('./pages/CongregationRequests'));
 const Congregations = lazy(() => import('./pages/Congregations'));
+const CongregationsLocations = lazy(() => import('./pages/CongregationsLocations'));
 const Startup = lazy(() => import('./pages/Startup'));
 const UserDetails = lazy(() => import('./pages/UserDetails'));
 const Users = lazy(() => import('./pages/Users'));
@@ -88,6 +89,10 @@ const App = () => {
             {
               path: '/congregations/:id',
               element: <CongregationDetails />,
+            },
+            {
+              path: '/congregations/geo',
+              element: <CongregationsLocations />,
             },
             {
               path: '/users',

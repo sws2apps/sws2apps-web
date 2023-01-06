@@ -5,6 +5,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 import CampaignIcon from '@mui/icons-material/Campaign';
+import EditLocationIcon from '@mui/icons-material/EditLocation';
 import GroupIcon from '@mui/icons-material/Group';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import MailIcon from '@mui/icons-material/Mail';
@@ -55,6 +56,11 @@ const DashboardMenu = () => {
             title: 'Congregations',
             icon: <HomeWorkIcon />,
             navigateTo: '/congregations',
+          },
+          {
+            title: 'Geo Locations',
+            icon: <EditLocationIcon />,
+            navigateTo: '/congregations/geo',
           },
         ],
       },

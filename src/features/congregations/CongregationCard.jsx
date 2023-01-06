@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Grid from '@mui/material/Grid';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import Paper from '@mui/material/Paper';
@@ -68,49 +69,51 @@ const CongregationCard = ({ congregation }) => {
   };
 
   return (
-    <Paper elevation={3} sx={{ padding: '10px' }}>
-      <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-        <HomeWorkIcon color="secondary" sx={{ fontSize: '40px' }} />
-        <Box>
-          <Box sx={{ minWidth: '240px' }}>
+    <Grid item xs={12} sm={6} lg={4}>
+      <Paper elevation={3} sx={{ padding: '10px' }}>
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+          <HomeWorkIcon color="secondary" sx={{ fontSize: '40px' }} />
+          <Box>
             <Box>
-              <Typography>{congregation.cong_name}</Typography>
-              <Typography>{congregation.cong_number}</Typography>
+              <Box>
+                <Typography>{congregation.cong_name}</Typography>
+                <Typography>{congregation.cong_number}</Typography>
+              </Box>
+
+              <Box sx={{ marginTop: '15px' }}>
+                <Typography sx={{ fontSize: '14px' }}>VIP Users: {totalVIP}</Typography>
+                <Typography sx={{ fontSize: '14px' }}>Pocket Users: {totalPocket}</Typography>
+              </Box>
             </Box>
 
-            <Box sx={{ marginTop: '15px' }}>
-              <Typography sx={{ fontSize: '14px' }}>VIP Users: {totalVIP}</Typography>
-              <Typography sx={{ fontSize: '14px' }}>Pocket Users: {totalPocket}</Typography>
-            </Box>
-          </Box>
-
-          <Box
-            sx={{
-              display: 'flex',
-              flexGrow: 1,
-              justifyContent: 'flex-end',
-              borderTop: '1px outset',
-              marginTop: '10px',
-              paddingTop: '10px',
-              gap: '5px',
-            }}
-          >
-            <Button
-              size="small"
-              color="error"
-              variant="outlined"
-              endIcon={<DeleteIcon />}
-              onClick={handleDeleteCongregation}
+            <Box
+              sx={{
+                display: 'flex',
+                flexGrow: 1,
+                justifyContent: 'flex-end',
+                borderTop: '1px outset',
+                marginTop: '10px',
+                paddingTop: '10px',
+                gap: '5px',
+              }}
             >
-              Delete
-            </Button>
-            <Button size="small" variant="outlined" endIcon={<OpenInNewIcon />} onClick={handleOpenCongregation}>
-              Open
-            </Button>
+              <Button
+                size="small"
+                color="error"
+                variant="outlined"
+                endIcon={<DeleteIcon />}
+                onClick={handleDeleteCongregation}
+              >
+                Delete
+              </Button>
+              <Button size="small" variant="outlined" endIcon={<OpenInNewIcon />} onClick={handleOpenCongregation}>
+                Open
+              </Button>
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </Paper>
+      </Paper>
+    </Grid>
   );
 };
 
