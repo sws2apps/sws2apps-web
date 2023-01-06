@@ -1,6 +1,6 @@
-# Scheduling Workbox System website
+# Scheduling Workbox System Control Panel Website
 
-Our main website to host our applications documentations.
+Our main website to administer and manage all our sws2apps applications.
 
 _Note: We are putting most of our time to build most of the frontend applications. Therefore, the website is not yet good as it should be._
 
