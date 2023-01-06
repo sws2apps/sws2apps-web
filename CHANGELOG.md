@@ -1,3 +1,13 @@
+# [2.1.0](https://github.com/sws2apps/sws2apps-web/compare/v2.0.0...v2.1.0) (2023-01-06)
+
+
+### Features
+
+* **congregations:** support assigning geo locations ([38d6ca9](https://github.com/sws2apps/sws2apps-web/commit/38d6ca9e7a5fec9d90f722403e0a3da32c0bab1e))
+* **deps:** bump @mui/material from 5.11.2 to 5.11.3 ([a069533](https://github.com/sws2apps/sws2apps-web/commit/a069533602f4283a9a09cbd53c5dc7ca00f141da))
+* **deps:** bump @mui/x-date-pickers from 5.0.12 to 5.0.13 ([9216590](https://github.com/sws2apps/sws2apps-web/commit/92165906ec7955fdad26f98358de88f332a55233))
+* **deps:** bump @tanstack/react-query from 4.20.4 to 4.20.9 ([3fb836c](https://github.com/sws2apps/sws2apps-web/commit/3fb836c6291006c9d4b180ec612e5d1685b8ec0b))
+
 # [2.0.0](https://github.com/sws2apps/sws2apps-web/compare/v1.3.0...v2.0.0) (2023-01-01)
 
 
