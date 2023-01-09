@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/sws2apps/sws2apps-web/compare/v2.2.0...v2.2.1) (2023-01-09)
+
+
+### Bug Fixes
+
+* **app:** update csp for new api ([acddbbc](https://github.com/sws2apps/sws2apps-web/commit/acddbbc8db1231fe8abfd919f584009a2f28adad))
+
 # [2.2.0](https://github.com/sws2apps/sws2apps-web/compare/v2.1.0...v2.2.0) (2023-01-09)
 
 
