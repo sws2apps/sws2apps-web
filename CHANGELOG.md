@@ -1,3 +1,15 @@
+# [2.2.0](https://github.com/sws2apps/sws2apps-web/compare/v2.1.0...v2.2.0) (2023-01-09)
+
+
+### Bug Fixes
+
+* **web:** update api address ([a501f4a](https://github.com/sws2apps/sws2apps-web/commit/a501f4a571853ba9cfc6a08c91e63c8ffff3a6e8))
+
+
+### Features
+
+* **deps:** bump @tanstack/react-query from 4.20.9 to 4.22.0 ([514e464](https://github.com/sws2apps/sws2apps-web/commit/514e464423ef5725cd3a59e2d52380d69d96d089))
+
 # [2.1.0](https://github.com/sws2apps/sws2apps-web/compare/v2.0.0...v2.1.0) (2023-01-06)
 
 
