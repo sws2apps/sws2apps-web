@@ -1,3 +1,23 @@
+# [2.4.0](https://github.com/sws2apps/sws2apps-web/compare/v2.3.0...v2.4.0) (2023-02-02)
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.115 to 5.0.0-alpha.116 ([c024e4c](https://github.com/sws2apps/sws2apps-web/commit/c024e4c527a0d1e906fc8e25a9ab934e3b5d5036))
+* **deps:** bump @mui/lab from 5.0.0-alpha.116 to 5.0.0-alpha.117 ([34b90a8](https://github.com/sws2apps/sws2apps-web/commit/34b90a86c6d2f139998d4849dff2e59cac22c223))
+* **deps:** bump @mui/lab from 5.0.0-alpha.117 to 5.0.0-alpha.118 ([b99f46e](https://github.com/sws2apps/sws2apps-web/commit/b99f46eb46e1efb2af59739318f408dede5d5b20))
+* **deps:** bump @mui/material from 5.11.4 to 5.11.5 ([e28a191](https://github.com/sws2apps/sws2apps-web/commit/e28a191f8429ff1c9712d240fecc02e4d3cc4256))
+* **deps:** bump @mui/material from 5.11.5 to 5.11.6 ([d7a90e3](https://github.com/sws2apps/sws2apps-web/commit/d7a90e319e53caca64b3ebb4f650c5e785dce85f))
+* **deps:** bump @mui/material from 5.11.6 to 5.11.7 ([1a2b1ba](https://github.com/sws2apps/sws2apps-web/commit/1a2b1ba6e411141453d4dbbe64e871be0323d4ba))
+* **deps:** bump @mui/x-date-pickers from 5.0.13 to 5.0.14 ([c473102](https://github.com/sws2apps/sws2apps-web/commit/c4731029aef77efb86c641b1887865dc8c77037e))
+* **deps:** bump @mui/x-date-pickers from 5.0.14 to 5.0.15 ([3ae5043](https://github.com/sws2apps/sws2apps-web/commit/3ae5043ca34c445d1c319bfbff5d0fa49c83a710))
+* **deps:** bump @mui/x-date-pickers from 5.0.15 to 5.0.16 ([95211cb](https://github.com/sws2apps/sws2apps-web/commit/95211cb2bee5bb6057b6d4811dc3b5cc5f8579e2))
+* **deps:** bump @tanstack/react-query from 4.22.0 to 4.22.4 ([de5310f](https://github.com/sws2apps/sws2apps-web/commit/de5310f88b346757245b1e2b78781915959a398a))
+* **deps:** bump @tanstack/react-query from 4.22.4 to 4.23.0 ([65bfd3b](https://github.com/sws2apps/sws2apps-web/commit/65bfd3b5a54603454cc7983eee7ee79c33d0e0b5))
+* **deps:** bump @tanstack/react-query from 4.23.0 to 4.24.4 ([0c3c037](https://github.com/sws2apps/sws2apps-web/commit/0c3c037b110b33263cfb5bf38eb1410c7380d38e))
+* **deps:** bump react-router-dom from 6.6.2 to 6.7.0 ([f8cdd18](https://github.com/sws2apps/sws2apps-web/commit/f8cdd1859461085d9638a4bb93dc698411f98bf0))
+* **deps:** bump react-router-dom from 6.7.0 to 6.8.0 ([e093cf8](https://github.com/sws2apps/sws2apps-web/commit/e093cf87cdeb75a6e1c26174174f69eff3d38746))
+
 # [2.3.0](https://github.com/sws2apps/sws2apps-web/compare/v2.2.1...v2.3.0) (2023-01-11)
 
 
