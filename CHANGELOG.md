@@ -1,3 +1,19 @@
+# [2.5.0](https://github.com/sws2apps/sws2apps-web/compare/v2.4.0...v2.5.0) (2023-02-16)
+
+
+### Features
+
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.8.1 to 3.8.2 ([586213c](https://github.com/sws2apps/sws2apps-web/commit/586213c3e83eabb5c6c2d1ff5e3908dc3796974c))
+* **deps:** bump @mui/icons-material from 5.11.0 to 5.11.9 ([9897114](https://github.com/sws2apps/sws2apps-web/commit/989711499e5adc6c2148769eb99792f5f9ebc709))
+* **deps:** bump @mui/lab from 5.0.0-alpha.118 to 5.0.0-alpha.119 ([e789dab](https://github.com/sws2apps/sws2apps-web/commit/e789dabb89fac27ce55bd2b8d61c89a4aca9e9e3))
+* **deps:** bump @mui/lab from 5.0.0-alpha.119 to 5.0.0-alpha.120 ([f8987a2](https://github.com/sws2apps/sws2apps-web/commit/f8987a2f9a1e42b2d9cbe69ebced1de4ed19acf7))
+* **deps:** bump @mui/material from 5.11.7 to 5.11.8 ([434368f](https://github.com/sws2apps/sws2apps-web/commit/434368f81aef98891d08770937e7f0ac2bfbf6e8))
+* **deps:** bump @mui/material from 5.11.8 to 5.11.9 ([f0e48d9](https://github.com/sws2apps/sws2apps-web/commit/f0e48d9c32077eb64174c05bd742de855eb6a94e))
+* **deps:** bump @mui/x-date-pickers from 5.0.16 to 5.0.17 ([eca7925](https://github.com/sws2apps/sws2apps-web/commit/eca792538c741b2dd99c3d3aaaf540d07899b55f))
+* **deps:** bump @mui/x-date-pickers from 5.0.17 to 5.0.18 ([f1e2882](https://github.com/sws2apps/sws2apps-web/commit/f1e28822512cc9e78351388c75a56cb3efc2aac4))
+* **deps:** bump @tanstack/react-query from 4.24.4 to 4.24.6 ([84d4952](https://github.com/sws2apps/sws2apps-web/commit/84d49523242c8450af7315293438d49d0ba76ee2))
+* **deps:** bump react-router-dom from 6.8.0 to 6.8.1 ([d242f6f](https://github.com/sws2apps/sws2apps-web/commit/d242f6f4a295a46d4efdb6f270f93115011fb29c))
+
 # [2.4.0](https://github.com/sws2apps/sws2apps-web/compare/v2.3.0...v2.4.0) (2023-02-02)
 
 
