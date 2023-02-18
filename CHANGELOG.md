@@ -8,6 +8,16 @@
 * **deps:** bump @emotion/styled from 11.10.5 to 11.10.6 ([8e5a8ca](https://github.com/sws2apps/sws2apps-web/commit/8e5a8ca195555951191c51bb57770c854ec2c50d))
 * **deps:** bump @mui/x-date-pickers from 5.0.18 to 5.0.19 ([e9ee84a](https://github.com/sws2apps/sws2apps-web/commit/e9ee84a4299b1b99f6ec075574580f1cd609da6f))
 
+# [2.6.0](https://github.com/sws2apps/sws2apps-web/compare/v2.5.0...v2.6.0) (2023-02-18)
+
+
+### Features
+
+* **auth:** update to use oauth ([079ce99](https://github.com/sws2apps/sws2apps-web/commit/079ce997b848b7f62bfd62c49befd2970cc81475))
+* **deps:** bump @emotion/react from 11.10.5 to 11.10.6 ([506d2e4](https://github.com/sws2apps/sws2apps-web/commit/506d2e4a575d2e2e923cd792e43943f35d8fca25))
+* **deps:** bump @emotion/styled from 11.10.5 to 11.10.6 ([8e5a8ca](https://github.com/sws2apps/sws2apps-web/commit/8e5a8ca195555951191c51bb57770c854ec2c50d))
+* **deps:** bump @mui/x-date-pickers from 5.0.18 to 5.0.19 ([e9ee84a](https://github.com/sws2apps/sws2apps-web/commit/e9ee84a4299b1b99f6ec075574580f1cd609da6f))
+
 # [2.5.0](https://github.com/sws2apps/sws2apps-web/compare/v2.4.0...v2.5.0) (2023-02-16)
 
 
