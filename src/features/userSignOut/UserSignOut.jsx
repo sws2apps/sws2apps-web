@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { getAuth, signOut } from 'firebase/auth';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
@@ -7,22 +9,24 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {
   apiHostState,
+  isAdminState,
   isAppClosingState,
   isOnlineState,
   isUserMfaSetupState,
   isUserMfaVerifyState,
   isUserSignInState,
-  userEmailState,
   visitorIDState,
 } from '../../states/main';
 
 const UserSignOut = () => {
-  const [open, setOpen] = useRecoilState(isAppClosingState);
-  const [userEmail, setUserEmail] = useRecoilState(userEmailState);
+  const navigate = useNavigate();
 
-  const setUserMfaSetup = useSetRecoilState(isUserMfaSetupState);
-  const setUserMfaVerify = useSetRecoilState(isUserMfaVerifyState);
-  const setUserSignIn = useSetRecoilState(isUserSignInState);
+  const [open, setOpen] = useRecoilState(isAppClosingState);
+
+  const setIsAdmin = useSetRecoilState(isAdminState);
+  const setIsUserSignIn = useSetRecoilState(isUserSignInState);
+  const setIsUserMfaVerify = useSetRecoilState(isUserMfaVerifyState);
+  const setIsUserMfaSetup = useSetRecoilState(isUserMfaSetupState);
 
   const isOnline = useRecoilValue(isOnlineState);
   const apiHost = useRecoilValue(apiHostState);
@@ -36,50 +40,45 @@ const UserSignOut = () => {
   };
 
   useEffect(() => {
-    const abortCont = new AbortController();
-
     const handleLogout = async () => {
-      if (isOnline) {
-        if (apiHost !== '') {
-          await fetch(`${apiHost}api/users/logout`, {
-            signal: abortCont.signal,
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              visitorid: visitorID,
-              email: userEmail,
-            },
-          });
-        }
+      if (isOnline && apiHost !== '') {
+        const auth = await getAuth();
+        const user = auth.currentUser;
+
+        await signOut(auth);
+
+        await fetch(`${apiHost}api/users/logout`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            visitorid: visitorID,
+            uid: user.uid,
+          },
+        });
+
+        setIsAdmin(false);
+        setIsUserMfaVerify(false);
+        setIsUserMfaSetup(false);
+        setIsUserSignIn(true);
+        navigate('/signin');
+        setOpen(false);
       }
-
-      localStorage.removeItem('email');
-
-      setOpen(false);
-      setUserMfaSetup(false);
-      setUserMfaVerify(false);
-      setUserSignIn(true);
-      setUserEmail('');
     };
 
     if (open) {
       handleLogout();
     }
-
-    return () => {
-      abortCont.abort();
-    };
   }, [
     open,
     apiHost,
     isOnline,
+    setIsAdmin,
     setOpen,
-    setUserMfaSetup,
-    setUserMfaVerify,
-    setUserSignIn,
-    setUserEmail,
-    userEmail,
     visitorID,
+    navigate,
+    setIsUserMfaVerify,
+    setIsUserMfaSetup,
+    setIsUserSignIn,
   ]);
 
   return (

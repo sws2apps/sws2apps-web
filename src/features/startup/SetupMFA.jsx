@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { Markup } from 'interweave';
 import { MuiOtpInput } from 'mui-one-time-password-input';
 import QRCode from 'qrcode';
 import Box from '@mui/material/Box';
@@ -16,16 +16,14 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import TabPanel from '../../components/TabPanel';
 import {
-  apiHostState,
-  isAdminState,
   isReEnrollMFAState,
   isUnauthorizedRoleState,
   isUserMfaSetupState,
   qrCodePathState,
   secretTokenPathState,
-  userEmailState,
   visitorIDState,
 } from '../../states/main';
+import { apiHandleVerifyOTP } from '../../api/auth';
 import { appMessageState, appSeverityState, appSnackOpenState } from '../../states/notification';
 
 const a11yProps = (index) => {
@@ -44,8 +42,7 @@ const validateChar = (value, index) => {
 };
 
 const SetupMFA = () => {
-  const abortCont = useRef();
-  const navigate = useNavigate();
+  const cancel = useRef();
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [userOTP, setUserOTP] = useState('');
@@ -58,12 +55,9 @@ const SetupMFA = () => {
   const setAppMessage = useSetRecoilState(appMessageState);
   const setIsUserMfaSetup = useSetRecoilState(isUserMfaSetupState);
   const setIsUnauthorizedRole = useSetRecoilState(isUnauthorizedRoleState);
-  const setIsAdmin = useSetRecoilState(isAdminState);
 
-  const apiHost = useRecoilValue(apiHostState);
   const qrCodePath = useRecoilValue(qrCodePathState);
   const token = useRecoilValue(secretTokenPathState);
-  const userEmail = useRecoilValue(userEmailState);
   const visitorID = useRecoilValue(visitorIDState);
   const isReEnrollMFA = useRecoilValue(isReEnrollMFAState);
 
@@ -77,67 +71,27 @@ const SetupMFA = () => {
 
   const handleVerifyOTP = useCallback(async () => {
     try {
-      abortCont.current = new AbortController();
+      setIsProcessing(true);
+      cancel.current = false;
 
-      if (userOTP.length === 6) {
-        setIsProcessing(true);
-        const reqPayload = {
-          token: userOTP,
-        };
-
-        if (apiHost !== '') {
-          const res = await fetch(`${apiHost}api/mfa/verify-token`, {
-            method: 'POST',
-            signal: abortCont.current.signal,
-            headers: {
-              'Content-Type': 'application/json',
-              visitorid: visitorID,
-              email: userEmail,
-            },
-            body: JSON.stringify(reqPayload),
-          });
-
-          const data = await res.json();
-          if (res.status === 200) {
-            if (data.global_role === 'admin') {
-              localStorage.setItem('email', userEmail);
-              setIsAdmin(true);
-              navigate('/');
-              return;
-            }
-            // congregation not assigned
-            setIsProcessing(false);
-            setIsUserMfaSetup(false);
-            setIsUnauthorizedRole(true);
-          } else {
-            setIsProcessing(false);
-            setAppMessage(data.message);
-            setAppSeverity('warning');
-            setAppSnackOpen(true);
-          }
+      const response = await apiHandleVerifyOTP(userOTP, true);
+      if (!cancel.current) {
+        if (response.unauthorized) {
+          setIsUserMfaSetup(false);
+          setIsUnauthorizedRole(true);
         }
+
+        setIsProcessing(false);
       }
     } catch (err) {
-      if (!abortCont.current.signal.aborted) {
+      if (!cancel.current) {
         setIsProcessing(false);
         setAppMessage(err.message);
         setAppSeverity('error');
         setAppSnackOpen(true);
       }
     }
-  }, [
-    apiHost,
-    navigate,
-    setAppMessage,
-    setAppSeverity,
-    setAppSnackOpen,
-    setIsAdmin,
-    setIsUnauthorizedRole,
-    setIsUserMfaSetup,
-    userEmail,
-    userOTP,
-    visitorID,
-  ]);
+  }, [setAppMessage, setAppSeverity, setAppSnackOpen, setIsUnauthorizedRole, setIsUserMfaSetup, userOTP]);
 
   const handleOtpChange = async (newValue) => {
     setUserOTP(newValue);
@@ -180,9 +134,9 @@ const SetupMFA = () => {
 
   useEffect(() => {
     return () => {
-      if (abortCont.current) abortCont.current.abort();
+      cancel.current = true;
     };
-  }, [abortCont]);
+  }, []);
 
   return (
     <Container sx={{ marginTop: '20px' }}>
@@ -195,9 +149,13 @@ const SetupMFA = () => {
           margin: '20px 0',
         }}
       >
-        {isReEnrollMFA
-          ? '<strong>Important:</strong> We have updated the MFA verification system. First, delete the previous sws2apps account created on Microsoft Authenticator or Google Authenticator. Then, choose on which device do you want to finalize the setup of the new verification code.'
-          : 'Two-factor authentication from the program Microsoft Authenticator or Google Authenticator is required. Then choose on which device do you want to do the setup'}
+        <Markup
+          content={
+            isReEnrollMFA
+              ? '<strong>Important:</strong> We have updated the MFA verification system. First, delete the previous sws2apps account created on <em>Microsoft Authenticator</em> or <em>Google Authenticator</em>. Then, choose on which device do you want to finalize the setup of the new verification code.'
+              : 'Two-factor authentication from the program <em>Microsoft Authenticator</em> or <em>Google Authenticator</em> is required. Then choose on which device do you want to do the setup.'
+          }
+        />
       </Typography>
 
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -213,9 +171,7 @@ const SetupMFA = () => {
         </Tabs>
       </Box>
       <TabPanel value={tabValue} index={0}>
-        <Typography sx={{ marginBottom: '15px' }}>
-          You may continue the setup when one of the two programs above has been installed on your device.
-        </Typography>
+        <Typography sx={{ marginBottom: '15px' }}>This device</Typography>
         <Button variant="contained" target="_blank" rel="noopener" href={qrCodePath}>
           Setup
         </Button>
@@ -247,13 +203,15 @@ const SetupMFA = () => {
           </Box>
         )}
 
-        {!isNoQR && (
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            {imgPath.length > 0 && <img className="qrcode" src={imgPath} alt="QR Code 2FA" />}
-          </Box>
-        )}
+        {!isNoQR && <Box>{imgPath.length > 0 && <img className="qrcode" src={imgPath} alt="QR Code 2FA" />}</Box>}
 
-        <Link component="button" underline="none" variant="body1" onClick={() => setIsNoQR(!isNoQR)}>
+        <Link
+          component="button"
+          underline="none"
+          variant="body1"
+          onClick={() => setIsNoQR(!isNoQR)}
+          sx={{ marginTop: '15px' }}
+        >
           {isNoQR ? 'Scan QR Code instead' : 'I cannot scan this QR Code'}
         </Link>
       </TabPanel>
@@ -262,7 +220,7 @@ const SetupMFA = () => {
         Then, enter below the OTP code generated from the app
       </Typography>
 
-      <Box sx={{ width: '300px' }}>
+      <Box sx={{ width: '100%', maxWidth: '450px', marginTop: '20px' }}>
         <MuiOtpInput
           value={userOTP}
           onChange={handleOtpChange}

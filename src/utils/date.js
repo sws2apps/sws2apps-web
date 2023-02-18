@@ -5,5 +5,5 @@ export const getLongDate = (varDate) => {
 };
 
 export const formatLastSeen = (last_seen) => {
-  return last_seen ? dateFormat(new Date(last_seen), 'mm/dd/yyyy hh:MM:ss') : '';
+  return last_seen ? dateFormat(new Date(last_seen), 'mm/dd/yyyy HH:MM:ss') : '';
 };
