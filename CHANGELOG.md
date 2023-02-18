@@ -1,3 +1,10 @@
+## [2.6.1](https://github.com/sws2apps/sws2apps-web/compare/v2.6.0...v2.6.1) (2023-02-18)
+
+
+### Bug Fixes
+
+* **cd:** add missing env ([b1249d3](https://github.com/sws2apps/sws2apps-web/commit/b1249d3f5f5b4cdb8e21a7ec4a1352d43ff34b2d))
+
 # [2.6.0](https://github.com/sws2apps/sws2apps-web/compare/v2.5.0...v2.6.0) (2023-02-18)
 
 
