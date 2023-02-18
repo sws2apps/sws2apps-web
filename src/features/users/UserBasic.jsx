@@ -7,21 +7,24 @@ import GradeIcon from '@mui/icons-material/Grade';
 import PersonIcon from '@mui/icons-material/Person';
 import SecurityIcon from '@mui/icons-material/Security';
 import Typography from '@mui/material/Typography';
+import emailIcon from '../../img/email.svg';
+import githubIcon from '../../img/github.svg';
+import googleIcon from '../../img/google.svg';
+import microsoftIcon from '../../img/microsoft.svg';
+import yahooIcon from '../../img/yahoo.svg';
 
 const UserBasic = ({ user }) => {
   const [status, setStatus] = useState(true);
 
+  const getUserAccountIcon = () => {
+    if (user.auth_provider === 'email' || user.auth_provider === 'password') return emailIcon;
+    if (user.auth_provider === 'github.com') return githubIcon;
+    if (user.auth_provider === 'google.com') return googleIcon;
+    if (user.auth_provider === 'microsoft.com') return microsoftIcon;
+    if (user.auth_provider === 'yahoo.com') return yahooIcon;
+  };
+
   useEffect(() => {
-    if (user.disabled && user.global_role !== 'pocket') {
-      setStatus(false);
-      return;
-    }
-
-    if (!user.emailVerified && user.global_role !== 'pocket') {
-      setStatus(false);
-      return;
-    }
-
     if (!user.mfaEnabled && user.global_role !== 'pocket') {
       setStatus(false);
       return;
@@ -55,9 +58,24 @@ const UserBasic = ({ user }) => {
             gap: '5px',
           }}
         >
+          {user.global_role !== 'pocket' && (
+            <Box sx={{ width: '50px', display: 'flex', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  backgroundColor: 'white',
+                  padding: '10px',
+                  marginLeft: '1px',
+                  borderRadius: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <img alt="Account Provider Icon" src={getUserAccountIcon()} style={{ width: '18px', height: '18px' }} />
+              </Box>
+            </Box>
+          )}
+
           {status && <Chip color="success" icon={<CheckCircleIcon />} label="Healthy Account" />}
-          {user.global_role !== 'pocket' && user.disabled && <Chip label="Disabled" />}
-          {user.global_role !== 'pocket' && !user.emailVerified && <Chip label="Needs verification" />}
           {user.global_role !== 'pocket' && !user.mfaEnabled && <Chip label="MFA Verification" />}
         </Box>
       </Box>

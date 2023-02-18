@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import UserAutoLogin from '../features/userAutoLogin';
 import RootModal from './RootModal';
 import NavBar from './NavBar';
 import { UserSignOut } from '../features/userSignOut';
@@ -34,8 +33,6 @@ const Layout = () => {
     <RootModal>
       <NavBar />
       <Box sx={{ padding: '10px' }}>
-        <UserAutoLogin />
-
         {isAppClosing && <UserSignOut />}
 
         <Suspense fallback={<WaitingPage />}>

@@ -77,16 +77,6 @@ export const isUserSignUpState = atom({
   default: true,
 });
 
-export const isEmailNotVerifiedState = atom({
-  key: 'isEmailNotVerified',
-  default: false,
-});
-
-export const isEmailBlockedState = atom({
-  key: 'isEmailBlocked',
-  default: false,
-});
-
 export const visitorIDState = atom({
   key: 'visitorID',
   default: '',

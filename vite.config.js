@@ -6,11 +6,11 @@ import eslint from 'vite-plugin-eslint';
 export default defineConfig({
   plugins: [react(), eslint()],
   server: {
-    port: 4040,
+    port: 4060,
     host: true,
   },
   preview: {
-    port: 4040,
+    port: 4060,
   },
   build: {
     chunkSizeWarningLimit: 2000,

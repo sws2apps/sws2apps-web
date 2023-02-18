@@ -9,17 +9,14 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { appMessageState, appSeverityState, appSnackOpenState } from '../../states/notification';
 import {
-  apiHostState,
   isAdminState,
   isReEnrollMFAState,
   isUnauthorizedRoleState,
   isUserMfaSetupState,
   isUserMfaVerifyState,
-  qrCodePathState,
-  secretTokenPathState,
-  userEmailState,
   visitorIDState,
 } from '../../states/main';
+import { apiHandleVerifyOTP } from '../../api/auth';
 
 const matchIsNumeric = (text) => {
   return !isNaN(Number(text));
@@ -30,8 +27,9 @@ const validateChar = (value, index) => {
 };
 
 const VerifyMFA = () => {
-  const abortCont = useRef();
   const navigate = useNavigate();
+
+  const cancel = useRef();
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [userOTP, setUserOTP] = useState('');
@@ -43,12 +41,8 @@ const VerifyMFA = () => {
   const setIsUnauthorizedRole = useSetRecoilState(isUnauthorizedRoleState);
   const setIsReEnrollMFA = useSetRecoilState(isReEnrollMFAState);
   const setIsUserMfaSetup = useSetRecoilState(isUserMfaSetupState);
-  const setQrCodePath = useSetRecoilState(qrCodePathState);
-  const setSecretTokenPath = useSetRecoilState(secretTokenPathState);
   const setIsAdmin = useSetRecoilState(isAdminState);
 
-  const apiHost = useRecoilValue(apiHostState);
-  const userEmail = useRecoilValue(userEmailState);
   const visitorID = useRecoilValue(visitorIDState);
 
   const handleOtpChange = async (newValue) => {
@@ -57,57 +51,32 @@ const VerifyMFA = () => {
 
   const handleVerifyOTP = useCallback(async () => {
     try {
-      abortCont.current = new AbortController();
+      setIsProcessing(true);
+      cancel.current = false;
 
-      if (userOTP.length === 6) {
-        setIsProcessing(true);
-        const reqPayload = {
-          token: userOTP,
-        };
+      const response = await apiHandleVerifyOTP(userOTP, false);
 
-        if (apiHost !== '') {
-          const res = await fetch(`${apiHost}api/mfa/verify-token`, {
-            method: 'POST',
-            signal: abortCont.current.signal,
-            headers: {
-              'Content-Type': 'application/json',
-              visitorid: visitorID,
-              email: userEmail,
-            },
-            body: JSON.stringify(reqPayload),
-          });
-
-          const data = await res.json();
-          if (res.status === 200) {
-            if (data.global_role === 'admin') {
-              localStorage.setItem('email', userEmail);
-              setIsAdmin(true);
-              navigate('/');
-              return;
-            }
-
-            setIsProcessing(false);
-            setIsUserMfaVerify(false);
-            setIsUnauthorizedRole(true);
-          } else {
-            if (data.message) {
-              setIsProcessing(false);
-              setAppMessage(data.message);
-              setAppSeverity('warning');
-              setAppSnackOpen(true);
-            } else {
-              setSecretTokenPath(data.secret);
-              setQrCodePath(data.qrCode);
-              setIsReEnrollMFA(true);
-              setIsUserMfaSetup(true);
-              setIsProcessing(false);
-              setIsUserMfaVerify(false);
-            }
-          }
+      if (!cancel.current) {
+        if (response.isSuccess) {
+          setIsAdmin(true);
+          navigate('/');
         }
+
+        if (response.unauthorized) {
+          setIsUserMfaVerify(false);
+          setIsUnauthorizedRole(true);
+        }
+
+        if (response.reenroll) {
+          setIsReEnrollMFA(true);
+          setIsUserMfaSetup(true);
+          setIsUserMfaVerify(false);
+        }
+
+        setIsProcessing(false);
       }
     } catch (err) {
-      if (!abortCont.current.signal.aborted) {
+      if (!cancel.current) {
         setIsProcessing(false);
         setAppMessage(err.message);
         setAppSeverity('error');
@@ -115,7 +84,6 @@ const VerifyMFA = () => {
       }
     }
   }, [
-    apiHost,
     navigate,
     setAppMessage,
     setAppSeverity,
@@ -125,11 +93,7 @@ const VerifyMFA = () => {
     setIsUnauthorizedRole,
     setIsUserMfaSetup,
     setIsUserMfaVerify,
-    setQrCodePath,
-    setSecretTokenPath,
-    userEmail,
     userOTP,
-    visitorID,
   ]);
 
   useEffect(() => {
@@ -140,9 +104,9 @@ const VerifyMFA = () => {
 
   useEffect(() => {
     return () => {
-      if (abortCont.current) abortCont.current.abort();
+      cancel.current = true;
     };
-  }, [abortCont]);
+  }, []);
 
   useEffect(() => {
     const handlePaste = (e) => {
@@ -160,8 +124,10 @@ const VerifyMFA = () => {
   return (
     <Container sx={{ marginTop: '20px' }}>
       <Typography variant="h4" sx={{ marginBottom: '15px' }}>
-        MFA verification
+        Let’s make sure that it is you
       </Typography>
+
+      <Typography sx={{ marginBottom: '15px' }}>Enter below a code from the authenticator app</Typography>
 
       <Box sx={{ width: '100%', maxWidth: '450px', marginTop: '20px' }}>
         <MuiOtpInput

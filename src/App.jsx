@@ -15,11 +15,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import PrivateRoute from './components/PrivateRoot';
 
 // lazy loading
-const Announcements = lazy(() => import('./pages/Announcements'));
-const AnnouncementDetails = lazy(() => import('./pages/AnnouncementDetails'));
 const CongregationDetails = lazy(() => import('./pages/CongregationDetails'));
-const CongregationRequestDetails = lazy(() => import('./pages/CongregationRequestDetails'));
-const CongregationRequests = lazy(() => import('./pages/CongregationRequests'));
 const Congregations = lazy(() => import('./pages/Congregations'));
 const CongregationsLocations = lazy(() => import('./pages/CongregationsLocations'));
 const Startup = lazy(() => import('./pages/Startup'));
@@ -63,26 +59,6 @@ const App = () => {
           children: [
             { path: '/', element: <DashboardMenu /> },
             {
-              path: '/announcements',
-              element: <Announcements />,
-            },
-            {
-              path: '/announcements/:id',
-              element: <AnnouncementDetails />,
-            },
-            {
-              path: '/announcements/new',
-              element: <AnnouncementDetails />,
-            },
-            {
-              path: '/congregations/requests',
-              element: <CongregationRequests />,
-            },
-            {
-              path: '/congregations/requests/:id',
-              element: <CongregationRequestDetails />,
-            },
-            {
               path: '/congregations',
               element: <Congregations />,
             },
@@ -120,7 +96,7 @@ const App = () => {
     // get visitor ID and check if there is an active connection
     const getUserID = async () => {
       const fpPromise = FingerprintJS.load({
-        apiKey: 'XwmESck7zm6PZAfspXbs',
+        apiKey: import.meta.env.VITE_FINGERPRINT_API_CLIENT_KEY,
       });
 
       let visitorId = '';

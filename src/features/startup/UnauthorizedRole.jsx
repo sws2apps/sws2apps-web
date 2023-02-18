@@ -17,16 +17,9 @@ const UnauthorizedRole = () => {
 
   return (
     <Container sx={{ marginTop: '20px' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <ReportProblemIcon
-          color="error"
-          sx={{
-            fontSize: '40px',
-            cursor: 'pointer',
-          }}
-        />
-        <Typography variant="h5">Unauthorized account</Typography>
-      </Box>
+      <Typography variant="h4" sx={{ marginBottom: '15px' }}>
+        Unauthorized account
+      </Typography>
 
       <Box
         sx={{
@@ -37,17 +30,19 @@ const UnauthorizedRole = () => {
           margin: '30px 0',
         }}
       >
-        <Typography>
-          You do not have yet the required role to use this application. Please contact the site administrator if you
-          believe you should have access.
-        </Typography>
+        <ReportProblemIcon
+          color="error"
+          sx={{
+            fontSize: '60px',
+            cursor: 'pointer',
+          }}
+        />
+        <Typography>You do not have yet the required role to access the administration panel.</Typography>
       </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant="contained" onClick={handleSignIn}>
-          OK
-        </Button>
-      </Box>
+      <Button variant="contained" onClick={handleSignIn}>
+        OK
+      </Button>
     </Container>
   );
 };
