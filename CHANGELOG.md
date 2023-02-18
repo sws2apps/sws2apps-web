@@ -1,3 +1,10 @@
+## [2.6.2](https://github.com/sws2apps/sws2apps-web/compare/v2.6.1...v2.6.2) (2023-02-18)
+
+
+### Bug Fixes
+
+* **firebase:** update csp values ([3eb8989](https://github.com/sws2apps/sws2apps-web/commit/3eb8989c8a55b27243594afbaf91515958f94a48))
+
 ## [2.6.1](https://github.com/sws2apps/sws2apps-web/compare/v2.6.0...v2.6.1) (2023-02-18)
 
 
