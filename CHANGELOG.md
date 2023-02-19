@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/sws2apps/sws2apps-web/compare/v2.6.3...v2.7.0) (2023-02-19)
+
+
+### Features
+
+* **congregation:** allow admin to assign congregation to an user ([54e3fa5](https://github.com/sws2apps/sws2apps-web/commit/54e3fa5b2ff51c685fd174e67261c83fe9946d2f))
+
 ## [2.6.3](https://github.com/sws2apps/sws2apps-web/compare/v2.6.2...v2.6.3) (2023-02-19)
 
 
