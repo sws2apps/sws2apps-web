@@ -1,4 +1,4 @@
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
 import { promiseSetRecoil } from 'recoil-outside';
 import { qrCodePathState, secretTokenPathState } from '../states/main';
 import { appMessageState, appSeverityState, appSnackOpenState } from '../states/notification';
@@ -67,7 +67,13 @@ export const apiHandleVerifyOTP = async (userOTP) => {
 
         const data = await res.json();
         if (res.status === 200) {
-          return { isSuccess: true };
+          if (data.global_role === 'admin') {
+            return { isSuccess: true };
+          }
+
+          const auth = await getAuth();
+          await signOut(auth);
+          return { unauthorized: true };
         } else {
           if (data.message) {
             await promiseSetRecoil(appMessageState, data.message);
