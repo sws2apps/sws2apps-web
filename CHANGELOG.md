@@ -1,3 +1,10 @@
+## [2.6.3](https://github.com/sws2apps/sws2apps-web/compare/v2.6.2...v2.6.3) (2023-02-19)
+
+
+### Bug Fixes
+
+* **auth:** handle undefined global role ([67d9c84](https://github.com/sws2apps/sws2apps-web/commit/67d9c849ba6bad1a2bc86acafa107cd09eb8d010))
+
 ## [2.6.2](https://github.com/sws2apps/sws2apps-web/compare/v2.6.1...v2.6.2) (2023-02-18)
 
 
