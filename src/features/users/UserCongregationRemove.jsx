@@ -11,7 +11,8 @@ import { appMessageState, appSeverityState, appSnackOpenState } from '../../stat
 import { rootModalOpenState } from '../../states/main';
 import { handleAdminLogout } from '../../utils/admin';
 import UserActionConfirmation from './UserActionConfirmation';
-import { apiCongregationRemoveUser, apiFetchUsers } from '../../utils/api';
+import { apiCongregationRemoveUser } from '../../api/congregation';
+import { apiFetchUsers } from '../../api/users';
 
 const UserCongregationRemove = ({ user, tmpUser, setTmpUser }) => {
   const queryClient = useQueryClient();
@@ -106,7 +107,9 @@ const UserCongregationRemove = ({ user, tmpUser, setTmpUser }) => {
           }}
         >
           <Box sx={{ marginRight: '30px' }}>
-            <Typography sx={{ fontWeight: 'bold' }}>{tmpUser.cong_name}</Typography>
+            <Typography sx={{ fontWeight: 'bold' }}>
+              {tmpUser.cong_country} - {tmpUser.cong_name}
+            </Typography>
             <Typography>{tmpUser.cong_number}</Typography>
           </Box>
           <Box>

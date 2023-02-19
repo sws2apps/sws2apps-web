@@ -1,10 +1,10 @@
+import { getAuth, signOut } from 'firebase/auth';
 import { promiseSetRecoil } from 'recoil-outside';
-import { isAdminState, qrCodePathState, secretTokenPathState, userEmailState, userPasswordState } from '../states/main';
+import { isAdminState, qrCodePathState, secretTokenPathState } from '../states/main';
 
 export const handleAdminLogout = async () => {
-  localStorage.removeItem('email');
-  await promiseSetRecoil(userPasswordState, '');
-  await promiseSetRecoil(userEmailState, '');
+  const auth = await getAuth();
+  if (auth) await signOut(auth);
   await promiseSetRecoil(qrCodePathState, '');
   await promiseSetRecoil(secretTokenPathState, '');
   await promiseSetRecoil(isAdminState, false);

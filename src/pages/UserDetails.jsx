@@ -33,7 +33,7 @@ const UserDetails = () => {
       <Box sx={{ marginTop: '20px', padding: '10px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
         <UserBasic user={user} />
         <UserAccountDetails user={user} />
-        {user.cong_id !== '' && <UserCongregation user={user} />}
+        <UserCongregation user={user} />
       </Box>
     </Box>
   );

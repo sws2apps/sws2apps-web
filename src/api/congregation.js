@@ -1,13 +1,29 @@
 import { getAuth } from 'firebase/auth';
-import { promiseGetRecoil } from 'recoil-outside';
-import { apiHostState, userEmailState, visitorIDState } from '../states/main';
+import { getProfile } from './common';
 
-const getProfile = async () => {
-  const apiHost = await promiseGetRecoil(apiHostState);
-  const userEmail = await promiseGetRecoil(userEmailState);
-  const visitorID = await promiseGetRecoil(visitorIDState);
+export const apiFetchCountries = async () => {
+  const { apiHost, visitorID } = await getProfile();
 
-  return { apiHost, userEmail, visitorID };
+  try {
+    if (apiHost !== '') {
+      const auth = await getAuth();
+      const user = auth.currentUser;
+
+      const res = await fetch(`${apiHost}api/congregations/countries`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          uid: user.uid,
+          visitorid: visitorID,
+        },
+      });
+      const data = await res.json();
+
+      return { status: res.status, data };
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 export const apiFetchCongregations = async (id) => {
@@ -22,8 +38,8 @@ export const apiFetchCongregations = async (id) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          visitorid: visitorID,
           uid: user.uid,
+          visitorid: visitorID,
         },
       });
       return res.json();
@@ -33,80 +49,36 @@ export const apiFetchCongregations = async (id) => {
   }
 };
 
-export const apiCongregationDelete = async (id) => {
+export const apiFetchCongregationsByCountry = async (country, name) => {
   const { apiHost, visitorID } = await getProfile();
 
   try {
-    if (apiHost !== '') {
+    if (name && apiHost !== '') {
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/admin/congregations/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          visitorid: visitorID,
-          uid: user.uid,
-        },
-      });
-      const data = await res.json();
-
-      return { status: res.status, data };
-    }
-  } catch (err) {
-    throw new Error(err);
-  }
-};
-
-export const apiFetchUsers = async (id) => {
-  const { apiHost, visitorID } = await getProfile();
-
-  try {
-    if (apiHost !== '') {
-      const auth = await getAuth();
-      const user = auth.currentUser;
-
-      const res = await fetch(`${apiHost}api/admin/users`, {
+      const res = await fetch(`${apiHost}api/congregations/list-by-country`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          visitorid: visitorID,
           uid: user.uid,
-        },
-      });
-      return res.json();
-    }
-  } catch (err) {
-    throw new Error(err);
-  }
-};
-
-export const apiUserTokenRevoke = async (id) => {
-  const { apiHost, visitorID } = await getProfile();
-
-  try {
-    if (apiHost !== '') {
-      const auth = await getAuth();
-      const user = auth.currentUser;
-
-      const res = await fetch(`${apiHost}api/admin/users/${id}/revoke-token`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
           visitorid: visitorID,
-          uid: user.uid,
+          country,
+          name,
         },
       });
       const data = await res.json();
 
       return { status: res.status, data };
     }
+
+    return [];
   } catch (err) {
     throw new Error(err);
   }
 };
 
-export const apiUserDelete = async (id) => {
+export const apiCongregationAddUser = async (cong_country, cong_name, cong_number, user_uid, user_role) => {
   const { apiHost, visitorID } = await getProfile();
 
   try {
@@ -114,13 +86,14 @@ export const apiUserDelete = async (id) => {
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/admin/users/${id}`, {
-        method: 'DELETE',
+      const res = await fetch(`${apiHost}api/admin/congregations/add-user`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          visitorid: visitorID,
           uid: user.uid,
+          visitorid: visitorID,
         },
+        body: JSON.stringify({ cong_country, cong_name, cong_number, user_uid, user_role }),
       });
       const data = await res.json();
 
@@ -157,32 +130,6 @@ export const apiCongregationRemoveUser = async (cong_id, user_id) => {
   }
 };
 
-export const apiCongregationAddUser = async (cong_id, user_uid, user_role) => {
-  const { apiHost, visitorID } = await getProfile();
-
-  try {
-    if (apiHost !== '') {
-      const auth = await getAuth();
-      const user = auth.currentUser;
-
-      const res = await fetch(`${apiHost}api/admin/congregations/${cong_id}/add-user`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          visitorid: visitorID,
-          uid: user.uid,
-        },
-        body: JSON.stringify({ user_uid, user_role }),
-      });
-      const data = await res.json();
-
-      return { status: res.status, data };
-    }
-  } catch (err) {
-    throw new Error(err);
-  }
-};
-
 export const apiCongregationUserUpdateRole = async (cong_id, user_uid, user_role) => {
   const { apiHost, visitorID } = await getProfile();
 
@@ -209,7 +156,7 @@ export const apiCongregationUserUpdateRole = async (cong_id, user_uid, user_role
   }
 };
 
-export const apiFetchCountries = async () => {
+export const apiCongregationDelete = async (id) => {
   const { apiHost, visitorID } = await getProfile();
 
   try {
@@ -217,8 +164,8 @@ export const apiFetchCountries = async () => {
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/admin/geo/`, {
-        method: 'GET',
+      const res = await fetch(`${apiHost}api/admin/congregations/${id}`, {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           visitorid: visitorID,
