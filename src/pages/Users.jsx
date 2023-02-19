@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { apiFetchUsers } from '../utils/api';
 import { UserCard } from '../features/users';
+import { apiFetchUsers } from '../api/users';
 
 const Users = () => {
   const { isLoading, data } = useQuery({

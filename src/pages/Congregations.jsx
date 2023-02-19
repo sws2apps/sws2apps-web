@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { apiFetchCongregations } from '../utils/api';
 import { CongregationCard } from '../features/congregations';
+import { apiFetchCongregations } from '../api/congregation';
 
 const Congregations = () => {
   const { isLoading, data } = useQuery({

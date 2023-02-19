@@ -11,7 +11,8 @@ import Typography from '@mui/material/Typography';
 import { appMessageState, appSeverityState, appSnackOpenState } from '../../states/notification';
 import { rootModalOpenState } from '../../states/main';
 import { handleAdminLogout } from '../../utils/admin';
-import { apiCongregationUserUpdateRole, apiFetchCongregations, apiFetchUsers } from '../../utils/api';
+import { apiCongregationUserUpdateRole, apiFetchCongregationsByCountry } from '../../api/congregation';
+import { apiFetchUsers } from '../../api/users';
 
 const styles = {
   checkbox: {
@@ -36,9 +37,9 @@ const CongregationMemberRole = ({ user, tmpUser, setTmpUser }) => {
   const handleCheckAdmin = (value) => {
     let role = [];
     if (value) {
-      role = [...user.cong_role, 'admin'];
+      role = [...tmpUser.cong_role, 'admin'];
     } else {
-      role = user.cong_role.filter((role) => role !== 'admin');
+      role = tmpUser.cong_role.filter((role) => role !== 'admin');
     }
 
     setTmpUser((prev) => {
@@ -49,9 +50,9 @@ const CongregationMemberRole = ({ user, tmpUser, setTmpUser }) => {
   const handleCheckLMMO = (value) => {
     let role = [];
     if (value) {
-      role = [...user.cong_role, 'lmmo'];
+      role = [...tmpUser.cong_role, 'lmmo'];
     } else {
-      role = user.cong_role.filter((role) => role !== 'lmmo');
+      role = tmpUser.cong_role.filter((role) => role !== 'lmmo');
     }
 
     setTmpUser((prev) => {
@@ -62,9 +63,9 @@ const CongregationMemberRole = ({ user, tmpUser, setTmpUser }) => {
   const handleCheckLMMOAssistant = (value) => {
     let role = [];
     if (value) {
-      role = [...user.cong_role, 'lmmo-backup'];
+      role = [...tmpUser.cong_role, 'lmmo-backup'];
     } else {
-      role = user.cong_role.filter((role) => role !== 'lmmo-backup');
+      role = tmpUser.cong_role.filter((role) => role !== 'lmmo-backup');
     }
 
     setTmpUser((prev) => {
@@ -75,9 +76,9 @@ const CongregationMemberRole = ({ user, tmpUser, setTmpUser }) => {
   const handleCheckViewMeetingSchedule = (value) => {
     let role = [];
     if (value) {
-      role = [...user.cong_role, 'view_meeting_schedule'];
+      role = [...tmpUser.cong_role, 'view_meeting_schedule'];
     } else {
-      role = user.cong_role.filter((role) => role !== 'view_meeting_schedule');
+      role = tmpUser.cong_role.filter((role) => role !== 'view_meeting_schedule');
     }
 
     setTmpUser((prev) => {
@@ -98,7 +99,7 @@ const CongregationMemberRole = ({ user, tmpUser, setTmpUser }) => {
         });
         await queryClient.prefetchQuery({
           queryKey: ['congregations'],
-          queryFn: apiFetchCongregations,
+          queryFn: apiFetchCongregationsByCountry,
         });
         setAppMessage('User roles updated successfully');
         setAppSeverity('info');

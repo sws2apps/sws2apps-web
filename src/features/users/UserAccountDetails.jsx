@@ -9,8 +9,8 @@ import Typography from '@mui/material/Typography';
 import UserActionConfirmation from './UserActionConfirmation';
 import { appMessageState, appSeverityState, appSnackOpenState } from '../../states/notification';
 import { rootModalOpenState } from '../../states/main';
-import { apiFetchUsers, apiUserDelete, apiUserTokenRevoke } from '../../utils/api';
 import { handleAdminLogout } from '../../utils/admin';
+import { apiFetchUsers, apiUserDelete, apiUserTokenRevoke } from '../../api/users';
 
 const UserAccountDetails = ({ user }) => {
   const queryClient = useQueryClient();

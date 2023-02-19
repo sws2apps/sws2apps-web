@@ -12,8 +12,8 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { appMessageState, appSeverityState, appSnackOpenState } from '../../states/notification';
 import { rootModalOpenState } from '../../states/main';
-import { apiCongregationDelete, apiFetchCongregations } from '../../utils/api';
 import { handleAdminLogout } from '../../utils/admin';
+import { apiCongregationDelete, apiFetchCongregations } from '../../api/congregation';
 
 const CongregationCard = ({ congregation }) => {
   const navigate = useNavigate();
@@ -47,10 +47,10 @@ const CongregationCard = ({ congregation }) => {
           queryKey: ['congregations'],
           queryFn: apiFetchCongregations,
         });
-        setAppMessage('Congregation account approved and created');
+        setAppMessage('Congregation deleted successfully');
         setAppSeverity('info');
         setAppSnackOpen(true);
-        navigate('/congregations/requests');
+        navigate('/congregations');
       } else if (status === 403) {
         handleClearAdmin();
       } else {
