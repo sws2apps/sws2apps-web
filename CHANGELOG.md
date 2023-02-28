@@ -1,3 +1,14 @@
+# [2.8.0](https://github.com/sws2apps/sws2apps-web/compare/v2.7.0...v2.8.0) (2023-02-28)
+
+
+### Features
+
+* **deps:** bump @mui/material from 5.11.9 to 5.11.10 ([8850ed3](https://github.com/sws2apps/sws2apps-web/commit/8850ed311859d5451ff3fe89903c916696511934))
+* **deps:** bump @mui/x-date-pickers from 5.0.19 to 5.0.20 ([1f9baf1](https://github.com/sws2apps/sws2apps-web/commit/1f9baf1ffb31350676c57c20882be2e2bf050f77))
+* **deps:** bump @tanstack/react-query from 4.24.6 to 4.24.9 ([b7f284d](https://github.com/sws2apps/sws2apps-web/commit/b7f284d9f0c7538f06b12ce4ea145157016b0453))
+* **deps:** bump @tanstack/react-query from 4.24.9 to 4.24.10 ([de3c3f3](https://github.com/sws2apps/sws2apps-web/commit/de3c3f344fd22aee97f3bb98564cef48437742d4))
+* **deps:** bump react-router-dom from 6.8.1 to 6.8.2 ([493796f](https://github.com/sws2apps/sws2apps-web/commit/493796fdc08e64241acc1f07e1d6643b1fd57c95))
+
 # [2.7.0](https://github.com/sws2apps/sws2apps-web/compare/v2.6.3...v2.7.0) (2023-02-19)
 
 
