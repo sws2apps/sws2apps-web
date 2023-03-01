@@ -1,3 +1,17 @@
+# [2.9.0](https://github.com/sws2apps/sws2apps-web/compare/v2.8.0...v2.9.0) (2023-03-01)
+
+
+### Bug Fixes
+
+* **csp:** update default-src value ([d77abc4](https://github.com/sws2apps/sws2apps-web/commit/d77abc40df7943c74c2e3a86371c4c5d343ecb4e))
+
+
+### Features
+
+* **deps:** bump @mui/icons-material from 5.11.9 to 5.11.11 ([aab3e68](https://github.com/sws2apps/sws2apps-web/commit/aab3e68bcb4d7c9e911fb7ddf6697aab02249715))
+* **deps:** bump @mui/lab from 5.0.0-alpha.120 to 5.0.0-alpha.121 ([b7d8b9e](https://github.com/sws2apps/sws2apps-web/commit/b7d8b9e7203808cdab5f7574a2feae165b392772))
+* **deps:** bump @mui/material from 5.11.10 to 5.11.11 ([beae9aa](https://github.com/sws2apps/sws2apps-web/commit/beae9aa60b82f1c5b88d1ff0aaadf6188ff010cb))
+
 # [2.8.0](https://github.com/sws2apps/sws2apps-web/compare/v2.7.0...v2.8.0) (2023-02-28)
 
 
