@@ -1,3 +1,11 @@
+# [2.10.0](https://github.com/sws2apps/sws2apps-web/compare/v2.9.0...v2.10.0) (2023-03-04)
+
+
+### Features
+
+* **deps:** bump firebase from 9.17.1 to 9.17.2 ([31f04ab](https://github.com/sws2apps/sws2apps-web/commit/31f04ab25909d920b0215a0731fe81fb47de4f21))
+* **deps:** bump recoil from 0.7.6 to 0.7.7 ([17f0552](https://github.com/sws2apps/sws2apps-web/commit/17f05524810a52966d9637bd47dc54fab8b1b4bb))
+
 # [2.9.0](https://github.com/sws2apps/sws2apps-web/compare/v2.8.0...v2.9.0) (2023-03-01)
 
 
