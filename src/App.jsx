@@ -118,7 +118,7 @@ const App = () => {
         setApiHost('http://localhost:8000/');
       }
     } else {
-      setApiHost('https://sws2apps.onrender.com/');
+      setApiHost('https://sws2apps-api.eu-4.evennode.com/');
     }
   }, [setApiHost]);
 
