@@ -118,7 +118,7 @@ const App = () => {
 				setApiHost('http://localhost:8000/');
 			}
 		} else {
-			setApiHost('https://www.sws2apps.com/');
+			setApiHost('https://api.sws2apps.com/');
 		}
 	}, [setApiHost]);
 
