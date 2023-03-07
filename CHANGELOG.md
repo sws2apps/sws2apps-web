@@ -1,3 +1,19 @@
+# [2.11.0](https://github.com/sws2apps/sws2apps-web/compare/v2.10.0...v2.11.0) (2023-03-07)
+
+
+### Bug Fixes
+
+* **web:** update backend url ([5f3db3d](https://github.com/sws2apps/sws2apps-web/commit/5f3db3de6965a7499b6be0791c6d8dc7d6c78d01))
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.121 to 5.0.0-alpha.122 ([b3e1c8c](https://github.com/sws2apps/sws2apps-web/commit/b3e1c8c9e400f53c33a893c5c47e74e579868e86))
+* **deps:** bump @mui/material from 5.11.11 to 5.11.12 ([2470b5c](https://github.com/sws2apps/sws2apps-web/commit/2470b5c4742ad8e2f663ec3cb2a27c8f7b19e4b4))
+* **deps:** bump @mui/x-date-pickers from 5.0.20 to 6.0.0 ([d7ea69b](https://github.com/sws2apps/sws2apps-web/commit/d7ea69bf1b9437cb9b838a9e3ad900b4ebf6cfc6))
+* **deps:** bump @tanstack/react-query from 4.24.10 to 4.26.0 ([1949577](https://github.com/sws2apps/sws2apps-web/commit/1949577046a6e3005cfdbe4e6bc06508d60f1b0f))
+* **deps:** bump @tanstack/react-query from 4.26.0 to 4.26.1 ([6733900](https://github.com/sws2apps/sws2apps-web/commit/6733900209192b2c9c08c125dd5130e2765ff122))
+
 # [2.10.0](https://github.com/sws2apps/sws2apps-web/compare/v2.9.0...v2.10.0) (2023-03-04)
 
 
