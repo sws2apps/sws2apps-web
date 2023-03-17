@@ -1,3 +1,17 @@
+# [2.12.0](https://github.com/sws2apps/sws2apps-web/compare/v2.11.0...v2.12.0) (2023-03-17)
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.122 to 5.0.0-alpha.123 ([cd86d25](https://github.com/sws2apps/sws2apps-web/commit/cd86d25e008fd861c1e9073a947062589a2e69d9))
+* **deps:** bump @mui/material from 5.11.12 to 5.11.13 ([0919d55](https://github.com/sws2apps/sws2apps-web/commit/0919d55af71aa21a086d083a4c9771866586cdfe))
+* **deps:** bump @mui/x-date-pickers from 6.0.0 to 6.0.1 ([01289a3](https://github.com/sws2apps/sws2apps-web/commit/01289a349ea69149e8e0c3cb5792e63546bd8313))
+* **deps:** bump @mui/x-date-pickers from 6.0.1 to 6.0.2 ([0102d04](https://github.com/sws2apps/sws2apps-web/commit/0102d040701a971015622c78b137697a13d7803a))
+* **deps:** bump firebase from 9.17.2 to 9.18.0 ([77ed344](https://github.com/sws2apps/sws2apps-web/commit/77ed344232552d5f759ab3ba3a2df6f3a95a7fde))
+* **deps:** bump interweave from 13.0.0 to 13.1.0 ([c6d143b](https://github.com/sws2apps/sws2apps-web/commit/c6d143b5f054bb6b92df27d292d8117a8d763a39))
+* **deps:** bump mui-one-time-password-input from 1.0.4 to 1.1.0 ([fbe05fd](https://github.com/sws2apps/sws2apps-web/commit/fbe05fd073ef73780891cd29c191013255ca05c3))
+* **deps:** bump react-router-dom from 6.8.2 to 6.9.0 ([9c07806](https://github.com/sws2apps/sws2apps-web/commit/9c07806a0b01bf2c348d7c5da702673992504cd7))
+
 # [2.11.0](https://github.com/sws2apps/sws2apps-web/compare/v2.10.0...v2.11.0) (2023-03-07)
 
 
