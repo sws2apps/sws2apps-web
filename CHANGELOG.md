@@ -1,3 +1,10 @@
+# [2.13.0](https://github.com/sws2apps/sws2apps-web/compare/v2.12.0...v2.13.0) (2023-03-20)
+
+
+### Features
+
+* **deps:** bump @tanstack/react-query from 4.26.1 to 4.27.0 ([d293450](https://github.com/sws2apps/sws2apps-web/commit/d293450a17e735559acac78e5ae1839d1bf9072d))
+
 # [2.12.0](https://github.com/sws2apps/sws2apps-web/compare/v2.11.0...v2.12.0) (2023-03-17)
 
 
