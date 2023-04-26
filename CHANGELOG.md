@@ -1,3 +1,18 @@
+# [2.16.0](https://github.com/sws2apps/sws2apps-web/compare/v2.15.0...v2.16.0) (2023-04-26)
+
+
+### Features
+
+* **deps:** bump @fingerprintjs/fingerprintjs-pro from 3.8.2 to 3.8.3 ([9b347b3](https://github.com/sws2apps/sws2apps-web/commit/9b347b3ad1b8dd613fb37a9350f51f55ff878100))
+* **deps:** bump @mui/lab from 5.0.0-alpha.126 to 5.0.0-alpha.127 ([0f69b06](https://github.com/sws2apps/sws2apps-web/commit/0f69b06441f304e0b5d75563f8dcfcbfbf0f9a31))
+* **deps:** bump @mui/lab from 5.0.0-alpha.127 to 5.0.0-alpha.128 ([42875db](https://github.com/sws2apps/sws2apps-web/commit/42875dba662e5b948aadcf83556beea17f670fc1))
+* **deps:** bump @mui/material from 5.12.0 to 5.12.1 ([ab8b502](https://github.com/sws2apps/sws2apps-web/commit/ab8b50256f472716aa532b560d98c709836b8457))
+* **deps:** bump @mui/material from 5.12.1 to 5.12.2 ([8bde48c](https://github.com/sws2apps/sws2apps-web/commit/8bde48c2c0db18e659e91a2cc2ced846d983e18d))
+* **deps:** bump @mui/x-date-pickers from 6.2.0 to 6.2.1 ([2ef14e7](https://github.com/sws2apps/sws2apps-web/commit/2ef14e7af228f88fa1ba86d060156ee8b3dd2ec2))
+* **deps:** bump @tanstack/react-query from 4.29.3 to 4.29.5 ([c55969b](https://github.com/sws2apps/sws2apps-web/commit/c55969bd5271e92862e805392bf8749ff741476f))
+* **deps:** bump firebase from 9.19.1 to 9.20.0 ([bb87aed](https://github.com/sws2apps/sws2apps-web/commit/bb87aedcaf2570e9fe42da104a21df6a9c275c4d))
+* **deps:** bump qrcode from 1.5.1 to 1.5.3 ([6b43fcd](https://github.com/sws2apps/sws2apps-web/commit/6b43fcd8dfd48de11f57f6eddfc8d0cfab7b3c91))
+
 # [2.15.0](https://github.com/sws2apps/sws2apps-web/compare/v2.14.0...v2.15.0) (2023-04-17)
 
 
