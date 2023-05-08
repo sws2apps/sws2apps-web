@@ -1,3 +1,20 @@
+# [2.17.0](https://github.com/sws2apps/sws2apps-web/compare/v2.16.0...v2.17.0) (2023-05-08)
+
+
+### Features
+
+* **deps:** bump @emotion/react from 11.10.6 to 11.10.8 ([6ca37be](https://github.com/sws2apps/sws2apps-web/commit/6ca37be17528eb48e7ec5860c0875c0f91fe8d3b))
+* **deps:** bump @emotion/react from 11.10.8 to 11.11.0 ([b544215](https://github.com/sws2apps/sws2apps-web/commit/b5442154a901a00c877ff72571041e8b08deeeee))
+* **deps:** bump @emotion/styled from 11.10.6 to 11.10.8 ([ed3fe5f](https://github.com/sws2apps/sws2apps-web/commit/ed3fe5f46a04d7ec1a4cde2159edf178bf296d43))
+* **deps:** bump @mui/lab from 5.0.0-alpha.128 to 5.0.0-alpha.129 ([1fcc22e](https://github.com/sws2apps/sws2apps-web/commit/1fcc22e494a254e96040b9522a88c4605fc27407))
+* **deps:** bump @mui/material from 5.12.2 to 5.12.3 ([dcc91ac](https://github.com/sws2apps/sws2apps-web/commit/dcc91ac789f94bb0d4020bc709fb5f2f5f930fe2))
+* **deps:** bump @mui/x-date-pickers from 6.2.1 to 6.3.0 ([1286643](https://github.com/sws2apps/sws2apps-web/commit/1286643d7b63f898585970c6dace4cb5da1e1972))
+* **deps:** bump @mui/x-date-pickers from 6.3.0 to 6.3.1 ([4cc2906](https://github.com/sws2apps/sws2apps-web/commit/4cc29069653c35c18a8f978c65429022598b6ca6))
+* **deps:** bump date-fns from 2.29.3 to 2.30.0 ([e8957d4](https://github.com/sws2apps/sws2apps-web/commit/e8957d48c7520eefb078575bfabaf38aeb4eddbd))
+* **deps:** bump firebase from 9.20.0 to 9.21.0 ([5f28a76](https://github.com/sws2apps/sws2apps-web/commit/5f28a769f3332ec0d699a4c04b35361c68bfad9a))
+* **deps:** bump react-router-dom from 6.10.0 to 6.11.0 ([9b5f9ae](https://github.com/sws2apps/sws2apps-web/commit/9b5f9ae52bef76422ee57293e45b1ef74348eb65))
+* **deps:** bump react-router-dom from 6.11.0 to 6.11.1 ([e15d595](https://github.com/sws2apps/sws2apps-web/commit/e15d595a97046a205e7fcdf5fe9e9803db65f0be))
+
 # [2.16.0](https://github.com/sws2apps/sws2apps-web/compare/v2.15.0...v2.16.0) (2023-04-26)
 
 
