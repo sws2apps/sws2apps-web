@@ -1,3 +1,14 @@
+# [2.18.0](https://github.com/sws2apps/sws2apps-web/compare/v2.17.0...v2.18.0) (2023-05-15)
+
+
+### Features
+
+* **deps:** bump @emotion/styled from 11.10.8 to 11.11.0 ([205b48a](https://github.com/sws2apps/sws2apps-web/commit/205b48af269355b7c3fd394b13b7ce7149727bee))
+* **deps:** bump @mui/material from 5.12.3 to 5.13.0 ([05308ea](https://github.com/sws2apps/sws2apps-web/commit/05308ea31f2c44316d2f5471262261aafd665793))
+* **deps:** bump @mui/x-date-pickers from 6.3.1 to 6.4.0 ([c70a80c](https://github.com/sws2apps/sws2apps-web/commit/c70a80cc1db44357f84fba594b4ec5c2d725a1fb))
+* **deps:** bump @tanstack/react-query from 4.29.5 to 4.29.7 ([674001d](https://github.com/sws2apps/sws2apps-web/commit/674001d620982618c40109e8cd8308599afb84b9))
+* **deps:** bump firebase from 9.21.0 to 9.22.0 ([0a65ffd](https://github.com/sws2apps/sws2apps-web/commit/0a65ffdb774a782bb346e3b5a2f06b6e543f0c04))
+
 # [2.17.0](https://github.com/sws2apps/sws2apps-web/compare/v2.16.0...v2.17.0) (2023-05-08)
 
 
