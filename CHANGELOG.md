@@ -1,3 +1,12 @@
+# [2.19.0](https://github.com/sws2apps/sws2apps-web/compare/v2.18.0...v2.19.0) (2023-05-18)
+
+
+### Features
+
+* **deps:** bump @mui/lab from 5.0.0-alpha.129 to 5.0.0-alpha.130 ([02a656a](https://github.com/sws2apps/sws2apps-web/commit/02a656aba602058b8d404be9f1defed68c254d69))
+* **deps:** bump @mui/material from 5.13.0 to 5.13.1 ([c07d5bd](https://github.com/sws2apps/sws2apps-web/commit/c07d5bdfa6614d384d07c2a14afabdee4411f057))
+* **deps:** bump react-router-dom from 6.11.1 to 6.11.2 ([cd38f66](https://github.com/sws2apps/sws2apps-web/commit/cd38f667d70f3550c1566cc5c2ceb411ecb1e5b1))
+
 # [2.18.0](https://github.com/sws2apps/sws2apps-web/compare/v2.17.0...v2.18.0) (2023-05-15)
 
 
