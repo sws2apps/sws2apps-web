@@ -13,6 +13,8 @@ export const apiFetchCountries = async () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          appclient: 'admin',
+					appversion: import.meta.env.PACKAGE_VERSION,
           uid: user.uid,
           visitorid: visitorID,
         },
@@ -38,6 +40,8 @@ export const apiFetchCongregations = async (id) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          appclient: 'admin',
+					appversion: import.meta.env.PACKAGE_VERSION,
           uid: user.uid,
           visitorid: visitorID,
         },
@@ -61,6 +65,8 @@ export const apiFetchCongregationsByCountry = async (country, name) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          appclient: 'admin',
+					appversion: import.meta.env.PACKAGE_VERSION,
           uid: user.uid,
           visitorid: visitorID,
           country,
@@ -90,6 +96,8 @@ export const apiCongregationAddUser = async (cong_country, cong_name, cong_numbe
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          appclient: 'admin',
+					appversion: import.meta.env.PACKAGE_VERSION,
           uid: user.uid,
           visitorid: visitorID,
         },
@@ -116,6 +124,8 @@ export const apiCongregationRemoveUser = async (cong_id, user_id) => {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          appclient: 'admin',
+					appversion: import.meta.env.PACKAGE_VERSION,
           visitorid: visitorID,
           uid: user.uid,
         },
@@ -142,6 +152,8 @@ export const apiCongregationUserUpdateRole = async (cong_id, user_uid, user_role
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          appclient: 'admin',
+					appversion: import.meta.env.PACKAGE_VERSION,
           visitorid: visitorID,
           uid: user.uid,
         },
@@ -168,6 +180,8 @@ export const apiCongregationDelete = async (id) => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          appclient: 'admin',
+					appversion: import.meta.env.PACKAGE_VERSION,
           visitorid: visitorID,
           uid: user.uid,
         },

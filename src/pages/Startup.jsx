@@ -55,6 +55,8 @@ const Startup = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            appclient: 'admin',
+            appversion: import.meta.env.PACKAGE_VERSION,
             visitorid: visitorID,
             uid: user.uid,
           },
@@ -75,6 +77,8 @@ const Startup = () => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              appclient: 'admin',
+              appversion: import.meta.env.PACKAGE_VERSION,
               uid: user.uid,
             },
             body: JSON.stringify({ visitorid: visitorID }),

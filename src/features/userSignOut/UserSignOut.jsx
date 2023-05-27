@@ -51,6 +51,8 @@ const UserSignOut = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            appclient: 'admin',
+            appversion: import.meta.env.PACKAGE_VERSION,
             visitorid: visitorID,
             uid: user.uid,
           },

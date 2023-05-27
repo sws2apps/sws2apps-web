@@ -13,6 +13,8 @@ export const apiFetchUsers = async (id) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          appclient: 'admin',
+					appversion: import.meta.env.PACKAGE_VERSION,
           visitorid: visitorID,
           uid: user.uid,
         },
@@ -36,6 +38,8 @@ export const apiUserTokenRevoke = async (id) => {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          appclient: 'admin',
+					appversion: import.meta.env.PACKAGE_VERSION,
           visitorid: visitorID,
           uid: user.uid,
         },
@@ -61,6 +65,8 @@ export const apiUserDelete = async (id) => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          appclient: 'admin',
+					appversion: import.meta.env.PACKAGE_VERSION,
           visitorid: visitorID,
           uid: user.uid,
         },
