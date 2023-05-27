@@ -1,3 +1,20 @@
+# [2.20.0](https://github.com/sws2apps/sws2apps-web/compare/v2.19.0...v2.20.0) (2023-05-27)
+
+
+### Bug Fixes
+
+* **web:** include app client and version on request ([e5af7a2](https://github.com/sws2apps/sws2apps-web/commit/e5af7a23164a3bfed8172ec46d606256ab74c402))
+
+
+### Features
+
+* **deps:** bump @fontsource/roboto from 4.5.8 to 5.0.0 ([8e43165](https://github.com/sws2apps/sws2apps-web/commit/8e43165888fc0f02e3fa950b67f4506c169a7fd1))
+* **deps:** bump @fontsource/roboto from 5.0.0 to 5.0.1 ([ce3d7b2](https://github.com/sws2apps/sws2apps-web/commit/ce3d7b210b98a4485fc7e4927a6f28eddc5e4837))
+* **deps:** bump @mui/lab from 5.0.0-alpha.130 to 5.0.0-alpha.131 ([04ef719](https://github.com/sws2apps/sws2apps-web/commit/04ef719ec36486f44a2ade3b70fc7b20fff282ae))
+* **deps:** bump @mui/material from 5.13.1 to 5.13.2 ([6203c28](https://github.com/sws2apps/sws2apps-web/commit/6203c28e662590b0b43d686285770b0482fd5b2d))
+* **deps:** bump @mui/x-date-pickers from 6.4.0 to 6.5.0 ([a6acab0](https://github.com/sws2apps/sws2apps-web/commit/a6acab067093323d70e685973f050857b6256675))
+* **deps:** bump firebase from 9.22.0 to 9.22.1 ([bf6e8e5](https://github.com/sws2apps/sws2apps-web/commit/bf6e8e59274316dcfd26adecb8b36baf2a3b464c))
+
 # [2.19.0](https://github.com/sws2apps/sws2apps-web/compare/v2.18.0...v2.19.0) (2023-05-18)
 
 
