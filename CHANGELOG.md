@@ -1,3 +1,28 @@
+# [2.21.0](https://github.com/sws2apps/sws2apps-web/compare/v2.20.0...v2.21.0) (2023-06-15)
+
+
+### Features
+
+* **deps:** bump @emotion/react from 11.11.0 to 11.11.1 ([f7619fc](https://github.com/sws2apps/sws2apps-web/commit/f7619fcce5e894bd71e4f77b7703bcb66ce719e8))
+* **deps:** bump @fontsource/roboto from 5.0.1 to 5.0.2 ([857b399](https://github.com/sws2apps/sws2apps-web/commit/857b399c713cd6d2cc9756ec0a8a71ab1ff5e7a5))
+* **deps:** bump @fontsource/roboto from 5.0.2 to 5.0.3 ([0c29d73](https://github.com/sws2apps/sws2apps-web/commit/0c29d73534184a57344fcaf80ca393f099e41771))
+* **deps:** bump @mui/lab from 5.0.0-alpha.131 to 5.0.0-alpha.132 ([6a6eed2](https://github.com/sws2apps/sws2apps-web/commit/6a6eed2f27df6780e6ce8173e480c6400b9cb548))
+* **deps:** bump @mui/lab from 5.0.0-alpha.132 to 5.0.0-alpha.133 ([8e55d63](https://github.com/sws2apps/sws2apps-web/commit/8e55d63ffc33918e59ffa2b44c321bb4db09bc95))
+* **deps:** bump @mui/lab from 5.0.0-alpha.133 to 5.0.0-alpha.134 ([206cf5b](https://github.com/sws2apps/sws2apps-web/commit/206cf5b2b2f279454175e1e05b7f0a6dc6162b5f))
+* **deps:** bump @mui/material from 5.13.2 to 5.13.3 ([4917109](https://github.com/sws2apps/sws2apps-web/commit/49171094641e3c9f9c234b9a050208b8be9398cd))
+* **deps:** bump @mui/material from 5.13.3 to 5.13.4 ([4530e76](https://github.com/sws2apps/sws2apps-web/commit/4530e76b4b003094dff310a644ac97910f4ff30d))
+* **deps:** bump @mui/material from 5.13.4 to 5.13.5 ([af5ad0c](https://github.com/sws2apps/sws2apps-web/commit/af5ad0c91975ec306ee37c67f6dc6ad9426fbae2))
+* **deps:** bump @mui/x-date-pickers from 6.5.0 to 6.6.0 ([61d67dc](https://github.com/sws2apps/sws2apps-web/commit/61d67dc285fe349f983441b1815140c4b1653618))
+* **deps:** bump @mui/x-date-pickers from 6.6.0 to 6.7.0 ([7d728da](https://github.com/sws2apps/sws2apps-web/commit/7d728da425452d96c383bd8b9af6acd6fe16da7d))
+* **deps:** bump @tanstack/react-query from 4.29.11 to 4.29.12 ([036e774](https://github.com/sws2apps/sws2apps-web/commit/036e77494eb6d01be3aa832f8da4e81a2aba9b33))
+* **deps:** bump @tanstack/react-query from 4.29.12 to 4.29.13 ([221726f](https://github.com/sws2apps/sws2apps-web/commit/221726f6c78ae8166cbbc67a7839eecd85d612e9))
+* **deps:** bump @tanstack/react-query from 4.29.7 to 4.29.11 ([0c3f884](https://github.com/sws2apps/sws2apps-web/commit/0c3f8846a46d5d54291568cc067e377e2fad4e86))
+* **deps:** bump firebase from 9.22.1 to 9.22.2 ([e4c7a67](https://github.com/sws2apps/sws2apps-web/commit/e4c7a671815d118e4130dd5ca2120818604d3b32))
+* **deps:** bump mui-one-time-password-input from 1.1.0 to 1.1.1 ([da019e0](https://github.com/sws2apps/sws2apps-web/commit/da019e060eb2c45560ebddbc13e5b91bf8b48876))
+* **deps:** bump react-router-dom from 6.11.2 to 6.12.0 ([92a9657](https://github.com/sws2apps/sws2apps-web/commit/92a965727efb8888db2d9105055eb884c3e1c9f6))
+* **deps:** bump react-router-dom from 6.12.0 to 6.12.1 ([76b80ae](https://github.com/sws2apps/sws2apps-web/commit/76b80aec790425b927853c25553d5f818698c5e1))
+* **deps:** bump react-router-dom from 6.12.1 to 6.13.0 ([be662da](https://github.com/sws2apps/sws2apps-web/commit/be662daa5ef08715c4391f36b70e0f1d56392a75))
+
 # [2.20.0](https://github.com/sws2apps/sws2apps-web/compare/v2.19.0...v2.20.0) (2023-05-27)
 
 
