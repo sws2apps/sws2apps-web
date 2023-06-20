@@ -1,10 +1,9 @@
 import { useRecoilState } from 'recoil';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import PublicTalkSource from './PublicTalkSource';
+import PublicTalkEditor from './PublicTalkEditor';
 import { publicTalksListState } from '../../states/congregation';
 import { LANGUAGE_LIST } from '../../constant/langList';
-import PublicTalkVernacular from './PublicTalkVernacular';
 import { apiUpdatePublicTalk } from '../../api/congregation';
 
 const PublicTalkContainer = ({ isNew, talk_number }) => {
@@ -13,11 +12,12 @@ const PublicTalkContainer = ({ isNew, talk_number }) => {
   const nextTalkNumber = publicTalks.length + 1;
   const publicTalk = publicTalks.find((record) => record.talk_number === talk_number);
 
-  const handleSaveSource = async (value) => {
+  const handleSave = async (language, value) => {
     const currentTalk = isNew ? nextTalkNumber : talk_number;
     const modifDate = new Date().toISOString();
+    language = language.toUpperCase();
 
-    const { status } = await apiUpdatePublicTalk('E', currentTalk, value, modifDate);
+    const { status } = await apiUpdatePublicTalk(language, currentTalk, value, modifDate);
 
     if (status === 200) {
       const newTalks = structuredClone(publicTalks);
@@ -27,31 +27,7 @@ const PublicTalkContainer = ({ isNew, talk_number }) => {
         newTalks.push({ talk_number: currentTalk });
       }
       foundTalk = newTalks.find((record) => record.talk_number === currentTalk);
-      foundTalk.E = { title: value, modified: modifDate };
-
-      newTalks.sort((a, b) => {
-        return a.talk_number > b.talk_number ? 1 : -1;
-      });
-
-      setPublicTalks(newTalks);
-    }
-  };
-
-  const handleSaveVernacular = async (language, value) => {
-    const currentTalk = isNew ? nextTalkNumber : talk_number;
-    const modifDate = new Date().toISOString();
-
-    const { status } = await apiUpdatePublicTalk(language.toUpperCase(), currentTalk, value, modifDate);
-
-    if (status === 200) {
-      const newTalks = structuredClone(publicTalks);
-
-      let foundTalk = newTalks.find((record) => record.talk_number === currentTalk);
-      if (!foundTalk) {
-        newTalks.push({ talk_number: currentTalk });
-      }
-      foundTalk = newTalks.find((record) => record.talk_number === currentTalk);
-      foundTalk[language.toUpperCase()] = { title: value, modified: new Date().toISOString() };
+      foundTalk[language] = { title: value, modified: modifDate };
 
       newTalks.sort((a, b) => {
         return a.talk_number > b.talk_number ? 1 : -1;
@@ -79,15 +55,15 @@ const PublicTalkContainer = ({ isNew, talk_number }) => {
         {isNew ? nextTalkNumber : publicTalk.talk_number}
       </Typography>
       <Box sx={{ flexGrow: 1 }}>
-        <PublicTalkSource isNew={isNew} public_talk={publicTalk} handleSaveSource={handleSaveSource} />
+        <PublicTalkEditor isNew={isNew} public_talk={publicTalk} handleSaveData={handleSave} language="E" />
         {!isNew && (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
             {LANGUAGE_LIST.filter((lang) => !lang.isSource).map((language) => (
-              <PublicTalkVernacular
+              <PublicTalkEditor
                 language={language.code}
                 key={language.code}
                 public_talk={publicTalk}
-                handleSaveVernacular={handleSaveVernacular}
+                handleSaveData={handleSave}
               />
             ))}
           </Box>

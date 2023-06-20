@@ -8,9 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-const PublicTalkSource = ({ isNew, handleSaveSource, public_talk }) => {
+const PublicTalkEditor = ({ isNew, handleSaveData, public_talk, language }) => {
   const [isEdit, setIsEdit] = useState(isNew);
-  const [source, setSource] = useState('');
+  const [title, setTitle] = useState('');
 
   const handleEdit = () => {
     setIsEdit(true);
@@ -18,20 +18,20 @@ const PublicTalkSource = ({ isNew, handleSaveSource, public_talk }) => {
 
   const handleCancel = () => {
     setIsEdit(false);
-    if (isNew) setSource('');
-    if (!isNew) setSource(public_talk.E?.title || '');
+    if (isNew) setTitle('');
+    if (!isNew) setTitle(public_talk[language.toUpperCase()]?.title || '');
   };
 
   const handleSave = () => {
-    handleSaveSource(source);
+    handleSaveData(title);
     setIsEdit(isNew ? true : false);
-    setSource('');
+    setTitle('');
   };
 
   useEffect(() => {
-    if (isNew) setSource('');
-    if (!isNew) setSource(public_talk.E?.title || '');
-  }, [isNew, public_talk]);
+    if (isNew) setTitle('');
+    if (!isNew) setTitle(public_talk[language.toUpperCase()]?.title || '');
+  }, [isNew, public_talk, language]);
 
   useEffect(() => {
     setIsEdit(isNew);
@@ -40,6 +40,24 @@ const PublicTalkSource = ({ isNew, handleSaveSource, public_talk }) => {
   return (
     <Box>
       <Box sx={{ display: 'flex', gap: '5px', alignItems: 'flex-start' }}>
+        {language !== 'E' && (
+          <Typography
+            sx={{
+              backgroundColor: '#3f51b5',
+              width: '60px',
+              textAlign: 'center',
+              fontSize: '20px',
+              fontWeight: 'bold',
+              color: 'white',
+              padding: '0 10px',
+              height: '40px',
+              lineHeight: '40px',
+              borderRadius: '5px',
+            }}
+          >
+            {language.toUpperCase()}
+          </Typography>
+        )}
         <Box sx={{ width: '100%' }}>
           <TextField
             label="Source"
@@ -47,18 +65,19 @@ const PublicTalkSource = ({ isNew, handleSaveSource, public_talk }) => {
             size="small"
             fullWidth
             InputProps={{ readOnly: !isEdit }}
-            value={source}
-            onChange={(e) => setSource(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
-          {!isNew && public_talk.E && (
+          {!isNew && public_talk[language] && (
             <Typography
               align="right"
               sx={{ fontSize: '14px', marginTop: '8px', fontStyle: 'italic', marginRight: '10px' }}
             >
-              {new Date(public_talk.E.modified).toLocaleString()}
+              {new Date(public_talk[language].modified).toLocaleString()}
             </Typography>
           )}
         </Box>
+
         {!isEdit && (
           <IconButton aria-label="edit" color="info" onClick={handleEdit}>
             <EditIcon />
@@ -80,4 +99,4 @@ const PublicTalkSource = ({ isNew, handleSaveSource, public_talk }) => {
   );
 };
 
-export default PublicTalkSource;
+export default PublicTalkEditor;
