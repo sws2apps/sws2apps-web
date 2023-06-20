@@ -1,3 +1,12 @@
+# [2.22.0](https://github.com/sws2apps/sws2apps-web/compare/v2.21.0...v2.22.0) (2023-06-20)
+
+
+### Features
+
+* **deps:** bump @mui/x-date-pickers from 6.7.0 to 6.8.0 ([9efbe13](https://github.com/sws2apps/sws2apps-web/commit/9efbe13804ac803d72e09870279d25d3b8958b59))
+* **deps:** bump @tanstack/react-query from 4.29.13 to 4.29.14 ([2ed32e5](https://github.com/sws2apps/sws2apps-web/commit/2ed32e5a0f18f9ca821af3631e7f5259bcea9807))
+* **web:** remove fingerprintjs dependency ([c48f426](https://github.com/sws2apps/sws2apps-web/commit/c48f426573ade7ac384e4a172974c47f04ab986e))
+
 # [2.21.0](https://github.com/sws2apps/sws2apps-web/compare/v2.20.0...v2.21.0) (2023-06-15)
 
 
