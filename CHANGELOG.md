@@ -1,3 +1,10 @@
+## [2.24.1](https://github.com/sws2apps/sws2apps-web/compare/v2.24.0...v2.24.1) (2023-06-20)
+
+
+### Bug Fixes
+
+* **congregations:** update updater function parameters ([2118293](https://github.com/sws2apps/sws2apps-web/commit/2118293f7fc48b64f04e6548cdf24ee63eeddceb))
+
 # [2.24.0](https://github.com/sws2apps/sws2apps-web/compare/v2.23.0...v2.24.0) (2023-06-20)
 
 
