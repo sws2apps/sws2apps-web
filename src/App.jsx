@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import FingerprintJS from '@fingerprintjs/fingerprintjs-pro';
+import { ClientJS } from 'clientjs';
 import CssBaseline from '@mui/material/CssBaseline';
 import { apiHostState, isAdminState, isLightThemeState, isOnlineState, visitorIDState } from './states/main';
 import { InternetChecker } from './features/internetChecker';
@@ -89,26 +89,14 @@ const App = () => {
 
   useEffect(() => {
     // get visitor ID and check if there is an active connection
-    const getUserID = async () => {
-      const fpPromise = FingerprintJS.load({
-        apiKey: import.meta.env.VITE_FINGERPRINT_API_CLIENT_KEY,
-      });
-
-      let visitorId = '';
-
-      do {
-        const fp = await fpPromise;
-        const result = await fp.get();
-        visitorId = result.visitorId;
-      } while (visitorId.length === 0);
-
+    const getUserID = () => {
+      const client = new ClientJS();
+      const visitorId = client.getFingerprint();
       setVisitorID(visitorId);
     };
 
-    if (isOnline) {
-      getUserID();
-    }
-  }, [setVisitorID, isOnline]);
+    getUserID();
+  }, [setVisitorID]);
 
   useEffect(() => {
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
