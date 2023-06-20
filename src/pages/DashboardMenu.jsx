@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import Box from '@mui/material/Box';
 import GroupIcon from '@mui/icons-material/Group';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import MenuCard from '../components/MenuCard';
 
 const DashboardMenu = () => {
@@ -14,6 +15,11 @@ const DashboardMenu = () => {
             title: 'Congregations',
             icon: <HomeWorkIcon />,
             navigateTo: '/congregations',
+          },
+          {
+            title: 'Public Talks',
+            icon: <ListAltIcon />,
+            navigateTo: '/public-talks',
           },
         ],
       },
