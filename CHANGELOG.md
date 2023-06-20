@@ -1,3 +1,10 @@
+# [2.23.0](https://github.com/sws2apps/sws2apps-web/compare/v2.22.0...v2.23.0) (2023-06-20)
+
+
+### Features
+
+* **web:** use fingerprintjs open-source ([bacfab3](https://github.com/sws2apps/sws2apps-web/commit/bacfab3942886819700b8d964cbeb8266b1bf63a))
+
 # [2.22.0](https://github.com/sws2apps/sws2apps-web/compare/v2.21.0...v2.22.0) (2023-06-20)
 
 
