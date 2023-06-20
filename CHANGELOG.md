@@ -1,3 +1,10 @@
+# [2.24.0](https://github.com/sws2apps/sws2apps-web/compare/v2.23.0...v2.24.0) (2023-06-20)
+
+
+### Features
+
+* **web:** add public talks editor ([d2352a3](https://github.com/sws2apps/sws2apps-web/commit/d2352a364fad47b790998cf6cdbd04b4799fbf4c))
+
 # [2.23.0](https://github.com/sws2apps/sws2apps-web/compare/v2.22.0...v2.23.0) (2023-06-20)
 
 
