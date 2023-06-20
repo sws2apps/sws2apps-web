@@ -1,3 +1,10 @@
+## [2.24.2](https://github.com/sws2apps/sws2apps-web/compare/v2.24.1...v2.24.2) (2023-06-20)
+
+
+### Bug Fixes
+
+* **congregations:** update placeholder for title in public talk editor ([3c9aaf8](https://github.com/sws2apps/sws2apps-web/commit/3c9aaf8e8be85495562a0a633e0c6ffc0c8ae93a))
+
 ## [2.24.1](https://github.com/sws2apps/sws2apps-web/compare/v2.24.0...v2.24.1) (2023-06-20)
 
 
