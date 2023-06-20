@@ -25,7 +25,7 @@ const PublicTalkEditor = ({ isNew, handleSaveData, public_talk, language }) => {
 	const handleSave = () => {
 		handleSaveData(language, title);
 		setIsEdit(isNew ? true : false);
-		setTitle('');
+		if (isNew) setTitle('');
 	};
 
 	useEffect(() => {
@@ -60,7 +60,7 @@ const PublicTalkEditor = ({ isNew, handleSaveData, public_talk, language }) => {
 				)}
 				<Box sx={{ width: '100%' }}>
 					<TextField
-						label='Source'
+						label={language === 'E' ? 'Source' : ''}
 						variant='outlined'
 						size='small'
 						fullWidth
