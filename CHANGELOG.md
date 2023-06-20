@@ -1,3 +1,10 @@
+## [2.24.3](https://github.com/sws2apps/sws2apps-web/compare/v2.24.2...v2.24.3) (2023-06-20)
+
+
+### Bug Fixes
+
+* **pages:** update queryKey for public talks fetch ([8f3f94e](https://github.com/sws2apps/sws2apps-web/commit/8f3f94e42acc38d6b9074e9ee0022e95de65895a))
+
 ## [2.24.2](https://github.com/sws2apps/sws2apps-web/compare/v2.24.1...v2.24.2) (2023-06-20)
 
 
