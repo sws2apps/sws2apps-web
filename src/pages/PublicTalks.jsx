@@ -9,7 +9,7 @@ import { apiFetchPublicTalks } from '../api/congregation';
 
 const PublicTalks = () => {
   const { isLoading, data } = useQuery({
-    queryKey: ['congregations'],
+    queryKey: ['public_talks'],
     queryFn: apiFetchPublicTalks,
   });
 
