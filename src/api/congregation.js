@@ -246,3 +246,30 @@ export const apiUpdatePublicTalk = async (language, talkNumber, talkTitle, talkM
     throw new Error(err);
   }
 };
+
+export const apiBulkUpdatePublicTalks = async (language, talks) => {
+  const { apiHost, visitorID } = await getProfile();
+
+  try {
+    if (apiHost !== '') {
+      const auth = await getAuth();
+      const user = auth.currentUser;
+
+      const res = await fetch(`${apiHost}api/admin/public-talks`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          appclient: 'admin',
+          appversion: import.meta.env.PACKAGE_VERSION,
+          uid: user.uid,
+          visitorid: visitorID,
+        },
+        body: JSON.stringify({ language, talks }),
+      });
+
+      return { status: res.status, data: res.json() };
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+};

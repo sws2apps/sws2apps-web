@@ -9,91 +9,94 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 const PublicTalkEditor = ({ isNew, handleSaveData, public_talk, language }) => {
-	const [isEdit, setIsEdit] = useState(isNew);
-	const [title, setTitle] = useState('');
+  const [isEdit, setIsEdit] = useState(isNew);
+  const [title, setTitle] = useState('');
 
-	const handleEdit = () => {
-		setIsEdit(true);
-	};
+  const handleEdit = () => {
+    setIsEdit(true);
+  };
 
-	const handleCancel = () => {
-		setIsEdit(false);
-		if (isNew) setTitle('');
-		if (!isNew) setTitle(public_talk[language.toUpperCase()]?.title || '');
-	};
+  const handleCancel = () => {
+    setIsEdit(false);
+    if (isNew) setTitle('');
+    if (!isNew) setTitle(public_talk[language.toUpperCase()]?.title || '');
+  };
 
-	const handleSave = () => {
-		handleSaveData(language, title);
-		setIsEdit(isNew ? true : false);
-		if (isNew) setTitle('');
-	};
+  const handleSave = () => {
+    handleSaveData(language, title);
+    setIsEdit(isNew ? true : false);
+    if (isNew) setTitle('');
+  };
 
-	useEffect(() => {
-		if (isNew) setTitle('');
-		if (!isNew) setTitle(public_talk[language.toUpperCase()]?.title || '');
-	}, [isNew, public_talk, language]);
+  useEffect(() => {
+    if (isNew) setTitle('');
+    if (!isNew) setTitle(public_talk[language.toUpperCase()]?.title || '');
+  }, [isNew, public_talk, language]);
 
-	useEffect(() => {
-		setIsEdit(isNew);
-	}, [isNew]);
+  useEffect(() => {
+    setIsEdit(isNew);
+  }, [isNew]);
 
-	return (
-		<Box>
-			<Box sx={{ display: 'flex', gap: '5px', alignItems: 'flex-start' }}>
-				{language !== 'E' && (
-					<Typography
-						sx={{
-							backgroundColor: '#3f51b5',
-							width: '60px',
-							textAlign: 'center',
-							fontSize: '20px',
-							fontWeight: 'bold',
-							color: 'white',
-							padding: '0 10px',
-							height: '40px',
-							lineHeight: '40px',
-							borderRadius: '5px',
-						}}
-					>
-						{language.toUpperCase()}
-					</Typography>
-				)}
-				<Box sx={{ width: '100%' }}>
-					<TextField
-						label={language === 'E' ? 'Source' : ''}
-						variant='outlined'
-						size='small'
-						fullWidth
-						InputProps={{ readOnly: !isEdit }}
-						value={title}
-						onChange={(e) => setTitle(e.target.value)}
-					/>
-					{!isNew && public_talk[language] && (
-						<Typography align='right' sx={{ fontSize: '14px', marginTop: '8px', fontStyle: 'italic', marginRight: '10px' }}>
-							{new Date(public_talk[language].modified).toLocaleString()}
-						</Typography>
-					)}
-				</Box>
+  return (
+    <Box>
+      <Box sx={{ display: 'flex', gap: '5px', alignItems: 'flex-start' }}>
+        {language !== 'E' && (
+          <Typography
+            sx={{
+              backgroundColor: '#3f51b5',
+              width: '60px',
+              textAlign: 'center',
+              fontSize: '20px',
+              fontWeight: 'bold',
+              color: 'white',
+              padding: '0 10px',
+              height: '40px',
+              lineHeight: '40px',
+              borderRadius: '5px',
+            }}
+          >
+            {language.toUpperCase()}
+          </Typography>
+        )}
+        <Box sx={{ width: '100%' }}>
+          <TextField
+            label={language === 'E' ? 'Source' : ''}
+            variant="outlined"
+            size="small"
+            fullWidth
+            InputProps={{ readOnly: !isEdit }}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          {!isNew && public_talk[language.toUpperCase()] && (
+            <Typography
+              align="right"
+              sx={{ fontSize: '14px', marginTop: '8px', fontStyle: 'italic', marginRight: '10px' }}
+            >
+              {new Date(public_talk[language.toUpperCase()].modified).toLocaleString()}
+            </Typography>
+          )}
+        </Box>
 
-				{!isEdit && (
-					<IconButton aria-label='edit' color='info' onClick={handleEdit}>
-						<EditIcon />
-					</IconButton>
-				)}
-				{isEdit && !isNew && (
-					<IconButton aria-label='save' color='error' onClick={handleCancel}>
-						<ClearIcon />
-					</IconButton>
-				)}
-				{isEdit && (
-					<IconButton aria-label='save' color='success' onClick={handleSave}>
-						{isNew && <AddCircleIcon />}
-						{!isNew && <CheckIcon />}
-					</IconButton>
-				)}
-			</Box>
-		</Box>
-	);
+        {!isEdit && (
+          <IconButton aria-label="edit" color="info" onClick={handleEdit}>
+            <EditIcon />
+          </IconButton>
+        )}
+        {isEdit && !isNew && (
+          <IconButton aria-label="save" color="error" onClick={handleCancel}>
+            <ClearIcon />
+          </IconButton>
+        )}
+        {isEdit && (
+          <IconButton aria-label="save" color="success" onClick={handleSave}>
+            {isNew && <AddCircleIcon />}
+            {!isNew && <CheckIcon />}
+          </IconButton>
+        )}
+      </Box>
+    </Box>
+  );
 };
 
 export default PublicTalkEditor;
