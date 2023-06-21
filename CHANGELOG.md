@@ -1,3 +1,11 @@
+# [2.25.0](https://github.com/sws2apps/sws2apps-web/compare/v2.24.3...v2.25.0) (2023-06-21)
+
+
+### Features
+
+* **congregations:** add public talk import ([ace2e3d](https://github.com/sws2apps/sws2apps-web/commit/ace2e3d97df139325cd184ee12dda128e9d33152))
+* **deps:** bump @tanstack/react-query from 4.29.14 to 4.29.15 ([308a6cd](https://github.com/sws2apps/sws2apps-web/commit/308a6cd17f818cef276b3be79d79ab0c95f91e25))
+
 ## [2.24.3](https://github.com/sws2apps/sws2apps-web/compare/v2.24.2...v2.24.3) (2023-06-20)
 
 
