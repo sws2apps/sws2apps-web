@@ -107,13 +107,13 @@ const App = () => {
 
   useEffect(() => {
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-      if (import.meta.env.VITE_API_REMOTE_URL) {
-        setApiHost(import.meta.env.VITE_API_REMOTE_URL);
+      if (import.meta.env.VITE_BACKEND_API) {
+        setApiHost(import.meta.env.VITE_BACKEND_API);
       } else {
         setApiHost('http://localhost:8000/');
       }
     } else {
-      setApiHost('https://sws2apps.herokuapp.com/');
+      setApiHost('https://api.sws2apps.com/');
     }
   }, [setApiHost]);
 
