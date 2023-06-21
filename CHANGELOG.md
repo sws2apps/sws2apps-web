@@ -1,3 +1,10 @@
+## [2.25.1](https://github.com/sws2apps/sws2apps-web/compare/v2.25.0...v2.25.1) (2023-06-21)
+
+
+### Bug Fixes
+
+* **congregations:** rerender public talk import component ([5b0df34](https://github.com/sws2apps/sws2apps-web/commit/5b0df34c43dda7d2f2e614f116b7eaf7e2af7dc7))
+
 # [2.25.0](https://github.com/sws2apps/sws2apps-web/compare/v2.24.3...v2.25.0) (2023-06-21)
 
 
