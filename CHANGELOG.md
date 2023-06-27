@@ -1,3 +1,15 @@
+# [2.26.0](https://github.com/sws2apps/sws2apps-web/compare/v2.25.1...v2.26.0) (2023-06-27)
+
+
+### Features
+
+* **deps:** bump @mui/material from 5.13.5 to 5.13.6 ([86972c1](https://github.com/sws2apps/sws2apps-web/commit/86972c101148ade13f8d322a674a3333afba0ea8))
+* **deps:** bump @mui/x-date-pickers from 6.8.0 to 6.9.0 ([6d37349](https://github.com/sws2apps/sws2apps-web/commit/6d37349e8d9ed30effac860dfd2c5f58b89db0c9))
+* **deps:** bump @tanstack/react-query from 4.29.15 to 4.29.17 ([23a28e8](https://github.com/sws2apps/sws2apps-web/commit/23a28e8770d1a9e2920dbd1e1e8ac2fbef8f0288))
+* **deps:** bump firebase from 9.22.2 to 9.23.0 ([9706fc5](https://github.com/sws2apps/sws2apps-web/commit/9706fc5c677140f7d17bcf2b76bec764e65437ec))
+* **deps:** bump mui-one-time-password-input from 1.1.1 to 1.1.2 ([ec3c01f](https://github.com/sws2apps/sws2apps-web/commit/ec3c01fe0b79ad530ea628906a02b2f524764bed))
+* **deps:** bump react-router-dom from 6.13.0 to 6.14.0 ([148680c](https://github.com/sws2apps/sws2apps-web/commit/148680cf8db5da2441ba5cce2e5a3ff018fd8249))
+
 ## [2.25.1](https://github.com/sws2apps/sws2apps-web/compare/v2.25.0...v2.25.1) (2023-06-21)
 
 
