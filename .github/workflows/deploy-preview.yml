@@ -40,7 +40,6 @@ jobs:
         run: npm run build
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          VITE_FINGERPRINT_API_CLIENT_KEY: ${{ secrets.VITE_FINGERPRINT_API_CLIENT_KEY }}
           VITE_FIREBASE_APIKEY: ${{ secrets.VITE_FIREBASE_APIKEY }}
           VITE_FIREBASE_AUTHDOMAIN: ${{ secrets.VITE_FIREBASE_AUTHDOMAIN }}
           VITE_FIREBASE_PROJECTID: ${{ secrets.VITE_FIREBASE_PROJECTID }}
@@ -56,6 +55,6 @@ jobs:
         if: ${{ steps.check_build.outputs.files_exists == 'true' }}
         uses: sws2apps/firebase-deployment@1351d30f4b2f51140fd421485094b63d36cdc334
         with:
-          workloadIdentityProvider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_PREVIEW }}
-          serviceAccount: ${{ secrets.SERVICE_ACCOUNT_PREVIEW }}
+          workloadIdentityProvider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          serviceAccount: ${{ secrets.SERVICE_ACCOUNT }}
           project: 'dev-sws2apps'

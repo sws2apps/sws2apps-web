@@ -11,7 +11,7 @@ jobs:
     if: ${{ github.repository == 'sws2apps/sws2apps-web' && github.ref == 'refs/heads/main' }}
     environment:
       name: Prod.env
-      url: https://sws2apps-tools.web.app
+      url: https://admin.sws2apps.com
     runs-on: ubuntu-latest
 
     permissions:
@@ -37,7 +37,6 @@ jobs:
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          VITE_FINGERPRINT_API_CLIENT_KEY: ${{ secrets.VITE_FINGERPRINT_API_CLIENT_KEY }}
           VITE_FIREBASE_APIKEY: ${{ secrets.VITE_FIREBASE_APIKEY }}
           VITE_FIREBASE_AUTHDOMAIN: ${{ secrets.VITE_FIREBASE_AUTHDOMAIN }}
           VITE_FIREBASE_PROJECTID: ${{ secrets.VITE_FIREBASE_PROJECTID }}
