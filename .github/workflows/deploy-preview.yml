@@ -13,7 +13,7 @@ jobs:
     name: Build and Deploy for Preview
     if: ${{ github.repository == 'sws2apps/sws2apps-web' && github.ref == 'refs/heads/main' }}
     environment:
-      name: Prod.env
+      name: Preview
       url: https://preview-admin.sws2apps.com
     runs-on: ubuntu-latest
 
