@@ -36,8 +36,8 @@ jobs:
       - name: Install package dependencies
         run: npm ci
 
-      - name: Run Semantic Release to version and build App
-        run: npx semantic-release
+      - name: Build the website
+        run: npm run build
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           VITE_FINGERPRINT_API_CLIENT_KEY: ${{ secrets.VITE_FINGERPRINT_API_CLIENT_KEY }}
