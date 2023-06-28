@@ -24,123 +24,127 @@ const PublicTalks = lazy(() => import('./pages/PublicTalks'));
 
 // creating theme
 const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
+	palette: {
+		mode: 'light',
+	},
 });
 
 const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
+	palette: {
+		mode: 'dark',
+	},
 });
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  const setVisitorID = useSetRecoilState(visitorIDState);
-  const setApiHost = useSetRecoilState(apiHostState);
+	const setVisitorID = useSetRecoilState(visitorIDState);
+	const setApiHost = useSetRecoilState(apiHostState);
 
-  const isLight = useRecoilValue(isLightThemeState);
-  const appSnackOpen = useRecoilValue(appSnackOpenState);
-  const isAdmin = useRecoilValue(isAdminState);
-  const isOnline = useRecoilValue(isOnlineState);
+	const isLight = useRecoilValue(isLightThemeState);
+	const appSnackOpen = useRecoilValue(appSnackOpenState);
+	const isAdmin = useRecoilValue(isAdminState);
+	const isOnline = useRecoilValue(isOnlineState);
 
-  const [activeTheme, setActiveTheme] = useState(darkTheme);
+	const [activeTheme, setActiveTheme] = useState(darkTheme);
 
-  const router = createBrowserRouter([
-    {
-      element: <Layout />,
-      errorElement: <ErrorBoundary />,
-      children: [
-        { path: '/signin', element: <Startup /> },
-        {
-          element: <PrivateRoute isAdmin={isAdmin} />,
-          children: [
-            { path: '/', element: <DashboardMenu /> },
-            {
-              path: '/congregations',
-              element: <Congregations />,
-            },
-            {
-              path: '/congregations/:id',
-              element: <CongregationDetails />,
-            },
-            {
-              path: '/users',
-              element: <Users />,
-            },
-            {
-              path: '/users/:id',
-              element: <UserDetails />,
-            },
-            {
-              path: '/public-talks',
-              element: <PublicTalks />,
-            },
-          ],
-        },
-      ],
-    },
-  ]);
+	const router = createBrowserRouter([
+		{
+			element: <Layout />,
+			errorElement: <ErrorBoundary />,
+			children: [
+				{ path: '/signin', element: <Startup /> },
+				{
+					element: <PrivateRoute isAdmin={isAdmin} />,
+					children: [
+						{ path: '/', element: <DashboardMenu /> },
+						{
+							path: '/congregations',
+							element: <Congregations />,
+						},
+						{
+							path: '/congregations/:id',
+							element: <CongregationDetails />,
+						},
+						{
+							path: '/users',
+							element: <Users />,
+						},
+						{
+							path: '/users/:id',
+							element: <UserDetails />,
+						},
+						{
+							path: '/public-talks',
+							element: <PublicTalks />,
+						},
+					],
+				},
+			],
+		},
+	]);
 
-  useEffect(() => {
-    if (isLight) {
-      setActiveTheme(lightTheme);
-    } else {
-      setActiveTheme(darkTheme);
-    }
-  }, [isLight]);
+	useEffect(() => {
+		if (isLight) {
+			setActiveTheme(lightTheme);
+		} else {
+			setActiveTheme(darkTheme);
+		}
+	}, [isLight]);
 
-  useEffect(() => {
-    // get visitor ID and check if there is an active connection
-    const getUserID = async () => {
-      const fp = await FingerprintJS.load();
-      const result = await fp.get();
+	useEffect(() => {
+		// get visitor ID and check if there is an active connection
+		const getUserID = async () => {
+			const fp = await FingerprintJS.load();
+			const result = await fp.get();
 
-      const visitorId = result.visitorId;
-      setVisitorID(visitorId);
-    };
+			const visitorId = result.visitorId;
+			setVisitorID(visitorId);
+		};
 
-    if (isOnline) getUserID();
-  }, [setVisitorID, isOnline]);
+		if (isOnline) getUserID();
+	}, [setVisitorID, isOnline]);
 
-  useEffect(() => {
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-      if (import.meta.env.VITE_BACKEND_API) {
-        setApiHost(import.meta.env.VITE_BACKEND_API);
-      } else {
-        setApiHost('http://localhost:8000/');
-      }
-    } else {
-      setApiHost('https://api.sws2apps.com/');
-    }
-  }, [setApiHost]);
+	useEffect(() => {
+		if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+			if (import.meta.env.VITE_BACKEND_API) {
+				setApiHost(import.meta.env.VITE_BACKEND_API);
+			} else {
+				setApiHost('http://localhost:8000/');
+			}
+		} else {
+			if (import.meta.env.VITE_BACKEND_API) {
+				setApiHost(import.meta.env.VITE_BACKEND_API);
+			} else {
+				setApiHost('https://api.sws2apps.com/');
+			}
+		}
+	}, [setApiHost]);
 
-  useEffect(() => {
-    if (!indexedDB) {
-      if (!('serviceWorker' in navigator)) {
-        return (
-          <div className="browser-not-supported">
-            You seem to use an unsupported browser to run this website. Make sure that you browser is up to date, or try
-            to use another browser.
-          </div>
-        );
-      }
-    }
-  }, []);
+	useEffect(() => {
+		if (!indexedDB) {
+			if (!('serviceWorker' in navigator)) {
+				return (
+					<div className='browser-not-supported'>
+						You seem to use an unsupported browser to run this website. Make sure that you browser is up to date, or try to use
+						another browser.
+					</div>
+				);
+			}
+		}
+	}, []);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={activeTheme}>
-        <CssBaseline />
-        <InternetChecker />
-        {appSnackOpen && <NotificationWrapper />}
+	return (
+		<QueryClientProvider client={queryClient}>
+			<ThemeProvider theme={activeTheme}>
+				<CssBaseline />
+				<InternetChecker />
+				{appSnackOpen && <NotificationWrapper />}
 
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </QueryClientProvider>
-  );
+				<RouterProvider router={router} />
+			</ThemeProvider>
+		</QueryClientProvider>
+	);
 };
 
 export default App;
