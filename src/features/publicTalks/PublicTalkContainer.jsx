@@ -6,14 +6,13 @@ import { publicTalksListState } from '../../states/congregation';
 import { LANGUAGE_LIST } from '../../constant/langList';
 import { apiUpdatePublicTalk } from '../../api/congregation';
 
-const PublicTalkContainer = ({ isNew, talk_number }) => {
+const PublicTalkContainer = ({ talk_number }) => {
   const [publicTalks, setPublicTalks] = useRecoilState(publicTalksListState);
 
-  const nextTalkNumber = publicTalks.length + 1;
   const publicTalk = publicTalks.find((record) => record.talk_number === talk_number);
 
   const handleSave = async (language, value) => {
-    const currentTalk = isNew ? nextTalkNumber : talk_number;
+    const currentTalk = talk_number;
     const modifDate = new Date().toISOString();
     language = language.toUpperCase();
 
@@ -52,22 +51,20 @@ const PublicTalkContainer = ({ isNew, talk_number }) => {
           borderRadius: '5px',
         }}
       >
-        {isNew ? nextTalkNumber : publicTalk.talk_number}
+        {publicTalk.talk_number}
       </Typography>
       <Box sx={{ flexGrow: 1 }}>
-        <PublicTalkEditor isNew={isNew} public_talk={publicTalk} handleSaveData={handleSave} language="E" />
-        {!isNew && (
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
-            {LANGUAGE_LIST.filter((lang) => !lang.isSource).map((language) => (
-              <PublicTalkEditor
-                language={language.code}
-                key={language.code}
-                public_talk={publicTalk}
-                handleSaveData={handleSave}
-              />
-            ))}
-          </Box>
-        )}
+        <PublicTalkEditor public_talk={publicTalk} handleSaveData={handleSave} language="E" />
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
+          {LANGUAGE_LIST.filter((lang) => !lang.isSource).map((language) => (
+            <PublicTalkEditor
+              language={language.code}
+              key={language.code}
+              public_talk={publicTalk}
+              handleSaveData={handleSave}
+            />
+          ))}
+        </Box>
       </Box>
     </Box>
   );

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Box from '@mui/material/Box';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -8,8 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-const PublicTalkEditor = ({ isNew, handleSaveData, public_talk, language }) => {
-  const [isEdit, setIsEdit] = useState(isNew);
+const PublicTalkEditor = ({ handleSaveData, public_talk, language }) => {
+  const [isEdit, setIsEdit] = useState(false);
   const [title, setTitle] = useState('');
 
   const handleEdit = () => {
@@ -18,24 +17,17 @@ const PublicTalkEditor = ({ isNew, handleSaveData, public_talk, language }) => {
 
   const handleCancel = () => {
     setIsEdit(false);
-    if (isNew) setTitle('');
-    if (!isNew) setTitle(public_talk[language.toUpperCase()]?.title || '');
+    setTitle(public_talk[language.toUpperCase()]?.title || '');
   };
 
   const handleSave = () => {
     handleSaveData(language, title);
-    setIsEdit(isNew ? true : false);
-    if (isNew) setTitle('');
+    setIsEdit(false);
   };
 
   useEffect(() => {
-    if (isNew) setTitle('');
-    if (!isNew) setTitle(public_talk[language.toUpperCase()]?.title || '');
-  }, [isNew, public_talk, language]);
-
-  useEffect(() => {
-    setIsEdit(isNew);
-  }, [isNew]);
+    setTitle(public_talk[language.toUpperCase()]?.title || '');
+  }, [public_talk, language]);
 
   return (
     <Box>
@@ -68,7 +60,7 @@ const PublicTalkEditor = ({ isNew, handleSaveData, public_talk, language }) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          {!isNew && public_talk[language.toUpperCase()] && (
+          {public_talk[language.toUpperCase()] && (
             <Typography
               align="right"
               sx={{ fontSize: '14px', marginTop: '8px', fontStyle: 'italic', marginRight: '10px' }}
@@ -83,15 +75,14 @@ const PublicTalkEditor = ({ isNew, handleSaveData, public_talk, language }) => {
             <EditIcon />
           </IconButton>
         )}
-        {isEdit && !isNew && (
+        {isEdit && (
           <IconButton aria-label="save" color="error" onClick={handleCancel}>
             <ClearIcon />
           </IconButton>
         )}
         {isEdit && (
           <IconButton aria-label="save" color="success" onClick={handleSave}>
-            {isNew && <AddCircleIcon />}
-            {!isNew && <CheckIcon />}
+            <CheckIcon />
           </IconButton>
         )}
       </Box>
