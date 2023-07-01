@@ -1,3 +1,10 @@
+# [2.28.0](https://github.com/sws2apps/sws2apps-web/compare/v2.27.0...v2.28.0) (2023-07-01)
+
+
+### Features
+
+* **congregations:** use pagination when navigating public talks ([62b056d](https://github.com/sws2apps/sws2apps-web/commit/62b056d28082248a0fa546928d2c3992c841f428))
+
 # [2.27.0](https://github.com/sws2apps/sws2apps-web/compare/v2.26.0...v2.27.0) (2023-06-28)
 
 
