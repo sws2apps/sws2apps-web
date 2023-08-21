@@ -26,7 +26,7 @@
     "@mui/lab": "^5.0.0-alpha.140",
     "@mui/material": "^5.14.5",
     "@mui/x-date-pickers": "^6.11.2",
-    "@tanstack/react-query": "^4.32.6",
+    "@tanstack/react-query": "^4.33.0",
     "date-fns": "^2.30.0",
     "dateformat": "^5.0.3",
     "file-select-dialog": "^1.5.4",
