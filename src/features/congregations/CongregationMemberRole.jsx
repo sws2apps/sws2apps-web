@@ -86,6 +86,45 @@ const CongregationMemberRole = ({ user, tmpUser, setTmpUser }) => {
     });
   };
 
+  const handleCheckSecretary = (value) => {
+    let role = [];
+    if (value) {
+      role = [...tmpUser.cong_role, 'secretary'];
+    } else {
+      role = tmpUser.cong_role.filter((role) => role !== 'secretary');
+    }
+
+    setTmpUser((prev) => {
+      return { ...prev, cong_role: role };
+    });
+  };
+
+  const handleCheckCoordinator = (value) => {
+    let role = [];
+    if (value) {
+      role = [...tmpUser.cong_role, 'coordinator'];
+    } else {
+      role = tmpUser.cong_role.filter((role) => role !== 'coordinator');
+    }
+
+    setTmpUser((prev) => {
+      return { ...prev, cong_role: role };
+    });
+  };
+
+  const handleCheckPublicTalkCoordinator = (value) => {
+    let role = [];
+    if (value) {
+      role = [...tmpUser.cong_role, 'public_talk_coordinator'];
+    } else {
+      role = tmpUser.cong_role.filter((role) => role !== 'public_talk_coordinator');
+    }
+
+    setTmpUser((prev) => {
+      return { ...prev, cong_role: role };
+    });
+  };
+
   const handleUpdateRole = async () => {
     try {
       setOpenModal(true);
@@ -153,6 +192,30 @@ const CongregationMemberRole = ({ user, tmpUser, setTmpUser }) => {
           <FormControlLabel
             control={
               <Checkbox
+                checked={tmpUser.cong_role?.includes('coordinator') || false}
+                disabled={tmpUser.global_role === 'pocket'}
+                onChange={(e) => handleCheckCoordinator(e.target.checked)}
+              />
+            }
+            label="Coordinator"
+          />
+        </Grid>
+        <Grid item xs={12} md={6} lg={4} sx={styles.checkbox}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={tmpUser.cong_role?.includes('secretary') || false}
+                disabled={tmpUser.global_role === 'pocket'}
+                onChange={(e) => handleCheckSecretary(e.target.checked)}
+              />
+            }
+            label="Secretary"
+          />
+        </Grid>
+        <Grid item xs={12} md={6} lg={4} sx={styles.checkbox}>
+          <FormControlLabel
+            control={
+              <Checkbox
                 checked={tmpUser.cong_role?.includes('lmmo') || false}
                 disabled={tmpUser.global_role === 'pocket'}
                 onChange={(e) => handleCheckLMMO(e.target.checked)}
@@ -171,6 +234,18 @@ const CongregationMemberRole = ({ user, tmpUser, setTmpUser }) => {
               />
             }
             label="Life and Ministry Meeting Overseer - Assistant"
+          />
+        </Grid>
+        <Grid item xs={12} md={6} lg={4} sx={styles.checkbox}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={tmpUser.cong_role?.includes('public_talk_coordinator') || false}
+                disabled={tmpUser.global_role === 'pocket'}
+                onChange={(e) => handleCheckPublicTalkCoordinator(e.target.checked)}
+              />
+            }
+            label="Public Talk Coordinator"
           />
         </Grid>
         <Grid item xs={12} md={6} lg={4} sx={styles.checkbox}>
