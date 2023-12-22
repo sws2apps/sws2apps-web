@@ -27,7 +27,7 @@
     "@mui/material": "^5.15.1",
     "@mui/x-date-pickers": "^6.18.5",
     "@tanstack/react-query": "^5.14.2",
-    "date-fns": "^3.0.3",
+    "date-fns": "^3.0.5",
     "dateformat": "^5.0.3",
     "file-select-dialog": "^1.5.4",
     "firebase": "^10.7.1",
