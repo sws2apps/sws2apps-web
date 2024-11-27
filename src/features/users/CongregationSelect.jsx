@@ -46,6 +46,7 @@ const CongregationSelect = ({ country, setCongregation }) => {
         }, 2000);
       }
     } catch (err) {
+      console.error(err);
       setIsLoading(false);
     }
 

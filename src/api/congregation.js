@@ -28,7 +28,7 @@ export const apiFetchCountries = async () => {
   }
 };
 
-export const apiFetchCongregations = async (id) => {
+export const apiFetchCongregations = async () => {
   const { apiHost, visitorID } = await getProfile();
 
   try {

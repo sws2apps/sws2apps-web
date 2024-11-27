@@ -1,7 +1,7 @@
 import { getAuth } from 'firebase/auth';
 import { getProfile } from './common';
 
-export const apiFetchUsers = async (id) => {
+export const apiFetchUsers = async () => {
   const { apiHost, visitorID } = await getProfile();
 
   try {
@@ -14,7 +14,7 @@ export const apiFetchUsers = async (id) => {
         headers: {
           'Content-Type': 'application/json',
           appclient: 'admin',
-					appversion: import.meta.env.PACKAGE_VERSION,
+          appversion: import.meta.env.PACKAGE_VERSION,
           visitorid: visitorID,
           uid: user.uid,
         },
@@ -39,7 +39,7 @@ export const apiUserTokenRevoke = async (id) => {
         headers: {
           'Content-Type': 'application/json',
           appclient: 'admin',
-					appversion: import.meta.env.PACKAGE_VERSION,
+          appversion: import.meta.env.PACKAGE_VERSION,
           visitorid: visitorID,
           uid: user.uid,
         },
@@ -66,7 +66,7 @@ export const apiUserDelete = async (id) => {
         headers: {
           'Content-Type': 'application/json',
           appclient: 'admin',
-					appversion: import.meta.env.PACKAGE_VERSION,
+          appversion: import.meta.env.PACKAGE_VERSION,
           visitorid: visitorID,
           uid: user.uid,
         },
