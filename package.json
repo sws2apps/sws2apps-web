@@ -1,7 +1,7 @@
 {
   "name": "sws2apps-web",
   "private": true,
-  "version": "2.32.0",
+  "version": "2.32.1",
   "type": "module",
   "repository": {
     "type": "git",

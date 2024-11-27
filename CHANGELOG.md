@@ -1,3 +1,11 @@
+## [2.32.1](https://github.com/sws2apps/sws2apps-web/compare/v2.32.0...v2.32.1) (2024-11-27)
+
+
+### Bug Fixes
+
+* **web:** remove public talks ([bd0ba43](https://github.com/sws2apps/sws2apps-web/commit/bd0ba439f176a9223cbe1c41e50de35bc1407456))
+* **web:** update api endpoint ([875b63b](https://github.com/sws2apps/sws2apps-web/commit/875b63b7571244371f5fa246c9ba8ce49ed990b6))
+
 # [2.32.0](https://github.com/sws2apps/sws2apps-web/compare/v2.31.0...v2.32.0) (2024-11-27)
 
 
