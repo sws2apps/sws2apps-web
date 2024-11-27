@@ -11,7 +11,7 @@ jobs:
     if: ${{ github.repository == 'sws2apps/sws2apps-web' && github.ref == 'refs/heads/main' }}
     environment:
       name: Prod.env
-      url: https://admin.sws2apps.com
+      url: https://console.sws2apps.com
     runs-on: ubuntu-latest
 
     permissions:
@@ -53,4 +53,4 @@ jobs:
         with:
           workloadIdentityProvider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           serviceAccount: ${{ secrets.SERVICE_ACCOUNT }}
-          project: 'sws2apps-tools'
+          project: 'admin-sws2apps'

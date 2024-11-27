@@ -1,7 +1,7 @@
 {
   "projects": {
-    "production": "sws2apps-tools",
-    "default": "sws2apps-tools"
+    "production": "admin-sws2apps",
+    "default": "admin-sws2apps"
   },
   "targets": {}
 }
