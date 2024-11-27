@@ -47,7 +47,7 @@ const UserSignOut = () => {
 
         await signOut(auth);
 
-        await fetch(`${apiHost}api/users/logout`, {
+        await fetch(`${apiHost}api/v2/users/logout`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -70,31 +70,20 @@ const UserSignOut = () => {
     if (open) {
       handleLogout();
     }
-  }, [
-    open,
-    apiHost,
-    isOnline,
-    setIsAdmin,
-    setOpen,
-    visitorID,
-    navigate,
-    setIsUserMfaVerify,
-    setIsUserMfaSetup,
-    setIsUserSignIn,
-  ]);
+  }, [open, apiHost, isOnline, setIsAdmin, setOpen, visitorID, navigate, setIsUserMfaVerify, setIsUserMfaSetup, setIsUserSignIn]);
 
   return (
     <Box>
       <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby="alert-dialog-close-title"
-        aria-describedby="alert-dialog-description"
+        aria-labelledby='alert-dialog-close-title'
+        aria-describedby='alert-dialog-description'
       >
-        <DialogTitle id="alert-dialog-close-title">Logging out</DialogTitle>
+        <DialogTitle id='alert-dialog-close-title'>Logging out</DialogTitle>
         <DialogContent>
           <CircularProgress
-            color="secondary"
+            color='secondary'
             size={80}
             disableShrink={true}
             sx={{
