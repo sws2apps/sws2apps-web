@@ -16,11 +16,6 @@ const DashboardMenu = () => {
             icon: <HomeWorkIcon />,
             navigateTo: '/congregations',
           },
-          {
-            title: 'Public Talks',
-            icon: <ListAltIcon />,
-            navigateTo: '/public-talks',
-          },
         ],
       },
       {

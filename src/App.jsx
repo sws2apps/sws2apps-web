@@ -74,10 +74,6 @@ const App = () => {
               path: '/users/:id',
               element: <UserDetails />,
             },
-            {
-              path: '/public-talks',
-              element: <PublicTalks />,
-            },
           ],
         },
       ],
@@ -125,9 +121,9 @@ const App = () => {
     if (!indexedDB) {
       if (!('serviceWorker' in navigator)) {
         return (
-          <div className="browser-not-supported">
-            You seem to use an unsupported browser to run this website. Make sure that you browser is up to date, or try
-            to use another browser.
+          <div className='browser-not-supported'>
+            You seem to use an unsupported browser to run this website. Make sure that you browser is up to date, or try to use
+            another browser.
           </div>
         );
       }

@@ -9,7 +9,7 @@ export const apiFetchUsers = async () => {
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/admin/users`, {
+      const res = await fetch(`${apiHost}api/v2/admin/users`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const apiUserTokenRevoke = async (id) => {
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/admin/users/${id}/revoke-token`, {
+      const res = await fetch(`${apiHost}api/v2/admin/users/${id}/revoke-token`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export const apiUserDelete = async (id) => {
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/admin/users/${id}`, {
+      const res = await fetch(`${apiHost}api/v2/admin/users/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

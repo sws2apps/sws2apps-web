@@ -9,7 +9,7 @@ export const apiFetchCountries = async () => {
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/congregations/countries`, {
+      const res = await fetch(`${apiHost}api/v2/congregations/countries`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export const apiFetchCongregations = async () => {
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/admin/congregations`, {
+      const res = await fetch(`${apiHost}api/v2/admin/congregations`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export const apiFetchCongregationsByCountry = async (country, name) => {
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/congregations/list-by-country`, {
+      const res = await fetch(`${apiHost}api/v2/congregations/list-by-country`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ export const apiCongregationAddUser = async (cong_country, cong_name, cong_numbe
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/admin/congregations/add-user`, {
+      const res = await fetch(`${apiHost}api/v2/admin/congregations/add-user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ export const apiCongregationRemoveUser = async (cong_id, user_id) => {
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/admin/congregations/${cong_id}/remove-user`, {
+      const res = await fetch(`${apiHost}api/v2/admin/congregations/${cong_id}/remove-user`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ export const apiCongregationUserUpdateRole = async (cong_id, user_uid, user_role
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/admin/congregations/${cong_id}/update-role`, {
+      const res = await fetch(`${apiHost}api/v2/admin/congregations/${cong_id}/update-role`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -176,7 +176,7 @@ export const apiCongregationDelete = async (id) => {
       const auth = await getAuth();
       const user = auth.currentUser;
 
-      const res = await fetch(`${apiHost}api/admin/congregations/${id}`, {
+      const res = await fetch(`${apiHost}api/v2/admin/congregations/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -189,85 +189,6 @@ export const apiCongregationDelete = async (id) => {
       const data = await res.json();
 
       return { status: res.status, data };
-    }
-  } catch (err) {
-    throw new Error(err);
-  }
-};
-
-export const apiFetchPublicTalks = async () => {
-  const { apiHost, visitorID } = await getProfile();
-
-  try {
-    if (apiHost !== '') {
-      const auth = await getAuth();
-      const user = auth.currentUser;
-
-      const res = await fetch(`${apiHost}api/admin/public-talks`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          appclient: 'admin',
-          appversion: import.meta.env.PACKAGE_VERSION,
-          uid: user.uid,
-          visitorid: visitorID,
-        },
-      });
-      return res.json();
-    }
-  } catch (err) {
-    throw new Error(err);
-  }
-};
-
-export const apiUpdatePublicTalk = async (language, talkNumber, talkTitle, talkModified) => {
-  const { apiHost, visitorID } = await getProfile();
-
-  try {
-    if (apiHost !== '') {
-      const auth = await getAuth();
-      const user = auth.currentUser;
-
-      const res = await fetch(`${apiHost}api/admin/public-talks`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          appclient: 'admin',
-          appversion: import.meta.env.PACKAGE_VERSION,
-          uid: user.uid,
-          visitorid: visitorID,
-        },
-        body: JSON.stringify({ language, talkTitle, talkModified, talkNumber }),
-      });
-
-      return { status: res.status, data: res.json() };
-    }
-  } catch (err) {
-    throw new Error(err);
-  }
-};
-
-export const apiBulkUpdatePublicTalks = async (language, talks) => {
-  const { apiHost, visitorID } = await getProfile();
-
-  try {
-    if (apiHost !== '') {
-      const auth = await getAuth();
-      const user = auth.currentUser;
-
-      const res = await fetch(`${apiHost}api/admin/public-talks`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          appclient: 'admin',
-          appversion: import.meta.env.PACKAGE_VERSION,
-          uid: user.uid,
-          visitorid: visitorID,
-        },
-        body: JSON.stringify({ language, talks }),
-      });
-
-      return { status: res.status, data: res.json() };
     }
   } catch (err) {
     throw new Error(err);
