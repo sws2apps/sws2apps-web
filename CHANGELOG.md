@@ -1,3 +1,10 @@
+## [2.32.2](https://github.com/sws2apps/sws2apps-web/compare/v2.32.1...v2.32.2) (2024-11-27)
+
+
+### Bug Fixes
+
+* **web:** udpate api endpoint ([df2e682](https://github.com/sws2apps/sws2apps-web/commit/df2e682d62735823a315cacac56881d3c67c6a27))
+
 ## [2.32.1](https://github.com/sws2apps/sws2apps-web/compare/v2.32.0...v2.32.1) (2024-11-27)
 
 
