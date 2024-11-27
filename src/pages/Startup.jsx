@@ -72,7 +72,7 @@ const Startup = () => {
         }
 
         if (res.status === 403) {
-          const res = await fetch(`${apiHost}user-login`, {
+          const res = await fetch(`${apiHost}api/v2/user-login`, {
             signal: abortCont.signal,
             method: 'POST',
             headers: {
