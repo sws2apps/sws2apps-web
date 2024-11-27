@@ -1,3 +1,10 @@
+## [2.32.3](https://github.com/sws2apps/sws2apps-web/compare/v2.32.2...v2.32.3) (2024-11-27)
+
+
+### Bug Fixes
+
+* **web:** update api endpoint ([74afff9](https://github.com/sws2apps/sws2apps-web/commit/74afff9a3fa9d3918cd778fda6bfb71a6994c5ea))
+
 ## [2.32.2](https://github.com/sws2apps/sws2apps-web/compare/v2.32.1...v2.32.2) (2024-11-27)
 
 
