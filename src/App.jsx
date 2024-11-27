@@ -20,7 +20,6 @@ const Congregations = lazy(() => import('./pages/Congregations'));
 const Startup = lazy(() => import('./pages/Startup'));
 const UserDetails = lazy(() => import('./pages/UserDetails'));
 const Users = lazy(() => import('./pages/Users'));
-const PublicTalks = lazy(() => import('./pages/PublicTalks'));
 
 // creating theme
 const lightTheme = createTheme({
