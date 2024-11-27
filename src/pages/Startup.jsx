@@ -50,7 +50,7 @@ const Startup = () => {
   const checkLogin = useCallback(async () => {
     try {
       if (isOnline && apiHost !== '' && visitorID !== '') {
-        const res = await fetch(`${apiHost}api/admin/`, {
+        const res = await fetch(`${apiHost}api/v2/admin/`, {
           signal: abortCont.signal,
           method: 'GET',
           headers: {
