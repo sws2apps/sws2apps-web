@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { appMessageState, appSeverityState, appSnackOpenState } from '../../states/notification';
 
-const OAuthButtonBase = ({ buttonStyles, logo, text, provider, isEmail }) => {
+const OAuthButtonBase = ({ buttonStyles, logo, text, provider }) => {
   const setAppSnackOpen = useSetRecoilState(appSnackOpenState);
   const setAppSeverity = useSetRecoilState(appSeverityState);
   const setAppMessage = useSetRecoilState(appMessageState);

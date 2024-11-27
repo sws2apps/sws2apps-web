@@ -104,7 +104,9 @@ const Startup = () => {
 
         setIsAuth(false);
       }
-    } catch {}
+    } catch (error) {
+      console.error(error);
+    }
   }, [
     apiHost,
     abortCont,

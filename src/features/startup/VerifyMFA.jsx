@@ -22,7 +22,7 @@ const matchIsNumeric = (text) => {
   return !isNaN(Number(text));
 };
 
-const validateChar = (value, index) => {
+const validateChar = (value) => {
   return matchIsNumeric(value);
 };
 
