@@ -56,7 +56,7 @@
     "globals": "^15.12.0",
     "prop-types": "^15.8.1",
     "serve": "^14.2.4",
-    "vite": "^6.0.0",
+    "vite": "^6.0.1",
     "vite-plugin-eslint": "^1.8.1"
   }
 }
