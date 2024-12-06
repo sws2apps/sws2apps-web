@@ -35,7 +35,7 @@
     "mui-one-time-password-input": "^3.0.1",
     "qrcode": "^1.5.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.0.0",
     "react-router-dom": "^7.0.2",
     "recoil": "^0.7.7",
     "recoil-outside": "^0.1.1"
@@ -46,7 +46,7 @@
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/react": "^18.3.13",
-    "@types/react-dom": "^18.3.1",
+    "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.16.0",
     "eslint-plugin-import": "^2.31.0",
